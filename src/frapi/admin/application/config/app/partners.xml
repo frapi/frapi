@@ -9,29 +9,5 @@
    <api_key>somesha1</api_key>
    <email>david@echolibre.com</email>
   </partner>
-  <partner>
-   <hash>7d69d037846e06eb91e6e2b424e98d607c0f2004</hash>
-   <firstname>Helgi</firstname>
-   <lastname>Thormar</lastname>
-   <company>echolibre</company>
-   <api_key>074ba77270f0e04ea69ce9548a367cba57d30369</api_key>
-   <email>helgi@echolibre.com</email>
-  </partner>
-  <partner>
-   <firstname>testing</firstname>
-   <lastname>testing</lastname>
-   <email>test</email>
-   <company>oh</company>
-   <api_key>fb61ed0fe60e9420b2393f3b97f0c101536a9ebe</api_key>
-   <hash>f758389024e1ba6a2399c3790c6fb3589d0eead3</hash>
-  </partner>
-  <partner>
-   <firstname>Conroy</firstname>
-   <lastname>Whitney</lastname>
-   <email>conroy</email>
-   <company>careerbuilder</company>
-   <api_key>363b677c7099b50782a2f3ac1baa8d14d814a557</api_key>
-   <hash>460a2f2326b4d91f37a6adcab0e36ddec7a61cdf</hash>
-  </partner>
  </partners>
 </frapi-config>

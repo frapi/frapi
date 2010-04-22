@@ -8,26 +8,5 @@
    <http_code>404</http_code>
    <description>Testing more</description>
   </error>
-  <error>
-   <name>RANDOM_TEST</name>
-   <message>random test error</message>
-   <http_code>406</http_code>
-   <description>Thsi error is returned when there's something very weird happening.</description>
-   <hash>b53c9140ee9f8afefc51b4d157b6a9c887e9c18e</hash>
-  </error>
-  <error>
-   <name>TESTING</name>
-   <message>TESTING 405 ERRORS</message>
-   <http_code>405</http_code>
-   <description>TESTING THE NEW XML WRITER</description>
-   <hash>b485fff90b0ebc1e80706c8d3e5ba593e96fc5dd</hash>
-  </error>
-  <error>
-   <name>CLAUDIO_ERROR</name>
-   <message>This error is returned to the webs ervbice</message>
-   <http_code>CLAUDIO</http_code>
-   <description>Documentaion purpose error</description>
-   <hash>5aa52de4cc125ca4b2b6401c7c887c5078b736d2</hash>
-  </error>
  </errors>
 </frapi-config>

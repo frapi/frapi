@@ -7,12 +7,5 @@
       <role>admin</role>
       <active>1</active>
     </user>
-    <user>
-      <handle>david</handle>
-      <password>aa743a0aaec8f7d7a1f01442503957f4d7a2d634</password>
-      <active>1</active>
-      <role>admin</role>
-      <hash>e563c15e7328eb4443368a726f315fd082043994</hash>
-    </user>
   </users>
 </frapi-config>
