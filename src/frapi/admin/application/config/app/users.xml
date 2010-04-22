@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<frapi-config>
+  <users>
+    <user>
+      <handle>admin</handle>
+      <password>5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8</password>
+      <role>admin</role>
+      <active>1</active>
+    </user>
+    <user>
+      <handle>david</handle>
+      <password>aa743a0aaec8f7d7a1f01442503957f4d7a2d634</password>
+      <active>1</active>
+      <role>admin</role>
+      <hash>e563c15e7328eb4443368a726f315fd082043994</hash>
+    </user>
+  </users>
+</frapi-config>

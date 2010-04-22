@@ -1,0 +1,10 @@
+
+<div class="field-block">
+<label<?php if (!empty($this->label)) { ?> for="<?php echo $this->name ?>"<?php } ?>><?php if (empty($this->label)) { echo '&nbsp;'; } ?>
+<?php
+if (!empty($this->label) && $this->required) {
+    echo "<span class=\"required\">*</span>&nbsp;";
+}
+?>
+<?php echo $this->label ?></label><?php echo $this->element ?>
+</div>

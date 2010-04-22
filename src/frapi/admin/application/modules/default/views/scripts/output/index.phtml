@@ -1,0 +1,54 @@
+
+<div style="float: left">
+    <form id="sync-form" method="post" action="/output/sync">
+        <input name="sync" id="sync" value="Sync Output Types" type="submit" />
+    </form>
+</div>
+<br /><br /><br /><br /><br />
+
+    <table id="list">
+     <thead>
+      <tr>
+        <th>Type</th>
+        <th>Action</th>
+      </tr>
+     </thead>
+     <tbody>
+<?php foreach ($this->data as $d) : if (is_array($d) && !empty($d)) :?>
+      <tr>
+        <td style="text-align: center;"><?php echo $d['name']; ?></td>
+        <td style="text-align: center;">
+            <?php if ($d['default'] != '1' && $d['enabled'] == '1') { ?>
+            <a href="/output/makedefault/id/<?php echo $d['name']; ?>">Make Default</a> |
+            <?php
+            }
+
+            if ($d['default'] == '1') {
+                echo 'Default Output | ';
+            }
+
+            if ($d['enabled'] == '1') {
+            ?>
+            <a href="/output/disable/id/<?php echo $d['name']; ?>">Disable</a>
+            <?php } else { ?>
+            <a href="/output/enable/id/<?php echo $d['name']; ?>">Enable</a>
+            <?php } ?>
+        </td>
+      </tr>
+<?php endif; endforeach; ?>
+     </tbody>
+    </table>
+
+<script type="text/javascript">
+$(function() {
+    var t = $('table#list')
+    t.tablesorter({
+        sortList:[[0,0]],
+        widgets: ['zebra'],
+        dateFormat: 'dd.mm.yyyy',
+        headers: {
+            1: { sorter: false }
+        }
+    });
+});
+</script>

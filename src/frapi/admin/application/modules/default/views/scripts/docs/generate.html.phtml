@@ -1,0 +1,141 @@
+<?php
+    function _makeAnchor($string)
+    {
+        return preg_replace('/[^a-zA-Z0-9_\-]+/', '', $string);
+    }
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>API Documentation</title>
+        <style type="text/css">
+        /**
+         * HTML (admin inline) Documentation
+         *
+         */
+        p.description{
+        	background-color: #EEE;
+        	padding: 5px;
+        }
+
+        .doc-subdata{
+        	border-left: 4px rgb(171, 190, 202) solid;
+        	margin-left: 2em;
+        	padding-left: 5px;
+        }
+
+        table.doc-table{
+        	border-collapse: collapse;
+        }
+        	table.doc-table tr th{
+        		background-color: rgb(240, 246, 250);
+        		border-top: 1px rgb(151, 170, 182) solid;
+        		border-bottom: 1px rgb(151, 170, 182) solid;
+        		letter-spacing: 0.1em;
+        		line-height: 2.8em;
+        		padding-left: 0.9em;
+        		padding-right: 0.9em;
+        		text-align: left;
+        	}
+        	table.doc-table tr th+th{
+        		border-left: 1px rgb(151, 170, 182) solid;
+        	}
+        	table.doc-table tr td{
+        		border-bottom: 1px solid rgb(171, 190, 202);
+        		line-height: 1.8em;
+        		padding-left: 0.9em;
+        		padding-right: 0.9em;
+        	}
+        	table.doc-table tr td+td{
+        		border-left: 1px rgb(171, 190, 202) solid;
+        	}
+        </style>
+    </head>
+
+    <body>
+        <h1>Actions</h1>
+        <?php if (count($this->doc_data['actions'])): ?>
+            <?php foreach ($this->doc_data['actions'] as $action): ?>
+                <h2><?php echo $action['name'] ?></h2>
+                <p>
+                    Action is <?php echo (($action['enabled'])?('<strong>Enabled</strong>'):('Disabled')); ?> and <?php echo (($action['public'])?('<strong>Public</strong>'):('Private')); ?>.
+                </p>
+                <div class="doc-subdata">
+                    <?php if (!empty($action['description'])):?>
+                        <h3>Description</h3>
+                        <p class="description"><?php echo $action['description'] ?></p>
+                    <?php endif; ?>
+
+                    <?php if (isset($action['parameters']) && !empty($action['parameters']) && count($action['parameters'])): ?>
+                        <h3>Parameters</h3>
+                        <table class="doc-table">
+                            <?php
+                            /**
+                             * OMG OMG OMG OMG OMG.
+                             */
+                            ?>
+                            <?php foreach ($action['parameters'] as $key => $param): ?>
+                                <?php 
+                                if (is_array($param) && isset($param[0])) : 
+                                    foreach ($param as $subkey => $subparam) :
+                                ?>
+                                <tr>
+                                    <td><?php echo $subparam['name'] ?></td>
+                                    <td><?php echo (($subparam['required'])?('<strong>Required</strong>'):('Optional')) ?></td>
+                                </tr>
+                                <?php endforeach; else: ?>
+                                <tr>
+                                    <td><?php echo $param['name'] ?></td>
+                                    <td><?php echo (($param['required'])?('<strong>Required</strong>'):('Optional')) ?></td>
+                                </tr>
+                            <?php endif; endforeach; ?>
+                        </table>
+                    <?php endif; ?>
+                    <? /** Removed for now. ?>
+                    <?php if(count($action['errors'])): ?>
+                        <h3>Errors Associated with Action</h3>
+                        <table class="doc-table">
+                            <?php foreach ($action['errors'] as $error): ?>
+                                <tr>
+                                    <td><a href="#<?php echo _makeAnchor($error['name']); ?>" title="Jump to Error"><?php echo $error['name'] ?></a></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    <?php endif; ?>
+                    <?php */ ?>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
+        <h1>Errors</h1>
+        <?php if (count($this->doc_data['errors'])): ?>
+            <?php foreach ($this->doc_data['errors'] as $error): ?>
+                <h2 id="<?php echo _makeAnchor($error['name']); ?>"><?php echo $error['name'] ?> (HTTP Code <?php echo ((!is_null($error['http_code']))?($error['http_code']):('400')) ?>)</h2>
+                <div class="doc-subdata">
+                    <?php if (!empty($error['description'])):?>
+                        <h3>Description</h3>
+                        <p class="description"><?php echo $error['description'] ?></p>
+                    <?php endif; ?>
+                    <h3>Error Message</h3>
+                    <p>
+                        <?php echo $error['message']; ?>
+                    </p>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
+        <h1>Output Types</h1>
+        <?php if (count($this->doc_data['output-types'])): ?>
+            <table class="doc-table">
+                <?php foreach ($this->doc_data['output-types'] as $type): ?>
+                    <tr>
+                        <td><?php echo $type['name'] ?></td>
+                        <td><?php echo (($type['enabled'])?('<strong>Enabled</strong>'):('Disabled')) ?></td>
+                        <td><?php echo (($type['default'])?('<strong>Default</strong>'):('')) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        <?php endif; ?>
+    </body>
+</html>

@@ -1,0 +1,71 @@
+<?php
+echo $this->form;
+?>
+
+<div class="field-block">
+<?php echo $this->formSubmit('submit', 'Save'); ?>
+</div>
+
+<br /><br />
+<a id="add-param">Add Parameter</a>
+<br /><br />
+<table id="params">
+    <tr>
+        <th style="width: 300px;">Parameter</th>
+        <th>Required ?</th>
+        <th>Action</th>
+    </tr>
+<?php
+    $i = 1;
+
+    foreach ($this->data['parameter'] as $dKey => $d) {
+        echo '<tr><td><input type="text" name="param[' . $i . ']" value="' . $d['name'] . '" style="width: 90%;" /></td>';
+        $checked = $d['required'] == '1' ? ' checked="checked"' : '';
+        echo '<td style="text-align: center;"><input type="checkbox" name="required[' . $i . ']"' . $checked . '></td>';
+        echo '<td>';
+        echo '<input type="hidden" name="param_id[' . $i . ']" value="' . $d['name'] . '" />';
+        echo '<a class="delete-button" href="#">Delete</a></td></tr>' . "\n";
+        $i++;
+    }
+?>
+</table>
+
+</form>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    var i = <?php echo $i; ?>;
+    $('#add-param').click(function () {
+        var html = '<tr><td><input type="text" name="param[' + i + ']" value="" style="width: 90%;" /></td>';
+        html = html + '<td style="text-align: center;"><input type="checkbox" name="required[' + i + ']"></td>';
+        html = html + '<td><a class="delete-button" href="#">Delete</a></td></tr>';
+
+        $('#params').append(html);
+        i++;
+    });
+
+    function deleteButton()
+    {
+        $('a.delete-button').live('click', function () {
+            id = $(this).parent().find('input:hidden').val();
+            $(this).parent().parent().remove();
+
+            if (id == 'undefined') {
+                return false;
+            }
+
+            // Get the ID
+            jQuery.ajax({
+                    type: "POST",
+                    url: "/action/edit/id/<?php echo $this->id; ?>/param/delete/paramid/" + id,
+    //                data: data.join("&"),
+                    success: function(msg){
+                        //console.log(msg);
+                    }
+            });
+        });
+    }
+
+    deleteButton();
+});
+</script>

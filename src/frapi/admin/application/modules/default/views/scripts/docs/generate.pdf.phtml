@@ -1,0 +1,215 @@
+<?php
+
+/**
+ * PDF format of API documentation.
+ *
+ * @package Frapi
+ */
+require_once 'Zend/Pdf.php';
+
+/**
+ * My extension of Zend PDF Page with some helpful functions.
+ *
+ * @package Frapi
+ **/
+class Zend_Pdf_Page_My extends Zend_Pdf_Page
+{
+    /**
+     * Left page margin
+     *
+     * @var Int
+     **/
+    private $_page_margin = 10;
+    
+    /**
+     * Base font size, default for text.
+     *
+     * @var Int
+     **/
+    public $base_font_size = 10;
+    
+    /**
+     * Keeps track of current line y-position.
+     *
+     * @var Int
+     **/
+    public $cursor_pos_y = 0;
+    
+    /**
+     * X-pos, mainly for indenting;
+     *
+     * @var Int
+     **/
+    public $cursor_pos_x = 0;
+    
+    public function init()
+    {
+        $this->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), $this->base_font_size);
+    }
+    
+    public function cursorDecrementLine()
+    {
+        $this->cursor_pos_y -= $this->getFontSize();
+    }
+    
+    public function cursorIncrementLine()
+    {
+        $this->cursor_pos_y += $this->getFontSize();
+    }
+    
+    public function drawHeader($text, $level = 1)
+    {
+        //Level = (1, 2, 3)
+        $this->saveGS();
+        $this->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), $this->base_font_size + $this->base_font_size * (0.7/$level));
+        $this->drawTextLine($text);
+        $this->cursor_pos_y += 6;
+        $this->setLineColor(new Zend_Pdf_Color_Html('#DEDEDE'));
+        $this->setLineWidth(10/$level);
+        $this->drawLine($this->_page_margin+$this->cursor_pos_x, $this->getHeight()-$this->cursor_pos_y, $this->getWidth(), $this->getHeight()-$this->cursor_pos_y);
+        $this->restoreGS();
+    }
+    
+    public function drawTextLine($line)
+    {
+        $font_size  = $this->getFontSize();
+        $pageHeight = $this->getHeight();
+
+        $this->drawText($line, $this->_page_margin+$this->cursor_pos_x, $pageHeight - $this->cursor_pos_y - $font_size, 'utf-8');
+        $this->cursorIncrementLine();
+    }
+    
+    public function drawTextMulti($text)
+    {
+        $pageHeight = $this->getHeight();
+        $pageWidth  = $this->getWidth();
+        $font_size  = $this->getFontSize();
+        
+        $text = wordwrap($text, 50, PHP_EOL);
+        
+        foreach (explode(PHP_EOL, $text) as $i => $line) {
+            $this->drawText($line, $this->_page_margin+$this->cursor_pos_x, $pageHeight - $this->cursor_pos_y - $font_size, 'utf-8');
+            $this->cursor_pos_y += $font_size;
+        }
+    }
+    
+    public function drawBoxedText($text)
+    {
+        $text_height = $this->getFontSize()/2;
+        $text_width  = 100;
+        $this->drawRectangle(
+            $this->getWidth()  - 10, 
+            $this->getHeight() - $this->cursor_pos_y + $text_height, 
+            $this->getWidth()  - $text_width, 
+            $this->getHeight() - $this->cursor_pos_y - $text_height + $text_height, 
+            Zend_Pdf_Page::SHAPE_DRAW_STROKE
+        );
+        $this->saveGS();
+        $this->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 11);
+        $this->drawText($text, $this->getWidth()-$text_width+5, $this->getHeight()-$this->cursor_pos_y+2);
+        $this->restoreGS();
+    }
+}
+
+$pdf = new Zend_Pdf();
+$page = new Zend_Pdf_Page_My(Zend_Pdf_Page::SIZE_A4);
+$page->init();
+
+$pageHeight = $page->getHeight();
+$pageWidth = $page->getWidth(); 
+
+$page->drawHeader('Actions');
+
+if (count($this->doc_data['actions'])) {
+    foreach ($this->doc_data['actions'] as $action) {
+        $page->cursor_pos_x = 20;
+        $page->drawHeader($action['name'], 2);
+        
+        $page->drawBoxedText((($action['enabled'])?('Enabled'):('Disabled')));        
+        //$page->drawTextLine('Action is '..' and '.(($action['public'])?('**Public**'):('Private')).'.');
+        
+        if (!empty($action['description'])) {
+            $page->cursor_pos_x = 60;
+            $page->drawHeader('Description', 4);
+            $page->drawTextMulti($action['description']);
+        }
+        
+        if (count($action['parameters'])) {
+            $page->drawHeader('Parameters', 4);
+            foreach ($action['parameters'] as $param) {
+                if (isset($param[0]) && is_array($param)) {
+                    foreach ($param as $subkey => $subparam) {
+                        $page->cursor_pos_x = 60;
+                        if ($subparam['required']) {
+                            $page->saveGS();
+                            $page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 10);
+                        }
+                        $page->drawTextLine(($subparam['required'])?('Required'):('Optional'));
+                        if ($subparam['required']) {
+                            $page->restoreGS();
+                        }
+                        $page->cursor_pos_x = 130;
+                        $page->cursorDecrementLine();
+                        $page->drawTextLine($subparam['name']);
+
+                    }
+                } else {
+                    $page->cursor_pos_x = 60;
+                    if ($param['required']) {
+                        $page->saveGS();
+                        $page->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 10);
+                    }
+                    $page->drawTextLine(($param['required'])?('Required'):('Optional'));
+                    if ($param['required']) {
+                        $page->restoreGS();
+                    }
+                    $page->cursor_pos_x = 130;
+                    $page->cursorDecrementLine();
+                    $page->drawTextLine($param['name']);
+                }
+            }
+        }
+        
+        if (count($action['errors'])) {
+            $page->drawHeader('Errors Associated with Action', 4);
+            foreach ($action['errors'] as $error) {
+                $page->drawTextLine($error['name']);
+            }
+        }
+    }
+} else {
+    $page->drawTextLine('No actions yet.');
+}
+
+$page->cursor_pos_x = 0;
+$page->drawHeader('Errors');
+if (count($this->doc_data['errors'])) {
+    foreach ($this->doc_data['errors'] as $error) {
+        $page->cursor_pos_x = 20;
+        $page->drawHeader($error['name'], 2);
+        
+        $page->cursor_pos_x = 60;
+        if (!empty($error['description'])) {
+            $page->drawHeader('Description', 4);
+            $page->drawTextMulti($error['description']);
+        }    
+        $page->drawHeader('Error Message', 4);
+        $page->drawTextMulti($error['message']);
+    }
+} else {
+    $page->drawTextLine('No errors yet.');
+}
+
+$page->cursor_pos_x = 0;
+$page->drawHeader('Output Types');
+if (count($this->doc_data['output-types'])) {
+    foreach ($this->doc_data['output-types'] as $type) {
+        $page->drawTextLine($type['name'] . ', '. (($type['enabled'])?('Enabled'):('Disabled')).', '.(($type['default'])?('Default'):('')));
+    }
+} else {
+    $page->drawTextLine('No output types yet.');
+}
+
+$pdf->pages[0] = $page;
+
+echo $pdf->render();

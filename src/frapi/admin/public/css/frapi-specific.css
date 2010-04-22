@@ -1,0 +1,147 @@
+form {
+	background-color: rgb(240, 246, 250);
+	border-top: 1px rgb(151, 170, 182) solid;
+	border-bottom: 1px rgb(151, 170, 182) solid;
+	letter-spacing: 0.1em;
+	line-height: 2.8em;
+	padding-left: 0.9em;
+	padding-right: 0.9em;
+	text-align: left;
+	margin-bottom: 30px;
+	width: 100%
+}
+
+form label {
+  display: inline-block;
+  line-height: 1.8;
+  vertical-align: top;
+}
+form label {
+  width: 180px; /* Width of labels */
+}
+
+
+/**
+ * Table#list Styles
+ *
+ * @author David Doran
+ */
+
+table#list{
+	border-collapse: collapse;
+}
+	table#list tr th{
+		background-color: rgb(240, 246, 250);
+		border-top: 1px rgb(151, 170, 182) solid;
+		border-bottom: 1px rgb(151, 170, 182) solid;
+		letter-spacing: 0.1em;
+		line-height: 2.8em;
+		padding-left: 0.9em;
+		padding-right: 0.9em;
+		text-align: left;
+	}
+	table#list tr th+th{
+		border-left: 1px rgb(151, 170, 182) solid;
+	}
+	table#list tr td{
+		border-bottom: 1px solid rgb(171, 190, 202);
+		line-height: 1.8em;
+		padding-left: 0.9em;
+		padding-right: 0.9em;
+	}
+	table#list tr td+td{
+		border-left: 1px rgb(171, 190, 202) solid;
+	}
+	
+	table#list thead tr .header {
+		padding-right: 25px !important;
+		background-image: url(../gifs/bg.gif);
+		background-repeat: no-repeat;
+		background-position: center right;
+		cursor: pointer;
+	}
+	table#list thead tr .headerSortUp {
+		background-image: url(../gifs/asc.gif);
+	}
+	table#list thead tr .headerSortDown {
+		background-image: url(../gifs/desc.gif);
+	}
+	table#list thead tr .headerSortDown, table#list thead tr .headerSortUp {
+	    background-color: rgb(171, 190, 202);
+	}
+	
+/**
+ * Messages and Alerts
+ *
+ * @author David Doran
+ */
+#message{
+	background-color: #FFFACD;
+	font-size: 1.2em;
+	margin-bottom: 1em;
+	padding: 0.5em 1em 0.5em 1em;
+}
+
+/**
+ * HTML (admin inline) Documentation
+ *
+ * @author David Doran
+ */
+p.description{
+	background-color: #EEE;
+	padding: 5px;
+}
+
+.doc-subdata{
+	border-left: 4px rgb(171, 190, 202) solid;
+	margin-left: 2em;
+	padding-left: 5px;
+}
+
+table.doc-table{
+	border-collapse: collapse;
+}
+	table.doc-table tr th{
+		background-color: rgb(240, 246, 250);
+		border-top: 1px rgb(151, 170, 182) solid;
+		border-bottom: 1px rgb(151, 170, 182) solid;
+		letter-spacing: 0.1em;
+		line-height: 2.8em;
+		padding-left: 0.9em;
+		padding-right: 0.9em;
+		text-align: left;
+	}
+	table.doc-table tr th+th{
+		border-left: 1px rgb(151, 170, 182) solid;
+	}
+	table.doc-table tr td{
+		border-bottom: 1px solid rgb(171, 190, 202);
+		line-height: 1.8em;
+		padding-left: 0.9em;
+		padding-right: 0.9em;
+	}
+	table.doc-table tr td+td{
+		border-left: 1px rgb(171, 190, 202) solid;
+	}
+	
+/**
+ * /Tester Styles
+ */
+#params-container {
+	display: inline-block;
+	width: 300px
+}		
+	#params {
+	}
+		#params p {
+			padding: 0
+		}
+			#params input {
+				width: 250px
+			}
+	
+	#add {
+		display: inline-block;
+		margin-left: 25px;
+		vertical-align: middle
+	}

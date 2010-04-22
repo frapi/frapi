@@ -1,0 +1,81 @@
+<h1><a href="/action" title="Actions Index">Actions</a></h1>
+<?php if (count($this->doc_data['actions'])): ?>
+    <?php foreach ($this->doc_data['actions'] as $action): ?>
+        <h2><?php echo $action['name'] ?></h2>
+        <p>
+            Action is <?php echo (($action['enabled'])?('<strong>Enabled</strong>'):('Disabled')); ?> and <?php echo (($action['public'])?('<strong>Public</strong>'):('Private')); ?>.
+        </p>
+        <div class="doc-subdata">
+            <?php if (!empty($action['description'])):?>
+                <h3>Description</h3>
+                <p class="description"><?php echo $action['description'] ?></p>
+            <?php endif; ?>
+
+            <?php if(count($action['parameters'])): ?>
+                <h3>Parameters</h3>
+                <table class="doc-table">
+                    <?php
+                    /**
+                     * OMG OMG OMG OMG OMG.
+                     */
+                    ?>
+                    <?php foreach ($action['parameters'] as $key => $param): ?>
+                        <?php 
+                        if (is_array($param) && isset($param[0])) : 
+                            foreach ($param as $subkey => $subparam) :
+                        ?>
+                        <tr>
+                            <td><?php echo $subparam['name'] ?></td>
+                            <td><?php echo (($subparam['required'])?('<strong>Required</strong>'):('Optional')) ?></td>
+                        </tr>
+                        <?php endforeach; else: ?>
+                        <tr>
+                            <td><?php echo $param['name'] ?></td>
+                            <td><?php echo (($param['required'])?('<strong>Required</strong>'):('Optional')) ?></td>
+                        </tr>
+                    <?php endif; endforeach; ?>
+                </table>
+            <?php endif; ?>
+            <?php /** ?>
+            <?php if(count($action['errors'])): ?>
+                <h3>Errors Associated with Action</h3>
+                <table class="doc-table">
+                    <?php foreach ($action['errors'] as $error): ?>
+                        <tr>
+                            <td><?php echo $error['name'] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php endif; ?>
+            <?php */ ?>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+<h1><a href="/errors" title="Errors Index">Errors</a></h1>
+<?php if (count($this->doc_data['errors'])): ?>
+    <?php foreach ($this->doc_data['errors'] as $error): ?>
+        <h2><?php echo $error['name'] ?> (HTTP Code <?php echo ((!is_null($error['http_code']))?($error['http_code']):('400')) ?>)</h2>
+        <div class="doc-subdata">
+            <h3>Description</h3>
+            <p class="description"><?php echo $error['description'] ?></p>
+            <h3>Error Message</h3>
+            <p>
+                <?php echo $error['message']; ?>
+            </p>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+<h1><a href="/output" title="Output Types Index">Output Types</a></h1>
+<?php if (count($this->doc_data['output-types'])): ?>
+    <table class="doc-table">
+        <?php foreach ($this->doc_data['output-types'] as $type): ?>
+            <tr>
+                <td><?php echo $type['name'] ?></td>
+                <td><?php echo (($type['enabled'])?('<strong>Enabled</strong>'):('Disabled')) ?></td>
+                <td><?php echo (($type['default'])?('<strong>Default</strong>'):('')) ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>

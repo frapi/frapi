@@ -1,0 +1,59 @@
+################################################################################
+         API Documentation, generated <?php echo date(DATE_ATOM), PHP_EOL; ?>
+         Actions      : <?php echo count($this->doc_data['actions']), PHP_EOL; ?>
+         Errors       : <?php echo count($this->doc_data['errors']), PHP_EOL; ?>
+         Output Types : <?php echo count($this->doc_data['output-types']), PHP_EOL; ?>
+################################################################################
+
+Actions
+================================================================================
+
+<?php foreach ($this->doc_data['actions'] as $action): ?>
+    <?php echo $action['name'], PHP_EOL?>
+    ========================================
+    <?php if (!empty($action['parameters'])) : ?>
+### Parameters
+        <?php foreach ($action['parameters'] as $param): ?>
+        <?php
+            if (is_array($param) && isset($param[0])) :
+                foreach ($param as $subkey => $subparam) :
+            ?>
+<?php echo $subparam['name'], "\t\t", (($subparam['required'])?('**Required**'):('Optional')), PHP_EOL; ?>
+            <?php endforeach; else: ?>
+<?php echo $param['name'], "\t\t", (($param['required'])?('**Required**'):('Optional')), PHP_EOL; ?>
+        <?php endif; endforeach; ?>
+    <?php else: ?>
+### No parameters associated to this action
+    <?php endif; ?>
+    
+    <?php if (!empty($action['errors'])) : ?>
+### Associated Errors
+        <?php foreach ($action['errors'] as $error): ?>
+<?php echo $error['name'], "\t\t", PHP_EOL; ?>
+        <?php endforeach; ?>
+    <?php else: ?>
+### No errors associated to this action
+    <?php endif; ?>
+    
+    <?php echo PHP_EOL; ?>
+<?php endforeach; ?>
+
+Errors
+================================================================================
+
+<?php foreach ($this->doc_data['errors'] as $error): ?>
+    <?php echo $error['name'] ?> (HTTP Code <?php echo ((!is_null($error['http_code']))?($error['http_code']):('400')) ?>) 
+    ========================================
+        <?php echo $error['message'], PHP_EOL ?>
+
+<?php endforeach; ?>
+
+Output Types
+================================================================================
+<?php foreach ($this->doc_data['output-types'] as $type): ?>
+    <?php echo str_pad($type['name'], 4), "\t\t", (($type['enabled'])?('**Enabled**'):('Disabled')), "\t\t", (($type['default'])?('**Default**'):('')), PHP_EOL ?>
+<?php endforeach; ?>
+
+################################################################################
+         FRAPI, echolibre ltd.
+################################################################################

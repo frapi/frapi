@@ -1,0 +1,224 @@
+<script type="text/javascript" src="/javascript/syntaxhighlighter/shCore.js"></script>
+<script type="text/javascript" src="/javascript/syntaxhighlighter/shBrushJScript.js"></script>
+<script type="text/javascript" src="/javascript/syntaxhighlighter/shBrushPhp.js"></script>
+<script type="text/javascript" src="/javascript/syntaxhighlighter/shBrushPlain.js"></script>
+<script type="text/javascript" src="/javascript/syntaxhighlighter/shBrushXml.js"></script>
+<script type="text/javascript" src="/javascript/customBrushHeaders.js"></script>
+<link type="text/css" rel="stylesheet" href="/css/syntaxhighlighter/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/css/syntaxhighlighter/shThemeDefault.css"/>
+<script type="text/javascript">
+	SyntaxHighlighter.config.clipboardSwf = '/javascript/syntaxhighlighter/clipboard.swf';
+	var highlight_response = function () {
+	    window.SyntaxHighlighter.highlight()
+	};
+</script>
+
+<?php
+echo $this->form;
+?>
+
+<input type="button" id="submitter" value="Run Test" />
+
+<style type="text/css">
+#container .main {
+    background-color: white !important;
+    background-image: none;
+}
+    #container .sidenav {
+        display: none;
+    }
+    
+    #container .content {
+        display: block;
+        float: none;
+        padding: 0;
+        width: 780px;
+    }
+    
+    form {
+        padding: 10px !important;
+        width: 760px;
+    }
+        #framer {
+            width: 100%; 
+            height: 400px;
+            border: 1px solid black;;
+        }
+</style>
+<br />
+
+<h2 style="display: none" id="request-header">Request</h2>
+<div id="request-container"></div>
+<h2 style="display: none" id="post-fields-header">POST Fields</h2>
+<div id="post-fields-container"></div>
+
+<h2 style="display: none" id="response-header">Response</h2>
+<div id="response-container"></div>
+
+<script type="text/javascript">
+    var url = 'api.frapi';
+    
+    $('#action').change(function() {
+        var selected = $(this).val();
+        var selectedText = $('#action :selected').text();
+        var type  = (selected.match(/^[0-9]+$/)) ? ("action") : ("route")
+
+        $('#params').empty();
+        if ("route" == type) {
+            var params   = new Array();
+            var segments = selectedText.replace(/^\/*/, "").replace(/\/*$/, "").split("/");
+            jQuery.each(segments, function(key, value){
+                if (value[0] == ":") {
+                    addParamInput(value.substr(1));
+                }
+            });
+            $('#query_uri').val(selectedText);
+        } else {
+            $('#query_uri').val("?action=" + selectedText);
+        }
+    });
+    
+    $('#action').change();
+    
+    $("form input").keypress(function (e) {
+		if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+			$('#submitter').click();
+			return false;
+		} else {
+			return true;
+		}
+    });
+    
+    function addParamInput(paramName)
+    {
+        var value = paramName ? paramName + "=" : "";
+        $("#params").append('<p><input type="text" name="param[]" value="'+value+'" /> <img src="/images/delete.png" class="remove" /></p>');
+    }
+    
+    $(function(){
+        $("#add").live("click", function(ev) {
+            addParamInput();
+        });
+
+        $(".remove").live('click', function (ev) {
+            target = $(ev.target);
+            target.parent().remove();
+        });
+    });
+    
+    
+    $('#emailkey').change(function() {
+        var selected = $(this).val();
+        var selectedText = $('#emailkey :selected').text();
+        var valid  = (selected > 0);
+
+        if (valid) {
+            var split = selectedText.split(" / ", 2);
+            $('#email').val(split[0]);
+            $('#key').val(split[1]);
+        }
+    });
+    
+    $('#submitter').live('click', function() { 
+        
+        var queryURI = $('#query_uri').val();
+        var method   = $('#method').val();
+        var email    = $('#email').val();
+        var key      = $('#key').val();
+        var format   = $('#format').val();
+        var url      = $('#url').val();
+        var extraParams = new Array();
+        
+        $("#message").remove();
+        
+        jQuery.each($('#params input'), function(){
+            extraParams[extraParams.length] = $(this).val();
+        });
+        
+        if (!queryURI) {
+            alert('No query URI?'); return false;
+        }
+
+        var finalParams = 'format=' + format;
+        finalParams += '&email=' + escape(email);
+        finalParams += '&secretKey=' + key;
+        
+        switch (method.toLowerCase()) {
+            case 'get':
+            case 'post':
+            case 'delete':
+            case 'put':
+                method = method.toLowerCase();
+                break;
+            default:
+                method = 'get';
+                break;
+        }
+        
+        finalParams += '&method=' + method;
+        finalParams += '&url=' + url;
+        finalParams += '&query_uri=' + escape(queryURI);
+        
+        if (extraParams.length > 0) {
+            for (var i = 0; i < extraParams.length; i++) {
+                finalParams += '&param[]=' + escape(extraParams[i]);
+            }
+        }
+        
+        $.ajax( {
+           type:    "GET",
+           url:     "/tester/ajax",
+           data:    finalParams,
+           success: function(data) {
+               var brush = "jscript";
+               switch (format.toLowerCase()) {
+                   case "xml":
+                       brush = "xml";
+                       break;
+                   case "php":
+                       brush = "php";
+                       break;
+                   case "cli":
+                       brush = "plain";
+                       break;
+               }
+
+               $('#request-header').html("Request ("+ data.method +")").show();
+               $('#response-header').html("Response (Code "+ data.status +")").show();
+               $('#request-container').empty().append(
+                   $('<input>').attr({id: "#request_url", style: "width: 100%"}).val(data.request_url)
+               );
+           
+               $('#post-fields-header').hide();
+               $('#post-fields-container').empty();
+               if (data.request_post_fields) {
+                   $('#post-fields-header').show();
+                   $('#post-fields-container').append(
+                       $('<textarea>').attr({id: "#post-fields-textarea", style: "width: 100%"}).val(data.request_post_fields)
+                   );
+               }
+           
+               $('#response-container').empty();
+               $('#response-container').append(
+                   $('<pre>').attr('id', '#response_headers').addClass("brush: headers").html(data.response_headers)                    
+               );
+               $('#response-container').append(
+                   $('<h2>Content Body</h2>')
+               ).append(
+                   $('<pre>').attr('id', '#response').addClass("brush: " + brush).html(unescape(data.content))    
+               );
+           
+               highlight_response();
+           },
+           dataType: "json",
+           error: function (XMLHttpRequest, textStatus, errorThrown) {
+               if (XMLHttpRequest.status == 403) {
+                   $(".content").prepend($('<div>').attr('id', 'message').html("Error: You were logged out due to inactivity. Please <a href=\"/login\" target=\"_blank\">log in</a> (opens in new tab) and try again."));
+               }
+               this;
+           }
+        });
+        
+        return false;
+    });
+</script>

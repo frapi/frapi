@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<frapi-config>
+ <actions>
+  <action>
+   <name>Testing1</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>Testing 1 edit2</description>
+   <route>/testing/1</route>
+   <hash>6f1e8805cc0451de243b0432b15feb48f33383f9</hash>
+   <parameters>
+    <parameter>
+     <name>bazinga</name>
+     <required>1</required>
+    </parameter>
+   </parameters>
+  </action>
+  <action>
+   <name>testing2</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>Testing with an id</description>
+   <route>/testing/:id</route>
+   <hash>d31226632e367e9431e41ef8b956f20f5fb3b5dd</hash>
+   <parameters>
+    <parameter>
+     <name>id</name>
+     <required>1</required>
+    </parameter>
+   </parameters>
+  </action>
+  <action>
+   <name>Testing3</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>Testing 03 &#13;
+&#13;
+haha ohhhrly?</description>
+   <route>/testing/035</route>
+   <hash>fe44113b9d083ab60671825d5a13f76103055fa7</hash>
+   <parameters>
+    <parameter>
+     <name>testing</name>
+     <required>1</required>
+    </parameter>
+    <parameter>
+     <name>testing2</name>
+     <required>1</required>
+    </parameter>
+   </parameters>
+  </action>
+  <action>
+   <name>OData</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>OData example bla bla</description>
+   <route>/api/test/odata</route>
+   <hash>f082d7ae24794afd12ad58be76fdf88c6f7d6666</hash>
+   <parameters>
+    <parameter>
+     <name>claudio</name>
+     <required>1</required>
+    </parameter>
+   </parameters>
+  </action>
+  <action>
+   <name>Faith</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>Example for docs with Faith</description>
+   <route>/example/faith</route>
+   <hash>62b33e6740e96e96e5279ac498bc056b6b2f552a</hash>
+  </action>
+  <action>
+   <name>Conroy</name>
+   <enabled>1</enabled>
+   <public>0</public>
+   <description>That's just an example for Conroy</description>
+   <route>/example/conroy</route>
+   <hash>46c485eb56380c45caac1646994421002808cae2</hash>
+  </action>
+  <action>
+   <name>Exampletester</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>Dummy description for example tester.</description>
+   <route>/example/tester</route>
+   <hash>6c6aa15c13a3b7be7034c4c886ab28297652545b</hash>
+  </action>
+ </actions>
+</frapi-config>

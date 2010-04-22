@@ -1,0 +1,44 @@
+<?php
+echo $this->form;
+?>
+
+<div class="field-block">
+<?php echo $this->formSubmit('submit', 'Save'); ?>
+</div>
+
+<br /><br />
+<a id="add-param">Add Parameter<a>
+<br /><br />
+<table id="params">
+    <tr>
+        <th style="width: 300px;">Parameter</th>
+        <th>Required ?</th>
+        <th>Action</th>
+    </tr>
+</table>
+
+</form>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    var i = 1;
+    $('#add-param').click(function () {
+        var html = '<tr><td><input type="text" name="param[' + i + ']" value="" style="width: 90%;" /></td>';
+        html = html + '<td style="text-align: center;"><input type="checkbox" name="required[' + i + ']"></td>';
+        html = html + '<td><a class="delete-button" href="#">Delete</a></td></tr>';
+
+        $('#params').append(html);
+        deleteButton();
+        i++;
+    });
+
+    function deleteButton()
+    {
+        $('a.delete-button').click(function () {
+            $(this).parent().parent().remove();
+        });
+    }
+
+    deleteButton();
+});
+</script>

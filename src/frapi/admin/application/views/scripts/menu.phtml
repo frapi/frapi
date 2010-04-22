@@ -1,0 +1,30 @@
+<?php
+$request = Zend_Controller_Front::getInstance()->getRequest();
+$this->menuItem = $request->getRequestUri();
+
+$string = substr($this->menuItem, 1);
+$pos    = strpos($string, '/');
+$lpos   = strpos($string, '/');
+if ($pos !== false && $pos === $lpos) {
+    $data = explode('/', $string);
+    if (count($data) > 2) {
+        $this->menuItem = '/' . $data[0] . '/' . $data[1];
+        $item = '/' . $data[0];
+    } else {
+        $item = '/' . substr($string, 0, $lpos);
+    }
+} else {
+    $item = '/' . $string;
+}
+
+?>	
+    <div class="navigation">
+        <a <?php echo $item == '/' ? ' class="active"' : '' ?> href="/">Dashboard</a>
+        <a <?php echo $item == '/action' ? ' class="active"' : '' ?> href="/action">Actions</a>
+        <a <?php echo $item == '/errors' ? ' class="active"' : '' ?> href="/errors">Errors</a>
+        <a <?php echo $item == '/partners' ? ' class="active"' : '' ?> href="/partners">Partners</a>
+        <a <?php echo $item == '/configuration' ? ' class="active"' : '' ?> href="/configuration">Configuration</a>
+        <a <?php echo $item == '/tester' ? ' class="active"' : '' ?> href="/tester">Tester</a>
+        <a <?php echo $item == '/stats' ? ' class="active"' : '' ?> href="/stats">Stats</a>
+		<div class="clearer"><span></span></div>
+    </div>

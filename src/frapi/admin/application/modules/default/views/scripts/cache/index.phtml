@@ -1,0 +1,28 @@
+<p>Listed below are Frapi's internal cache keys, colour-coded by status. Click to see cache contents.</p>
+<p>Click "Delete" to expire cache values, they will then be re-generated (when required) by the API front-end.</p>
+
+<table id="list">
+    <tr>
+        <th>Key</th>
+        <th>Set</th>
+        <th>Size</th>
+        <th>Delete</th>
+    </tr>
+    <?php
+    foreach ($this->profile as $k=>$p) {
+        $style = (($p['set'])?('background-color:#DDFFDD'):('background-color:#FFDDDD'));
+        ?>
+        <tr>
+            <td style="<?php echo $style ?>"><a href="/cache/detail/key/<?php echo $k ?>" title="Detail"><?php echo $k ?></a></td>
+            <td style="<?php echo $style ?>"><?php echo (($p['set'])?('yes'):('<strong>NO</strong>')) ?></td>
+            <td style="<?php echo $style ?>"><?php echo $p['size'] ?></td>
+            <td style="<?php echo $style ?>"><?php if($p['set']): ?><a href="/cache/unset/key/<?php echo $k ?>" title="Delete">Delete</a><?php else: ?>N/A<?php endif ?></td>
+        </tr>
+        <?php
+    }
+    ?>
+
+</table>
+
+<br />
+<p>You can <a href="/cache/unsetall" title="Unset All Cache Keys">unset all keys</a> to clear the cache.</p>

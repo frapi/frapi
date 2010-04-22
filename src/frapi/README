@@ -1,0 +1,56 @@
+Requirements
+===========================
+APC: Required for caching, specifically for From_Database_Error::code, ::msg
+HTTP: (http://pecl.php.net/http)
+
+APC Keys
+===========================
+A number of APC keys are in use across the application. 
+These are often stored on the frontend, and deleted on the backend
+when actions, errors or routes are updated.
+"Actions.enabled-public"    = Enabled, public actions as list.
+"Actions.enabled-private"   = Enabled, private actions as list.
+"Errors.user-defined"       = List of developer-defined errors in admin.
+"Internal.database-dsn"     = DSN, username, and password for admin (SQLite) database.
+"Output.default-format"     = Stores the default output format set in admin. E.g., "xml", "json", "php"...
+"Partners.emails-keys"      = Stores array of partnerEmail=>partnerKey for lookups.
+"Router.routes-prepared"    = Prepared array of routes keyed by first path segment.
+
+
+File System Operations
+===========================
+chmod -R 777 custom
+
+Pretty URL and easy access:
+===========================
+Add this to your .htaccess
+    RewriteEngine On
+    SetEnv THE_MACHINE local
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule /([a-zA-Z]+)\.([a-z]+)? /index.php?action=$1&format=$2 [QSA,L]
+    RewriteRule /([a-zA-Z]+)(\.*)? /index.php?action=$1 [QSA,L]
+
+
+Vhost configuration Apache2
+===========================
+# http://local.api.echolibre.com
+<VirtualHost *:80>
+    DocumentRoot YOUR_PATH/public
+    ServerName local.api.echolibre.com
+    ServerAdmin root@localhost.com
+
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule /([a-zA-Z]+)\.([a-z]+)? /index.php?action=$1&format=$2 [QSA,L]
+    RewriteRule /([a-zA-Z]+)(\.*)? /index.php?action=$1 [QSA,L]
+</VirtualHost>
+
+
+# http://local.admin.api.echolibre.com
+<VirtualHost *:80>
+    DocumentRoot YOUR_PATH/admin/public
+    ServerName local.admin.api.echolibre.com
+    ServerAdmin root@localhost.com
+</VirtualHost>

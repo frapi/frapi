@@ -1,0 +1,10 @@
+<h1><?php echo $this->key ?></h1>
+
+<pre><?php
+        if (is_scalar($this->deats)) {
+            echo $this->deats;
+        } else {
+            print_r($this->deats);
+        }
+?>
+</pre>

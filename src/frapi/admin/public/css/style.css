@@ -1,0 +1,207 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    height: 100%;
+    min-width: 700px;
+}
+
+#container {
+    width: 700px;
+    height: 100%;
+    margin:0 auto;
+    border-left: black solid 1px;
+    border-right: black solid 1px;
+    text-align: left;
+}
+
+#header {
+    height: auto;
+    text-align: left;
+}
+
+#submenu, #menu {
+    height: auto;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
+    font-size: 108%;
+    padding: 4px;
+    margin: 0;
+}
+
+#submenu li, #menu li {
+    display: inline;
+    list-style: none;
+    padding: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-left: 1px solid black;
+}
+
+#submenu li:first-child, #menu li:first-child {
+    border: 0;
+}
+
+#submenu li a, #menu li a {
+    text-decoration: none;
+}
+
+#submenu li a:hover, #menu li a:hover {
+    color: red;
+}
+
+#submenu {
+    font-size: 100%;
+    border: 0;
+    border-bottom: 1px solid black;
+}
+
+#content {
+    height: auto;
+    padding: 8px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+fieldset {
+    border: 1px solid black;
+    -moz-border-radius: 4px;
+    padding: 8px;
+}
+
+legend {
+    margin-left: 20px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+form, input, textarea, select, option {
+    text-align: left;
+}
+
+input[type=text] {
+    width: 200px;
+}
+
+label {
+    cursor: pointer;
+  margin-right:12px;
+  width:200px;
+  display:inline-block;
+  font-weight:bold;
+  vertical-align:top;
+  line-height:18px;
+}
+
+label + label {
+    display: block;
+    margin-bottom: 4px;
+    padding: 0;
+}
+
+label + label + br {
+    display: none;
+}
+
+label > span.required {
+    color: red;
+}
+
+.field-block, .field-block-ignore {
+  clear:both;
+  padding-top:12px;
+}
+
+#message, #error, div.errors, label.error {
+  color: red;
+  border: 1px solid red;
+  padding:10px;
+  margin: 20px;
+  width: auto;
+}
+
+#message {
+    color: green;
+    border-color: green;
+}
+
+div.errors {
+  margin-left:10px;
+  color:#f00;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li, div.errors li {
+    list-style: none;
+}
+
+tbody {
+    border: 1px solid black;
+}
+
+td {
+    border: 0;
+    border-bottom: 1px solid black;
+}
+
+/* tables */
+
+table#list thead tr th, table#list tfoot tr th {
+	background-color: #e6EEEE;
+	border: 1px solid black;
+	padding: 4px;
+}
+
+table#list thead tr .header {
+	background-image: url(../gifs/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table#list tbody td {
+	color: #3D3D3D;
+	padding: 4px;
+	background-color: #FFF;
+	vertical-align: top;
+}
+table#list tbody tr.odd td {
+	background-color:#E2EDF4;
+}
+table#list thead tr .headerSortUp {
+	background-image: url(../gifs/asc.gif);
+}
+table#list thead tr .headerSortDown {
+	background-image: url(../gifs/desc.gif);
+}
+table#list thead tr .headerSortDown, table#list thead tr .headerSortUp {
+    background-color: #8dbdd8;
+}
+
+table#list {
+    width: 100%;
+}
+
+table#list tbody td.enabled {
+    font-weight: bold;
+    text-align: center;
+    color: green;
+}
+
+table#list tbody td.disabled {
+    font-weight: bold;
+    text-align: center;
+    color: red;
+}
+
+table#list tbody td.visibility {
+    text-align: center;
+}
+
+table#list tbody td div {
+    display: none;
+}

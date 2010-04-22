@@ -1,0 +1,41 @@
+<?php
+$request = Zend_Controller_Front::getInstance()->getRequest();
+$this->menuItem = $request->getRequestUri();
+
+$string = substr($this->menuItem, 1);
+$pos    = strpos($string, '/');
+$lpos   = strpos($string, '/');
+if ($pos !== false && $pos === $lpos) {
+    $data = explode('/', $string);
+    if (count($data) > 2) {
+        // This has to be fixed. Too restrictive to one level of hierarchy
+        $this->menuItem = '/' . $data[0] . '/' . $data[1];
+        $item = '/' . $data[0];
+    } else {
+        $item = '/' . substr($string, 0, $lpos);
+    }
+} else {
+    $item = '/' . $string;
+}
+
+
+?>	
+    <?php if ($this->menuItem !== '/action/code') :?>
+	<div class="sidenav">
+		<h2>Submenu</h2>
+    <?php if (in_array($item, array('/configuration', '/database', '/cache', '/output'))) { ?>
+        <li<?php echo $item == '/cache' ? ' class="active"' : '' ?>><a href="/cache">Cache</a></li>
+      <li<?php echo $item == '/user' ? ' class="active"' : '' ?>><a href="/user">Users</a></li>
+      <li<?php echo $item == '/output' ? ' class="active"' : '' ?>><a href="/output">Output</a></li>
+      <li<?php echo $item == '/database' ? ' class="active"' : '' ?>><a href="/database">Database</a></li>
+    <?php } elseif ($item == '/user') { ?>
+        <li<?php echo $item == '/user/add' ? ' class="active"' : '' ?>><a href="/user/add">Add new User</a></li>
+    <?php } elseif ($item == '/partners') { ?>
+        <li<?php echo $item == '/partners/add' ? ' class="active"' : '' ?>><a href="/partners/add">Add new Partner</a></li>
+    <?php } elseif ($item == '/errors') { ?>
+        <li<?php echo $item == '/errors/add' ? ' class="active"' : '' ?>><a href="/errors/add">Add new Error</a></li>
+    <?php } elseif ($item == '/action') { ?>
+        <li<?php echo $item == '/action/add' ? ' class="active"' : '' ?>><a href="/action/add">Add new Action</a></li>
+    <?php } ?>
+	</div>
+	<?php endif; ?>

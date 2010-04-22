@@ -1,0 +1,27 @@
+<h2>Database configuration</h2>
+<?php if (empty($this->configs)) : ?>
+There are no database configurations yet. <a href="/database/add">Add some</a><br />
+<?php else: ?>
+<br /><br />
+<a href="/database/edit">Edit Database settings</a>
+<br /><br />
+<table id="list">
+ <thead>
+  <tr>
+    <th>Key</th>
+    <th>Value</th>
+    <th>Type</th>
+  </tr>
+ </thead>
+ <tbody>
+ <?php foreach ($this->configs as $d) : ?>
+  <tr>
+    <td><?php echo $d['key']; ?></td>
+    <td><?php echo $d['value']; ?></td>
+    <td>Main</td>
+  </tr>
+ <?php endforeach; ?>
+ </tbody>
+</table>
+
+<?php endif; ?>
