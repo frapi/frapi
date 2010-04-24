@@ -11,6 +11,7 @@ class CacheController extends Lupin_Controller_Base
         
         $configModel = new Default_Model_Configuration();
         $server = $configModel->getKey('api_url');
+        $cache = $configModel->getKey('cache');
         $this->hash = isset($server) ? hash('sha1', $server) : '';
 
         $this->cache_keys = array(
@@ -21,7 +22,8 @@ class CacheController extends Lupin_Controller_Base
             "Output.formats-enabled",
             "Actions.enabled-private",
             "Actions.enabled-public",
-            "Partners.emails-keys"
+            "Partners.emails-keys",
+            "Cache.adapter",
         );
         
         parent::init();

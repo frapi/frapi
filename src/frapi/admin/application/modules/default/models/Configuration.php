@@ -34,6 +34,10 @@ class Default_Model_Configuration extends Lupin_Model
             $return[] = $password;
         }
         
+        if (isset($cache) && isset($cache['value'])) {
+            $return[] = $cache;
+        }
+        
         return $return;
     }
     

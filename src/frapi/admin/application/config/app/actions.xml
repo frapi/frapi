@@ -15,5 +15,13 @@
     </parameter>
    </parameters>
   </action>
+  <action>
+   <name>testing2</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>Testing 2</description>
+   <route></route>
+   <hash>faeb277992bf48cecc95b563b7fa14127f0bd951</hash>
+  </action>
  </actions>
 </frapi-config>

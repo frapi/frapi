@@ -54,6 +54,7 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
 
     public function executeGet()
     {
+        $cache = Frapi_Cache::getInstance();
         $b = $this->getParam('bazinga', self::TYPE_OUTPUT);
         
         return $this->toArray();

@@ -298,31 +298,66 @@ if ($valid instanceof Frapi_Error) {
         }
 
         $executeActionBody .= "\n\n" . 'return $this->toArray();';
-
+        
+        $docblockArray = array(
+            'shortDescription' => '',
+            'longDescription'  => '',
+            'tags'             => array(
+                new Zend_CodeGenerator_Php_Docblock_Tag_Return(array(
+                    'datatype'  => 'array',
+                )),
+            )
+        );
+        
+        $docblock = new Zend_CodeGenerator_Php_Docblock(array());
+        
+        $docblockArray['shortDescription'] = 'Default Call Method';
+        $docblockArray['longDescription']  = 'This method is called when no specific request handler has been found';
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
-                            'name' => 'executeAction',
-                            'body' => $executeActionBody,
+            'name' => 'executeAction',
+            'body' => $executeActionBody,
+            'docblock' => new Zend_CodeGenerator_Php_Docblock(array($docblockArray))
         ));
 
+        $docblockArray['shortDescription'] = 'Get Request Handler';
+        $docblockArray['longDescription']  = 'This method is called when a request is a GET';
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
-                            'name' => 'executeGet',
-                            'body' => $executeActionBody,
-        ));
-        $methods[] = new Zend_CodeGenerator_Php_Method(array(
-                            'name' => 'executePost',
-                            'body' => $executeActionBody,
+            'name' => 'executeGet',
+            'body' => $executeActionBody,
+            'docblock' => new Zend_CodeGenerator_Php_Docblock(array($docblockArray))
         ));
         
+        $docblockArray['shortDescription'] = 'Post Request Handler';
+        $docblockArray['longDescription']  = 'This method is called when a request is a POST';
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
-                            'name' => 'executePut',
-                            'body' => $executeActionBody,
+            'name' => 'executePost',
+            'body' => $executeActionBody,
+            'docblock' => new Zend_CodeGenerator_Php_Docblock(array($docblockArray))
+        ));
+        
+        $docblockArray['shortDescription'] = 'Put Request Handler';
+        $docblockArray['longDescription']  = 'This method is called when a request is a PUT';
+        $methods[] = new Zend_CodeGenerator_Php_Method(array(
+            'name' => 'executePut',
+            'body' => $executeActionBody,
+            'docblock' => new Zend_CodeGenerator_Php_Docblock(array($docblockArray))
         ));
     
+        $docblockArray['shortDescription'] = 'Delete Request Handler';
+        $docblockArray['longDescription']  = 'This method is called when a request is a DELETE';
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
-                            'name' => 'executeDelete',
-                            'body' => $executeActionBody,
+            'name' => 'executeDelete',
+            'body' => $executeActionBody,
+            'docblock' => new Zend_CodeGenerator_Php_Docblock(array($docblockArray))
         ));
 
+        $docblockArray['shortDescription'] = 'Head Request Handler';
+        $docblockArray['longDescription']  = 'This method is called when a request is a HEAD';
+        $methods[] = new Zend_CodeGenerator_Php_Method(array(
+            'name' => 'executeHead',
+            'body' => $executeActionBody,
+            'docblock' => new Zend_CodeGenerator_Php_Docblock(array($docblockArray))
+        ));
 
         $class->setMethods($methods);
 

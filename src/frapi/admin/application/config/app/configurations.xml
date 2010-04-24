@@ -21,5 +21,9 @@
    <key>api_url</key>
    <value>api.frapi</value>
   </configuration>
+  <configuration>
+   <key>cache</key>
+   <value>apc</value>
+  </configuration>
  </configurations>
 </frapi-config>

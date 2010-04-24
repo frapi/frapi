@@ -123,6 +123,15 @@ class ActionController extends Lupin_Controller_Base
     {
         $this->_helper->viewRenderer->setNoRender();
         $model = new Default_Model_Action;
+        
+        $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
+        if (!is_writable($dir)) {
+            $this->addMessage(
+                'The path : "' . $dir . '" is not currently writeable by this user, ' . 
+                'therefore we cannot synchronize the codebase'
+            );
+            $this->_redirect('/action');
+        }
         $model->sync();
         $this->addMessage('Development environment has been sychronized');
         $this->_redirect('/action');

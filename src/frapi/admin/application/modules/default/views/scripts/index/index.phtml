@@ -1,7 +1,20 @@
-
+<?php if (!empty($this->issues)) : ?>
+    <h2>First of all, Welcome to your API! Now, see below</h2><br />
+    <h2>Critical Setup Issues</h2>
+    <p>We have identified issues regarding your setup which means that your API <u>will <strong>not</strong></u> function correctly until you resolved those issues.</p>
+    <ul>
+        <?php foreach ($this->issues as $name => $message) :?>
+            <li><?php echo $message; ?><br /><br /></li>
+        <?php endforeach; ?>
+    </ul>
+<?php else: ?>
+    <h2>Welcome to the amazing world of Frapi</h2>
+<?php endif; ?>
+<?php /** ?>
 <h3>Overview of your API statistics</h3>
 <br />
 <img src="http://img.skitch.com/20100421-qj45as8i6449qjci8bspw1n1st.png" style="width: 548px; height: 250px;" />
 <br />
 <br />
 For an in-depth analysis of your stats, <a href="#">click here</a>
+<?php */ ?>
