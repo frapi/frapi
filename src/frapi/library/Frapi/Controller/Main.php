@@ -265,7 +265,7 @@ class Frapi_Controller_Main
          * Unhappy? Remove me.
          */
         $puts = parse_str(file_get_contents("php://input"));
-        
+
         if (!empty($puts)) {
             foreach ($puts as $put => $val) {
                 $params[$put] = $val;

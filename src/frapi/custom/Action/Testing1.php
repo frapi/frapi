@@ -42,8 +42,6 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
 
     public function executeAction()
     {
-        throw new Frapi_Error("> 'OH_NO_REALLY'", 'THIS IS NOT COOL', 305);
-        throw new Frapi_Error("NO_CODE", 'THIS IS NOT COOL');
         $valid = $this->hasRequiredParameters($this->requiredParams);
         if ($valid instanceof Frapi_Error) {
             return $valid;
@@ -54,11 +52,10 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
 
     public function executeGet()
     {
-        $cache = Frapi_Cache::getInstance();
-        $cache->add('test', 'david');
-
-        $b = $this->getParam($cache->get('test'), self::TYPE_OUTPUT);
+        // You can easily load a CouchDB using ArmChair. If you need something
+        // More advanced then use something more advanced ;-)
         
+        //$chair = new ArmChair('http://localhost:5984/databasenameishere');   
         return $this->toArray();
     }
 

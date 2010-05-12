@@ -2,6 +2,8 @@ Requirements
 ===========================
 APC: Required for caching, specifically for From_Database_Error::code, ::msg
 HTTP: (http://pecl.php.net/http)
+PEAR: (http://pear.php.net)
+HTTP_Request2: Used in the bundled ArmChair (http://pear.php.net/HTTP_Request2)
 
 APC Keys
 ===========================
