@@ -117,8 +117,12 @@ class Lupin_Config_Xml
      */
     public function getAll($type)
     {
+        if (!isset($this->config[$type])) {
+            return false;
+        }
+        
         $ret = $this->config[$type];
-
+        
         if (empty($ret)) {
             return false;
         }
@@ -244,7 +248,15 @@ class Lupin_Config_Xml
      */
     public function add($type, array $data)
     {
+        if (empty($this->config)) {
+            $this->config = array($type => true);
+        }
+
         if (isset($this->config->$type)) {
+            if (!isset($this->config[$type])) {
+                $this->config[$type] = $type;
+            }
+
             if (!isset($this->config[$type][0])) {
                 $this->config[$type] = array($this->config[$type]);
             }

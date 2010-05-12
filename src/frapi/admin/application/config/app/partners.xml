@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <frapi-config>
- <partners>
-  <partner>
-   <hash>132be75a6e0ee65db752ef136c0e27ad443ec890</hash>
-   <firstname>David</firstname>
-   <lastname>Coallier</lastname>
-   <company>echolibre</company>
-   <api_key>somesha1</api_key>
-   <email>david@echolibre.com</email>
-  </partner>
- </partners>
+ <partners/>
 </frapi-config>

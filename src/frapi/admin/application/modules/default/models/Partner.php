@@ -28,9 +28,12 @@ class Default_Model_Partner extends Lupin_Model
         );
 
         try {
-            $this->config->add('partner', $values);
-        } catch (Exception $e) { }
+            $res = $this->config->add('partner', $values);
+        } catch (Exception $e) { 
+
+        }
         
+        var_dump($res); die();
         $this->refreshAPCCache();
         return true;
     }
