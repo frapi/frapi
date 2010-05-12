@@ -23,7 +23,7 @@
  */
 class Frapi_Controller_Main
 {
-    const MAIN_WEBSERVICE_DEBUG  = true;
+    const MAIN_WEBSERVICE_DEBUG  = false;
     const MAIN_WESERVICE_TESTING = true;
 
     /**
@@ -256,6 +256,23 @@ class Frapi_Controller_Main
      */
     public function getParams()
     {
+        $params = $this->request;
+        
+        /**
+         * This certainly isn't a pure approach however it is a very
+         * practical approach that will suit most people most of the times.
+         *
+         * Unhappy? Remove me.
+         */
+        $puts = parse_str(file_get_contents("php://input"));
+        
+        if (!empty($puts)) {
+            foreach ($puts as $put => $val) {
+                $params[$put] = $val;
+            }
+        }
+        
+        $this->request = $params;
         return $this->request;
     }
 
@@ -394,8 +411,8 @@ class Frapi_Controller_Main
             if (self::MAIN_WEBSERVICE_DEBUG && $this->getFormat() != 'xml') {
                 $type = 'text/plain';
             }
-
-            header("Content-Type: $type; charset=$charset;");
+            
+            
         }
     }
 }

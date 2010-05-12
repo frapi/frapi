@@ -103,7 +103,7 @@ class Frapi_Output
         } else {
             header('HTTP/1.1 200 OK');
         }
-        
+
         header('Content-type: '.$this->mimeType.'; charset=utf-8');
         
         //IF debugging is turned on, then send cache info

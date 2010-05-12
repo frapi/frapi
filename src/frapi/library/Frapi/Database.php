@@ -27,7 +27,7 @@ class Frapi_Database extends PDO
     /**
      * Just the instance of the PDO connection.
      *
-     * @var object
+     * @var PDO object
      */
     private static $instance;
     
@@ -74,6 +74,8 @@ class Frapi_Database extends PDO
     
     private static function getDbConfig()
     {
+        throw new Frapi_Database_Exception('This method is outdated. We have to fix it.');
+        
         $sql    = "
             SELECT key, value 
             FROM configurations

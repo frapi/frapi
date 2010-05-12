@@ -1,6 +1,6 @@
 <?php
 /**
- * Error.
+ * Frapi Error.
  *
  *
  * LICENSE
@@ -32,7 +32,7 @@ class Frapi_Error extends Frapi_Exception
      */
     const ERROR_INVALID_SECRET_KEY_NO          = 403;
     const ERROR_INVALID_URL_PROMPT_FORMAT_NO   = 400;
-    const ERROR_INVALID_ACTION_REQUEST_NO      = 405;
+    const ERROR_INVALID_ACTION_REQUEST_NO      = 404;
     const ERROR_INVALID_PARTNER_ID_NO          = 403;
     const ERROR_MISSING_REQUEST_ARG_NO         = 401; // Malformed.
 
@@ -95,6 +95,50 @@ class Frapi_Error extends Frapi_Exception
     {
         $error = self::_get($error_name, $error_msg, $http_code);
         parent::__construct($error['message'], $error['name'], $error['http_code']);
+    }
+    
+    /**
+     * Very basic error handler
+     *
+     * This method is to catch all usual errors thrown from PHP
+     * and display them in an API looking way.
+     *
+     * @param  int    $errno  The error number.
+     * @param  string $errstr The error message
+     * @param  string $errfile The file where the error happened.
+     * @param  int    $errline The line at which the error happened in $errfile.
+     *
+     * @throws Frapi_Error
+     * @return void
+     */
+    public function errorHandler($errno, $errstr, $errfile, $errline)
+    {
+        $errorType = 'Fatal';
+        
+        switch ($errno) {
+            case E_ERROR:
+            case E_USER_ERROR:
+                $errorType = 'Fatal';
+                break;
+            case E_WARNING:
+            case E_USER_WARNING:
+                $errorType = 'Warning';
+                break;
+            case E_NOTICE:
+            case E_USER_NOTICE:
+                $errorType = 'Notice';
+                break;
+            default:
+                $errorType = 'Unknown';
+                break;
+        }
+        
+        throw new Frapi_Error(
+            'PHP ' . $errorType . ' error', 
+            $errstr . ' (Error Number: '.$errno.'),' . 
+                      ' (File: ' . $errfile . ' at line ' . $errline . ')',
+            400
+        );
     }
     
     /**
@@ -167,8 +211,11 @@ class Frapi_Error extends Frapi_Exception
     /**
      * Get errors from database.
      *
-     * @return Array
-     **/
+     * This method fetches the errors from the database (XML)
+     * key-values which then get cached when used in self::_get
+     *
+     * @return Array An array of errors
+     */
     private static function _getErrorsFromDb()
     {
         $conf          = Frapi_Internal::getConfiguration('errors');

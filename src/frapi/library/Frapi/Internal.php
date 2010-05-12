@@ -34,8 +34,15 @@ class Frapi_Internal
      * Keeps a static handle for the admin database.
      *
      * @var PDO Database Adapter
-     **/
+     */
     protected static $dbHandle = null;
+    
+    /**
+     * This holds the Frapi_Cache object
+     *
+     * @param Frapi_Cache $cache The cache object.
+     */
+    protected static $cache;
     
     protected static $conf = array();
 
@@ -43,17 +50,27 @@ class Frapi_Internal
      * Log variable for debugging
      *
      * @var Array
-     **/
+     */
     protected static $_log = null;
 
+    /**
+     * This is the hash of your server's hostname. It may seem as a bug
+     * or an inflexible solution and may be changed at a later point, however
+     * frapi runs on it's own hostname by design and is not sharing domain
+     * names just yet.
+     *
+     * The reason for the hash was that on the same server with multiple vhosts
+     * there would be cache collisions and conflicts thus the need for a special
+     * hash in the apc keys.
+     */
     private static $_hash = false;
     
     /**
      * Logging function
      *
      * @return void
-     **/
-    protected function log($type, $extra = null)
+     */
+    protected static function log($type, $extra = null)
     {
         if (Frapi_Controller_Main::MAIN_WEBSERVICE_DEBUG) {
             if (is_null(self::$_log)) {
@@ -92,6 +109,10 @@ class Frapi_Internal
     
     public static function getConfiguration($type)
     {
+        if (!isset(self::$cache)) {
+            self::$cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
+        }
+        
         if (!isset(self::$conf[$type])) {
             self::initConfiguration($type);
         }

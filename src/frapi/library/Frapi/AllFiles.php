@@ -110,6 +110,5 @@ require EXTRA_LIBRARIES_ROOT_PATH . 'Lupin/Config/Xml.php';
 require EXTRA_LIBRARIES_ROOT_PATH . 'Lupin/Config/Helper/XmlArray.php';
 
 
-// OData test
-define ('ODATA_DIR', EXTRA_LIBRARIES_ROOT_PATH . DIRECTORY_SEPARATOR . 'ODataphp');
-set_include_path(get_include_path() . PATH_SEPARATOR . ODATA_DIR);
+// Other data
+define('FRAPI_CACHE_ADAPTER', 'apc');
