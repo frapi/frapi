@@ -120,7 +120,7 @@ $pageWidth = $page->getWidth();
 
 $page->drawHeader('Actions');
 
-if (count($this->doc_data['actions'])) {
+if (!empty($this->doc_data['actions'])) {
     foreach ($this->doc_data['actions'] as $action) {
         $page->cursor_pos_x = 20;
         $page->drawHeader($action['name'], 2);
@@ -170,7 +170,7 @@ if (count($this->doc_data['actions'])) {
             }
         }
         
-        if (count($action['errors'])) {
+        if (!empty($action['errors'])) {
             $page->drawHeader('Errors Associated with Action', 4);
             foreach ($action['errors'] as $error) {
                 $page->drawTextLine($error['name']);

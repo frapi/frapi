@@ -109,7 +109,7 @@
         <?php endif; ?>
 
         <h1>Errors</h1>
-        <?php if (count($this->doc_data['errors'])): ?>
+        <?php if (!empty($this->doc_data['errors'])): ?>
             <?php foreach ($this->doc_data['errors'] as $error): ?>
                 <h2 id="<?php echo _makeAnchor($error['name']); ?>"><?php echo $error['name'] ?> (HTTP Code <?php echo ((!is_null($error['http_code']))?($error['http_code']):('400')) ?>)</h2>
                 <div class="doc-subdata">

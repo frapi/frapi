@@ -7,7 +7,7 @@
 
 Actions
 ================================================================================
-
+<?php if (!empty($this->doc_data['actions'])) : ?>
 <?php foreach ($this->doc_data['actions'] as $action): ?>
     <?php echo $action['name'], PHP_EOL?>
     ========================================
@@ -37,22 +37,26 @@ Actions
     
     <?php echo PHP_EOL; ?>
 <?php endforeach; ?>
+<?php endif; ?>
 
 Errors
 ================================================================================
-
+<?php if (!empty($this->doc_data['errors'])) : ?>
 <?php foreach ($this->doc_data['errors'] as $error): ?>
     <?php echo $error['name'] ?> (HTTP Code <?php echo ((!is_null($error['http_code']))?($error['http_code']):('400')) ?>) 
     ========================================
         <?php echo $error['message'], PHP_EOL ?>
 
 <?php endforeach; ?>
+<?php endif; ?>
 
 Output Types
 ================================================================================
+<?php if (!empty($this->doc_data['output-types'])) : ?>
 <?php foreach ($this->doc_data['output-types'] as $type): ?>
     <?php echo str_pad($type['name'], 4), "\t\t", (($type['enabled'])?('**Enabled**'):('Disabled')), "\t\t", (($type['default'])?('**Default**'):('')), PHP_EOL ?>
 <?php endforeach; ?>
+<?php endif; ?>
 
 ################################################################################
          FRAPI, echolibre ltd.

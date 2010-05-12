@@ -44,7 +44,7 @@ Actions
 
 Errors
 =======
-
+<?php if (!empty($this->doc_data['errors'])) :?>
 <?php foreach ($this->doc_data['errors'] as $error): ?>
 
 
@@ -64,6 +64,7 @@ Errors
     <?php echo $error['description'], PHP_EOL ?>
 <?php endif; ?>
 <?php endforeach; ?>
+<?php endif; ?>
 
 Output Types
 ==============
