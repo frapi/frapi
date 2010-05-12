@@ -3,10 +3,10 @@
 /**
  * Action Testing1 
  * 
- * Testing 1 edit
+ * Testing 1 edit2
  * 
- * @link http://echolibre.com/frapi
- * @author Echolibre <frapi@echolibre.com>
+ * @link http://getfrapi.com
+ * @author Frapi <frapi@getfrapi.com>
  * @link /testing/1
  */
 class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
@@ -36,10 +36,16 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
      */
     public function toArray()
     {
-
         return $this->data;
     }
 
+    /**
+     * Default Call Method
+     * 
+     * This method is called when no specific request handler has been found
+     * 
+     * @return array
+     */
     public function executeAction()
     {
         $valid = $this->hasRequiredParameters($this->requiredParams);
@@ -50,15 +56,32 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
         return $this->toArray();
     }
 
+    /**
+     * Get Request Handler
+     * 
+     * This method is called when a request is a GET
+     * 
+     * @return array
+     */
     public function executeGet()
     {
-        // You can easily load a CouchDB using ArmChair. If you need something
-        // More advanced then use something more advanced ;-)
+        $valid = $this->hasRequiredParameters($this->requiredParams);
+        if ($valid instanceof Frapi_Error) {
+            return $valid;
+        }
         
-        //$chair = new ArmChair('http://localhost:5984/databasenameishere');   
+        $this->data['bazinga'] = $this->getParam('bazinga', self::TYPE_OUTPUT);
+        
         return $this->toArray();
     }
 
+    /**
+     * Post Request Handler
+     * 
+     * This method is called when a request is a POST
+     * 
+     * @return array
+     */
     public function executePost()
     {
         $valid = $this->hasRequiredParameters($this->requiredParams);
@@ -66,9 +89,20 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
             return $valid;
         }
         
+        // This instantiates an ArmChair object to access CouchDB. If you need
+        // something more advanced well... use something else, it's not forbidden.
+        // $chair = new ArmChair('http://localhost:5984/databasenamehere');
+        
         return $this->toArray();
     }
 
+    /**
+     * Put Request Handler
+     * 
+     * This method is called when a request is a PUT
+     * 
+     * @return array
+     */
     public function executePut()
     {
         $valid = $this->hasRequiredParameters($this->requiredParams);
@@ -79,7 +113,31 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
         return $this->toArray();
     }
 
+    /**
+     * Delete Request Handler
+     * 
+     * This method is called when a request is a DELETE
+     * 
+     * @return array
+     */
     public function executeDelete()
+    {
+        $valid = $this->hasRequiredParameters($this->requiredParams);
+        if ($valid instanceof Frapi_Error) {
+            return $valid;
+        }
+        
+        return $this->toArray();
+    }
+
+    /**
+     * Head Request Handler
+     * 
+     * This method is called when a request is a HEAD
+     * 
+     * @return array
+     */
+    public function executeHead()
     {
         $valid = $this->hasRequiredParameters($this->requiredParams);
         if ($valid instanceof Frapi_Error) {
@@ -91,3 +149,4 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
 
 
 }
+

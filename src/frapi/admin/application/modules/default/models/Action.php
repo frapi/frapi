@@ -316,7 +316,7 @@ if ($valid instanceof Frapi_Error) {
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
             'name' => 'executeAction',
             'body' => $executeActionBody,
-            'docblock' => new Zend_CodeGenerator_Php_Docblock(array($docblockArray))
+            'docblock' => $docblockArray,
         ));
 
         $docblockArray['shortDescription'] = 'Get Request Handler';
@@ -324,7 +324,7 @@ if ($valid instanceof Frapi_Error) {
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
             'name' => 'executeGet',
             'body' => $executeActionBody,
-            'docblock' => new Zend_CodeGenerator_Php_Docblock(array($docblockArray))
+            'docblock' => $docblockArray,
         ));
         
         $docblockArray['shortDescription'] = 'Post Request Handler';
@@ -332,7 +332,7 @@ if ($valid instanceof Frapi_Error) {
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
             'name' => 'executePost',
             'body' => $executeActionBody,
-            'docblock' => new Zend_CodeGenerator_Php_Docblock(array($docblockArray))
+            'docblock' => $docblockArray,
         ));
         
         $docblockArray['shortDescription'] = 'Put Request Handler';
@@ -340,7 +340,7 @@ if ($valid instanceof Frapi_Error) {
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
             'name' => 'executePut',
             'body' => $executeActionBody,
-            'docblock' => new Zend_CodeGenerator_Php_Docblock(array($docblockArray))
+            'docblock' => $docblockArray,
         ));
     
         $docblockArray['shortDescription'] = 'Delete Request Handler';
@@ -348,7 +348,7 @@ if ($valid instanceof Frapi_Error) {
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
             'name' => 'executeDelete',
             'body' => $executeActionBody,
-            'docblock' => new Zend_CodeGenerator_Php_Docblock(array($docblockArray))
+            'docblock' => $docblockArray,
         ));
 
         $docblockArray['shortDescription'] = 'Head Request Handler';
@@ -356,7 +356,7 @@ if ($valid instanceof Frapi_Error) {
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
             'name' => 'executeHead',
             'body' => $executeActionBody,
-            'docblock' => new Zend_CodeGenerator_Php_Docblock(array($docblockArray))
+            'docblock' => $docblockArray,
         ));
 
         $class->setMethods($methods);
