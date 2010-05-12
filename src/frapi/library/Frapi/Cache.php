@@ -24,15 +24,45 @@ class Frapi_Cache_Exception extends Frapi_Exception {}
  */
 class Frapi_Cache
 {
+    /**
+     * The adapter name to load
+     *
+     * @var string $adapter The name of the adapter driver.
+     */
     public $adapter = 'apc';
+    
+    /**
+     * The cache object that holds the cache connector
+     *
+     * @var Frapi_Cache $cacheObject The cache object.
+     */
     public $cacheObject = null;
     
-    public function __construct($adapter = 'apc')
+    /**
+     * Constructor
+     *
+     * This is the constructor of the Frapi_Cache class.
+     *
+     * @param  string $adapter The adapter to load.
+     * @param  array  $options Potentially a list of options per adapter.
+     * @return void
+     */
+    public function __construct($adapter = 'apc', $options = array())
     {
         $this->cacheObject = Frapi_Cache::getInstance($adapter);
     }
     
-    public static function getInstance($adapter = 'apc')
+    /**
+     * Create an instance of the cache
+     *
+     * This method accepts a paramter and will return a cache object
+     * of connecting to the adapter you specified.
+     *
+     * @param  string $adapter The adapter to load.
+     * @param  array  $options Potentially a list of options per adapter.
+     * @return Frapi_Cache_Interface A new class of the requested adapter type.
+     */
+    public static function getInstance($adapter = 'apc', $options = array())
     {
         $adapter     = ucfirst(strtolower($adapter));
         $adapterFile = LIBRARY_CACHE_ADAPTER . DIRECTORY_SEPARATOR . $adapter . '.php';
