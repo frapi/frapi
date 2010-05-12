@@ -70,7 +70,12 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
             return $valid;
         }
         
-        $this->data['bazinga'] = $this->getParam('bazinga', self::TYPE_OUTPUT);
+        // Access your API like: http://api.frapi/testing/1.printr?bazinga=2.3david"><script>2
+        $this->data['bazinga-escaped'] = $this->getParam('bazinga', self::TYPE_OUTPUT);
+        $this->data['bazinga-plain']   = $this->getParam('bazinga', self::TYPE_STRING);
+        $this->data['bazinga-int']     = $this->getParam('bazinga', self::TYPE_INT);
+        $this->data['bazinga-float']   = $this->getParam('bazinga', self::TYPE_FLOAT);
+        
         
         return $this->toArray();
     }
