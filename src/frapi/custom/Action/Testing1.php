@@ -65,6 +65,7 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executeGet()
     {
+        throw new Frapi_Error('ERROR_CODE', 'The error message to display', 405);
         $valid = $this->hasRequiredParameters($this->requiredParams);
         if ($valid instanceof Frapi_Error) {
             return $valid;

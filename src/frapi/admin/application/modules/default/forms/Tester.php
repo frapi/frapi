@@ -76,9 +76,14 @@ class Default_Form_Tester extends Lupin_Form
         $partnerModel = new Default_Model_Partner();
         $partners = $partnerModel->getAll();
 
-        foreach ($partners as $key => $partner) {
-            $emails_keys [$partner['hash']] = $partner['email'] . ' / ' . $partner['api_key'];
+        if (!empty($partners)) {
+            foreach ($partners as $key => $partner) {
+                if (!empty($partner)) {
+                    $emails_keys [$partner['hash']] = $partner['email'] . ' / ' . $partner['api_key'];
+                }
+            }
         }
+        
         $email_key->addMultiOptions($emails_keys);
         $this->addElement($email_key);
         
