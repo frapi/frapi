@@ -15,5 +15,19 @@
     </parameter>
    </parameters>
   </action>
+  <action>
+   <name>Testing2</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>Testing 2</description>
+   <route>/testing/2</route>
+   <hash>500286218fe54ed4b7e8a8ce58ea4d947fb4f658</hash>
+   <parameters>
+    <parameter>
+     <name>name</name>
+     <required>1</required>
+    </parameter>
+   </parameters>
+  </action>
  </actions>
 </frapi-config>
