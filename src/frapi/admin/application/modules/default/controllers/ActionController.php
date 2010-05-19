@@ -78,7 +78,11 @@ class ActionController extends Lupin_Controller_Base
         $model = new Default_Model_Action;
 
         $actionData = $model->get($id);
-        $params     = $actionData['parameters'];
+        $params     = array();
+        
+        if (isset($actionData['parameters']) && !empty($actionData['parameters'])) {
+            $params = $actionData['parameters'];
+        }
 
         if (isset($params['parameter']) && !isset($params['parameter'][0])) {
             $params['parameter'] = array($params['parameter']);
@@ -148,58 +152,81 @@ class ActionController extends Lupin_Controller_Base
             new Zend_Reflection_Class('Action_' . $name)
         );
 
-        
-        $error = array();
+        $error  = array();
+        $errors = array();
         
         foreach ($class->getMethods() as $key => $method) {
             $body = $method->getBody();
             $methodName = $method->getName();
-            $regex = '@frapi_error\(.*?\)@i';
-            preg_match_all($regex, $body, $matches, PREG_PATTERN_ORDER);
-            print_r($matches);
-            continue;
+
             $toks = token_get_all('<?' . 'php ' . $body . '?>');
+            
             $it = new ArrayIterator($toks);
+            
             for ($it->rewind(); $it->valid(); $it->next()) {
-                
                 $current = $it->current();
                 $key = $it->key();
-                $item = (double)$current[0];
                 
+                $item = (double)$current[0];
+
                 if ($item == T_STRING && stristr('frapi_error', $current[1]) !== false) {
-                    $error[$methodName][$key] = array();
-                    while ($it->valid()) {
-                        $it->next();
-                        $current = $it->current();
-                        
-                        if ((double)$current[0] == T_CONSTANT_ENCAPSED_STRING) {
-                            $error[$methodName][$key]['name'] = $current[1];
-                            
-                            while ($it->valid()) {
-                                $it->next();
-                                $current = $it->current();
-                                if ((double)$current[0] == T_CONSTANT_ENCAPSED_STRING) {
-                                    $error[$methodName][$key]['message'] = $current[1];
-                                    while ($it->valid()) {
-                                        
-                                        $it->next();
-                                        $current = $it->current();
-                                        if ((double)$current[0] == T_LNUMBER) {
-                                            $error[$methodName][$key]['code'] = $current[1];
-                                            
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    if ($error = $this->getErrors($it, $methodName)) {
+                        $errors[] = $error;
                     }
                 }
+                
             }
         }
         
-        print_r($error);
+        //print_r($errors);
 
         die();
         
+    }
+    
+    private function getErrors($it, $methodName)
+    {
+        $error  = array();
+        $i = 0;
+        while ($it->valid()) {
+            $it->next();
+            $mainKey = $key = $it->key();
+            $current = $it->current();
+
+            if ((double)$current[0] == T_CONSTANT_ENCAPSED_STRING) {
+
+                $error[$methodName][$key][$i] = array();
+                $error[$methodName][$key][$i]['name'] = $current[1];
+
+                while ($it->valid()) {
+                    $it->next();
+                    $current = $it->current();
+                    
+                    if ((double)$current[0] == T_CONSTANT_ENCAPSED_STRING) {
+                        $error[$methodName][$key]['message'] = $current[1];
+
+                        while ($it->valid()) {
+                            
+                            $it->next();
+                            $current = $it->current();
+                            if ((double)$current[0] == T_LNUMBER) {
+                                $error[$methodName][$key]['code'] = $current[1];
+                                
+                            }
+                        }
+                    } else {
+                        if ($it->offsetExists($mainKey)) {
+                            $it->seek($mainKey);
+                        }
+                    }
+                }
+
+                ++$i;
+            } else {
+
+            }
+        }
+        
+        return !empty($error) ? $error : false;
     }
 }

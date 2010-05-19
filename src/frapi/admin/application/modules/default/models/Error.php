@@ -25,6 +25,8 @@ class Default_Model_Error extends Lupin_Model
             $this->config->add('error', $values);
         } catch (Exception $e) { }
         
+        $this->refreshAPCCache();
+        
         return true;
     }
 
@@ -43,6 +45,8 @@ class Default_Model_Error extends Lupin_Model
         try {
             $this->config->update('error', 'hash', $id, $values);
         } catch (Exception $e) { }
+        
+        $this->refreshAPCCache();        
         
         return true;
     }
