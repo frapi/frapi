@@ -33,7 +33,6 @@ class Default_Model_Partner extends Lupin_Model
 
         }
         
-        var_dump($res); die();
         $this->refreshAPCCache();
         return true;
     }
