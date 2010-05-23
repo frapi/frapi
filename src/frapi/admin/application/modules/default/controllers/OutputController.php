@@ -26,6 +26,7 @@ class OutputController extends Lupin_Controller_Base
         $model = new Default_Model_Output;
         $model->makeDefault($this->getRequest()->getParam('id'));
         apc_delete('Output.default-format');
+        $this->refreshAPCCache();
         $this->_redirect('/output');
     }
 
@@ -41,5 +42,19 @@ class OutputController extends Lupin_Controller_Base
         $model = new Default_Model_Output;
         $model->disable($this->getRequest()->getParam('id'));
         $this->_redirect('/output');
+    }
+    
+    /**
+     * Refresh the APC cache by deleting APC entries.
+     *
+     * @return void
+     */
+    public function refreshAPCCache()
+    {
+        $configModel = new Default_Model_Configuration();
+        $server = $configModel->getKey('api_url');
+        $hash = isset($server) ? hash('sha1', $server) : '';
+        
+        apc_delete($hash . '-Output.default-format');
     }
 }

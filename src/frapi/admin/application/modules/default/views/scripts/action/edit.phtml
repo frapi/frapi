@@ -17,15 +17,16 @@ echo $this->form;
     </tr>
 <?php
     $i = 1;
-
-    foreach ($this->data['parameter'] as $dKey => $d) {
-        echo '<tr><td><input type="text" name="param[' . $i . ']" value="' . $d['name'] . '" style="width: 90%;" /></td>';
-        $checked = $d['required'] == '1' ? ' checked="checked"' : '';
-        echo '<td style="text-align: center;"><input type="checkbox" name="required[' . $i . ']"' . $checked . '></td>';
-        echo '<td>';
-        echo '<input type="hidden" name="param_id[' . $i . ']" value="' . $d['name'] . '" />';
-        echo '<a class="delete-button" href="#">Delete</a></td></tr>' . "\n";
-        $i++;
+    if (isset($this->data['parameter']) && !empty($this->data['parameter'])) {
+        foreach ($this->data['parameter'] as $dKey => $d) {
+            echo '<tr><td><input type="text" name="param[' . $i . ']" value="' . $d['name'] . '" style="width: 90%;" /></td>';
+            $checked = $d['required'] == '1' ? ' checked="checked"' : '';
+            echo '<td style="text-align: center;"><input type="checkbox" name="required[' . $i . ']"' . $checked . '></td>';
+            echo '<td>';
+            echo '<input type="hidden" name="param_id[' . $i . ']" value="' . $d['name'] . '" />';
+            echo '<a class="delete-button" href="#">Delete</a></td></tr>' . "\n";
+            $i++;
+        }
     }
 ?>
 </table>
