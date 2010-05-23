@@ -138,9 +138,11 @@ class Default_Model_Action extends Lupin_Model
             }
             
             $p = array();
-            foreach ($params as $param) {
-                if ($param['required'] == '1') {
-                    $p[] = $param['name'];
+            if (!empty($params)) {
+                foreach ($params as $param) {
+                    if ($param['required'] == '1') {
+                        $p[] = $param['name'];
+                    }
                 }
             }
 
