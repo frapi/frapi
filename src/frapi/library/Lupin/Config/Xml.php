@@ -252,11 +252,11 @@ class Lupin_Config_Xml
             $this->config = array($type => true);
         }
 
-        if (isset($this->config->$type)) {
-            if (!isset($this->config[$type])) {
-                $this->config[$type] = $type;
-            }
+        if (!isset($this->config[$type])) {
+            $this->config[$type] = $type;
+        }
 
+        if (isset($this->config[$type])) {
             if (!isset($this->config[$type][0])) {
                 $this->config[$type] = array($this->config[$type]);
             }
