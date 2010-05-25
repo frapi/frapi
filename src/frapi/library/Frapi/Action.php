@@ -173,14 +173,7 @@ class Frapi_Action
         return true;
     }
 
-    /**
-     * The RESTful actions
-     *
-     * The actions used to create RESTful applications. Those are not going to be
-     * promoted until we have a solid version running.
-     *
-     * @todo Remove this comment
-     */
+    // The RESTful actions
     public function executeGet()    { return $this->executeAction(); }
     public function executePut()    { return $this->executeAction(); }
     public function executePost()   { return $this->executeAction(); }

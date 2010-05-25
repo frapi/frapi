@@ -185,6 +185,7 @@ class Lupin_Config_Xml
                 {
                     unset($this->config[$type][$key]);
                 }
+                // There's a bug here that I am unhappy with. I'm tracking this down.
             }
         }
 

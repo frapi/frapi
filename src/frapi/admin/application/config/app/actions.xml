@@ -29,35 +29,5 @@
     </parameter>
    </parameters>
   </action>
-  <action>
-   <name>Joel</name>
-   <enabled>1</enabled>
-   <public>1</public>
-   <description>This is the NAME action that does ... nothing.</description>
-   <route>/testing/action/:name</route>
-   <hash>b9249788b3bab89c8c796dc2db85e1ee4602f2e7</hash>
-   <parameters>
-    <parameter>
-     <name>name</name>
-     <required>1</required>
-    </parameter>
-   </parameters>
-  </action>
-  <action>
-   <name>Zf</name>
-   <enabled>1</enabled>
-   <public>1</public>
-   <description>Just something.</description>
-   <route>/route/:framework/:name</route>
-   <hash>e73c649b8a992a37882463acadc9b36fc2569568</hash>
-  </action>
-  <action>
-   <name>Dave</name>
-   <enabled>1</enabled>
-   <public>1</public>
-   <description>Just documentation you may want.</description>
-   <route>/call/:name</route>
-   <hash>c7a413e3bac523be6fa8db57f1ddb9ad49fc38e5</hash>
-  </action>
  </actions>
 </frapi-config>

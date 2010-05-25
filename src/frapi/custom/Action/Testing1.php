@@ -66,6 +66,7 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
     public function executeGet()
     {
         throw new Frapi_Error('ERROR_CODE', 'The error message to display', 405);
+        throw new Frapi_Error('Testing', 'Testing');
         $valid = $this->hasRequiredParameters($this->requiredParams);
         if ($valid instanceof Frapi_Error) {
             return $valid;
@@ -95,6 +96,7 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
             return $valid;
         }
         
+        throw new Frapi_Error('TestingPost', 'POST Error');
         // This instantiates an ArmChair object to access CouchDB. If you need
         // something more advanced well... use something else, it's not forbidden.
         // $chair = new ArmChair('http://localhost:5984/databasenamehere');

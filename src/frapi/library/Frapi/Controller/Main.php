@@ -329,11 +329,11 @@ class Frapi_Controller_Main
         $conf = Frapi_Internal::getConfiguration('outputs');
         $row  = $conf->getByField('output', 'default', '1');
         
-        if (isset($row[0]) && isset($row[0]['name'])) {
-            Frapi_Internal::setCached('Output.default-format', $row[0]['name']);
-            return $row[0]['name'];
+        if (isset($row) && isset($row['name'])) {
+            Frapi_Internal::setCached('Output.default-format', $row['name']);
+            return $row['name'];
         }
-
+        
         return Frapi_Controller_Api::DEFAULT_OUTPUT_FORMAT;
     }
 
