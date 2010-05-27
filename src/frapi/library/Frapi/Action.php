@@ -260,22 +260,16 @@ class Frapi_Action
                 $param = (object)$param;
                 break;
             case self::TYPE_SQL:
-                /**
-                  * @todo: Fix this... this is not flexible enough
-                  */
-                global $db;
                 $param = mysql_escape_string($param);
                 break;
             case self::TYPE_OUTPUT:
                 $param = htmlentities($param, ENT_QUOTES, 'UTF-8');
                 break;
             case self::TYPE_OUTPUTSAFE:
-                global $db;
                 // OMFG Skype: (Puke). Code gangbang.
                 $param = htmlentities(mysql_escape_string($param), ENT_QUOTES, 'UTF-8');
                 break;
             case self::TYPE_SAFESQLARRAY:
-                global $db;
                 $tmpArray = array();
                 foreach ((array)$param as $val => $par) {
                     $val = mysql_escape_string($val);
