@@ -18,14 +18,30 @@ class ActionController extends Lupin_Controller_Base
 {
     public function init()
     {
-        $actions = array('index', 'add', 'edit', 'delete', 'sync', 'test', 'code');
+        $actions = array('index', 'add', 'edit', 'delete', 'sync', 'test', 'code', 'error');
         $this->_helper->_acl->allow('admin', $actions);
         parent::init();
     }
 
+    public function errorAction() {}
+    
     public function indexAction()
     {
         $model = new Default_Model_Action;
+        $dir = Zend_Registry::get('localConfigPath');
+        $dir = $dir . 'actions.xml';
+
+        if (!is_writable($dir)) {
+            $this->addMessage(
+                'The <strong>'.$dir.'</strong> is not currently writeable by this user, ' . 
+                'therefore we cannot update the configuration file. <br /><br />' . 
+                'You might want to run <strong>sh setup.sh</strong> which sets the files to ' . 
+                'chmod 777. This file is located in the root of your FRAPI download/checkout.'
+            );
+            
+            $this->_redirect('/action/error');
+        }
+        
         $data = $model->getAll();
 
         if ($data == false) {

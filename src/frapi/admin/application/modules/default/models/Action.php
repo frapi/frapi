@@ -134,8 +134,6 @@ class Default_Model_Action extends Lupin_Model
     {
         $actions = $this->config->getAll('action');
         
-
-
         foreach ($actions as $key => $a) {
             $description = isset($a['description']) ? $a['description'] : false;
             $route = isset($a['route']) ? $a['route'] : false;
@@ -159,7 +157,6 @@ class Default_Model_Action extends Lupin_Model
                     }
                 }
             }
-
 
             $name = ucfirst(strtolower($a['name']));
             $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
