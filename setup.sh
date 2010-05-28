@@ -18,3 +18,7 @@ chmod -R 777 $CURRENTDIR/src/frapi/custom/Action
 ## This is for the likes of errors and actions 
 ## saved by the administrator interface
 chmod -R 777 $CURRENTDIR/src/frapi/admin/application/config/app
+
+# Init the Armchair submodule
+git submodule init
+git submodule update
