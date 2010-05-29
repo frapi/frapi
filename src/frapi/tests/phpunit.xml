@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit 
+    bootstrap="./bootstrap.php" 
+    colors="true">
+
+    <testsuite name="All Tests for FRAPI">
+        <directory>./unit-tests</directory>    
+    </testsuite>
+
+    <!--     
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../admin/application</directory>
+            <directory suffix=".php">../library/Frapi</directory>
+            <exclude>
+                <directory suffix=".php">../library/Zend</directory>
+                <directory suffix=".php">../library/Lupin</directory>
+                <directory suffix=".phtml">../admin/application/</directory>
+                <file>../admin/application/Bootstrap.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+    
+    <logging>
+        <log type="coverage-html" 
+            target="./log/report" 
+            charset="UTF-8" 
+            yui="true" 
+            highlight="true" 
+            lowUpperBound="50" 
+            highLowerBound="80" />
+        <log type="testdox-html" target="./log/testdox.html" />
+    </logging>
+    -->
+</phpunit>
