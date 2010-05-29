@@ -1,8 +1,5 @@
 <?php
 
-require_once 'phpunit/Framework.php';
-require '../library/Frapi/Router.php';
-
 class RouterTest extends PHPUnit_Framework_TestCase
 {
     /**

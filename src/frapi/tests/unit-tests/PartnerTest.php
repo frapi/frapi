@@ -1,8 +1,5 @@
 <?php
 
-require_once 'phpunit/Framework.php';
-require '../library/Frapi/Model/Partner.php';
-
 class PartnerTest extends PHPUnit_Framework_TestCase
 {
     //Not sure what tests to include here!
