@@ -7,7 +7,6 @@
         <directory>./unit-tests</directory>    
     </testsuite>
 
-    <!--     
     <filter>
         <whitelist>
             <directory suffix=".php">../admin/application</directory>
@@ -31,5 +30,4 @@
             highLowerBound="80" />
         <log type="testdox-html" target="./log/testdox.html" />
     </logging>
-    -->
 </phpunit>
