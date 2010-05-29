@@ -9,5 +9,10 @@ class PartnerTest extends PHPUnit_Framework_TestCase
         if (!class_exists('Frapi_Model_Partner')) {
             $this->fail('Partner class not defined.');
         }
+        
+        $this->markTestIncomplete(
+            'Not sure what tests to include here! 
+             Partner Model is purely database access.'
+        );
     }
 }

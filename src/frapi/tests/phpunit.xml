@@ -3,8 +3,8 @@
     bootstrap="./bootstrap.php" 
     colors="true">
 
-    <testsuite name="All Tests for FRAPI">
-        <directory>./unit-tests</directory>    
+    <testsuite name="FRAPI Library Tests">
+        <directory>./unit-tests/library</directory>    
     </testsuite>
 
     <filter>
