@@ -39,6 +39,18 @@ class Frapi_Exception extends Exception
      */
     protected $name;
     
+    /**
+     * Custom Frapi Exception class
+     * 
+     * $message and $name are required params used to display friendly error
+     * messages to Frapi_Error.  Frapi_Exception is only used internally. API
+     * developers should use Frapi_Error for providing errors to consumers.
+     * 
+     * @param string $message
+     * @param string $name
+     * @param int $http_code
+     * @param string $at
+     */
     public function __construct($message, $name, $http_code = 400, $at = '')
     {
         // make sure everything is assigned properly
