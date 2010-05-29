@@ -16,11 +16,11 @@
  */
 class ActionController extends Lupin_Controller_Base
 {
-    public function init()
+    public function init($styles = array())
     {
         $actions = array('index', 'add', 'edit', 'delete', 'sync', 'test', 'code');
         $this->_helper->_acl->allow('admin', $actions);
-        parent::init();
+        parent::init($styles);
     }
 
     public function indexAction()
