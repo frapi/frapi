@@ -52,35 +52,21 @@ class RouterTest extends PHPUnit_Framework_TestCase
         );
         $router->setPreparedRoutes(Frapi_Router::prepareRoutes($routesToPrepare));
         
-        $this->assertEquals(
-            "user", 
-            end($router->match("/user"))
-        );
+        $user              = $router->match("/user");
+        $user_id           = $router->match("/user/1234");
+        $user_login        = $router->match("/user/login/");
+        $user_logout       = $router->match("/user/logout");
+        $container_get     = $router->match("/container/get/12345");
+        $container_get_all = $router->match("/container/get/all");
         
-        $this->assertEquals(
-            "user-id", 
-            end($router->match("/user/1234"))
-        );
         
-        $this->assertEquals(
-            "user-login", 
-            end($router->match("/user/login/"))
-        );
+        $this->assertEquals("user",              end($user));
+        $this->assertEquals("user-id",           end($user_id));
+        $this->assertEquals("user-login",        end($user_login));
+        $this->assertEquals("user-logout",       end($user_logout));
+        $this->assertEquals("container-get-all", end($container_get_all));
+        $this->assertEquals("container-get",     end($container_get));
         
-        $this->assertEquals(
-            "user-logout", 
-            end($router->match("/user/logout"))
-        );
-        
-        $this->assertEquals(
-            "container-get-all", 
-            end($router->match("/container/get/all"))
-        );
-        
-        $this->assertEquals(
-            "container-get", 
-            end($router->match("/container/get/12345"))
-        );
     }
     
     /**
