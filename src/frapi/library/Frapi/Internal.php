@@ -75,10 +75,10 @@ class Frapi_Internal
         if (Frapi_Controller_Main::MAIN_WEBSERVICE_DEBUG) {
             if (is_null(self::$_log)) {
                 self::$_log = array(
-                    'cache-get' => array('times'=>0, 'keys'=>array()),
-                    'cache-set' => array('times'=>0, 'keys'=>array()),
+                    'cache-get'    => array('times'=>0, 'keys'=>array()),
+                    'cache-set'    => array('times'=>0, 'keys'=>array()),
                     'cache-delete' => array('times'=>0, 'keys'=>array()),
-                    'db'        => array('times'=>0)
+                    'db'           => array('times'=>0)
                 );
             }
 
