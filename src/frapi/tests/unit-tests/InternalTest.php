@@ -1,12 +1,17 @@
 <?php
 
-require_once 'phpunit/Framework.php';
-include "../library/Frapi/AllFiles.php";
-//require '../library/Frapi/Exception.php';
-require '../library/Frapi/Internal.php';
-
 class InternalTest extends PHPUnit_Framework_TestCase
 {
+    
+    /**
+     * @var mixed
+     */
+    private $_cache;
+    
+    public function setUp() {
+        $_SERVER['HTTP_HOST'] = 'testing';    
+    }
+    
     /**
      * Test cache values do not exist, i.e., they were torn down!!
      *
@@ -24,18 +29,8 @@ class InternalTest extends PHPUnit_Framework_TestCase
      **/
     public function testCacheStoreAndRetrieve($key, $value)
     {
-        Frapi_Internal::setCached($key, $value);
-        $this->assertEquals($value, Frapi_Internal::getCached($key));
-    }
-    
-    /**
-     * Test Internal class can init DB.
-     *
-     **/
-    public function testInitDB()
-    {
-        $db = Frapi_Internal::getDB();
-        $this->assertTrue($db instanceof PDO);
+        MockFrapi_Internal::setCached($key, $value);
+        $this->assertEquals($value, MockFrapi_Internal::getCached($key));
     }
     
     /**
@@ -52,7 +47,7 @@ class InternalTest extends PHPUnit_Framework_TestCase
             array('test-array-num', array(1, 2, 3, 4, 5)),
             array('test-array-assoc', array('a'=>'c', 'c'=>'d', 'e'=>123)),
             array('test-array-assoc-nested', array('a'=>array('c'=>array('t'=>'a-c-t-nest')), 'c'=>'d', 'e'=>123))
-            );
+        );
     }
     
     /**
