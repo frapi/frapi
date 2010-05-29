@@ -1,11 +1,5 @@
 <?php
 
-require_once 'phpunit/Framework.php';
-require '../library/Frapi/Exception.php';
-require '../library/Frapi/Output/Interface.php';
-require '../library/Frapi/Output.php';
-require '../library/Frapi/Output/JSON.php';
-
 class OutputJSONTest extends PHPUnit_Framework_TestCase
 {
     /**
