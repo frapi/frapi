@@ -35,7 +35,10 @@ class Lupin_Controller_Base extends Zend_Controller_Action
         if (strrpos($uri, '/') === strlen($uri) - 1) {
             $uri = substr($uri, 0, -1);
         }
-        $this->view->navigation()->findByUri($uri)->active = true;
+        
+        if (!is_null($this->view->navigation()->findByUri($uri))) {
+            $this->view->navigation()->findByUri($uri)->active = true;
+        }
 
         $this->view->styleSheets = array_merge(array('css/styles.css'), $styles);
         $this->view->setEscape(array('Lupin_Security', 'escape'));
