@@ -11,7 +11,7 @@ class Lupin_Security
      * @param mixed $var The output to escape.
      * @return mixed The escaped value.
      */
-    public function escape($var)
+    public static function escape($var)
     {
         return htmlspecialchars(stripslashes($var));
     }
