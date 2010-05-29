@@ -16,10 +16,10 @@
  */ 
 class AuthController extends Lupin_Controller_Base
 {
-    public function init()
+    public function init($styles = array())
     {
         $this->_helper->_acl->allow(null);
-        parent::init();
+        parent::init($styles);
         $this->initView();
     }
 

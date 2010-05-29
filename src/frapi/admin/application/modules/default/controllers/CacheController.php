@@ -19,7 +19,7 @@ class CacheController extends Lupin_Controller_Base
     private $cache_keys = array();
     private $hash = false;
     
-    public function init()
+    public function init($styles = array())
     {
         $actions = array('index', 'detail', 'unset', 'unsetall');
         $this->_helper->_acl->allow('admin', $actions);
@@ -41,7 +41,7 @@ class CacheController extends Lupin_Controller_Base
             "Cache.adapter",
         );
         
-        parent::init();
+        parent::init($styles);
     }
 
     public function indexAction() 

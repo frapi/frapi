@@ -16,13 +16,13 @@
  */
 class TesterController extends Lupin_Controller_Base
 {
-    public function init()
+    public function init($styles = array())
     {
         $actions = array('index', 'ajax');
 
         $this->_helper->_acl->allow('admin', $actions);
         //$this->view->addHelperPath('echolibre/View/Helper', 'Zend_View_Helper_FormStatic');
-        parent::init();
+        parent::init($styles);
     }
 
     public function indexAction()

@@ -16,7 +16,7 @@
  */
 class DocsController extends Lupin_Controller_Base
 {
-    public function init()
+    public function init($styles = array())
     {
         $actions = array('index', 'generate');
         $this->_helper->_acl->allow('admin', $actions);
@@ -59,7 +59,7 @@ class DocsController extends Lupin_Controller_Base
         $contextSwitch->addActionContext('generate', 'pdf')->initContext();
         $contextSwitch->addActionContext('generate', 'mdown')->initContext();
         
-        parent::init();
+        parent::init($styles);
     }
     
     /**
