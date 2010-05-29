@@ -1,12 +1,19 @@
 <?php
-// Define path to application directory
-define('ROOT_PATH',        dirname(dirname(__FILE__)));
+
+require_once realpath(dirname(__FILE__) . '/../library/Frapi/AllFiles.php');
+
 define('APPLICATION_PATH', ROOT_PATH . '/admin/application');
+define('APPLICATION_ENV', 'testing');
 
-// Define application environment
-define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
-
-set_include_path('.' . PATH_SEPARATOR . ROOT_PATH . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR . get_include_path());
+set_include_path(
+    implode(PATH_SEPARATOR, 
+        array(
+            ROOT_PATH . DIRECTORY_SEPARATOR . 'library',
+            dirname(__FILE__) . DIRECTORY_SEPARATOR .'mock',
+            get_include_path()
+        )
+    )
+);
 
 // Create application, bootstrap, and run
 require_once 'Zend/Application.php';
