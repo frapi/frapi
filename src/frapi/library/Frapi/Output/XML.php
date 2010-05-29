@@ -236,7 +236,8 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
             try {
                 $writer->startElement($key);
             } catch (Exception $e) {
-                throw new Frapi_Output_XML_Exception('Invalid XML element name, cannot create element.');
+                // @todo $name param should be set appropriately.  Add new constants to Frapi_Error as appropriate?
+                throw new Frapi_Output_XML_Exception('Invalid XML element name, cannot create element.', 'Insert appropriate error code here');
             }
             
             if (!is_null($value)) {
