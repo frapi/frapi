@@ -1,5 +1,6 @@
 Requirements
 ===========================
+PHP: Version 5.2.4 and above
 APC: Required for caching, specifically for From_Database_Error::code, ::msg
 HTTP: (http://pecl.php.net/http)
 PEAR: (http://pear.php.net)
