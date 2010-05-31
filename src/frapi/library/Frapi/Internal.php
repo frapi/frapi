@@ -260,7 +260,12 @@ class Frapi_Internal
     {
         self::log('cache-get', $key);
         $hash = self::getHash();
-        if (($apc_val = apc_fetch($hash . '-' . $key)) !== false) {
+        
+        if (!isset(self::$cache)) {
+            self::$cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
+        }
+        
+        if (($apc_val = self::$cache->get($hash . '-' . $key)) !== false) {
             return $apc_val;
         }
         return false;
@@ -276,7 +281,12 @@ class Frapi_Internal
     {
         self::log('cache-set', $key);
         $hash = self::getHash();
-        apc_store($hash . '-' . $key, $value);
+        
+        if (!isset(self::$cache)) {
+            self::$cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
+        }
+        
+        self::$cache->add($hash . '-' . $key, $value);
     }
 
     /**
@@ -288,6 +298,11 @@ class Frapi_Internal
     {
         self::log('cache-delete', $key);
         $hash = self::getHash();
-        apc_undelete($hash.'-'.$key);
+        
+        if (!isset(self::$cache)) {
+            self::$cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
+        }
+        
+        self::$cache->delete($hash.'-'.$key);
     }
 }

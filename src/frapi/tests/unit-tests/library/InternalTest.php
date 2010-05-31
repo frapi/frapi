@@ -29,7 +29,7 @@ class InternalTest extends PHPUnit_Framework_TestCase
      **/
     public function testCacheStoreAndRetrieve($key, $value)
     {
-        MockFrapi_Internal::setCached($key, $value);
+        Frapi_Internal::setCached($key, $value);
         $this->assertEquals($value, MockFrapi_Internal::getCached($key));
     }
     
