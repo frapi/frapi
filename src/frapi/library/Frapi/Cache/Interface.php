@@ -62,17 +62,4 @@ interface Frapi_Cache_Interface
      *                       either true or false. 
      */
     public function delete($name);
-    
-    /**
-     * Undelete from the cache
-     *
-     * Unelete a variable from the cache so it is usuable and
-     * retrievable again by $this->get($name)
-     *
-     * @param  string $name  The name of the cache variable to revive.
-     * 
-     * @return boolean       Depending on the success of the operation, 
-     *                       either true or false. 
-     */
-    public function undelete($name);
 }
