@@ -1,6 +1,4 @@
 <?php
-class Frapi_Cache_Adapter_Apc_Exception extends Frapi_Cache_Adapter_Exception {}
-
 /**
  * Frapi APC Cache Adapter Layer
  *
@@ -75,7 +73,7 @@ class Frapi_Cache_Adapter_Apc implements Frapi_Cache_Interface
     /**
      * Undelete from the cache
      *
-     * Unelete a variable from the cache so it is usuable and
+     * Undelete a variable from the cache so it is usuable and
      * retrievable again by $this->get($name)
      *
      * @param  string $name  The name of the cache variable to revive.
