@@ -35,9 +35,7 @@ class Frapi_Cache_Adapter_Wincache implements Frapi_Cache_Interface
      */
     public function get($name) 
     {
-        throw new Frapi_Cache_Adapter_Wincache_Exception(
-            'Please implement me.'
-        );
+        return wincache_ucache_get($name);
     }
 
     /**
@@ -55,9 +53,7 @@ class Frapi_Cache_Adapter_Wincache implements Frapi_Cache_Interface
      */
     public function add($name, $value, $expiry = 900) 
     {
-        throw new Frapi_Cache_Adapter_Wincache_Exception(
-            'Please implement me.'
-        );
+        return wincache_ucache_add($name, $value, $expiry);
     }
     
     /**
@@ -73,9 +69,7 @@ class Frapi_Cache_Adapter_Wincache implements Frapi_Cache_Interface
      */
     public function delete($name) 
     {
-        throw new Frapi_Cache_Adapter_Wincache_Exception(
-            'Please implement me.'
-        );
+        return wincache_ucache_delete($name);
     }
     
     /**
