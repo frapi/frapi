@@ -1,6 +1,6 @@
 <?php
 /**
- * Frapi APC Cache Layer
+ * Frapi APC Cache Adapter Layer
  *
  * LICENSE
  *
@@ -12,10 +12,10 @@
  * obtain it through the world-wide-web, please send an email
  * to license@getfrapi.com so we can send you a copy immediately.
  *
- * The cache exception.
+ * The cache adapter exception.
  *
  * @license   New BSD
  * @copyright echolibre ltd.
  * @package   frapi
  */
-class Frapi_Cache_Exception extends Frapi_Exception {}
+class Frapi_Cache_Adapter_Exception extends Frapi_Exception {}

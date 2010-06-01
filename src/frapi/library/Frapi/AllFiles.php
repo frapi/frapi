@@ -94,6 +94,7 @@ require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Rules.php';
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Cache.php';
 require LIBRARY_CACHE     . DIRECTORY_SEPARATOR . 'Interface.php';
 require LIBRARY_CACHE     . DIRECTORY_SEPARATOR . 'Exception.php';
+require LIBRARY_CACHE     . DIRECTORY_SEPARATOR . 'Adapter' . DIRECTORY_SEPARATOR . 'Exception.php';
 
 // Authorization
 require LIBRARY_AUTHORIZATION . DIRECTORY_SEPARATOR . 'Interface.php';
