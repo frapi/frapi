@@ -1,6 +1,4 @@
 <?php
-class Frapi_Cache_Adapter_Apc_Exception extends Frapi_Cache_Adapter_Exception {}
-
 /**
  * Frapi APC Cache Adapter Layer
  *
