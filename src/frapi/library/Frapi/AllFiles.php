@@ -63,6 +63,7 @@ require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Controller/Api.php';
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Router.php';
 
 // Action
+require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Action' . DIRECTORY_SEPARATOR . 'Exception.php';
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Action' . DIRECTORY_SEPARATOR . 'Interface.php';
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Action.php';
 
