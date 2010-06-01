@@ -8,7 +8,8 @@ class InternalTest extends PHPUnit_Framework_TestCase
      */
     private $_cache;
     
-    public function setUp() {
+    public function setUp() 
+    {
         $_SERVER['HTTP_HOST'] = 'testing';    
     }
     
@@ -59,7 +60,8 @@ class InternalTest extends PHPUnit_Framework_TestCase
     {
         $kvs = $this->keysValuesProvider();
         foreach ($kvs as $arr) {
-            apc_delete($arr[0]);
+            Frapi_Internal::deleteCached($arr[0]);
+//            apc_delete($arr[0]);
         }
     }
 }

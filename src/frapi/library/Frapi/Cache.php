@@ -1,6 +1,4 @@
 <?php
-class Frapi_Cache_Exception extends Frapi_Exception {}
-
 /**
  * Frapi Cache Layer
  *
@@ -29,7 +27,7 @@ class Frapi_Cache
      *
      * @var string $adapter The name of the adapter driver.
      */
-    public $adapter = 'apc';
+    public $adapter;
     
     /**
      * The cache object that holds the cache connector
@@ -68,7 +66,11 @@ class Frapi_Cache
         $adapterFile = LIBRARY_CACHE_ADAPTER . DIRECTORY_SEPARATOR . $adapter . '.php';
         $className   = 'Frapi_Cache_Adapter_' . $adapter;
         
-        if (!class_exists($className)) {
+        if (!file_exists($adapterFile)) {
+            throw new Frapi_Cache_Adapter_Exception("$className does not exist.", 'Frapi_Cache_Adapter_Exception');
+        }
+        
+        if (!class_exists($className, false)) {
             require_once $adapterFile;
             return new $className;
         }
