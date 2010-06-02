@@ -3,7 +3,7 @@
 /**
  * Frapi_Cache_Adapter_Apc test case.
  */
-class ApcTest extends PHPUnit_Framework_TestCase
+class Frapi_Cache_Adapter_ApcTest extends PHPUnit_Framework_TestCase
 {
 
     /**

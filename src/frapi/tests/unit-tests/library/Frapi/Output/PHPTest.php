@@ -1,6 +1,6 @@
 <?php
 
-class OutputPHPTest extends PHPUnit_Framework_TestCase
+class Frapi_Output_PHPTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Test the output when response is empty.

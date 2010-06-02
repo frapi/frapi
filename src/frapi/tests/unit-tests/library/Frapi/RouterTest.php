@@ -1,6 +1,6 @@
 <?php
 
-class RouterTest extends PHPUnit_Framework_TestCase
+class Frapi_RouterTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Test that router is prepating routes correctly!

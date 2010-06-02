@@ -3,7 +3,7 @@
 /**
  * Frapi_Cache test case.
  */
-class CacheTest extends PHPUnit_Framework_TestCase
+class Frapi_CacheTest extends PHPUnit_Framework_TestCase
 {
     
     /**

@@ -1,6 +1,6 @@
 <?php
 
-class OutputXMLTest extends PHPUnit_Framework_TestCase
+class Frapi_Output_XMLTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Test the XML output of an empty response from action.

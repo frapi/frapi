@@ -1,6 +1,6 @@
 <?php
 
-class ExceptionTest extends PHPUnit_Framework_TestCase
+class Frapi_ExceptionTest extends PHPUnit_Framework_TestCase
 {
     
     /**

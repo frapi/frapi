@@ -5,7 +5,7 @@
  * 
  * @todo Someone using wincache will have to flesh this out.
  */
-class WincacheTest extends PHPUnit_Framework_TestCase
+class Frapi_Cache_Adapter_WincacheTest extends PHPUnit_Framework_TestCase
 {
 
     /**

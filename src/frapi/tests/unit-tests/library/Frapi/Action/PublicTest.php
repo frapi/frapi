@@ -5,7 +5,7 @@
  * 
  * Key 'public_test' is a required parameter
  */
-class PublicActionTest extends PHPUnit_Framework_TestCase
+class Frapi_Action_PublicTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Frapi_Action

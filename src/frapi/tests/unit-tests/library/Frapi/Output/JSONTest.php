@@ -1,6 +1,6 @@
 <?php
 
-class OutputJSONTest extends PHPUnit_Framework_TestCase
+class Frapi_Output_JSONTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Test the output when response is empty.

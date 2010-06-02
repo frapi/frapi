@@ -1,6 +1,6 @@
 <?php
 
-class InternalTest extends PHPUnit_Framework_TestCase
+class Frapi_InternalTest extends PHPUnit_Framework_TestCase
 {
     
     /**
