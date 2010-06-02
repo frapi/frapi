@@ -18,3 +18,18 @@ set_include_path(
 // Create application, bootstrap, and run
 require_once 'Zend/Application.php';
 $app = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/config/application.ini');
+
+/**
+ * shorthand debug functions via Jaybill
+ * http://jaybill.com/2007/10/01/the-most-useful-function-you-will-ever-use-in-the-zend-framework/
+ * Modified by Jeremy Kendall
+ */
+            
+function dd($val, $label="", $echo=true){
+    d($val, $label, $echo);
+    die();
+}
+
+function d($val, $label="", $echo=true){
+    Zend_Debug::dump($val, $label, $echo);
+}

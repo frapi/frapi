@@ -114,7 +114,10 @@ class Frapi_Action
             );
         }
 
-        require $file;
+        if (!class_exists($class, false)) {
+            require $file;
+        }
+
         return new $class;
     }
 
@@ -134,7 +137,7 @@ class Frapi_Action
      *
      * @param array $params The params to populate xml with.
      */
-    public function setActionParams($params)
+    public function setActionParams(array $params)
     {
         $this->params = $params;
         return $this;

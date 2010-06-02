@@ -61,14 +61,15 @@ class Frapi_ActionTest extends PHPUnit_Framework_TestCase
      */
     public function testSetActionParams ()
     {
-        // TODO Auto-generated Frapi_ActionTest->testSetActionParams()
-        $this->markTestIncomplete(
-        "setActionParams test not implemented");
+        $actionParams = array('one' => 'one', 1 => 'two');
         
-        $this->action->setActionParams(/* parameters */);
-    
+        $action = Frapi_Action::getInstance('Testing1');
+        $action->setActionParams($actionParams);
+        $params = $action->getParams();
+        
+        $this->assertEquals($actionParams, $params);
     }
-
+    
     /**
      * Tests Frapi_Action->executeGet()
      */
