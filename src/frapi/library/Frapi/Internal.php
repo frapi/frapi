@@ -110,37 +110,21 @@ class Frapi_Internal
     public static function getConfiguration($type)
     {
         if (!isset(self::$cache)) {
-            self::$cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
+            self::$cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);   
         }
         
         if (!isset(self::$conf[$type])) {
-            self::initConfiguration($type);
+            if (1 == 2 && $cachedConfig = self::getCached('Internal.configuration.type.' . $type)) {
+                return json_decode($cachedConfig);
+            } else {
+                $xml = new Lupin_Config_Xml($type);
+                self::$conf[$type] = $xml;
+                //self::setCached('Internal.configuration.type.' . $type, json_encode(self::$conf[$type]));
+            }
         }
         
         return self::$conf[$type];
     }
-
-    
-    private static function _getConfiguration($type)
-    {
-        if (1 == 2 && $cachedConfig = self::getCached('Internal.configuration.type.' . $type)) {
-            return json_decode($cachedConfig);
-            
-        } else {
-            $xml = new Lupin_Config_Xml($type);
-            self::$conf[$type] = $xml;
-            //self::setCached('Internal.configuration.type.' . $type, json_encode(self::$conf[$type]));
-            
-            return self::$conf[$type];
-        }
-    }
-    
-    public static function initConfiguration($type)
-    {
-        $conf = self::_getConfiguration($type);
-        self::$conf[$type] = $conf;
-    }
-
 
     /**
      * Get `key` from cache, if not found check in configuration file
