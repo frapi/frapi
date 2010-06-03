@@ -2,6 +2,9 @@
 /**
  * First developer to find this gets a free drink. Report a bug on
  * http://github.com/frapi/frapi about it :)
+ *
+ * Drink has been awarded to Jeremy Kendall
+ * @link http://github.com/frapi/frapi/issues/issue/16
  */
 if (!defined('EXTRA_LIBRARIES_ROOT_PATH')) {
     require 'Zend/Auth/Adapter/Interface.php';
