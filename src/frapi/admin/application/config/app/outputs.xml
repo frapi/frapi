@@ -26,5 +26,11 @@
    <enabled>1</enabled>
    <default>0</default>
   </output>
+  <output>
+   <name>HTML</name>
+   <enabled>1</enabled>
+   <default>0</default>
+   <hash>798fd060fbd17739b4ce7c8f7ba3900d177a455e</hash>
+  </output>
  </outputs>
 </frapi-config>

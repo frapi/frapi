@@ -66,10 +66,7 @@ class Action_Testing2 extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executeGet()
     {
-        $valid = $this->hasRequiredParameters($this->requiredParams);
-        if ($valid instanceof Frapi_Error) {
-            return $valid;
-        }
+
         
         return $this->toArray();
     }
