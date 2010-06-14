@@ -1,0 +1,2 @@
+<h3>Hello</h3>
+<p>This is an example of how to generate HTML pages with FRAPI. It is however not recommended as FRAPI is made for webservices and APIs. If you want to build a web application that has a frontend and images and everything, I recommend looking at Lithium, Zend Framework, Symfony, Agavi, Cake or any other web-application frameworks for that matter. FRAPI is built for APIs and exposing your data to the world (machines) and to broaden your market.</p>

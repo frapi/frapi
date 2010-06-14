@@ -112,7 +112,11 @@ class TesterController extends Lupin_Controller_Base
         function collapseHeaders($headers) {
             $header_string = "";
             foreach ($headers as $name => $value) {
-                $header_string .= $name . ": " . wordwrap( $value, 45, "\n\t") . "\n";
+                if (is_array($value)) {
+                    $value = implode("\n\t", $value);
+                }
+                
+                $header_string .= $name . ": " . wordwrap($value, 45, "\n\t") . "\n";
             }
             return $header_string;
         }
