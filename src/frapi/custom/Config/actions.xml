@@ -5,7 +5,7 @@
    <name>Testing1</name>
    <enabled>1</enabled>
    <public>1</public>
-   <description>Testing 1 edit2</description>
+   <description>Testing 1 and editing from the new configuration location.</description>
    <route>/testing/1</route>
    <hash>6f1e8805cc0451de243b0432b15feb48f33383f9</hash>
    <parameters>

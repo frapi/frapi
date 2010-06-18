@@ -17,7 +17,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         Zend_Registry::set('config', new Zend_Config($this->getOptions()));
         
-        $localConfigPath = APPLICATION_PATH . '/config/app/';
+        $localConfigPath = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . 
+                          DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR;
+                          
         Zend_Registry::set('localConfigPath', $localConfigPath);
     }
 

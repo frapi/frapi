@@ -48,7 +48,7 @@ class AuthController extends Lupin_Controller_Base
         // Don't allow logged in people here
         $user = Zend_Auth::getInstance()->getIdentity();
         if ($user !== null) {
-            $this->redirect('/');
+            $this->_redirect('/');
         }
 
         $this->view->title = 'Log in';

@@ -107,6 +107,19 @@ class Frapi_Internal
         return self::$_log;
     }
     
+    /**
+     * Get the configuration
+     *
+     * This method retrieves and loads the information.
+     *
+     * @TODO This method has to be optimized -- The fetched object
+     * has to be cached so we don't parse XML files each time. If we cache the 
+     * $xml object directly into APC we end up with Incomplete classes, and if we 
+     * encode it using json_encode well we loose all it's properties (access to methods).
+     *
+     * @param  string $type  The configuration to load.
+     * @return array The configuration for a type
+     */
     public static function getConfiguration($type)
     {
         if (!isset(self::$cache)) {
@@ -115,11 +128,11 @@ class Frapi_Internal
         
         if (!isset(self::$conf[$type])) {
             if (1 == 2 && $cachedConfig = self::getCached('Internal.configuration.type.' . $type)) {
-                return json_decode($cachedConfig);
+                return $cachedConfig;
             } else {
                 $xml = new Lupin_Config_Xml($type);
                 self::$conf[$type] = $xml;
-                //self::setCached('Internal.configuration.type.' . $type, json_encode(self::$conf[$type]));
+                //self::setCached('Internal.configuration.type.' . $type, self::$conf[$type]);
             }
         }
         
@@ -155,6 +168,15 @@ class Frapi_Internal
         }
     }
     
+    /**
+     * Retrieve the cached partners
+     *
+     * This method retrieves the cached partners. If the caching method
+     * does not identify anything from the cache then we parse the XML file.
+     *
+     * @param string $type The type of cached partners to fetch.
+     * @return array A list of partners retrieved that have valid information.
+     */
     public static function getCachedPartners($type = 'keys')
     {
         if ($cached = self::getCached('Partners.emails-' . $type)) {
@@ -176,6 +198,18 @@ class Frapi_Internal
         }
     }
 
+    /**
+     * Get the cached actions
+     *
+     * Retrieve a list of cached actions. This method will also retrieve
+     * and cache a list of private and public actions.
+     *
+     * The private actions are the actions taht require a partner username/password
+     * in order to be able to access them.
+     *
+     * @param  string $type Retrieve the type of partner (public or private)
+     * @return array A list of partners.
+     */
     public static function getCachedActions($type = 'public')
     {
         if ($cached = self::getCached('Actions.enabled-' . $type)) {

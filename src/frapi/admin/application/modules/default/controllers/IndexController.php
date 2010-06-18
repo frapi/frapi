@@ -27,10 +27,7 @@ class IndexController extends Lupin_Controller_Base
         $issues = array();
         $user   = get_current_user();
 
-        $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 
-            'admin'    . DIRECTORY_SEPARATOR . 
-            'application'    . DIRECTORY_SEPARATOR . 
-            'config'   . DIRECTORY_SEPARATOR . 'app';
+        $dir = Zend_Registry::get('localConfigPath');
 
         if (!is_writable($dir)) {
             $issues['config-path'] = 

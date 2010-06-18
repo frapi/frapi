@@ -15,11 +15,8 @@ CURRENTDIR=`pwd`
 ## This is for the generated actions (By the administration interface)
 chmod 775 $CURRENTDIR/src/frapi/custom/Action
 
-## This is for the likes of errors and actions 
-## saved by the administrator interface
-chmod 775 $CURRENTDIR/src/frapi/admin/application/config/app
-chmod 664 $CURRENTDIR/src/frapi/admin/application/config/app/*.xml
-
+chmod 775 $CURRENTDIR/src/frapi/custom/Config
+chmod 664 $CURRENTDIR/src/frapi/custom/Config/*.xml
 # Init the Armchair submodule
 git submodule init
 git submodule update
