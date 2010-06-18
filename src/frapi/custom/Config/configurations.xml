@@ -7,15 +7,15 @@
   </configuration>
   <configuration>
    <key>db_username</key>
-   <value>username</value>
+   <value>root</value>
   </configuration>
   <configuration>
    <key>db_password</key>
-   <value>password2</value>
+   <value>password</value>
   </configuration>
   <configuration>
    <key>db_database</key>
-   <value>frapi</value>
+   <value>test</value>
   </configuration>
   <configuration>
    <key>api_url</key>

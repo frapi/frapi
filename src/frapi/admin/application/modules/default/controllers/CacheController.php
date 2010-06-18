@@ -39,6 +39,7 @@ class CacheController extends Lupin_Controller_Base
             "Actions.enabled-public",
             "Partners.emails-keys",
             "Cache.adapter",
+            'Database.configs'
         );
         
         parent::init($styles);

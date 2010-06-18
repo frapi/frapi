@@ -199,6 +199,36 @@ class Frapi_Internal
     }
 
     /**
+     * Retrieve the cached db configuration
+     *
+     * This method retrieves the cached configuration. If the caching method
+     * does not identify anything from the cache then we parse the XML file.
+     *
+     * @param string $type The type of cached database configs to fetch.
+     * @return array A list of db configs retrieved that have valid information.
+     */
+    public static function getCachedDbConfig()
+    {
+        if ($cached = self::getCached('Database.configs')) {
+            return $cached;
+        } else {
+        
+            $res  = self::getConfiguration('configurations');
+            $rows = $res->getAll('configuration');
+            
+            if ($rows !== false) {
+                foreach ($rows as $key => $value) {
+                    $confs[$value['key']] = $value['value'];
+                }
+                
+                self::setCached('Database.configs',  $confs);
+            }
+    
+            return self::getCached('Database.configs');
+        }
+    }
+
+    /**
      * Get the cached actions
      *
      * Retrieve a list of cached actions. This method will also retrieve

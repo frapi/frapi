@@ -110,7 +110,8 @@ class Default_Model_Configuration extends Lupin_Model
             $this->updateByKey('db_username', $username);
             $this->updateByKey('db_password', $password);
         } catch (Exception $e) {}
-
+        
+        $this->refreshAPCCache();
         return true;
     }
     
@@ -127,5 +128,19 @@ class Default_Model_Configuration extends Lupin_Model
         }
         
         return false;
+    }
+    
+    /**
+     * Refresh the APC cache by deleting APC entries.
+     *
+     * @return void
+     */
+    public function refreshAPCCache()
+    {
+        $configModel = new Default_Model_Configuration();
+        $server = $configModel->getKey('api_url');
+        $hash = isset($server) ? hash('sha1', $server) : '';
+        
+        apc_delete($hash . '-Database.configs');
     }
 }

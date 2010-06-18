@@ -45,7 +45,7 @@ class Frapi_Database extends PDO
     protected static function factory($name = 'default')
     {
         if (!isset(self::$instance[$name])) {
-            $configs = self::getDbConfig();
+            $configs = Frapi_Internal::getCachedDbConfig();
 
             self::$instance[$name] = new PDO(
                 'mysql:dbname='.$configs['db_database'].';host='.$configs['db_hostname'], 
@@ -72,22 +72,6 @@ class Frapi_Database extends PDO
     public static function getInstance($name = 'default')
     {
         return self::factory($name);
-    }
-
-    
-    private static function getDbConfig()
-    {
-        $configs = Frapi_Internal::getDB()->query($sql)->fetchAll();
-        
-        $conf = array();
-        foreach ($configs as $key => $value) {
-            $conf[$value['key']] = $value['value'];
-        }
-        
-        unset($configs);
-        unset($db);
-        
-        return $conf;
     }
     
     public static function getMasterInstance()
