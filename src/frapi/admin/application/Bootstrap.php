@@ -9,7 +9,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $autoloader = new Zend_Application_Module_Autoloader(array(
             'namespace' => 'Default',
-            'basePath'  => APPLICATION_PATH . '/modules/default',
+            'basePath'  => APPLICATION_PATH . DIRECTORY_SEPARATOR . 
+                           'modules' . DIRECTORY_SEPARATOR . 'default',
         ));
     }
 
@@ -32,7 +33,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->bootstrap('Config');
 
         //add routing
-        $routes = new Zend_Config_Ini(APPLICATION_PATH . '/config/routes.ini');
+        $routes = new Zend_Config_Ini(
+            APPLICATION_PATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'routes.ini'
+        );
+        
         $fc->getRouter()->addConfig($routes);
     }
 
@@ -40,7 +44,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         $viewRenderer->initView();
-        $viewRenderer->view->addHelperPath('echolibre/View/Helper', 'Zend_View_Helper_FormStatic');
+        
+        $viewRenderer->view->addHelperPath(
+            'echolibre' . DIRECTORY_SEPARATOR . 
+            'View' . DIRECTORY_SEPARATOR. 'Helper',
+            
+            'Zend_View_Helper_FormStatic'
+        );
     }
 
     protected function _initAcl()
@@ -72,7 +82,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view = $this->getResource('view');
 
         $user = Zend_Auth::getInstance()->getIdentity();
-        include APPLICATION_PATH . '/configs/navigation.php';
+        include APPLICATION_PATH . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR . 'navigation.php';
         $navigation = new Zend_Navigation($items);
         $view->navigation($navigation)->menu()->setUlClass('nav');
     }
