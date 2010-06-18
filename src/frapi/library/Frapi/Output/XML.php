@@ -55,7 +55,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
      *                        
      * @return Object $This object
      */
-    public function populateOutput($response)
+    public function populateOutput($data)
     {
         $directory = CUSTOM_OUTPUT . DIRECTORY_SEPARATOR . 'xml';
 
@@ -83,7 +83,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
             $this->response = $xml;
             
         } else {
-            $this->response = $this->_generateXML($response);
+            $this->response = $this->_generateXML($data);
         }
 
         return $this;

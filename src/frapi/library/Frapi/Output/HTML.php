@@ -46,7 +46,7 @@ class Frapi_Output_HTML extends Frapi_Output implements Frapi_Output_Interface
      *                        
      * @return Object $This object
      */
-    public function populateOutput($response)
+    public function populateOutput($data)
     {
         $directory = CUSTOM_OUTPUT . DIRECTORY_SEPARATOR . 'html';
 
