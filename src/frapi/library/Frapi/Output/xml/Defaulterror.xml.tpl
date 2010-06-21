@@ -1,5 +1,5 @@
 <response>
-    <errors><?php foreach ($response['errors'] as $error): ?>
+    <errors><?php foreach ($data['errors'] as $error): ?>
 	<error code="<?php echo $error['name']; ?>">
             <message><?php echo $error['message']; ?></message>
             <name><?php echo $error['name']; ?></name>
