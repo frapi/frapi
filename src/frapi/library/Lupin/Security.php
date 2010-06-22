@@ -13,7 +13,7 @@ class Lupin_Security
      */
     public static function escape($var)
     {
-        if (isset($var) && is_string($var) && strlen(trim($var)) > 0)
+        if (isset($var) && is_string($var) && strlen(trim($var)) > 0) {
             return htmlspecialchars(stripslashes($var));
         }
         
