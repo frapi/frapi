@@ -13,6 +13,10 @@ class Lupin_Security
      */
     public static function escape($var)
     {
-        return htmlspecialchars(stripslashes($var));
+        if (isset($var) && is_string($var) && strlen(trim($var)) > 0)
+            return htmlspecialchars(stripslashes($var));
+        }
+        
+        return '';
     }
 }
