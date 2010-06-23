@@ -89,6 +89,14 @@ class Frapi_Action
      * @var string $uid  The user uid (Internally used only)
      */
     protected $uid;
+    
+    /**
+     * If one decides to use a custom template in the XML or HTML output
+     * then this variable will be set.
+     *
+     * @var string The name of the custom template to load from custom/Output/{type}/custom/
+     */
+    protected $customTemplate = false;
 
     /**
      * Get an instance of the desired type of Action
@@ -141,6 +149,33 @@ class Frapi_Action
     {
         $this->params = $params;
         return $this;
+    }
+    
+    /**
+     * Set the template file to use
+     *
+     * This method is used to set the custom template file to use
+     * instead of the default Actionname.xml.tpl or Actionname.html.tpl
+     *
+     * @param string $customTemplateFileName The template file to load.
+     * @return void
+     */
+    public function setTemplateFileName($customTemplateFileName)
+    {
+        $this->customTemplate = $customTemplateFileName;
+    }
+    
+    /**
+     * Get the template to load
+     *
+     * This method fetches the template filename to use and
+     * returns it's value.
+     *
+     * @return mixed Either false or a string with the name of the file.
+     */
+    public function getTemplateFileName()
+    {
+        return $this->customTemplate;
     }
     
     /**

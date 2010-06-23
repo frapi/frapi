@@ -67,7 +67,6 @@ class Action_Testing2 extends Frapi_Action implements Frapi_Action_Interface
     public function executeGet()
     {
         $this->data['name'] = 'david';
-        
         return $this->toArray();
     }
 

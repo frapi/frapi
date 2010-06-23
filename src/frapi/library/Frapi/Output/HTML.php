@@ -43,16 +43,22 @@ class Frapi_Output_HTML extends Frapi_Output implements Frapi_Output_Interface
      * action.
      *
      * @param Mixed $response Most of the times an array but could be and stdClass
+     * @param String $customTemplate The custom template file to use instead of the default one.
      *                        
      * @return Object $This object
      */
-    public function populateOutput($data)
+    public function populateOutput($data, $customTemplate = false)
     {
         $directory = CUSTOM_OUTPUT . DIRECTORY_SEPARATOR . 'html';
-
+        
         $file      = $directory . DIRECTORY_SEPARATOR .
                      ucfirst(strtolower($this->action)) . '.html.tpl';
 
+         if ($customTemplate !== false) {
+             $file = $directory . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR .
+                     $customTemplate . '.html.tpl';
+         }
+         
         $html       = '';
 
         if (file_exists($file)) {

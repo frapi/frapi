@@ -55,9 +55,11 @@ class Frapi_Output_CLI extends Frapi_Output implements Frapi_Output_Interface
      *
      * @param Mixed $response Most of the times an array but could be
      *                        an stdClass
+     * @param String $customTemplate The custom template file to use instead of the default one.
+     *
      * @return Object $This object
      */
-    public function populateOutput($response)
+    public function populateOutput($response, $customTemplate = false)
     {
         $this->response = $response;
         return $this;

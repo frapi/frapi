@@ -51,18 +51,24 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
      * variable with the value returned from the
      * action.
      *
-     * @param Mixed $response Most of the times an array but could be and stdClass
+     * @param Mixed  $response Most of the times an array but could be and stdClass
+     * @param String $customTemplate The custom template file to use instead of the default one.
      *                        
      * @return Object $This object
      */
-    public function populateOutput($data)
+    public function populateOutput($data, $customTemplate = false)
     {
         $directory = CUSTOM_OUTPUT . DIRECTORY_SEPARATOR . 'xml';
+        
+        $file = $directory . DIRECTORY_SEPARATOR .
+                ucfirst(strtolower($this->action)) . '.xml.tpl';
+                
+        if ($customTemplate !== false) {
+            $file = $directory . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR .
+                    $customTemplate . '.xml.tpl';
+        }
 
-        $file      = $directory . DIRECTORY_SEPARATOR .
-                     ucfirst(strtolower($this->action)) . '.xml.tpl';
-
-        $xml       = '';
+        $xml = '';
 
         if (file_exists($file)) {
             ob_start();

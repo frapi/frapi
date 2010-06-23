@@ -134,13 +134,22 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
 
         $out = $this->getOutputInstance($this->getFormat())
                     ->setOutputAction($this->getAction())
-                    ->populateOutput($result)
+                    ->populateOutput($result, $this->actionContext->getTemplateFileName())
                     ->sendHeaders($result)
                     ->executeOutput();
 
         return $out;
     }
 
+    /**
+     * Process Frapi Errors
+     *
+     * This method will process the FRAPI Errors, pass them to the 
+     * output handler, and format it correctly. 
+     *
+     * @param Frapi_Exception $e  The frapi exception to use
+     * @return object The response object.
+     */
     public function processError(Frapi_Exception $e)
     {
         $error = $this->getOutputInstance($this->getFormat())

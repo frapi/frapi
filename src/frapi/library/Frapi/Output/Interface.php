@@ -30,8 +30,9 @@ interface Frapi_Output_Interface
      *
      * @param Mixed $response Most of the times an array but could be
      *                        an stdClass
+     * @param String $customTemplate The custom template file to use instead of the default one.
      */
-    public function populateOutput($response);
+    public function populateOutput($response, $customTemplate = false);
 
     /**
      * Execute the output
