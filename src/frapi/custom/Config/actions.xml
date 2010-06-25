@@ -19,7 +19,6 @@
    <name>Testing2</name>
    <enabled>1</enabled>
    <public>1</public>
-   <description></description>
    <route>/testing/2</route>
    <hash>500286218fe54ed4b7e8a8ce58ea4d947fb4f658</hash>
    <parameters>

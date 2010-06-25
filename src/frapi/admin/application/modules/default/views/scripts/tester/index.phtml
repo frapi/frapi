@@ -65,13 +65,6 @@ echo $this->form;
 
         $('#params').empty();
         if ("route" == type) {
-            var params   = new Array();
-            var segments = selectedText.replace(/^\/*/, "").replace(/\/*$/, "").split("/");
-            jQuery.each(segments, function(key, value){
-                if (value[0] == ":") {
-                    addParamInput(value.substr(1));
-                }
-            });
             $('#query_uri').val(selectedText);
         } else {
             $('#query_uri').val("?action=" + selectedText);
