@@ -178,14 +178,22 @@ class Lupin_Config_Xml
             if (!isset($this->config[$type][0])) {
                 $this->config[$type] = array($this->config[$type]);
             }
-
+            
             foreach ($this->config[$type] as $key => $node) {
                 if (isset($node[$field]) && $node[$field] == $value &&
                     isset($this->config[$type][$key])) 
                 {
                     unset($this->config[$type][$key]);
                 }
-                // There's a bug here that I am unhappy with. I'm tracking this down.
+                
+                // This is a bug that happens when there's no first key. We need
+                // to make sure [0] exists in the array.
+                if (isset($this->config[$type]) && !empty($this->config[$type]) && 
+                    !isset($this->config[$type][0]))
+                {
+                    $conf = array_merge(array(), $this->config[$type]);
+                    $this->config[$type] = $conf;
+                }
             }
         }
 
