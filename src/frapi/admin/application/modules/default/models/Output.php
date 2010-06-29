@@ -101,6 +101,12 @@ class Default_Model_Output extends Lupin_Model
      **/
     public function refreshAPCCache()
     {
-        apc_delete('Output.default-format');
+        $configModel = new Default_Model_Configuration();
+        $server = $configModel->getKey('api_url');
+        $hash = isset($server) ? hash('sha1', $server) : '';
+        
+        $cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
+
+        $cache->delete($hash . '-Output.default-format');
     }
 }

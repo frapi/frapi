@@ -12,6 +12,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'basePath'  => APPLICATION_PATH . DIRECTORY_SEPARATOR . 
                            'modules' . DIRECTORY_SEPARATOR . 'default',
         ));
+        
     }
 
     protected function _initConfig()

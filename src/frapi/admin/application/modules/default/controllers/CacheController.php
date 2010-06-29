@@ -16,9 +16,35 @@
  */
 class CacheController extends Lupin_Controller_Base
 {
+    /**
+     * Cached keys to be used across the system
+     *
+     * @var array An array of cached keys
+     */
     private $cache_keys = array();
+    
+    /**
+     * The cache key hashes. 
+     *
+     * @var string A hash of the server remote address.
+     */
     private $hash = false;
     
+    /** 
+     * This variable holds the Frapi_Cache object
+     *
+     * @var Frapi_Cache The cache object
+     */
+    private $cache = false;
+    
+    /**
+     * Initialize 
+     *
+     * This method does the pre-requisite for the Controller to work
+     * and function correctly
+     *
+     * @return void
+     */
     public function init($styles = array())
     {
         $actions = array('index', 'detail', 'unset', 'unsetall');
@@ -27,6 +53,8 @@ class CacheController extends Lupin_Controller_Base
         $configModel = new Default_Model_Configuration();
         $server = $configModel->getKey('api_url');
         $cache = $configModel->getKey('cache');
+        $this->cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
+        
         $this->hash = isset($server) ? hash('sha1', $server) : '';
 
         $this->cache_keys = array(
@@ -45,6 +73,15 @@ class CacheController extends Lupin_Controller_Base
         parent::init($styles);
     }
 
+    /**
+     * The index action
+     *
+     * This is the list of cached keys
+     *
+     * This method defines a method and recurisvely calls itself
+     * 
+     * @return void
+     */
     public function indexAction() 
     {   
         function deepStrlen($data)
@@ -65,11 +102,14 @@ class CacheController extends Lupin_Controller_Base
             
         $profile = array();
         $sets    = array();
-        $names   = array(); 
+        $names   = array();
+        
         foreach ($this->cache_keys as $k=>$key) {
             
             $profile [$key]= array(
-                'set'   => ($isset = ($value = apc_fetch($this->hash . '-'. $key) !== false ? true : false)),
+                'set'   => ($isset = ($value = $this->cache->get(
+                    $this->hash . '-'. $key) !== false ? true : false)),
+                    
                 'value' => $value, 
                 'size'  => ($isset ? deepStrlen($value) :'N/A'),
             );
@@ -78,27 +118,55 @@ class CacheController extends Lupin_Controller_Base
             $names[$k] = $key;
         }
         
-        array_multisort($sets, SORT_DESC, $names, SORT_ASC, $profile );
+        array_multisort($sets, SORT_DESC, $names, SORT_ASC, $profile);
         $this->view->profile = $profile;
     }
     
+    /**
+     * Cache details
+     *
+     * This method returns a list of details about a certain 
+     * cached action.
+     *
+     * @return void
+     */
     public function detailAction() 
     {
-        $deats = apc_fetch($this->hash . '-' . ($key = $this->getRequest()->getParam('key')));
+        $deats = $this->cache->get(
+            $this->hash . '-' . ($key = $this->getRequest()->getParam('key'))
+        );
+        
         $this->view->deats = $deats;
         $this->view->key   = $key;
     }
     
+    /** 
+     * Unset a key
+     *
+     * This method is used when a cached key gets unset
+     *
+     * @return void
+     */
     public function unsetAction()
     {
-        apc_delete($this->hash . '-' . $this->getRequest()->getParam('key'));
+        $this->cache->delete(
+            $this->hash . '-' . $this->getRequest()->getParam('key')
+        );
+        
         $this->_redirect('/cache');
     }
     
+    /**
+     * Remove all cached keys
+     *
+     * This method removes all cached keys.
+     *
+     * @return void
+     */
     public function unsetallAction()
     {
         foreach ($this->cache_keys as $key) {
-            apc_delete($this->hash . '-' . $key);
+            $this->cache->delete($this->hash . '-' . $key);
         }
         
         $this->_redirect('/cache');

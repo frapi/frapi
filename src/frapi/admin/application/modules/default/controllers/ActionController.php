@@ -16,6 +16,14 @@
  */
 class ActionController extends Lupin_Controller_Base
 {
+    /**
+     * Main Initializer
+     *
+     * This is the public method that will be used by the controller base
+     * using the tyles in the init.
+     *
+     * @param array $styles an array of stylesheets (CSS)
+     */
     public function init($styles = array())
     {
         $actions = array('index', 'add', 'edit', 'delete', 'sync', 'test', 'code', 'error');
@@ -23,8 +31,24 @@ class ActionController extends Lupin_Controller_Base
         parent::init($styles);
     }
 
+    /** 
+     * Empty error action
+     *
+     * This is only the action for errors
+     *
+     * @return void
+     */
     public function errorAction() {}
     
+    /**
+     * The index
+     *
+     * This is the index action where we check if the localConfigPath
+     * is writeable by the user. If it isn't then we set a warning message.
+     *
+     * @uses   Default_Model_Action
+     * @return void
+     */
     public function indexAction()
     {
         $model = new Default_Model_Action;
@@ -51,6 +75,20 @@ class ActionController extends Lupin_Controller_Base
         $this->view->data = $data;
     }
 
+    /**
+     * Add an action
+     *
+     * This is the add action method. It literally does what it say. 
+     * It adds an action.
+     *
+     * This method has a different output whether or not some data is posted
+     * to it. 
+     *
+     * @uses Default_Form_Action
+     * @uses Default_Model_Action
+     *
+     * @return void
+     */
     public function addAction()
     {
         $form  = new Default_Form_Action;
@@ -69,6 +107,12 @@ class ActionController extends Lupin_Controller_Base
         $this->view->form = $form;
     }
     
+    /**
+     * This is the code action
+     *
+     * This method is not in use right now but was mostly used
+     * for the code editor (In browser FRAPI code editor)
+     */
     public function codeAction()
     {
         $request = $this->getRequest();

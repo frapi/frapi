@@ -67,7 +67,9 @@ class Frapi_Cache
         $className   = 'Frapi_Cache_Adapter_' . $adapter;
         
         if (!file_exists($adapterFile)) {
-            throw new Frapi_Cache_Adapter_Exception("$className does not exist.", 'Frapi_Cache_Adapter_Exception');
+            throw new Frapi_Cache_Adapter_Exception(
+                "$className does not exist.", 'Frapi_Cache_Adapter_Exception'
+            );
         }
         
         if (!class_exists($className, false)) {

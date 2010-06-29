@@ -16,13 +16,36 @@
  */
 class Default_Model_Action extends Lupin_Model
 {
+    /** 
+     * A config object holding the Lupin_Config_Xml object
+     * 
+     * @var Lupin_Config_Xml $config  The config object.
+     */
     protected $config;
     
+    /** 
+     * Constructor
+     *
+     * The constructor for the Action model
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->config = new Lupin_Config_Xml('actions');
     }
 
+    /** 
+     * Add a new action
+     *
+     * This method is invoked whenever the action adding controller
+     * is invokved. It calls $this->generateAction() and creates a 
+     * new action file if it doesn't exist.
+     *
+     * @param array $data The data to create the action with.
+     *
+     * @return boolean true
+     */
     public function add(array $data)
     {
         $whitelist = array(
@@ -59,6 +82,16 @@ class Default_Model_Action extends Lupin_Model
         return true;
     }
 
+    /** 
+     * Update an action
+     *
+     * This method updates an action using data passed 
+     * to the $data method parameter.
+     *
+     * @param array $data The data array to update the action with.
+     * @param string $id  An hash that contains the id of the action to update.
+     * @return boolean true
+     */
     public function update(array $data, $id)
     {
         $whitelist = array(
@@ -92,25 +125,49 @@ class Default_Model_Action extends Lupin_Model
         
         try {
             $this->config->update('action', 'hash', $id, $values);
-        } catch (Exception $e) { }
+        } catch (Exception $e) {}
 
         $this->refreshAPCCache();
         return true;
     }
 
+    /**
+     * Delete an action
+     *
+     * This method deletes an action by it's hash-id
+     *
+     * @param  string $id The id of the action to delete.
+     * @return void
+     */
     public function delete($id)
     {
         $this->config->deleteByField('action', 'hash', $id);
-
         $this->refreshAPCCache();
     }
 
+    /**
+     * Get an action
+     *
+     * This method is used to retrieve information about an
+     * action using it's hash-id.
+     *
+     * @param  string $id The id of the action to retrieve.
+     * @return mixed  Either an array with all the information related
+     *                to an action or a boolean false when nothing is found.
+     */
     public function get($id)
     {        
         $action = $this->config->getByField('action', 'hash', $id);
         return isset($action) ? $action : false;
     }
 
+    /** 
+     * Get a list of actions
+     *
+     * This method is used to retrieve a list of actions.
+     *
+     * @return array An array of actions by hashes.
+     */
     public function getList()
     {
         $action = $this->config->getAll('action');
@@ -123,13 +180,29 @@ class Default_Model_Action extends Lupin_Model
         return $return;
     }
 
+    /**
+     * Get all action
+     *
+     * Get all the actions.
+     *
+     * @return mixed Either boolean false or an array of all actions.
+     */
     public function getAll()
     {
         $action = $this->config->getAll('action');
-
         return $action;
     }
 
+    /** 
+     * Synchronize the code base
+     *
+     * This method is invoked whenever someone clicks on the "Sync" button. It
+     * looks at the actions, looks at the existing files and either generate
+     * the action if the action file doesn't exist or updates it whenever
+     * it has to be updated (New required parameters, etc).
+     *
+     * @return void
+     */
     public function sync()
     {
         $actions = $this->config->getAll('action');
@@ -179,6 +252,18 @@ class Default_Model_Action extends Lupin_Model
         }
     }
 
+    /** 
+     * Update an action
+     *
+     * This method is used whenever an action is updated from the 
+     * administration panel.
+     *
+     * @param string $file  The file to update.
+     * @param string $name  The name of the file to update.
+     * @param array  $properties An array of properties related to an action.
+     *
+     * @return Either a generated/updated action or false.
+     */
     private function updateAction($file, $name, $properties)
     {
         $className = 'Action_' . $name;
@@ -210,7 +295,23 @@ class Default_Model_Action extends Lupin_Model
 
         return $file->generate();
     }
-
+    
+    /** 
+     * Generate the action
+     *
+     * This is a gigantic method used to generate the actual Action code. It
+     * uses the properties, description, name, and routes passed to it.
+     *
+     * This method uses the Zend_CodeGenerator_Php_* family to identify and create the
+     * new files. 
+     *
+     * @param string $name  The name of the action
+     * @param array $properties An array of properties related to an action
+     * @param string $description A description for an action. Default false.
+     * @param string $route The custom route for that action. Default false.
+     * 
+     * @return string A generated file.
+     */
     private function generateAction($name, $properties, $description = false, $route = false)
     {
         $docblock = new Zend_CodeGenerator_Php_Docblock(array(
@@ -246,7 +347,8 @@ class Default_Model_Action extends Lupin_Model
         
         $classDocblock = new Zend_CodeGenerator_Php_Docblock(array(
                 'shortDescription' => 'Action ' . $name . ' ',
-                'longDescription'  => ($description !== false) ? $description : 'A class generated by Frapi',
+                'longDescription'  => ($description !== false) 
+                                      ? $description : 'A class generated by Frapi',
                 'tags'             => $tags,
             )
         );
@@ -280,7 +382,9 @@ class Default_Model_Action extends Lupin_Model
 
         $docblock = new Zend_CodeGenerator_Php_Docblock(array(
             'shortDescription' => 'To Array',
-            'longDescription'  => "This method returns the value found in the database \ninto an associative array.",
+            'longDescription'  => "This method returns the value found in the database \n" . 
+                                  'into an associative array.',
+                                  
             'tags'             => array(
                 new Zend_CodeGenerator_Php_Docblock_Tag_Return(array(
                     'datatype'  => 'array',
@@ -291,9 +395,12 @@ class Default_Model_Action extends Lupin_Model
         $toArrayBody = '        ' . "\n";
         if (!empty($properties)) {
             foreach ($properties as $p) {
-                $toArrayBody.= '$this->data[\'' . $p . '\'] = $this->getParam(\'' . $p . '\', self::TYPE_OUTPUT);' . "\n";
+                $toArrayBody  .= 
+                    '$this->data[\'' . $p . '\'] = ' . 
+                    '$this->getParam(\'' . $p . '\', self::TYPE_OUTPUT);' . "\n";
             }
         }
+        
         $toArrayBody.= 'return $this->data;';
 
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
@@ -325,7 +432,9 @@ if ($valid instanceof Frapi_Error) {
         $docblock = new Zend_CodeGenerator_Php_Docblock(array());
         
         $docblockArray['shortDescription'] = 'Default Call Method';
-        $docblockArray['longDescription']  = 'This method is called when no specific request handler has been found';
+        $docblockArray['longDescription']  = 'This method is called when no specific ' . 
+                                             'request handler has been found';
+                                             
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
             'name' => 'executeAction',
             'body' => $executeActionBody,
@@ -390,9 +499,11 @@ if ($valid instanceof Frapi_Error) {
         $server = $configModel->getKey('api_url');
         $hash = isset($server) ? hash('sha1', $server) : '';
         
-        apc_delete($hash . '-Actions.enabled-public');
-        apc_delete($hash . '-Actions.enabled-private');
-        apc_delete($hash . '-Router.routes-prepared');
-        apc_delete($hash . '-configFile-actions');
+        $cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
+        
+        $cache->delete($hash . '-Actions.enabled-public');
+        $cache->delete($hash . '-Actions.enabled-private');
+        $cache->delete($hash . '-Router.routes-prepared');
+        $cache->delete($hash . '-configFile-actions');
     }
 }

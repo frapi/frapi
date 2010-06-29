@@ -90,7 +90,13 @@ class Default_Model_Error extends Lupin_Model
      */
     public function refreshAPCCache()
     {
-        apc_delete('Errors.user-defined');
-        apc_delete($hash . '-configFile-errors');
+        $configModel = new Default_Model_Configuration();
+        $server = $configModel->getKey('api_url');
+        $hash = isset($server) ? hash('sha1', $server) : '';
+        
+        $cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
+        
+        $cache->delete($hash . '-Errors.user-defined');
+        $cache->delete($hash . '-configFile-errors');
     }
 }

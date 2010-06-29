@@ -141,7 +141,9 @@ class Default_Model_Configuration extends Lupin_Model
         $server = $configModel->getKey('api_url');
         $hash = isset($server) ? hash('sha1', $server) : '';
         
-        apc_delete($hash . '-Database.configs');
-        apc_delete($hash . '-configFile-configurations');
+        $cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
+        
+        $cache->delete($hash . '-Database.configs');
+        $cache->delete($hash . '-configFile-configurations');
     }
 }

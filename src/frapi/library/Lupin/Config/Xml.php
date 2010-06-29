@@ -74,7 +74,8 @@ class Lupin_Config_Xml
          * @TODO Remove me after the rewrite of the Config Reader. Move this to 
          *       Frapi_Internal. I dislike inter-dependencies.
          */
-        if ($cachedConfig = Frapi_Internal::getCached('configFile-' . $name)) {
+        if ($cachedConfig = Frapi_Internal::getCached('configFile-' . $name)) 
+        {
             $this->config = $cachedConfig;
         } else {
             $helper = new Lupin_Config_Helper_XmlArray();
@@ -245,7 +246,6 @@ class Lupin_Config_Xml
             }
         }
         
-        
         return false;
     }
     
@@ -308,6 +308,8 @@ class Lupin_Config_Xml
     {
         $helper = new Lupin_Config_Helper_XmlArray();
 
+        Frapi_Internal::deleteCached('configFile-' . $this->configName);
+        
         return $helper->write(
             array(
                 'config'       => $this->config,

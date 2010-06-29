@@ -111,7 +111,13 @@ class Default_Model_Partner extends Lupin_Model
      **/
     public function refreshAPCCache()
     {
-        apc_delete('Partners.emails-keys');
-        apc_delete($hash . '-configFile-partners');
+        $configModel = new Default_Model_Configuration();
+        $server = $configModel->getKey('api_url');
+        $hash = isset($server) ? hash('sha1', $server) : '';
+        
+        $cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
+
+        $cache->delete($hash . '-Partners.emails-keys');
+        $cache->delete($hash . '-configFile-partners');
     }
 }

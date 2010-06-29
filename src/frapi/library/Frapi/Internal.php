@@ -313,8 +313,8 @@ class Frapi_Internal
             self::$cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
         }
         
-        if (($apc_val = self::$cache->get($hash . '-' . $key)) !== false) {
-            return $apc_val;
+        if (($cacheVal = self::$cache->get($hash . '-' . $key)) !== false) {
+            return $cacheVal;
         }
         return false;
     }

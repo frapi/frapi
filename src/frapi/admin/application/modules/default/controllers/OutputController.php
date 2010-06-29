@@ -40,7 +40,7 @@ class OutputController extends Lupin_Controller_Base
     {
         $model = new Default_Model_Output;
         $model->makeDefault($this->getRequest()->getParam('id'));
-        apc_delete('Output.default-format');
+
         $this->refreshAPCCache();
         $this->_redirect('/output');
     }
@@ -70,6 +70,8 @@ class OutputController extends Lupin_Controller_Base
         $server = $configModel->getKey('api_url');
         $hash = isset($server) ? hash('sha1', $server) : '';
         
-        apc_delete($hash . '-Output.default-format');
+        $cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
+
+        $cache->delete($hash . '-Output.default-format');
     }
 }
