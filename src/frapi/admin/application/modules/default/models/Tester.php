@@ -16,6 +16,13 @@
  */
 class Default_Model_Tester extends Lupin_Model_DB
 {
+    /**
+     * Build a form
+     *
+     * This method is used to build extra "param" form fields.
+     *
+     * @return string The newly formed "form".
+     */
     public function buildForm()
     {
         return '
