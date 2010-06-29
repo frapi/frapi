@@ -393,5 +393,6 @@ if ($valid instanceof Frapi_Error) {
         apc_delete($hash . '-Actions.enabled-public');
         apc_delete($hash . '-Actions.enabled-private');
         apc_delete($hash . '-Router.routes-prepared');
+        apc_delete($hash . '-configFile-actions');
     }
 }

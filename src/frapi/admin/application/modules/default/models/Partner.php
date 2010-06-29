@@ -112,5 +112,6 @@ class Default_Model_Partner extends Lupin_Model
     public function refreshAPCCache()
     {
         apc_delete('Partners.emails-keys');
+        apc_delete($hash . '-configFile-partners');
     }
 }

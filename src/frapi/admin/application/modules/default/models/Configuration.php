@@ -142,5 +142,6 @@ class Default_Model_Configuration extends Lupin_Model
         $hash = isset($server) ? hash('sha1', $server) : '';
         
         apc_delete($hash . '-Database.configs');
+        apc_delete($hash . '-configFile-configurations');
     }
 }

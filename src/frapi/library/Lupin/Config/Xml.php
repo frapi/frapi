@@ -66,12 +66,21 @@ class Lupin_Config_Xml
                 $config = Zend_Registry::get('localConfigPath');
             } catch (Zend_Exception $e) {}
         }
-
+        
         $this->configFile = $config . $name . '.xml';
         $this->configName = $name;
-
-        $helper = new Lupin_Config_Helper_XmlArray();
-        $this->config = $helper->parse($this->configFile);
+        
+        /**
+         * @TODO Remove me after the rewrite of the Config Reader. Move this to 
+         *       Frapi_Internal. I dislike inter-dependencies.
+         */
+        if ($cachedConfig = Frapi_Internal::getCached('configFile-' . $name)) {
+            $this->config = $cachedConfig;
+        } else {
+            $helper = new Lupin_Config_Helper_XmlArray();
+            $this->config = $helper->parse($this->configFile);
+            Frapi_Internal::setCached('configFile-' . $name, $this->config);
+        }
 
         $this->config = $this->config[$name];
     }

@@ -91,5 +91,6 @@ class Default_Model_Error extends Lupin_Model
     public function refreshAPCCache()
     {
         apc_delete('Errors.user-defined');
+        apc_delete($hash . '-configFile-errors');
     }
 }
