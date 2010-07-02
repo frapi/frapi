@@ -74,7 +74,7 @@ class Frapi_Cache
         
         if (!class_exists($className, false)) {
             require_once $adapterFile;
-            return new $className;
+            return new $className($options);
         }
                      
         return new $className;
