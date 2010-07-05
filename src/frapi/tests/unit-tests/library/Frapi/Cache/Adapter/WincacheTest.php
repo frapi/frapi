@@ -5,6 +5,29 @@
  * 
  * @todo Someone using wincache will have to flesh this out.
  */
+/**
+ * Test Case
+ *
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://getfrapi.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@getfrapi.com so we can send you a copy immediately.
+ *
+ * This class contains the rules about actions/outputs
+ *
+ * It mostly contains methods that are there to validate
+ * the types and actions requested.
+ *
+ * @license   New BSD
+ * @copyright echolibre ltd.
+ * @package   frapi-tests
+ */ 
 class Frapi_Cache_Adapter_WincacheTest extends PHPUnit_Framework_TestCase
 {
 
@@ -18,6 +41,12 @@ class Frapi_Cache_Adapter_WincacheTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp ()
     {
+        if (!extension_loaded('WinCache')) {
+            $this->markTestSkipped(
+              'The WinCache extension is not available.'
+            );
+        }
+        
         parent::setUp();
         
         // TODO Auto-generated WincacheTest::setUp()
@@ -54,7 +83,7 @@ class Frapi_Cache_Adapter_WincacheTest extends PHPUnit_Framework_TestCase
     {
         // TODO Auto-generated WincacheTest->testGet()
         $this->markTestIncomplete(
-        "get test not implemented");
+            "get test not implemented");
         
         $this->Frapi_Cache_Adapter_Wincache->get(/* parameters */);
     
@@ -67,7 +96,7 @@ class Frapi_Cache_Adapter_WincacheTest extends PHPUnit_Framework_TestCase
     {
         // TODO Auto-generated WincacheTest->testAdd()
         $this->markTestIncomplete(
-        "add test not implemented");
+            "add test not implemented");
         
         $this->Frapi_Cache_Adapter_Wincache->add(/* parameters */);
     
@@ -80,11 +109,9 @@ class Frapi_Cache_Adapter_WincacheTest extends PHPUnit_Framework_TestCase
     {
         // TODO Auto-generated WincacheTest->testDelete()
         $this->markTestIncomplete(
-        "delete test not implemented");
+            "delete test not implemented");
         
         $this->Frapi_Cache_Adapter_Wincache->delete(/* parameters */);
     
     }
-
 }
-

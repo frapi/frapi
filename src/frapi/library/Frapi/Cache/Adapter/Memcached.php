@@ -52,7 +52,7 @@ class Frapi_Cache_Adapter_Memcached implements Frapi_Cache_Interface
     {
         // @FIXME For now we'll assume only memcached on localhost on port 11211
         $this->memcache = new Memcached();
-        $this->memcache->addServer('127.0.0.1', 11211)
+        $this->memcache->addServer('127.0.0.1', 11211);
     }
     
     /**

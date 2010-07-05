@@ -1,8 +1,4 @@
 <?php
-
-/**
- * Frapi_Cache_Adapter_Apc test case.
- */
 /**
  * Test Case
  *
@@ -26,13 +22,24 @@
  * @copyright echolibre ltd.
  * @package   frapi-tests
  */
-class Frapi_Cache_Adapter_ApcTest extends PHPUnit_Framework_TestCase
+
+/**
+ * Frapi_Cache_Adapter_Memcached test case.
+ */
+class Frapi_Cache_Adapter_MemcachedTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Frapi_Cache_Adapter_Apc
+     * @var Frapi_Cache_Adapter_Memcached
      */
-    private $Frapi_Cache_Adapter_Apc;
+    private $Frapi_Cache_Adapter_Memcached;
+    
+    /**
+     * Memcached object
+     *
+     * @var Memcached $cache  The memcached object.
+     */
+    private $cache;
     
     /**
      * ttl for acp_store($key, $value, $ttl)
@@ -41,13 +48,30 @@ class Frapi_Cache_Adapter_ApcTest extends PHPUnit_Framework_TestCase
      */
     private $_ttl = 900;
 
+
+    /**
+     * Constructs the test case.
+     */
+    public function __construct ()
+    {
+    }
+
     /**
      * Prepares the environment before running a test.
      */
     protected function setUp ()
     {
+        if (!extension_loaded('Memcached')) {
+            $this->markTestSkipped(
+              'The Memcached extension is not available.'
+            );
+        }
+        
         parent::setUp();
-        $this->Frapi_Cache_Adapter_Apc = new Frapi_Cache_Adapter_Apc();
+        $this->cache = new Memcached();
+        $this->cache->addServer('127.0.0.1', '11211');
+        
+        $this->Frapi_Cache_Adapter_Memcached = new Frapi_Cache_Adapter_Memcached();
     }
 
     /**
@@ -55,7 +79,8 @@ class Frapi_Cache_Adapter_ApcTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown ()
     {
-        $this->Frapi_Cache_Adapter_Apc = null;
+        $this->Frapi_Cache_Adapter_Memcached = null;
+        $this->cache = null;
         parent::tearDown();
     }
     
@@ -77,25 +102,25 @@ class Frapi_Cache_Adapter_ApcTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Frapi_Cache_Adapter_Apc->get()
+     * Tests Frapi_Cache_Adapter_Memcached->get()
      * 
      * @dataProvider keysValuesProvider
      */
     public function testGet ($key, $value)
     {
-        apc_store($key, $value, $this->_ttl);
+        $this->cache->set($key, $value, $this->_ttl);
         $this->assertEquals($value, $this->Frapi_Cache_Adapter_Apc->get($key));
     }
 
     /**
-     * Tests Frapi_Cache_Adapter_Apc->add()
+     * Tests Frapi_Cache_Adapter_Memcached->add()
      * 
      * @dataProvider keysValuesProvider
      */
     public function testAdd ($key, $value)
     {
         $this->Frapi_Cache_Adapter_Apc->add($key, $value);
-        $this->assertEquals($value, apc_fetch($key));
+        $this->assertEquals($value, $this->cache->get($key));
     }
 
     /**
@@ -105,9 +130,9 @@ class Frapi_Cache_Adapter_ApcTest extends PHPUnit_Framework_TestCase
      */
     public function testDelete ($key, $value)
     {
-        apc_store($key, $value, $this->_ttl);
+        $this->cache->add($key, $value, $this->_ttl);
         $this->Frapi_Cache_Adapter_Apc->delete($key);
-        $this->assertEquals(false, apc_fetch($key));
+        $this->assertEquals(false, $this->cache->get($key));
     }
 
     /**
