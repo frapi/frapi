@@ -98,11 +98,7 @@ class Frapi_Output
      **/
     public function sendHeaders($response)
     {
-        if ($response instanceof Frapi_Exception) {
-            header('HTTP/1.1 '.intval($response->getStatusCode()));
-        } else {
-            header('HTTP/1.1 200 OK');
-        }
+        header('HTTP/1.1 '.intval($response->getStatusCode()));
 
         header('Content-type: '.$this->mimeType.'; charset=utf-8');
         

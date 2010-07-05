@@ -124,18 +124,26 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
             }
         }
 
-        $result = $this->actionContext->$action();
-
+        $response = $this->actionContext->$action();
+        
+        // Make sure we use a Frapi_Response.
+        if (!$response instanceof Frapi_Response) {
+            $response = new Frapi_Response(
+                array(
+                    'data' => $response
+                )
+            );
+        }
+        
         /**
          * If the action result is NOT an instance of
          * Error, we can assume that it's valid
          * output so keep going and output the result
          */
-
         $out = $this->getOutputInstance($this->getFormat())
                     ->setOutputAction($this->getAction())
-                    ->populateOutput($result, $this->actionContext->getTemplateFileName())
-                    ->sendHeaders($result)
+                    ->populateOutput($response->getData(), $this->actionContext->getTemplateFileName())
+                    ->sendHeaders($response)
                     ->executeOutput();
 
         return $out;

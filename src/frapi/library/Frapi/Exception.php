@@ -77,6 +77,14 @@ class Frapi_Exception extends Exception
         return $this->at;
     }
    
+    /**
+     * Get the name of the error
+     *
+     * This method returns the name of the error that we
+     * are attempting to throw (The error internal-code)
+     *
+     * @return string The name of the error.
+     */
     public function getName()
     {
         return $this->name;
@@ -90,6 +98,20 @@ class Frapi_Exception extends Exception
     public function getStatusCode()
     {
         return $this->http_code;
+    }
+    
+    /** 
+     * Set the Status code
+     *
+     * This method is used to set the HTTP status
+     * code of the response we are going to return.
+     *
+     * @param int $code The http status code.
+     * @return void
+     */
+    public function setStatusCode($code)
+    {
+        $this->http_code = $code;
     }
 
     /**

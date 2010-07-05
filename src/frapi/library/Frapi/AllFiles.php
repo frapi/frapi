@@ -68,6 +68,9 @@ require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Action' . DIRECTORY_SEPARATOR
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Action' . DIRECTORY_SEPARATOR . 'Interface.php';
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Action.php';
 
+// Response
+require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Response.php';
+
 //Database
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Database.php';
 

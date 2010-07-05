@@ -19,7 +19,7 @@
  *
  * It also contains an array that says which fields need
  * to be logged in in order to use and which fields simply need
- * a parterID and partnerKey.
+ * a username/email and secretkey (Set from the admin).
  *
  * @license   New BSD
  * @copyright echolibre ltd.
