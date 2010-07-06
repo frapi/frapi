@@ -41,30 +41,18 @@ class Frapi_Authorization_Partner extends Frapi_Authorization implements Frapi_A
             return false;
         }
 
+        $auth = new Frapi_Authorization_HTTP_Digest();
+        
         /**
          * Make sure the params needed are passed
          * if not, return an error with invalid partner
          * id/key
          */
-        $partnerID  = isset($this->params['email'])     ? $this->params['email']     : false;
-        $partnerKey = isset($this->params['secretKey']) ? $this->params['secretKey'] : false;
-
-        if (!empty($partnerID) && !empty($partnerKey)) {
-            /**
-             * Last step, validate the partner information
-             * using the security Context
-             */
-            $partnerID  = $this->params['email'];
-            $partnerKey = $this->params['secretKey'];
-
-            $security     = new Frapi_Security();
-            $securityPass = $security->isPartner($partnerID, $partnerKey);
-
-            // Seems ok to me.. might as well go through.
+        if (!empty($this->params['digest'])) {
+            $authed = $auth->authorize();
             return true;
         }
-        
-        header('WWW-Authenticate: Basic realm="API Authentication"');
-        exit(0);
+
+        $auth->send();
     }
 }

@@ -43,4 +43,28 @@ class Frapi_Model_Partner
 
         return false;
     }
+    
+    /**
+     * Find out whether a username is a valid one or not.
+     *
+     * This method is used from the Digest to figure out whether or not a user
+     * is a valid handle and one that should be used.
+     *
+     * @param string $partnerID  Partner identifier (email).
+     *
+     * @return mixed Information about a user or a Boolean Whether the 
+     *               supplied partnerID are valid details.
+     */
+    public static function isPartnerHandle($partnerID)
+    {
+        if (!($partners = Frapi_Internal::getCached("Partners.emails-keys"))) {            
+            $partners = Frapi_Internal::getCachedPartners();
+        }
+
+        if (isset($partners[$partnerID]) && $partners[$partnerID]['email'] == $partnerID) {
+            return $partners[$partnerID];
+        }
+
+        return false;
+    }
 }

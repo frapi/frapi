@@ -57,8 +57,8 @@ require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Internal.php';
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Logger.php';
 
 // API Controller
-require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Controller/Main.php';
-require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Controller/Api.php';
+require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'Main.php';
+require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'Api.php';
 
 //Routing
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Router.php';
@@ -110,11 +110,18 @@ require LIBRARY_AUTHORIZATION . DIRECTORY_SEPARATOR . 'Partner.php';
 require LIBRARY_AUTHORIZATION_ADAPTER . DIRECTORY_SEPARATOR . 'Xml.php';
 
 // Models
-require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . '/Model/Partner.php';
+require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Model' . DIRECTORY_SEPARATOR . 'Partner.php';
+
+// HTTP Digest Auth
+require LIBRARY_AUTHORIZATION . DIRECTORY_SEPARATOR . 'HTTP' . DIRECTORY_SEPARATOR . 'Digest.php';
 
 // Lupin XML config stuff.
-require EXTRA_LIBRARIES_ROOT_PATH . 'Lupin/Config/Xml.php';
-require EXTRA_LIBRARIES_ROOT_PATH . 'Lupin/Config/Helper/XmlArray.php';
+require EXTRA_LIBRARIES_ROOT_PATH . 'Lupin' . DIRECTORY_SEPARATOR . 
+                                    'Config' . DIRECTORY_SEPARATOR . 'Xml.php';
+                                    
+require EXTRA_LIBRARIES_ROOT_PATH . 'Lupin' . DIRECTORY_SEPARATOR  . 
+                                    'Config' . DIRECTORY_SEPARATOR . 
+                                    'Helper' . DIRECTORY_SEPARATOR . 'XmlArray.php';
 
 
 // Other data

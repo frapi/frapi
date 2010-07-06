@@ -223,12 +223,12 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         if (Frapi_Rules::isPublicAction($this->getAction())) {
             return true;
         }
-        
+
         //For Basic HTTP Auth, use headers automatically filled by PHP, if available.
         $headers = $_SERVER;
+
         $auth_params = array(
-            "email"     => ((isset($headers['PHP_AUTH_USER'])) ? ($headers['PHP_AUTH_USER']) : (null)),
-            "secretKey" => ((isset($headers['PHP_AUTH_PW'])) ? ($headers['PHP_AUTH_PW']) : (null))
+            'digest' => isset($_SERVER['PHP_AUTH_DIGEST']) ? $_SERVER['PHP_AUTH_DIGEST'] : null
         );
 
         // First step: Set the state of the context objects.
@@ -254,6 +254,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
          *
          * If it is ok, it returns true.
          */
+
         if (!$partnerAuth) {
             throw new Frapi_Error(
                 Frapi_Error::ERROR_INVALID_ACTION_REQUEST_NAME,

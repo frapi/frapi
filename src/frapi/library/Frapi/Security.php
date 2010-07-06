@@ -35,6 +35,8 @@ class Frapi_Security implements Frapi_Security_Interface
      * to the method is valid and if it is indeed
      * one of our partners. If so return true.
      *
+     * @deprecated
+     *
      * @param  string $partnerID   The partner ID
      * @param  string $partnerKey  The partner Key
      * @return bool   If it is a valid partner or not.
