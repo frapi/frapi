@@ -198,14 +198,24 @@ class Frapi_Error extends Frapi_Exception
         }
         
         if (isset(self::$_errors[$error_name])) {
-            return self::$_errors[$error_name];
-        } else {
-            return array(
-                'name'      => $error_name,
-                'message'   => $error_msg !== false ? $error_msg : $error_name, 
-                'http_code' => $http_code !== null  ? $http_code : '400', 
-            );
+            $error = self::$_errors[$error_name];
+            
+            if ($error_msg !== false) {
+                $error['message'] = $error_msg;
+            }
+            
+            if (!is_null($http_code)) {
+                $error['http_code'] = $http_code;
+            }
+
+            return $error;
         }
+        
+        return array(
+            'name'      => $error_name,
+            'message'   => $error_msg !== false ? $error_msg : $error_name, 
+            'http_code' => $http_code !== null  ? $http_code : '400', 
+        );
     }
     
     /**
