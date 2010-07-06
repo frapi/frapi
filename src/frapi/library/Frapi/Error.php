@@ -91,7 +91,7 @@ class Frapi_Error extends Frapi_Exception
      *
      * @return void
      */
-    public function __construct($error_name, $error_msg = false, $http_code = null)
+    public function __construct($error_name, $error_msg = false, $http_code = false)
     {
         $error = self::_get($error_name, $error_msg, $http_code);
         parent::__construct($error['message'], $error['name'], $error['http_code']);
@@ -178,11 +178,16 @@ class Frapi_Error extends Frapi_Exception
      * slower datastores (static class variable, APC, database)
      * and will store the loaded errors in the faster stores.
      *
-     * @param String $error_name Name of error to lookup and return.
+     * @param string $error_name Name of error.
+     * @param string $error_msg  The actual message of the error.
+     * @param int    $http_code  This might be hard to grasp however, we are in a web
+     *                           industry dealing with the web. The code you are sending
+     *                           to your exception should really be represented by the
+     *                           HTTP Code returned to your users.
      *
-     * @return Array
-     **/
-    private static function _get($error_name, $error_msg = false, $http_code = null)
+     * @return array An array with the content of the error.
+     */
+    private static function _get($error_name, $error_msg = false, $http_code = false)
     {
         if (!self::$_statically_loaded) {
             $errors = Frapi_Internal::getCached('Errors.user-defined');
@@ -204,7 +209,7 @@ class Frapi_Error extends Frapi_Exception
                 $error['message'] = $error_msg;
             }
             
-            if (!is_null($http_code)) {
+            if ($http_code !== false) {
                 $error['http_code'] = $http_code;
             }
 
@@ -214,7 +219,7 @@ class Frapi_Error extends Frapi_Exception
         return array(
             'name'      => $error_name,
             'message'   => $error_msg !== false ? $error_msg : $error_name, 
-            'http_code' => $http_code !== null  ? $http_code : '400', 
+            'http_code' => $http_code !== false  ? $http_code : '400', 
         );
     }
     

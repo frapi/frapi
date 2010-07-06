@@ -301,9 +301,9 @@ class Frapi_Internal
      * For instance, memcache may be checked, then APC etc..
      * False on failure to find value.
      *
-     * @param $key String Key name
-     * @return Mixed | false
-     **/
+     * @param  string $key Key name
+     * @return mixed  Either a boolean false or the value of the cached value.
+     */
     public static function getCached($key)
     {
         self::log('cache-get', $key);
@@ -316,13 +316,18 @@ class Frapi_Internal
         if (($cacheVal = self::$cache->get($hash . '-' . $key)) !== false) {
             return $cacheVal;
         }
+        
         return false;
     }
 
     /**
+     * Cache a key-value
+     *
      * Store a cached $key=>$value pair in a series
      * of caches. E.g., memcache and APC.
      *
+     * @param  string $key   The key to store the value under.
+     * @param  mixed  $value The value to cache.
      * @return void
      */
     public static function setCached($key, $value)
@@ -340,8 +345,11 @@ class Frapi_Internal
     /**
      * Delete key from cache(s).
      *
+     * This method deletes a key from the cache instance.
+     *
+     * @param  string  The cached key to delete.
      * @return void
-     **/
+     */
     public static function deleteCached($key)
     {
         self::log('cache-delete', $key);
