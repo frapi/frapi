@@ -1,0 +1,265 @@
+domain "en_EN"
+
+# login page
+msgid "USERNAME"
+msgstr "Username"
+
+msgid "PASSWORD"
+msgstr "Password"
+
+msgid "LOGIN"
+msgstr "Login"
+
+msgid "SUBMENU"
+msgstr "Submenu"
+
+msgid "WELCOME"
+msgstr "Welcome"
+
+msgid "YOU_ARE_USING_FRAPI"
+msgstr "You are using the FRAPI admin system"
+
+#menu
+msgid "DASHBOARD"
+msgstr "Dashboard"
+
+msgid "ACTIONS"
+msgstr "Actions"
+
+msgid "ERRORS"
+msgstr "Errors" 
+
+msgid "PARTNERS"
+msgstr "Partners"
+
+msgid "CONFIGURATION"
+msgstr "Configuration"
+
+msgid "TESTER"
+msgstr "Tester"
+
+# top right - sync
+msgid "SYNCING_MESSAGE"
+msgstr "&quot;Sync'ing&quot;: Synchronizing your codebase with the actions you created in &quot;Actions&quot;"
+
+# Dashboard welcome
+msgid "DASHBOARD_WELCOME_TITLE"
+msgstr "First of all, Welcome to your API! Now, see below"
+
+msgid "CRITICAL_SETUP_ISSUES"
+msgstr "Critical Setup Issues"
+
+msgid "CRITICAL_SETUP_ISSUES_INTRO"
+msgstr "We have identified issues regarding your setup which means that your API will not function correctly until you resolved those issues."
+
+msgid "THE"
+msgstr "The"
+
+# Action section
+
+msgid "ADD_NEW_ACTION"
+msgstr "Add new Action"
+
+msgid "SETUP_HELP_MESSAGE"
+msgstr "You might want to run sh setup.sh which sets the files to chmod 777. This file is located in the root of your FRAPI download/checkout."
+
+msgid "NAME"
+msgstr "Name"
+
+msgid "IS_ACTION_PUBLIC"
+msgstr "Is the action public?"
+
+msgid "IS_ACTION_ENABLED"
+msgstr "Is the action enabled?"
+
+msgid "CUSTOM_ROUTE"
+msgstr "Custom Route"
+
+msgid "DESCRIPTION"
+msgstr "Description"
+
+msgid "SAVE"
+msgstr "Save"
+
+msgid "ADD_PARAMETER"
+msgstr "Add Parameter"
+
+msgid "PARAMETER"
+msgstr "Parameter"
+
+msgid "REQUIRED"
+msgstr "Required"
+
+msgid "ACTION"
+msgstr "Action"
+
+msgid "DELETE"
+msgstr "Delete"
+
+msgid "PLEASE_PROVIDE_USERNAME"
+msgstr "Please provide a username and password."
+
+# Error section
+
+msgid "ADD_NEW_ERROR"
+msgstr "Add new Error"
+
+msgid "FILTER"
+msgstr "Filter"
+
+msgid "MESSAGE"
+msgstr "Message"
+
+msgid "EDIT"
+msgstr "Edit"
+
+msgid "HTTP_CODE"
+msgstr "HTTP Code"
+
+msgid "ERROR_MESSAGE"
+msgstr "Error Message"
+
+msgid "SUBMIT"
+msgstr "Submit"
+
+# Partner Section
+
+msgid "ADD_NEW_PARTNER"
+msgstr "Add new Partner"
+
+msgid "COMPANY"
+msgstr "Company"
+
+msgid "API_KEY"
+msgstr "API Key"
+
+msgid "FIRSTNAME"
+msgstr "First Name"
+
+msgid "LASTNAME"
+msgstr "Last Name"
+
+msgid "EMAIL_USERNAME"
+msgstr "Email/Username"
+
+# Configuration Section
+msgid "CACHE"
+msgstr "Cache"
+
+msgid "USERS"
+msgstr "Users"
+
+msgid "OUTPUT"
+msgstr "Output"
+
+msgid "DATABASE"
+msgstr "Database"
+
+msgid "SELECT_ITEM_FROM_SUBMENU"
+msgstr "Please select an item from the submenu, to your left."
+
+msgid "UPDATE_CONFIGURATION"
+msgstr "Update Configuration"
+
+msgid "API_DOMAIN"
+msgstr "API Domain"
+
+msgid "FOR_TESTER"
+msgstr "for Tester"
+
+msgid "CACHE_HELP_ONE"
+msgstr "Listed below are Frapi's internal cache keys, colour-coded by status. Click to see cache contents."
+
+msgid "CACHE_HELP_TWO"
+msgstr "Click &quot;Delete&quot; to expire cache values, they will then be re-generated (when required) by the API front-end."
+
+msgid "SET"
+msgstr "Set"
+
+msgid "SIZE"
+msgstr "Size"
+
+msgid "DELETE"
+msgstr "Delete"
+
+msgid "YES"
+msgstr "Yes"
+
+msgid "YOU_CAN"
+msgstr "You can"
+
+msgid "UNSET_ALL_KEYS"
+msgstr "unset all keys"
+
+msgid "TO_CLEAR_CACHE"
+msgstr "to clear the cache."
+
+msgid "HANDLE"
+msgstr "Handle"
+
+msgid "ADD_NEW_USER"
+msgstr "Add new User"
+
+msgid "SYNC_OUTPUT_TYPES"
+msgstr "Sync Output Types"
+
+msgid "MAKE_DEFAULT"
+msgstr "Make Default"
+
+msgid "DISABLE"
+msgstr "Disable"
+
+msgid "TYPE"
+msgstr "Type"
+
+msgid "VALUE"
+msgstr "Value"
+
+msgid "KEY"
+msgstr "Key"
+
+msgid "EDIT_DATABASE_SETTINGS"
+msgstr "Edit Database settings"
+
+# Tester Section
+
+msgid "QUERY_URI"
+msgstr "Query URI"
+
+msgid "PARAMS"
+msgstr "Params"
+
+msgid "ADD_PARAMETER"
+msgstr "Add a parameter (&quot;name=value&quot;)"
+
+msgid "FORMAT"
+msgstr "Format"
+
+msgid "METHOD"
+msgstr "Method"
+
+msgid "EMAIL"
+msgstr "Email"
+
+msgid "SECRET_KEY"
+msgstr "Secret Key"
+
+msgid "LOAD_EMAIL_KEY"
+msgstr "Load Email/Key Combo"
+
+msgid "SELECT_COMBO_OF_FIELDS"
+msgstr "Select a combination to fill the fields above."
+
+msgid "RUN_TEST"
+msgstr "Run Test"
+
+# Other
+
+msgid "ADDED"
+msgstr "added"
+
+msgid "UPDATED"
+msgstr "updated"
+
+msgid "ID_PARAM_MISSING"
+msgstr "ID parameter is missing."
