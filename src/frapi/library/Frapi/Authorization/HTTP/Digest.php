@@ -61,7 +61,7 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
      *
      * @var integer The nonce life length.
      */
-    public $nonceLife = 10;
+    public $nonceLife = 300;
 
     /** 
      * This variable is used to define whether or not the passwords
