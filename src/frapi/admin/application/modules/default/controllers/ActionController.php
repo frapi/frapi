@@ -54,13 +54,17 @@ class ActionController extends Lupin_Controller_Base
         $model = new Default_Model_Action;
         $dir = Zend_Registry::get('localConfigPath');
         $dir = $dir . 'actions.xml';
+        
+        $dir = Zend_Registry::get('localConfigPath');
+        $translate = Zend_Registry::get('tr');        
 
         if (!is_writable($dir)) {
+
+            $actionPathMessage = sprintf($translate->_('ACTION_DIR_PROBLEM'), $dir);
+            $setupHelpMessage  = $translate->_('SETUP_HELP_MESSAGE');
+        
             $this->addMessage(
-                'The <strong>'.$dir.'</strong> is not currently writeable by this user, ' . 
-                'therefore we cannot update the configuration file. <br /><br />' . 
-                'You might want to run <strong>sh setup.sh</strong> which sets the files to ' . 
-                'chmod 777. This file is located in the root of your FRAPI download/checkout.'
+                $actionPathMessage .' <br /><br />' . $setupHelpMessage
             );
             
             $this->_redirect('/action/error');

@@ -28,21 +28,18 @@ class IndexController extends Lupin_Controller_Base
         $user   = get_current_user();
 
         $dir = Zend_Registry::get('localConfigPath');
-
+        $translate = Zend_Registry::get('tr');
+        
         if (!is_writable($dir)) {
-            $issues['config-path'] = 
-                'The "<strong>'.$dir.'</strong>" directory is not writeable by the ' . 
-                'current user ('.$user.'), therefore we will not be able to save API configurations: ('.
-                'Actions, Errors, Partners, Configuration, etc) until the user has write access.';
+            $configPathMessage = $translate->_('ACTION_WARNING_CONFIG');
+            $issues['config-path'] = sprintf($configPathMessage, $dir, $user);
         }
         
         $dir    = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
 
         if (!is_writable($dir)) {
-            $issues['custom-action-path'] = 
-                'The "<strong>'.$dir.'</strong>" directory is not writeable by the ' . 
-                'current user ('.$user.'), therefore we will not be able to synchronize ' .
-                'the codebase until the user has write access.';
+            $actionPathMessage = $translate->_('ACTION_WARNING_ACTION');
+            $issues['custom-action-path'] = sprintf($actionPathMessage, $dir, $user);
         }
 
         $this->view->issues = $issues;

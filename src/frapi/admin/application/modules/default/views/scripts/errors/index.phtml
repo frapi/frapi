@@ -1,12 +1,17 @@
-<div style="float: left"><form id="filter-form">Filter: <input name="filter" id="filter" value="" maxlength="30" size="30" type="text"></form></div>
+<div style="float: left">
+    <form id="filter-form">
+    <?php echo $this->tr->_('FILTER'); ?>: <input name="filter" id="filter" value="" maxlength="30" size="30" type="text">
+    </form>
+</div>
+
 <br /><br /><br /><br /><br />
 
     <table id="list">
      <thead>
       <tr>
-        <th>Name</th>
-        <th>Message</th>
-        <th>Action</th>
+        <th><?php echo $this->tr->_('NAME'); ?></th>
+        <th><?php echo $this->tr->_('MESSAGE'); ?></th>
+        <th><?php echo $this->tr->_('ACTION'); ?></th>
       </tr>
      </thead>
      <tbody>
@@ -15,7 +20,7 @@
         <td><?php echo $d['name']; ?></td>
         <td><?php echo $d['message']; ?></td>
         <td style="text-align: center;">
-            <a href="/errors/edit/id/<?php echo $d['hash']; ?>">Edit</a> | <a href="/errors/delete/id/<?php echo $d['hash']; ?>">Delete</a>
+            <a href="/errors/edit/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('EDIT'); ?></a> | <a href="/errors/delete/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('DELETE'); ?></a>
         </td>
       </tr>
 <?php endif; endforeach; ?>

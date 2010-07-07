@@ -17,7 +17,7 @@
 echo $this->form;
 ?>
 
-<input type="button" id="submitter" value="Run Test" />
+<input type="button" id="submitter" value="<?php echo $this->tr->_('RUN_TEST'); ?>" />
 
 <style type="text/css">
 #container .main {
@@ -47,12 +47,12 @@ echo $this->form;
 </style>
 <br />
 
-<h2 style="display: none" id="request-header">Request</h2>
+<h2 style="display: none" id="request-header"><?php echo $this->tr->_('REQUEST'); ?></h2>
 <div id="request-container"></div>
-<h2 style="display: none" id="post-fields-header">POST Fields</h2>
+<h2 style="display: none" id="post-fields-header"><?php echo $this->tr->_('POST_FIELDS'); ?></h2>
 <div id="post-fields-container"></div>
 
-<h2 style="display: none" id="response-header">Response</h2>
+<h2 style="display: none" id="response-header"><?php echo $this->tr->_('RESPONSE'); ?></h2>
 <div id="response-container"></div>
 
 <script type="text/javascript">
@@ -85,7 +85,7 @@ echo $this->form;
     function addParamInput(paramName)
     {
         var value = paramName ? paramName + "=" : "";
-        $("#params").append('<p><input type="text" name="param[]" value="'+value+'" /> <img src="/images/delete.png" class="remove" /></p>');
+        $("#params").append('<p><input type="text" name="param[]" value="'+value+'" /> <img src="/images/delete.png" class="<?php echo $this->tr->_('REMOVE'); ?>" /></p>');
     }
     
     $(function(){
@@ -129,7 +129,7 @@ echo $this->form;
         });
         
         if (!queryURI) {
-            alert('No query URI?'); return false;
+            alert('<?php echo $this->tr->_('NO_QUERY_URI'); ?>?'); return false;
         }
 
         var finalParams = 'format=' + format;
@@ -175,9 +175,13 @@ echo $this->form;
                        brush = "plain";
                        break;
                }
-
-               $('#request-header').html("Request ("+ data.method +")").show();
-               $('#response-header').html("Response (Code "+ data.status +")").show();
+               
+               var RequestString = '<?php echo $this->tr->_('REQUEST'); ?>';
+               var ResponseString = '<?php echo $this->tr->_('RESPONSE'); ?>';
+               var CodeString = '<?php echo $this->tr->_('CODE'); ?>';
+               
+               $('#request-header').html(RequestString + " ("+ data.method +")").show();
+               $('#response-header').html(ResponseString + " (" + CodeString + " "+ data.status +")").show();
                $('#request-container').empty().append(
                    $('<input>').attr({id: "#request_url", style: "width: 100%"}).val(data.request_url)
                );
@@ -196,7 +200,7 @@ echo $this->form;
                    $('<pre>').attr('id', '#response_headers').addClass("brush: headers").html(data.response_headers)                    
                );
                $('#response-container').append(
-                   $('<h2>Content Body</h2>')
+                   $('<h2><?php echo $this->tr->_('CONTENT_BODY'); ?></h2>')
                ).append(
                    $('<pre>').attr('id', '#response').addClass("brush: " + brush).html(unescape(data.content))    
                );
@@ -206,7 +210,8 @@ echo $this->form;
            dataType: "json",
            error: function (XMLHttpRequest, textStatus, errorThrown) {
                if (XMLHttpRequest.status == 403) {
-                   $(".content").prepend($('<div>').attr('id', 'message').html("Error: You were logged out due to inactivity. Please <a href=\"/login\" target=\"_blank\">log in</a> (opens in new tab) and try again."));
+                   var ResponseString = '<?php echo $this->tr->_('TESTER_REQUEST_ERROR'); ?>';
+                   $(".content").prepend($('<div>').attr('id', 'message').html(ResponseString));
                }
                this;
            }

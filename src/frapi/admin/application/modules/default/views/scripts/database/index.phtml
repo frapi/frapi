@@ -1,16 +1,16 @@
-<h2>Database configuration</h2>
+<h2><?php echo $this->tr->_('DATABASE_CONFIGURATION'); ?></h2>
 <?php if (empty($this->configs)) : ?>
-There are no database configurations yet. <a href="/database/add">Add some</a><br />
+<?php echo $this->tr->_('NO_DATABASE_CONFIGURATION_YET'); ?>. <a href="/database/add"><?php echo $this->tr->_('ADD_SOME'); ?></a><br />
 <?php else: ?>
 <br /><br />
-<a href="/database/edit">Edit Database settings</a>
+<a href="/database/edit"><?php echo $this->tr->_('EDIT_DATABASE_CONFIGURATION'); ?></a>
 <br /><br />
 <table id="list">
  <thead>
   <tr>
-    <th>Key</th>
-    <th>Value</th>
-    <th>Type</th>
+    <th><?php echo $this->tr->_('KEY'); ?></th>
+    <th><?php echo $this->tr->_('VALUE'); ?></th>
+    <th><?php echo $this->tr->_('TYPE'); ?></th>
   </tr>
  </thead>
  <tbody>
@@ -18,7 +18,7 @@ There are no database configurations yet. <a href="/database/add">Add some</a><b
   <tr>
     <td><?php echo $d['key']; ?></td>
     <td><?php echo $d['value']; ?></td>
-    <td>Main</td>
+    <td><?php echo $this->tr->_('MAIN'); ?></td>
   </tr>
  <?php endforeach; ?>
  </tbody>

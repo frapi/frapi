@@ -4,30 +4,33 @@
     <table id="list">
      <thead>
       <tr>
-        <th>Name</th>
-        <th>Visibility</th>
-        <th>Enabled</th>
-        <th>Action</th>
+        <th><?php echo $this->tr->_('NAME'); ?></th>
+        <th><?php echo $this->tr->_('VISIBILITY'); ?></th>
+        <th><?php echo $this->tr->_('ENABLED'); ?></th>
+        <th><?php echo $this->tr->_('ACTION'); ?></th>
       </tr>
      </thead>
      <tbody>
 <?php foreach ($this->data as $key => $d) : if (is_array($d) && !empty($d)) : ?>
-      <tr>
+      <tr><?php echo $this->tr->_(''); ?>
         <td><?php echo $d['name']; ?></td>
-        <?php $visibility = ($d['public'] == '1' || $d['public'] === null) ? 'Public' : 'Private'; ?>
+        <?php 
+            $visibility = ($d['public'] == '1' || $d['public'] === null) ? 
+                $this->tr->_('PUBLIC') : $this->tr->_('PRIVATE'); 
+        ?>
         <td class="visibility"><?php echo $visibility; ?></td>
         <?php
             if ($d['enabled'] == '1') {
-                $enabled = 'Yes';
+                $enabled = $this->tr->_('YES');
                 $class   = 'enabled';
             } else {
-                $enabled = 'No';
+                $enabled = $this->tr->_('NO');
                 $class   = 'disabled';
             }
         ?>
         <td class="<?php echo $class; ?>"><?php echo $enabled; ?></td>
         <td style="text-align: center;">
-            <a href="/action/edit/id/<?php echo $d['hash']; ?>">Edit</a> |
+            <a href="/action/edit/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('EDIT'); ?></a> |
             <?php
                 if ($d['enabled'] == '1') {
 //                    echo '<a href="#">Disable</a>';
@@ -35,7 +38,7 @@
 //                    echo '<a href="#">Enable</a>';
                 }
             ?>
-            <a href="/action/delete/id/<?php echo $d['hash']; ?>">Delete</a>
+            <a href="/action/delete/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('DELETE'); ?></a>
         </td>
       </tr>
 <?php endif; endforeach; ?>

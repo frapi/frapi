@@ -41,6 +41,10 @@ class Lupin_Controller_Base extends Zend_Controller_Action
         }
 
         $this->view->styleSheets = array_merge(array('css/styles.css'), $styles);
+        
+        $translate = Zend_Registry::get('tr');
+        $this->view->tr = $translate;
+        
         $this->view->setEscape(array('Lupin_Security', 'escape'));
     }
 

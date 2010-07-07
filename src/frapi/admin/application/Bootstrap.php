@@ -14,6 +14,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         ));
         
     }
+    
+    protected function _initLanguages()
+    {
+        $languageDir = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'languages';
+        Zend_Registry::set('languageDir', $languageDir);
+        
+        $translate = new Zend_Translate(
+            'gettext', Zend_Registry::get('languageDir') . DIRECTORY_SEPARATOR . 'en_GB.mo', 'en'
+        );
+        
+        Zend_Registry::set('tr', $translate);
+
+    }
 
     protected function _initConfig()
     {

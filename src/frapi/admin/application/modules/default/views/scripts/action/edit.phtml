@@ -7,13 +7,13 @@ echo $this->form;
 </div>
 
 <br /><br />
-<a id="add-param">Add Parameter</a>
+<a id="add-param"><?php echo $this->tr->_('ADD_PARAMETER'); ?></a>
 <br /><br />
 <table id="params">
     <tr>
-        <th style="width: 300px;">Parameter</th>
-        <th>Required ?</th>
-        <th>Action</th>
+        <th style="width: 300px;"><?php echo $this->tr->_('PARAMETER'); ?></th>
+        <th><?php echo $this->tr->_('REQUIRED'); ?> ?</th>
+        <th><?php echo $this->tr->_('ACTION'); ?></th>
     </tr>
 <?php
     $i = 1;
@@ -24,7 +24,7 @@ echo $this->form;
             echo '<td style="text-align: center;"><input type="checkbox" name="required[' . $i . ']"' . $checked . '></td>';
             echo '<td>';
             echo '<input type="hidden" name="param_id[' . $i . ']" value="' . $d['name'] . '" />';
-            echo '<a class="delete-button" href="#">Delete</a></td></tr>' . "\n";
+            echo '<a class="delete-button" href="#">' . $this->tr->_('DELETE') . '</a></td></tr>' . "\n";
             $i++;
         }
     }
@@ -39,7 +39,7 @@ $(document).ready(function() {
     $('#add-param').click(function () {
         var html = '<tr><td><input type="text" name="param[' + i + ']" value="" style="width: 90%;" /></td>';
         html = html + '<td style="text-align: center;"><input type="checkbox" name="required[' + i + ']"></td>';
-        html = html + '<td><a class="delete-button" href="#">Delete</a></td></tr>';
+        html = html + '<td><a class="delete-button" href="#"><?php echo $this->tr->_('DELETE'); ?></a></td></tr>';
 
         $('#params').append(html);
         i++;
@@ -57,12 +57,9 @@ $(document).ready(function() {
 
             // Get the ID
             jQuery.ajax({
-                    type: "POST",
-                    url: "/action/edit/id/<?php echo $this->id; ?>/param/delete/paramid/" + id,
-    //                data: data.join("&"),
-                    success: function(msg){
-                        //console.log(msg);
-                    }
+                type: "POST",
+                url: "/action/edit/id/<?php echo $this->id; ?>/param/delete/paramid/" + id,
+                success: function(msg) {}
             });
         });
     }

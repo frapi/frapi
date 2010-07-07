@@ -131,8 +131,10 @@ class Zend_Translate_Adapter_Gettext extends Zend_Translate_Adapter {
                 }
             }
         }
-
-        $this->_data[$locale][''] = trim($this->_data[$locale]['']);
+        
+        $this->_data[$locale][''] = 
+            isset($this->_data[$locale]['']) ? trim($this->_data[$locale]['']) : false;
+            
         if (empty($this->_data[$locale][''])) {
             $this->_adapterInfo[$filename] = 'No adapter information available';
         } else {

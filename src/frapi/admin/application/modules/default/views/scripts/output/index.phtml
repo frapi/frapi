@@ -1,7 +1,9 @@
 
 <div style="float: left">
     <form id="sync-form" method="post" action="/output/sync">
-        <input name="sync" id="sync" value="Sync Output Types" type="submit" />
+        <input name="sync" id="sync" 
+               value="<?php echo $this->tr->_('SYNC_OUTPUT_TYPES'); ?>" 
+               type="submit" />
     </form>
 </div>
 <br /><br /><br /><br /><br />
@@ -9,8 +11,8 @@
     <table id="list">
      <thead>
       <tr>
-        <th>Type</th>
-        <th>Action</th>
+        <th><?php echo $this->tr->_('TYPE'); ?></th>
+        <th><?php echo $this->tr->_('ACTION'); ?></th>
       </tr>
      </thead>
      <tbody>
@@ -19,19 +21,21 @@
         <td style="text-align: center;"><?php echo $d['name']; ?></td>
         <td style="text-align: center;">
             <?php if ($d['default'] != '1' && $d['enabled'] == '1') { ?>
-            <a href="/output/makedefault/id/<?php echo $d['name']; ?>">Make Default</a> |
+            <a href="/output/makedefault/id/<?php echo $d['name']; ?>">
+              <?php echo $this->tr->_('MAKE_DEFAULT'); ?>
+            </a> |
             <?php
             }
 
             if ($d['default'] == '1') {
-                echo 'Default Output | ';
+                echo $this->tr->_('DEFAULT_OUTPUT') . ' | ';
             }
 
             if ($d['enabled'] == '1') {
             ?>
-            <a href="/output/disable/id/<?php echo $d['name']; ?>">Disable</a>
+            <a href="/output/disable/id/<?php echo $d['name']; ?>"><?php echo $this->tr->_('DISABLE'); ?></a>
             <?php } else { ?>
-            <a href="/output/enable/id/<?php echo $d['name']; ?>">Enable</a>
+            <a href="/output/enable/id/<?php echo $d['name']; ?>"><?php echo $this->tr->_('ENABLE'); ?></a>
             <?php } ?>
         </td>
       </tr>
