@@ -12,7 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to license@getfrapi.com so we can send you a copy immediately.
  *
- * The APC adapter of the Frapi Cache.
+ * The eAccelerator adapter of the Frapi Cache.
  *
  * @license   New BSD
  * @copyright echolibre ltd.
