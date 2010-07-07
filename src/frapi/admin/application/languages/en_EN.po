@@ -179,9 +179,6 @@ msgstr "Set"
 msgid "SIZE"
 msgstr "Size"
 
-msgid "DELETE"
-msgstr "Delete"
-
 msgid "YES"
 msgstr "Yes"
 
@@ -229,7 +226,7 @@ msgstr "Query URI"
 msgid "PARAMS"
 msgstr "Params"
 
-msgid "ADD_PARAMETER"
+msgid "TESTER_ADD_PARAMETER"
 msgstr "Add a parameter (&quot;name=value&quot;)"
 
 msgid "FORMAT"
