@@ -122,7 +122,3 @@ require EXTRA_LIBRARIES_ROOT_PATH . 'Lupin' . DIRECTORY_SEPARATOR .
 require EXTRA_LIBRARIES_ROOT_PATH . 'Lupin' . DIRECTORY_SEPARATOR  . 
                                     'Config' . DIRECTORY_SEPARATOR . 
                                     'Helper' . DIRECTORY_SEPARATOR . 'XmlArray.php';
-
-
-// Other data
-define('FRAPI_CACHE_ADAPTER', 'apc');

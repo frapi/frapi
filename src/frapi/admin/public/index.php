@@ -12,8 +12,11 @@ set_include_path('.' . PATH_SEPARATOR . ROOT_PATH . DIRECTORY_SEPARATOR . 'libra
 
 // Create application, bootstrap, and run
 require_once 'Zend/Application.php';
+
 require_once ROOT_PATH . DIRECTORY_SEPARATOR . 'library' . 
-             DIRECTORY_SEPARATOR . 'Frapi' . DIRECTORY_SEPARATOR . 'AllFiles.php';
+          DIRECTORY_SEPARATOR . 'Frapi' . DIRECTORY_SEPARATOR . 'AllFiles.php';
+                          
+require_once ROOT_PATH . DIRECTORY_SEPARATOR . 'custom'. DIRECTORY_SEPARATOR . 'AllFiles.php';
 
 $app = new Zend_Application(
     APPLICATION_ENV, APPLICATION_PATH . DIRECTORY_SEPARATOR . 'config' . 
