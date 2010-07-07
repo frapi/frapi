@@ -68,6 +68,6 @@ class Frapi_Cache_Adapter_Eaccelerator implements Frapi_Cache_Interface
      */
     public function delete($name) 
     {
-        return eaccelerator_get($name);
+        return eaccelerator_rm($name);
     }
 }
