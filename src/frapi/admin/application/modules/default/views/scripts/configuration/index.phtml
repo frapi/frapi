@@ -1,5 +1,21 @@
-<em><?php echo $this->tr->_('DATABASE_SELECT_ITEM'); ?>.</em>
+<h2><?php echo $this->tr->_('DATABASE_SELECT_ITEM'); ?>.</h2>
 
 <?php
     echo $this->form;
 ?>
+</form>
+
+<br />
+
+<h2>FRAPI Administration Language</h2>
+<div id="langSelector">
+    <form action="/language" method="post">
+        <select name="languages" style="width: 200px;">
+            <option value="en">English</option>
+            <option value="fr">Francais</option>
+        </select>
+        <br />
+
+        <input type="submit" value="<?php echo $this->tr->_('SAVE'); ?>" />
+    </form>
+</div>
