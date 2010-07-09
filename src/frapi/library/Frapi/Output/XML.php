@@ -70,7 +70,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
 
         $xml = '';
 
-        $print = hash('md5', serialize($data));
+        $print = hash('md5', json_encode($data));
         
         if ($response = Frapi_Internal::getCached($print)) {
             $this->response = json_decode($response);
