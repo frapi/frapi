@@ -56,7 +56,7 @@ class Frapi_Cache_Adapter_Memcache implements Frapi_Cache_Interface
             $this->memcache->addServer('127.0.0.1', '11211');
         }
         
-        if (isset($options['servers']) {
+        if (isset($options['servers'])) {
             foreach ($options['servers'] as $server => $port) {
                 $this->memcache->addServer($server, $port);
             }
