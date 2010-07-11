@@ -16,7 +16,9 @@
  * @copyright echolibre ltd.
  * @package   frapi
  */
-define('ROOT_PATH',         dirname(dirname(dirname(__FILE__))));
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH',         dirname(dirname(dirname(__FILE__))));
+}
 
 define('CUSTOM_PATH',       ROOT_PATH . DIRECTORY_SEPARATOR . 'custom');
 define('LIBRARY_ROOT_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'Frapi');
