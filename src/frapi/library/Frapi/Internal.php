@@ -161,7 +161,9 @@ class Frapi_Internal
                     $return[] = strtolower($row[$query['key']]);
                 }
 
-                self::setCached($key, $return);
+                if (!self::setCached($key, $return)) {
+                    return $return;
+                }
             }
         
             return $return;
@@ -191,7 +193,9 @@ class Frapi_Internal
                     $users[$value['email']] = $value;
                 }
                 
-                self::setCached('Partners.emails-' . $type,  $users);
+                if (!self::setCached('Partners.emails-' . $type,  $users)) {
+                    return $users;
+                }
             }
     
             return self::getCached('Partners.emails-' . $type);
@@ -221,7 +225,9 @@ class Frapi_Internal
                     $confs[$value['key']] = $value['value'];
                 }
                 
-                self::setCached('Database.configs',  $confs);
+                if (!self::setCached('Database.configs',  $confs)) {
+                    return $confs;
+                }
             }
     
             return self::getCached('Database.configs');
@@ -265,8 +271,13 @@ class Frapi_Internal
                     }
                 }
 
-                self::setCached('Actions.enabled-public',  $public);
-                self::setCached('Actions.enabled-private', $private);
+                if (!self::setCached('Actions.enabled-public',  $public)) {
+                    return $public;
+                }
+                
+                if (!self::setCached('Actions.enabled-private', $private)) {
+                    return $private;
+                }
             }
         
             return self::getCached('Actions.enabled-' . $type);

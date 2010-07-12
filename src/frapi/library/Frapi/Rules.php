@@ -99,7 +99,7 @@ class Frapi_Rules implements Frapi_Rules_Interface
     public static function isPublicAction($action)
     {
         $actions = Frapi_Internal::getCachedActions('public');
-        
+
         if (!in_array($action, $actions)) {
             return false;
         }
