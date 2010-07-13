@@ -58,7 +58,7 @@ class TesterController extends Lupin_Controller_Base
         $url         = $this->_request->getParam('url');
         $extraParams = $this->_request->getParam('param');
 
-        $params      = array('format' =>$this->_request->getParam('format'));
+        $params      = array();
 
         if (!empty($extraParams)) {
             foreach ($extraParams as $newParam) {
@@ -100,7 +100,7 @@ class TesterController extends Lupin_Controller_Base
             $encoded_auth = base64_encode($email . ':' . $pass);
             $request->addHeaders(array('Authorization' => 'Basic ' . $encoded_auth));
         }
-        
+
         if ("post" == $method) {
             $request->addPostFields($params);
         } else {
@@ -115,7 +115,7 @@ class TesterController extends Lupin_Controller_Base
                 if (is_array($value)) {
                     $value = implode("\n\t", $value);
                 }
-                
+
                 $header_string .= $name . ": " . wordwrap($value, 45, "\n\t") . "\n";
             }
             return $header_string;
