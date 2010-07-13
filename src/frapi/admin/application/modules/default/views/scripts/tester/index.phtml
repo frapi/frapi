@@ -103,7 +103,7 @@ echo $this->form;
     $('#emailkey').change(function() {
         var selected = $(this).val();
         var selectedText = $('#emailkey :selected').text();
-        var valid  = (selected > 0);
+        var valid  = (selected.length > 0);
 
         if (valid) {
             var split = selectedText.split(" / ", 2);
