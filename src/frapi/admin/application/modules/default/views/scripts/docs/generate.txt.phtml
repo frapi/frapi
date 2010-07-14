@@ -11,6 +11,10 @@ Actions
 <?php foreach ($this->doc_data['actions'] as $action): ?>
     <?php echo $action['name'], PHP_EOL?>
     ========================================
+    <?php if (!empty($action['route'])): ?>
+### URL
+        <?php echo $action['route'] . PHP_EOL; ?>
+    <?php endif; ?>
     <?php if (!empty($action['parameters'])) : ?>
 ### Parameters
         <?php foreach ($action['parameters'] as $param): ?>

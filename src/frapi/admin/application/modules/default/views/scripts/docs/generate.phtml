@@ -6,6 +6,14 @@
             Action is <?php echo (($action['enabled'])?('<strong>Enabled</strong>'):('Disabled')); ?> and <?php echo (($action['public'])?('<strong>Public</strong>'):('Private')); ?>.
         </p>
         <div class="doc-subdata">
+            <?php if (!empty($action['route'])): ?>
+                <h3>URL</h3>
+                <p>
+                    <ul>
+                        <li><?php echo $action['route']; ?></li>
+                    </ul>
+                </p>
+            <?php endif; ?>
             <?php if (!empty($action['description'])):?>
                 <h3>Description</h3>
                 <p class="description"><?php echo $action['description'] ?></p>

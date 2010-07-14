@@ -124,9 +124,14 @@ if (!empty($this->doc_data['actions'])) {
     foreach ($this->doc_data['actions'] as $action) {
         $page->cursor_pos_x = 20;
         $page->drawHeader($action['name'], 2);
-        
+
         $page->drawBoxedText((($action['enabled'])?('Enabled'):('Disabled')));        
-        //$page->drawTextLine('Action is '..' and '.(($action['public'])?('**Public**'):('Private')).'.');
+
+        if (!empty($action['route'])) {
+            $page->cursor_pos_x = 60;           
+            $page->drawHeader('URL', 4);
+            $page->drawTextMulti($action['route']);
+        }
         
         if (!empty($action['description'])) {
             $page->cursor_pos_x = 60;
