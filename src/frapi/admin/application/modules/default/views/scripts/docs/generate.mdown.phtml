@@ -13,6 +13,13 @@ Actions
 
 <?php echo $action['name'], PHP_EOL?>
 ------------------------------------------
+<?php if (!empty($action['route'])) : ?>
+### URL 
+
+* <?php echo $action['route']; ?>
+<?php endif; ?>
+
+
 <?php if (!empty($action['parameters'])) : ?>
 ### Parameters
         <?php foreach ($action['parameters'] as $param): ?>
