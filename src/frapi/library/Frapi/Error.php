@@ -239,8 +239,10 @@ class Frapi_Error extends Frapi_Exception
         
         $errors = array();
         
-        foreach ($conf_errors as $errKey => $error) {
-            $errors[$error['name']] = $error;
+        if (is_array($conf_errors) && !empty($conf_errors)) {
+            foreach ($conf_errors as $errKey => $error) {
+                $errors[$error['name']] = $error;
+            }
         }
         
         return $errors; 
