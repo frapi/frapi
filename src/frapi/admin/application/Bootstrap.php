@@ -109,5 +109,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $this->bootstrap('Config');
         Zend_Registry::set('db', $this->getPluginResource('db')->getDbAdapter());
-    }
+    } 
 }

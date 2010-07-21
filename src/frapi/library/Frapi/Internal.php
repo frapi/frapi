@@ -350,7 +350,7 @@ class Frapi_Internal
             self::$cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
         }
         
-        self::$cache->add($hash . '-' . $key, $value);
+        return self::$cache->add($hash . '-' . $key, $value);
     }
 
     /**
@@ -370,6 +370,6 @@ class Frapi_Internal
             self::$cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
         }
         
-        self::$cache->delete($hash.'-'.$key);
+        return self::$cache->delete($hash.'-'.$key);
     }
 }
