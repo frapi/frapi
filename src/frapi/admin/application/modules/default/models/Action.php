@@ -109,16 +109,18 @@ class Default_Model_Action extends Lupin_Model
             'route'       =>  $data['use_custom_route'] ? $data['route'] : null
         );
         
-        
-        if (isset($data['param']) && isset($data['required'])) {
-            $params = array_combine($data['param'], $data['required']);
-            
+        if (isset($data['param'])) {
+            $params = $data['param'];
             $values['parameters'] = array();
             
             foreach ($params as $param => $value) {
+                if (strlen(trim($data['param'][$param])) <= 0) { 
+                    continue;
+                }
+
                 $values['parameters']['parameter'][] = array(
-                    'name'     => $param,
-                    'required' => ($value == 'on' ? '1' : '0'),
+                    'name'     => $data['param'][$param],
+                    'required' => (isset($data['required'][$param]) ? '1' : '0'),
                 );
             }
         }

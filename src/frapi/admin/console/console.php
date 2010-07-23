@@ -55,7 +55,7 @@ $routes = array (
     'sync-action'   => 'ActionController::syncAction',
     'exit'          => '',
 );
-
+ini_set('display_errors', 'On');
 $command = '';
 while (true) {
 
