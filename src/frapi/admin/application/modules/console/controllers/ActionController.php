@@ -230,7 +230,20 @@ class ActionController
      */
     public function syncAction()
     {
-        fwrite(STDOUT, 'syncAction has not been implemented yet.' . PHP_EOL);
+        $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
+
+        if (!is_writable($dir)) {
+                fwrite(STDOUT, 'The path : "' . $dir .
+                    '" is not currently writeable by this user, ' .
+                    'therefore we cannot synchronize the codebase' . PHP_EOL
+                );
+                return;
+        }
+
+        $model = new Default_Model_Action();
+        $model->sync();
+
+        fwrite(STDOUT, 'All actions have been synced successfully.' . PHP_EOL);
     }
 
     /**

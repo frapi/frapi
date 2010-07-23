@@ -52,7 +52,7 @@ $routes = array (
     'delete-action' => 'ActionController::deleteAction',
     'edit-action'   => 'ActionController::editAction',
     'test-action'   => 'ActionController::testAction',
-    'sync-action'   => 'ActionController::syncAction',
+    'sync-actions'  => 'ActionController::syncAction',
     'exit'          => '',
 );
 
