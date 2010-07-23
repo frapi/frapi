@@ -190,7 +190,35 @@ class ActionController
      */
     public function deleteAction()
     {
-        fwrite(STDOUT, 'deleteAction has not been implemented yet.' . PHP_EOL);
+        fwrite(STDOUT, 'Which action would you like to delete? ' . PHP_EOL);
+
+        $model      = new Default_Model_Action();
+        $actions    = $model->getAll();
+
+        $max_action = 0;
+        $action_to_delete = null;
+        while (!in_array($action_to_delete, array_keys($actions), true)) {
+            foreach ($actions as $key => $action) {
+                fwrite(STDOUT, $key . ' - ' . $action['name'] . PHP_EOL);
+                $max_action = $key;
+            }
+            fwrite(STDOUT, '(0 - ' . $max_action . '): ');
+            $action_to_delete = (int)trim(fgets(STDIN));
+        }
+
+        $confirm = '';
+        while (!in_array($confirm, $this->yes_no_values)) {
+            fwrite(STDOUT, 'Are you sure you want to delete ' . $actions[$action_to_delete]['name'] . '(y/n):');
+            $confirm = trim(strtolower(fgets(STDIN)));
+        }
+
+        if ($confirm == 'y') {
+            $hash = $actions[$action_to_delete]['hash'];
+            if ($hash) {
+                $model->delete($hash);
+                fwrite(STDOUT, $actions[$action_to_delete]['name'] . ' was deleted successfully.' . PHP_EOL);
+            }
+        }
     }
 
     /**
