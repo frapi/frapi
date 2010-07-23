@@ -16,6 +16,7 @@
  */
 class ActionController
 {
+    private $yes_no_values = array('y', 'n');
     /**
      *  List action
      *
@@ -71,7 +72,101 @@ class ActionController
      */
     public function addAction()
     {
-        fwrite(STDOUT, 'AddAction has not been implemented yet.' . PHP_EOL);
+        $action_name = '';
+        while ($action_name == '') {
+            fwrite(STDOUT, 'Action Name: ');
+            $action_name = trim(fgets(STDIN));
+        }
+
+        $action_enabled = '';
+        while (!in_array($action_enabled, $this->yes_no_values)) {
+            fwrite(STDOUT, 'Action Enabled(y/n): ');
+            $action_enabled = trim(strtolower(fgets(STDIN)));
+        }
+        $action_enabled = ($action_enabled == 'y' ? '1' : '0');
+
+        $action_public = '';
+        while (!in_array($action_public, $this->yes_no_values)) {
+            fwrite(STDOUT, 'Action Public(y/n): ');
+            $action_public = trim(strtolower(fgets(STDIN)));
+        }
+        $action_public = ($action_public == 'y' ? '1' : '0');
+
+        $action_custom_route = '' ;
+        while (!in_array($action_custom_route, $this->yes_no_values)) {
+            fwrite(STDOUT, 'Custom Route(y/n): ');
+            $action_custom_route = trim(strtolower(fgets(STDIN)));
+        }
+        $action_custom_route = ($action_custom_route == 'y' ? '1' : '0');
+
+        if ($action_custom_route == 1) {
+            $action_custom_route_route = '';
+            while ($action_custom_route_route == '') {
+                fwrite(STDOUT, 'Custom Route: ');
+                $action_custom_route_route = trim(strtolower(fgets(STDIN)));
+            }
+        }
+
+        $action_description = '';
+        while ($action_description == '') {
+            fwrite(STDOUT, 'Description: ');
+            $action_description = trim(fgets(STDIN));
+        }
+
+        $add_parameters = '';
+        while (!in_array($add_parameters, $this->yes_no_values)) {
+            fwrite(STDOUT, 'Add parameters(y/n): ');
+            $add_parameters = trim(strtolower(fgets(STDIN)));
+        }
+
+        $action_parameters = array();
+        if ($add_parameters == 'y') {
+
+            while ($add_parameters == 'y') {
+
+                $parameter_name = '';
+                while ($parameter_name == '') {
+                    fwrite(STDOUT, 'Parameter Name: ');
+                    $parameter_name = trim(fgets(STDIN));
+                }
+
+                $parameter_required = '';
+                while (!in_array($parameter_required, $this->yes_no_values)) {
+                    fwrite(STDOUT, 'Parameter Required(y/n): ');
+                    $parameter_required = trim(strtolower(fgets(STDIN)));
+                }
+                $parameter_required = ($parameter_required == 'y' ? 'on' : null);
+
+                $action_parameters[] = array('parameter_name' => $parameter_name, 'parameter_required' => $parameter_required);
+
+                $add_parameters = '';
+                while (!in_array($add_parameters, $this->yes_no_values)) {
+                    fwrite(STDOUT, 'Add another Parameter(y/n): ');
+                    $add_parameters = trim(strtolower(fgets(STDIN)));
+                }
+            }
+        }
+
+        $submit_data = array (
+            'name'              => $action_name,
+            'enabled'           => $action_enabled,
+            'public'            => $action_public,
+            'use_custom_route'  => $action_custom_route,
+            'route'             => $action_custom_route_route,
+            'description'       => $action_description
+        );
+
+        foreach ($action_parameters as $parameter_data) {
+           $submit_data['param'][]      = $parameter_data['parameter_name'];
+           $submit_data['required'][]   = $parameter_data['parameter_required'];
+        }
+
+        $model = new Default_Model_Action();
+        if ($model->add($submit_data)) {
+            fwrite(STDOUT, 'Action added successfully.' . PHP_EOL);
+        } else {
+            fwrite(STDOUT, 'Error adding action.' . PHP_EOL);
+        }
     }
 
     /**
