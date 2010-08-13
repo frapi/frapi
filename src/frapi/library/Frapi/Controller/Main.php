@@ -156,8 +156,15 @@ class Frapi_Controller_Main
 
             $this->router->loadAndPrepareRoutes();
 
-            $query_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-            
+            $uri = $_SERVER['REQUEST_URI'];
+            // For some reason, this is now a fatal error and no longer a warning
+            // in php (aprse_url() with an http:// in the URL_PATH...
+            if (stristr($uri, '?') !== false) {
+                $uri = substr($uri, 0, strpos($uri, '?'));
+            }
+
+            $query_path = parse_url($uri, PHP_URL_PATH);
+
             //Query ending in .xxx may or may not be an output format
             $query_path_format = null;
             if (strrpos($query_path, '.')) {
