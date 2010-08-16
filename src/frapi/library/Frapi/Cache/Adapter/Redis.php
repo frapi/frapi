@@ -50,8 +50,6 @@ class Frapi_Cache_Adapter_Redis implements Frapi_Cache_Interface
      */
     public function __construct(array $options)
     {
-        throw new Exception('There is currently a problem with Redis and it is being investigated.');
-
         $this->redis = new Redis();
 
         $defaults = array('hostname' => '127.0.0.1', 'port' => 6379);
@@ -75,8 +73,8 @@ class Frapi_Cache_Adapter_Redis implements Frapi_Cache_Interface
     {
         $key = $this->redis->get($name);
 
-        if ($key) {
-            return array(json_decode($key));
+        if ($key !== false) {
+            return unserialize($key);
         }
         
         return false;
@@ -97,8 +95,8 @@ class Frapi_Cache_Adapter_Redis implements Frapi_Cache_Interface
      */
     public function add($name, $value, $expiry = 900) 
     {
-        $this->redis->add($name, json_encode($value));
-        return $this->redis->setTimeout($name, $expiry);
+        $this->redis->add($name, serialize($value));
+        $this->redis->setTimeout($name, $expiry);
     }
     
     /**
