@@ -29,7 +29,7 @@ class Frapi_Output_CLI extends Frapi_Output implements Frapi_Output_Interface
      *
      * @var string
      */
-    protected $mimeType = 'text/plain';
+    public $mimeType = 'text/plain';
     
     /**
      * Re-defining sendHeaders not to send headers

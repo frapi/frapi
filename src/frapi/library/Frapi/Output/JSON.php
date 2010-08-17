@@ -30,7 +30,7 @@ class Frapi_Output_JSON  extends Frapi_Output implements Frapi_Output_Interface
      *
      * @var string
      */
-    protected $mimeType = 'application/json';
+    public $mimeType = 'application/json';
     
     /**
      * Populate the Output

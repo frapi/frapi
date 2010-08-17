@@ -65,8 +65,8 @@ class Frapi_Rules implements Frapi_Rules_Interface
                 'key'  => 'name'
             )
         );
-        
-        if (!in_array(strtolower($type), $outputs)) {
+
+        if (is_array($outputs) && !in_array(strtolower($type), $outputs)) {
             return false;
         }
         

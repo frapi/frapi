@@ -25,7 +25,7 @@ class Frapi_Controller_Main
 {
     const MAIN_WEBSERVICE_DEBUG  = false;
     const MAIN_WESERVICE_TESTING = true;
-
+    
     /**
      * The request parameter
      *
@@ -157,8 +157,8 @@ class Frapi_Controller_Main
             $this->router->loadAndPrepareRoutes();
 
             $uri = $_SERVER['REQUEST_URI'];
-            // For some reason, this is now a fatal error and no longer a warning
-            // in php (aprse_url() with an http:// in the URL_PATH...
+            // For some reason, this is now a fatal error in 5.3 and no longer a warning
+            // in php (parse_url() with an http:// in the URL_PATH)...
             if (stristr($uri, '?') !== false) {
                 $uri = substr($uri, 0, strpos($uri, '?'));
             }
@@ -221,7 +221,7 @@ class Frapi_Controller_Main
         $this->request = $request;
         return $this;
     }
-
+    
     /**
      * Get Files (GETTER)
      *

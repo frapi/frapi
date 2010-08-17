@@ -319,15 +319,15 @@ class Frapi_Internal
     {
         self::log('cache-get', $key);
         $hash = self::getHash();
-        
+
         if (!isset(self::$cache)) {
             self::$cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
         }
-        
+
         if (($cacheVal = self::$cache->get($hash . '-' . $key)) !== false) {
             return $cacheVal;
         }
-        
+
         return false;
     }
 

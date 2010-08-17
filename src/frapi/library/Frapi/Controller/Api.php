@@ -31,6 +31,23 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      * the default output format is simply xml
      */
     const DEFAULT_OUTPUT_FORMAT = 'xml';
+    
+    /** 
+     * A map of all the mimetypes to their output
+     * format. In order to add a new mimetype, add it's
+     * mimetype name and then add it's output as the associated
+     * value.
+     * 
+     * @var array An array of mimetypes and their output types.
+     */
+    public $mimeMaps = array(
+        'application/xml'  => 'xml',
+        'text/xml'         => 'xml',
+        'application/json' => 'json',
+        'text/json'        => 'json',
+        'text/html'        => 'html',
+        'text/plain'       => 'json',
+    );
 
     /**
      * Ctor
@@ -85,7 +102,8 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      */
     protected function getOutputInstance($type)
     {
-        $this->outputContext = Frapi_Output::getInstance($type);
+        $options = $this->detectAndSetMimeType();
+        $this->outputContext = Frapi_Output::getInstance($type, $options);
         return $this->outputContext;
     }
 
@@ -264,5 +282,32 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         }
 
         return true;
+    }
+    
+    /**
+     * Detect and set the mimetype
+     *
+     * This method is used to detect the CONTENT-TYPE passed
+     * to the API, assign this mimetype to an output type and move on.
+     *
+     * In the event where a content type isn't found or isn't mapped
+     * we return false and move on with our lives.
+     *
+     * @return mixed Either false or an array of mimetype and outputformat
+     */
+    public function detectAndSetMimeType()
+    {
+        if (!isset($_SERVER['CONTENT_TYPE'])) {
+            return false;
+        }
+        
+        if (!isset($this->mimeMaps[$_SERVER['CONTENT_TYPE']])) {
+            return false;
+        }
+        
+        $mimeType     = $_SERVER['CONTENT_TYPE'];
+        $outputFormat = strtoupper($this->mimeMaps[$_SERVER['CONTENT_TYPE']]);
+        
+        return array('mimeType' => $mimeType, 'outputFormat' => $outputFormat);
     }
 }
