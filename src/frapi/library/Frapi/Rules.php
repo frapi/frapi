@@ -83,7 +83,7 @@ class Frapi_Rules implements Frapi_Rules_Interface
     {
         $actions = Frapi_Internal::getCachedActions('private');
 
-        if (in_array(strtolower($action), $actions)) {
+        if (is_array($actions) && in_array(strtolower($action), $actions)) {
             return true;
         }
 
@@ -100,7 +100,7 @@ class Frapi_Rules implements Frapi_Rules_Interface
     {
         $actions = Frapi_Internal::getCachedActions('public');
 
-        if (!in_array($action, $actions)) {
+        if (is_array($actions) && !in_array($action, $actions)) {
             return false;
         }
 
