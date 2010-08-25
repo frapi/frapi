@@ -113,7 +113,9 @@ class Lupin_Form_Decorator_Composite extends Zend_Form_Decorator_Abstract
 
                 // adds the element source to the output
                 $elementOutput = '';
-                if (
+                if ($element->preserveDecorators) {
+                    $elementOutput .= $view->element;
+                } elseif (
                        $element instanceof Zend_Form_Element_Hidden
                     || $element instanceof Zend_Form_Element_Hash
                 ) {

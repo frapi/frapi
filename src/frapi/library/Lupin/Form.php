@@ -116,11 +116,15 @@ class Lupin_Form extends Zend_Form
             }
         }
 
-        if (($val = $element->getValidator('Zend_Validate_EmailAddress')) !== false) {
+        if ($val = $element->getValidator('Zend_Validate_EmailAddress')) {
             $val->setMessage("'%value%' is not a valid email address, please only submit a valid address.", 'emailAddressInvalidFormat');
         }
 
-        $this->_removeDefaultElementDecorators($element);
+        // Only remove the default element decorators if we haven't been told
+        // to preserve decorators
+        if (!$element->preserveDecorators) {
+            $this->_removeDefaultElementDecorators($element);
+        }
     }
 
     /**
