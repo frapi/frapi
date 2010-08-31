@@ -8,7 +8,6 @@ form {
 	padding-right: 0.9em;
 	text-align: left;
 	margin-bottom: 30px;
-	width: 100%
 }
 
 form label {
@@ -77,9 +76,7 @@ table#list{
  */
 #message{
 	background-color: #FFFACD;
-	font-size: 1.2em;
 	margin-bottom: 1em;
-	padding: 0.5em 1em 0.5em 1em;
 }
 
 /**

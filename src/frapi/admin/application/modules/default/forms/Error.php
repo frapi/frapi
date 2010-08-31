@@ -22,7 +22,7 @@ class Default_Form_Error extends Lupin_Form
         $http_code->setLabel('HTTP Code');
         $http_code->setRequired(false);
         $this->addElement($http_code);
-        
+
         $name = new Zend_Form_Element_Text('name');
         $name->setLabel('Name');
         $name->setRequired(true);
@@ -30,7 +30,7 @@ class Default_Form_Error extends Lupin_Form
 
         $msg = new Zend_Form_Element_Textarea('message');
         $msg->setLabel('Error Message');
-        $msg->setAttribs(array('rows' => 10, 'cols' => 40));
+        $msg->setAttribs(array('rows' => 10, 'cols' => 35));
         $msg->setRequired(true);
         $this->addElement($msg);
 
@@ -43,9 +43,9 @@ class Default_Form_Error extends Lupin_Form
         $actions->setAttrib('size', 8);
         $this->addElement($actions);
         */
-        
+
         $desc = new Zend_Form_Element_Textarea('description');
-        $desc->cols = 40;
+        $desc->cols = 35;
         $desc->rows = 15;
         $desc->setLabel('Description');
         $desc->setRequired(false);
