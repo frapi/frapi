@@ -135,7 +135,7 @@ class Frapi_Router
         $matches          = array('static' => array(), 'dynamic' => array());
         $explodedPath     = self::parseSegments($queryPath);
         $firstPathSegment = current($explodedPath);
-        
+
         if (isset($this->preparedRoutes[$firstPathSegment])) {
             
             foreach ($this->preparedRoutes[$firstPathSegment] as $route) {

@@ -56,6 +56,7 @@ class TesterController extends Lupin_Controller_Base
         $method      = strtolower($this->_request->getParam('method'));
         $query_uri   = trim($this->_request->getParam('query_uri'), '/ ');
         $url         = $this->_request->getParam('url');
+        $ssl         = $this->_request->getParam('ssl');
         $extraParams = $this->_request->getParam('param');
 
         $params      = array();
@@ -94,7 +95,8 @@ class TesterController extends Lupin_Controller_Base
         $email = $this->_request->getParam('email');
         $pass = $this->_request->getParam('secretKey');
 
-        $request_url = 'http://' . $url . '/' . $query_uri;
+        $request_url = 'http' . ($ssl !== null ? 's' : '') . '://' . $url . '/' . $query_uri;
+
         $request = new HttpRequest($request_url, $newMethod);
         if ($email && $pass) {
             $encoded_auth = base64_encode($email . ':' . $pass);

@@ -107,6 +107,10 @@ class Default_Form_Tester extends Lupin_Form
         $url->setRequired(true);
         $url->setValue($config_model->getKey("api_url"));
         $this->addElement($url);
+        
+        $ssl = new Zend_Form_Element_Checkbox('ssl');
+        $ssl->setLabel('Use HTTPS?');
+        $this->addElement($ssl);
 
         parent::init();
     }

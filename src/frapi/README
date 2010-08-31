@@ -6,6 +6,11 @@ HTTP: (http://pecl.php.net/http)
 PEAR: (http://pear.php.net)
 HTTP_Request2: Used in the bundled ArmChair (http://pear.php.net/HTTP_Request2)
 
+Redis
+=====
+
+In order to use the Redis cache adapter, you will have to install the phpredis package from owlient (http://github.com/owlient/phpredis)
+
 APC Keys
 ===========================
 A number of APC keys are in use across the application. 

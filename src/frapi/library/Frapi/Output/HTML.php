@@ -33,7 +33,7 @@ class Frapi_Output_HTML extends Frapi_Output implements Frapi_Output_Interface
      *
      * @var string
      */
-    protected $mimeType = 'text/html';
+    public $mimeType = 'text/html';
     
     /**
      * Populate the Output

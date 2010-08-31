@@ -52,15 +52,24 @@ class Frapi_Output
      *
      * @var string $type  The type of outputaction
      */
-    protected $type;
+    public $type;
     
     /**
      * The MIME type to send in the headers.
      *
      * @var string
      **/
-    protected $mime_type = "text/plain";
+    public $mimeType = "text/plain";
 
+    /**
+     * This variable does not have a default value by default. It is
+     * only used when the server-content-type is required and when it's
+     * explicitely set by the controllers.
+     *
+     * @param string $outputFormat The output format to invoke.
+     */
+    public $outputFormat;
+    
     /**
      * This method sets the value of the action requested
      * by the partner using the webservice.
@@ -97,7 +106,7 @@ class Frapi_Output
      * @return Object $this
      **/
     public function sendHeaders($response)
-    {
+    {   
         header('HTTP/1.1 '.intval($response->getStatusCode()));
 
         header('Content-type: '.$this->mimeType.'; charset=utf-8');
@@ -152,14 +161,26 @@ class Frapi_Output
      * and instantiate the OutputContextObject
      * that is to be used according to the type.
      *
-     * @param  string $type  The type of context to get.
+     * @param  string $type    The type of context to get.
+     * @param  mixed  $options An array of options to pass (mimetype, outputformat) or false if nothing.
+     *
      * @return Object The new OutputContext$TYPE object.
      */
-    public static function getInstance($type)
+    public static function getInstance($type, $options)
     {
+        // We always override the extension if a content-type is requested.
+        $type = isset($options['outputFormat']) 
+            ? $options['outputFormat'] 
+            : $type;
+        
         $class = 'Frapi_Output_' . strtoupper($type);
         $obj = new $class;
-        $obj->type = $type;
+        
+        $obj->type     = $type;
+        
+        $obj->mimeType = isset($options['mimeType'])
+            ? $options['mimeType']
+            : $obj->mimeType;
 
         return $obj;
     }

@@ -72,7 +72,7 @@
                     <?php endif; ?>
                     <?php if (!empty($action['description'])):?>
                         <h3>Description</h3>
-                        <p class="description"><?php echo $action['description'] ?></p>
+                        <p class="description"><?php echo nl2br($action['description']); ?></p>
                     <?php endif; ?>
 
                     <?php if (isset($action['parameters']) && !empty($action['parameters']) && count($action['parameters'])): ?>

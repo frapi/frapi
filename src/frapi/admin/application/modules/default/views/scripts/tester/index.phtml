@@ -120,6 +120,8 @@ echo $this->form;
         var key      = $('#key').val();
         var format   = $('#format').val();
         var url      = $('#url').val();
+        var ssl      = $('#ssl').is(':checked');
+
         var extraParams = new Array();
 
         $("#message").remove();
@@ -152,6 +154,9 @@ echo $this->form;
         finalParams += '&method=' + method;
         finalParams += '&url=' + url;
         finalParams += '&query_uri=' + escape(queryURI);
+        if (ssl === true) {
+            finalParams += '&ssl=true';
+        }
 
         if (extraParams.length > 0) {
             for (var i = 0; i < extraParams.length; i++) {
