@@ -1,0 +1,356 @@
+domain "fr_FR"
+
+# login page
+msgid "USERNAME"
+msgstr "Username"
+
+msgid "PASSWORD"
+msgstr "Password"
+
+msgid "LOGIN"
+msgstr "Login"
+
+msgid "SUBMENU"
+msgstr "Submenu"
+
+msgid "WELCOME"
+msgstr "Welcome"
+
+msgid "YOU_ARE_USING_FRAPI"
+msgstr "You are using the FRAPI admin system"
+
+#menu
+msgid "DASHBOARD"
+msgstr "Controle"
+
+msgid "ACTIONS"
+msgstr "Actions"
+
+msgid "ERRORS"
+msgstr "Erreurs" 
+
+msgid "PARTNERS"
+msgstr "Partenaires"
+
+msgid "CONFIGURATION"
+msgstr "Configuration"
+
+msgid "TESTER"
+msgstr "Testeur"
+
+# top right - sync
+msgid "SYNCING_MESSAGE"
+msgstr "&quot;Sync'ing&quot;: Synchronizing your codebase with the actions you created in &quot;Actions&quot;"
+
+# Dashboard welcome
+
+msgid "AMAZING_WELCOME"
+msgstr "Welcome to the amazing world of FRAPI"
+
+msgid "DASHBOARD_WELCOME_TITLE"
+msgstr "First of all, Welcome to your API! Now, see below"
+
+msgid "CRITICAL_SETUP_ISSUES"
+msgstr "Critical Setup Issues"
+
+msgid "CRITICAL_SETUP_ISSUES_INTRO"
+msgstr "We have identified issues regarding your setup which means that your API will not function correctly until you resolved those issues."
+
+msgid "THE"
+msgstr "The"
+
+# Action section
+
+msgid "ADD_NEW_ACTION"
+msgstr "Add new Action"
+
+msgid "SETUP_HELP_MESSAGE"
+msgstr "You might want to run <b>sh setup.sh</b> which sets the files to chmod 777. This file is located in the root of your FRAPI download/checkout."
+
+msgid "ACTION_DIR_PROBLEM"
+msgstr "The <strong>%s</strong> is not currently writeable by this user, therefore we cannot update the configuration file."
+
+msgid "NAME"
+msgstr "Name"
+
+msgid "IS_ACTION_PUBLIC"
+msgstr "Is the action public?"
+
+msgid "PRIVATE"
+msgstr "Private"
+
+msgid "PUBLIC"
+msgstr "Public"
+
+msgid "IS_ACTION_ENABLED"
+msgstr "Is the action enabled?"
+
+msgid "CUSTOM_ROUTE"
+msgstr "Custom Route"
+
+msgid "DESCRIPTION"
+msgstr "Description"
+
+msgid "SAVE"
+msgstr "Save"
+
+msgid "ADD_PARAMETER"
+msgstr "Add Parameter"
+
+msgid "PARAMETER"
+msgstr "Parameter"
+
+msgid "REQUIRED"
+msgstr "Required"
+
+msgid "ACTION"
+msgstr "Action"
+
+msgid "DELETE"
+msgstr "Delete"
+
+msgid "PLEASE_PROVIDE_USERNAME"
+msgstr "Please provide a username and password."
+
+# Error section
+
+msgid "ADD_NEW_ERROR"
+msgstr "Add new Error"
+
+msgid "FILTER"
+msgstr "Filter"
+
+msgid "MESSAGE"
+msgstr "Message"
+
+msgid "EDIT"
+msgstr "Edit"
+
+msgid "HTTP_CODE"
+msgstr "HTTP Code"
+
+msgid "ERROR_MESSAGE"
+msgstr "Error Message"
+
+msgid "SUBMIT"
+msgstr "Submit"
+
+# Partner Section
+
+msgid "ADD_NEW_PARTNER"
+msgstr "Add new Partner"
+
+msgid "COMPANY"
+msgstr "Company"
+
+msgid "API_KEY"
+msgstr "API Key"
+
+msgid "FIRSTNAME"
+msgstr "First Name"
+
+msgid "LASTNAME"
+msgstr "Last Name"
+
+msgid "EMAIL_USERNAME"
+msgstr "Email/Username"
+
+# Configuration Section
+msgid "CACHE"
+msgstr "Cache"
+
+msgid "USERS"
+msgstr "Users"
+
+msgid "OUTPUT"
+msgstr "Output"
+
+msgid "DATABASE"
+msgstr "Database"
+
+msgid "SELECT_ITEM_FROM_SUBMENU"
+msgstr "Please select an item from the submenu, to your left."
+
+msgid "UPDATE_CONFIGURATION"
+msgstr "Update Configuration"
+
+msgid "API_DOMAIN"
+msgstr "API Domain"
+
+msgid "FOR_TESTER"
+msgstr "for Tester"
+
+msgid "CACHE_HELP_ONE"
+msgstr "Listed below are Frapi's internal cache keys, colour-coded by status. Click to see cache contents."
+
+msgid "CACHE_HELP_TWO"
+msgstr "Click &quot;Delete&quot; to expire cache values, they will then be re-generated (when required) by the API front-end."
+
+msgid "SET"
+msgstr "Set"
+
+msgid "SIZE"
+msgstr "Size"
+
+msgid "YES"
+msgstr "Yes"
+
+msgid "NO"
+msgstr "No"
+
+msgid "YOU_CAN"
+msgstr "You can"
+
+msgid "UNSET_ALL_KEYS"
+msgstr "unset all keys"
+
+msgid "UNSET_ALL_CACHE_KEYS"
+msgstr "Unset all cache keys"
+
+msgid "TO_CLEAR_CACHE"
+msgstr "to clear the cache"
+
+msgid "HANDLE"
+msgstr "Handle"
+
+msgid "ADD_NEW_USER"
+msgstr "Add new User"
+
+msgid "SYNC_OUTPUT_TYPES"
+msgstr "Sync Output Types"
+
+msgid "MAKE_DEFAULT"
+msgstr "Make Default"
+
+msgid "DISABLE"
+msgstr "Disable"
+
+msgid "ENABLE"
+msgstr "Enabled"
+
+msgid "DEFAULT_OUTPUT"
+msgstr "Default Output"
+
+msgid "TYPE"
+msgstr "Type"
+
+msgid "VALUE"
+msgstr "Value"
+
+msgid "KEY"
+msgstr "Key"
+
+msgid "EDIT_DATABASE_SETTINGS"
+msgstr "Edit Database settings"
+
+# Tester Section
+
+msgid "QUERY_URI"
+msgstr "Query URI"
+
+msgid "PARAMS"
+msgstr "Params"
+
+msgid "TESTER_ADD_PARAMETER"
+msgstr "Add a parameter (&quot;name=value&quot;)"
+
+msgid "FORMAT"
+msgstr "Format"
+
+msgid "METHOD"
+msgstr "Method"
+
+msgid "EMAIL"
+msgstr "Email"
+
+msgid "SECRET_KEY"
+msgstr "Secret Key"
+
+msgid "LOAD_EMAIL_KEY"
+msgstr "Load Email/Key Combo"
+
+msgid "SELECT_COMBO_OF_FIELDS"
+msgstr "Select a combination to fill the fields above."
+
+msgid "RUN_TEST"
+msgstr "Run Test"
+
+msgid "POST_FIELDS"
+msgstr "Post Fields"
+
+msgid "RESPONSE"
+msgstr "Response"
+
+msgid "NO_QUERY_URI"
+msgstr "No query URI"
+
+msgid "REQUEST"
+msgstr "Request"
+
+msgid "CODE"
+msgstr "Code"
+
+msgid "CONTENT_BODY"
+msgstr "Content Body"
+
+msgid "TESTER_REQUEST_ERROR"
+msgstr "Error: You were logged out due to inactivity. Please <a href=\"/login\" target=\"_blank\">log in</a> (opens in new tab) and try again."
+
+
+# Other
+
+msgid "ADDED"
+msgstr "added"
+
+msgid "UPDATED"
+msgstr "updated"
+
+msgid "ID_PARAM_MISSING"
+msgstr "ID parameter is missing."
+
+msgid "NO_ACCESS_MESSAGE"
+msgstr "You do not have access to the area you were trying to access.<br />Please contact any of the administrators if you believe you should have access"
+
+msgid "VISIBILITY"
+msgstr "Visibility"
+
+msgid "DETAIL"
+msgstr "Detail"
+
+# Database
+
+msgid "DATABASE_CONFIGURATION"
+msgstr "Database configuration"
+
+msgid "ADD_NEW_DATABASE_CONFIGURATION"
+msgstr "Add new database configuration"
+
+msgid "EDIT_DATABASE_CONFIGURATION"
+msgstr "Edit database configuration"
+
+msgid "NO_DATABASE_CONFIGURATION_YET"
+msgstr "There are no database configurations yet"
+
+msgid "ADD_SOME"
+msgstr "Add some"
+
+msgid "MAIN"
+msgstr "Main"
+
+msgid "DATABASE_SELECT_ITEM"
+msgstr "Please select an item from the submenu, to your left"
+
+# Error page
+msgid "ERROR_PAGE"
+msgstr "Error Page"
+
+msgid "SORRY_ERROR_MESSAGE"
+msgstr "Sorry! A system error prevented your action from being executed"
+
+# Warnings
+
+msgid "ACTION_WARNING_CONFIG"
+msgstr "The &quot;<b>%s</b>&quot; directory is not writeable by the current user (%s), therefore we will not be able to save API configurations: (Actions, Errors, Partners, Configuration, etc) until the user has write access."
+
+msgid "ACTION_WARNING_ACTION"
+msgstr "The &quot;<b>%s</b>&quot; directory is not writeable by the current user (%s), therefore we will not be able to synchronize the codebase until the user has write access."
