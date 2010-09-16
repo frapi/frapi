@@ -105,15 +105,15 @@ class CacheController extends Lupin_Controller_Base
         $names   = array();
         
         foreach ($this->cache_keys as $k=>$key) {
-            
+            $value = $this->cache->get($this->hash . '-' . $key);
+            $isset = $value !== false ? true : false;
+
             $profile [$key]= array(
-                'set'   => ($isset = ($value = $this->cache->get(
-                    $this->hash . '-'. $key) !== false ? true : false)),
-                    
+                'set'   => $isset,
                 'value' => $value, 
                 'size'  => ($isset ? deepStrlen($value) :'N/A'),
             );
-            
+
             $sets [$k] = $isset;
             $names[$k] = $key;
         }
