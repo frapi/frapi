@@ -28,13 +28,17 @@ class LanguageController extends Lupin_Controller_Base
         $data = $this->_request->getParams();
         
         if ($this->_request->isPost()) {
-            $locale = new Zend_Session_Namespace('locale');
-                $translate = Zend_Registry::get('tr');
-                $translate->setLocale($data['languages']);
-                $locale = new Zend_Locale($data['languages']);
-                Zend_Registry::set('locale', $locale);
-                Zend_Registry::set('tr', $translate);
-            $locale->value = $data['languages'];
+            
+            $localeSession = new Zend_Session_Namespace('locale');
+            $translate = Zend_Registry::get('tr');
+            
+            $translate->setLocale($data['languages']);
+            
+            $locale = new Zend_Locale($data['languages']);
+            Zend_Registry::set('locale', $locale);
+            Zend_Registry::set('tr', $translate);
+            
+            $localeSession->value = $data['languages'];
         }
         
         $this->_redirect('/');

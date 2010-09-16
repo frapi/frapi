@@ -143,6 +143,16 @@ class ActionController extends Lupin_Controller_Base
 
     }
 
+    /**
+     * Edit an action
+     *
+     * This method is invoked whenever an action has to be edited from the
+     * administration panel. 
+     *
+     * An action is edited by it's id/hash
+     *
+     * @return Zend_View
+     */
     public function editAction()
     {
         $request = $this->getRequest();
@@ -189,6 +199,14 @@ class ActionController extends Lupin_Controller_Base
         $this->view->form = $form;
     }
 
+    /**
+     * Delete an action
+     *
+     * This method is used to delete an action from the list of actions.
+     * Once the action is deleted, the user is sent back to the /actions page.
+     *
+     * @return Zend_View
+     */
     public function deleteAction()
     {
         $id = $this->getRequest()->getParam('id');
@@ -203,6 +221,16 @@ class ActionController extends Lupin_Controller_Base
         $this->_redirect('/action');
     }
 
+    /**
+     * Synchronize the codebase
+     *
+     * This method is used to synchronize the codebase and generate the
+     * code for the actions that don't exist yet. The synchronisation is 
+     * done by comparing the existing file names. The ones that don't exist
+     * will be created.
+     *
+     * @return Zend_View
+     */
     public function syncAction()
     {
         $this->_helper->viewRenderer->setNoRender();
@@ -264,6 +292,18 @@ class ActionController extends Lupin_Controller_Base
         
     }
     
+    /**
+     * Prototype getErrors
+     *
+     * This method is not used. It is currently a prototype, a holder
+     * for reverse engineering the actions and finding the errors
+     * in each of the actions and creating them in the database associating
+     * them with actions.
+     *
+     * @param  Iterator $it  The iterator to fetch the parameters from
+     * @param  string   $methodName The original method name to parse.
+     * @return mixed    Either an array of error or false.
+     */
     private function getErrors($it, $methodName)
     {
         $error  = array();

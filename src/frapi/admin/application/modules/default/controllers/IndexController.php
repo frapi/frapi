@@ -22,6 +22,15 @@ class IndexController extends Lupin_Controller_Base
         parent::init($styles);
     }
 
+    /**
+     * Index action
+     *
+     * The main index does nothing special. it verifies whether or not the 
+     * setup can be ran by verifying the permissions on the custom directory
+     * emits meesages when it's not.
+     *
+     * @return void
+     */
     public function indexAction()
     {
         $issues = array();

@@ -21,14 +21,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Registry::set('languageDir', $languageDir);
 
         $translate = new Zend_Translate(
-            'gettext', $languageDir . DIRECTORY_SEPARATOR . 'en_GB.mo', 'en'
+            'gettext', $languageDir
         );
         
-        //$translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'fr_FR.mo', 'fr');
+        $translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'en_GB.mo', 'en');
+        $translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'fr_FR.mo', 'fr');
 
         $locale = new Zend_Session_Namespace('locale');
+        $translate->setLocale($locale->value);
 
         Zend_Registry::set('tr', $translate);
+        Zend_Registry::set('Zend_Translate', $translate);
+        Zend_Registry::set('Zend_Locale', $locale);
 
     }
 
