@@ -70,13 +70,20 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
 
         $xml = '';
 
-        if (file_exists($file)) {
+        $print = hash('md5', json_encode($data));
+        
+        if ($response = Frapi_Internal::getCached($print)) {
+            $this->response = json_decode($response);
+            
+        } elseif (file_exists($file)) {
             ob_start();
             echo '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
             include $file;
             $xml = ob_get_contents();
             ob_end_clean();
             $this->response = $xml;
+            Frapi_Internal::setCached($print, json_encode($xml));
+            
         } elseif ($this->action == 'defaultError') {
             $directory = LIBRARY_OUTPUT . DIRECTORY_SEPARATOR . 'xml';
             $file      = $directory . DIRECTORY_SEPARATOR . 'Defaulterror.xml.tpl';
@@ -87,7 +94,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
             ob_end_clean();
             
             $this->response = $xml;
-            
+            Frapi_Internal::setCached($print, json_encode($xml));          
         } else {
             $this->response = $this->_generateXML($data);
         }
