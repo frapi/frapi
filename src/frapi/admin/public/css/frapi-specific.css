@@ -142,3 +142,22 @@ table.doc-table{
 		margin-left: 25px;
 		vertical-align: middle
 	}
+
+#submitter {
+    float: left;
+}
+
+#submitter-div {
+    float: left;
+}
+
+#loading {
+    float: left;
+}
+
+#testing {
+    float: left;
+    display: none;
+    padding-left: 5px;
+    padding-top: 1px;
+}
