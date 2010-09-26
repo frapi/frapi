@@ -38,8 +38,23 @@ class Frapi_Response
     protected $data = array();
     
     /**
-     * @param string $message   Exception message
-     * 
+     * The constructor
+     *
+     * The constructor takes on a single parameter which is
+     * an array of response information 
+     *
+     * Up to version 0.0.1 the only 2 things the response array
+     * contains is "code" and "data".
+     *
+     * Ex:
+     * <?php
+     *     return new Frapi_Response(array(
+     *         'code' => '201',
+     *         'data' => array('location' => '/resource/id')
+     *     ));
+     * ?>
+     *
+     * @param array $response An array of code, data and response information
      */
     public function __construct(array $response)
     {
@@ -93,6 +108,7 @@ class Frapi_Response
      *
      * This method sets the data variable to be used in the output.
      *
+     * @param  array $data An array of data to set in the response.
      * @return array An array of data to use in the output.
      */
     public function setData(array $data)
