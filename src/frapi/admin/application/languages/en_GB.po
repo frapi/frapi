@@ -1,4 +1,13 @@
-domain "en_GB"
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Trevor Morse <trevor.morse@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
 
 # login page
 msgid "USERNAME"
@@ -27,7 +36,7 @@ msgid "ACTIONS"
 msgstr "Actions"
 
 msgid "ERRORS"
-msgstr "Errors" 
+msgstr "Errors"
 
 msgid "PARTNERS"
 msgstr "Partners"
@@ -43,7 +52,6 @@ msgid "SYNCING_MESSAGE"
 msgstr "&quot;Sync'ing&quot;: Synchronizing your codebase with the actions you created in &quot;Actions&quot;"
 
 # Dashboard welcome
-
 msgid "AMAZING_WELCOME"
 msgstr "Welcome to the amazing world of FRAPI"
 
@@ -60,7 +68,6 @@ msgid "THE"
 msgstr "The"
 
 # Action section
-
 msgid "ADD_NEW_ACTION"
 msgstr "Add new Action"
 
@@ -113,7 +120,6 @@ msgid "PLEASE_PROVIDE_USERNAME"
 msgstr "Please provide a username and password."
 
 # Error section
-
 msgid "ADD_NEW_ERROR"
 msgstr "Add new Error"
 
@@ -136,7 +142,6 @@ msgid "SUBMIT"
 msgstr "Submit"
 
 # Partner Section
-
 msgid "ADD_NEW_PARTNER"
 msgstr "Add new Partner"
 
@@ -244,7 +249,6 @@ msgid "EDIT_DATABASE_SETTINGS"
 msgstr "Edit Database settings"
 
 # Tester Section
-
 msgid "QUERY_URI"
 msgstr "Query URI"
 
@@ -275,6 +279,9 @@ msgstr "Select a combination to fill the fields above."
 msgid "RUN_TEST"
 msgstr "Run Test"
 
+msgid "TESTING"
+msgstr "Testing"
+
 msgid "POST_FIELDS"
 msgstr "Post Fields"
 
@@ -296,9 +303,7 @@ msgstr "Content Body"
 msgid "TESTER_REQUEST_ERROR"
 msgstr "Error: You were logged out due to inactivity. Please <a href=\"/login\" target=\"_blank\">log in</a> (opens in new tab) and try again."
 
-
 # Other
-
 msgid "ADDED"
 msgstr "added"
 
@@ -318,7 +323,6 @@ msgid "DETAIL"
 msgstr "Detail"
 
 # Database
-
 msgid "DATABASE_CONFIGURATION"
 msgstr "Database configuration"
 
@@ -348,9 +352,9 @@ msgid "SORRY_ERROR_MESSAGE"
 msgstr "Sorry! A system error prevented your action from being executed"
 
 # Warnings
-
 msgid "ACTION_WARNING_CONFIG"
 msgstr "The &quot;<b>%s</b>&quot; directory is not writeable by the current user (%s), therefore we will not be able to save API configurations: (Actions, Errors, Partners, Configuration, etc) until the user has write access."
 
 msgid "ACTION_WARNING_ACTION"
 msgstr "The &quot;<b>%s</b>&quot; directory is not writeable by the current user (%s), therefore we will not be able to synchronize the codebase until the user has write access."
+

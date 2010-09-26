@@ -17,7 +17,8 @@
 echo $this->form;
 ?>
 
-<input type="button" id="submitter" value="<?php echo $this->tr->_('RUN_TEST'); ?>" />
+<div id="submitter-div"><input type="button" id="submitter" value="<?php echo $this->tr->_('RUN_TEST'); ?>" /></div>
+<div id="testing"><img id="loading" src="/gifs/ajax-loader.gif" alt="Loading" /></div>
 
 <style type="text/css">
 #container .main {
@@ -113,6 +114,10 @@ echo $this->form;
     });
 
     $('#submitter').live('click', function() {
+
+        $('#submitter').attr('disabled', true)
+                       .attr('value', '<?php echo $this->tr->_('TESTING'); ?>...');
+        $('#testing').show();
 
         var queryURI = $('#query_uri').val();
         var method   = $('#method').val();
@@ -212,6 +217,10 @@ echo $this->form;
                );
 
                highlight_response();
+
+               $('#submitter').attr('disabled', false)
+                              .attr('value', '<?php echo $this->tr->_('RUN_TEST'); ?>');
+               $('#testing').hide();
            },
            dataType: "json",
            error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -219,6 +228,10 @@ echo $this->form;
                    var ResponseString = '<?php echo $this->tr->_('TESTER_REQUEST_ERROR'); ?>';
                    $(".content").prepend($('<div>').attr('id', 'message').html(ResponseString));
                }
+
+               $('#submitter').attr('disabled', false)
+                              .attr('value', '<?php echo $this->tr->_('RUN_TEST'); ?>');
+               $('#testing').hide();
                this;
            }
         });
