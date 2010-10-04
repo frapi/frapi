@@ -86,7 +86,7 @@ echo $this->form;
     function addParamInput(paramName)
     {
         var value = paramName ? paramName + "=" : "";
-        $("#params").append('<p><input type="text" name="param[]" value="'+value+'" /> <img src="/images/delete.png" class="<?php echo $this->tr->_('REMOVE'); ?>" /></p>');
+        $("#params").append('<p><input type="text" name="param[]" value="'+value+'" /> <img src="/images/delete.png" class="remove" /></p>');
     }
 
     $(function(){
@@ -94,8 +94,8 @@ echo $this->form;
             addParamInput();
         });
 
-        $(".remove").live('click', function (ev) {
-            target = $(ev.target);
+        $(".remove").live('click', function () {
+            var target = $(this);
             target.parent().remove();
         });
     });
