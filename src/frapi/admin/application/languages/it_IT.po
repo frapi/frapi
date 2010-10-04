@@ -1,0 +1,360 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Trevor Morse <trevor.morse@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# login page
+msgid "USERNAME"
+msgstr "Nome utente"
+
+msgid "PASSWORD"
+msgstr "Password"
+
+msgid "LOGIN"
+msgstr "Accedi"
+
+msgid "SUBMENU"
+msgstr "Sotto menu"
+
+msgid "WELCOME"
+msgstr "Benvenuto"
+
+msgid "YOU_ARE_USING_FRAPI"
+msgstr "Stai usando il sistema di amministrazione di FRAPI"
+
+#menu
+msgid "DASHBOARD"
+msgstr "Pagina di amministrazione"
+
+msgid "ACTIONS"
+msgstr "Azioni"
+
+msgid "ERRORS"
+msgstr "Errori"
+
+msgid "PARTNERS"
+msgstr "Partners"
+
+msgid "CONFIGURATION"
+msgstr "Configurazione"
+
+msgid "TESTER"
+msgstr "Test"
+
+# top right - sync
+msgid "SYNCING_MESSAGE"
+msgstr "&quot;Sincronizza&quot;: Sincronizza il tuo codice con le azioni create nella sezione &quot;Azioni&quot;"
+
+# Dashboard welcome
+msgid "AMAZING_WELCOME"
+msgstr "Benvenuto nel fantastico mondo di FRAPI"
+
+msgid "DASHBOARD_WELCOME_TITLE"
+msgstr "Prima di tutto, benvenuto nelle tue API! Adesso, prosegui qui sotto."
+
+msgid "CRITICAL_SETUP_ISSUES"
+msgstr "Problemi di installazione critici."
+
+msgid "CRITICAL_SETUP_ISSUES_INTRO"
+msgstr "E' stato identificato un errore nella tua installazione, questo implica che l'API non funzionerà correttamente fintanto che non verrà risolto il problema."
+
+msgid "THE"
+msgstr "La"
+
+# Action section
+msgid "ADD_NEW_ACTION"
+msgstr "Aggiungi un Azione"
+
+msgid "SETUP_HELP_MESSAGE"
+msgstr "Puoi eseguire <b>sh setup.sh</b> che setta i permessi a 777. Il file si trova nella cartella principale della vostra copia di FRAPI."
+
+msgid "ACTION_DIR_PROBLEM"
+msgstr "<strong>%s</strong> non è scrivibile dall'utente attuale, pertanto non è possibile aggiornare il file di configurazione."
+
+msgid "NAME"
+msgstr "Nome"
+
+msgid "IS_ACTION_PUBLIC"
+msgstr "Questa azione è pubblica?"
+
+msgid "PRIVATE"
+msgstr "Privata"
+
+msgid "PUBLIC"
+msgstr "Pubblica"
+
+msgid "IS_ACTION_ENABLED"
+msgstr "Questa azione è attiva?"
+
+msgid "CUSTOM_ROUTE"
+msgstr "Percorso personalizzato"
+
+msgid "DESCRIPTION"
+msgstr "Descrizione"
+
+msgid "SAVE"
+msgstr "Salva"
+
+msgid "ADD_PARAMETER"
+msgstr "Aggiungi un Parametro"
+
+msgid "PARAMETER"
+msgstr "Parametero"
+
+msgid "REQUIRED"
+msgstr "Richiesto"
+
+msgid "ACTION"
+msgstr "Azione"
+
+msgid "DELETE"
+msgstr "Cancella"
+
+msgid "PLEASE_PROVIDE_USERNAME"
+msgstr "Per favore, inserisci nome utente e password."
+
+# Error section
+msgid "ADD_NEW_ERROR"
+msgstr "Aggiungi un nuovo Errore"
+
+msgid "FILTER"
+msgstr "Filtra"
+
+msgid "MESSAGE"
+msgstr "Messaggio"
+
+msgid "EDIT"
+msgstr "Modifica"
+
+msgid "HTTP_CODE"
+msgstr "Codice HTTP"
+
+msgid "ERROR_MESSAGE"
+msgstr "Messaggio di errore"
+
+msgid "SUBMIT"
+msgstr "Invia"
+
+# Partner Section
+msgid "ADD_NEW_PARTNER"
+msgstr "Aggiungi un nuovo Partner"
+
+msgid "COMPANY"
+msgstr "Azienda"
+
+msgid "API_KEY"
+msgstr "Chiave dell'API"
+
+msgid "FIRSTNAME"
+msgstr "Nome"
+
+msgid "LASTNAME"
+msgstr "Cognome"
+
+msgid "EMAIL_USERNAME"
+msgstr "Email/Nome utente"
+
+# Configuration Section
+msgid "CACHE"
+msgstr "Cache"
+
+msgid "USERS"
+msgstr "Utenti"
+
+msgid "OUTPUT"
+msgstr "Output"
+
+msgid "DATABASE"
+msgstr "Database"
+
+msgid "SELECT_ITEM_FROM_SUBMENU"
+msgstr "Seleziona una voce dal sotto menu presente alla tua sinistra."
+
+msgid "UPDATE_CONFIGURATION"
+msgstr "Aggiorna la configurazione"
+
+msgid "API_DOMAIN"
+msgstr "Dominio dell'API"
+
+msgid "FOR_TESTER"
+msgstr "Per i Tester"
+
+msgid "CACHE_HELP_ONE"
+msgstr "Le voci elencate di seguito sono le chiavi della cache di FRAPI, il colore ne identifica lo stato. Selezionale per vederne il contenuto."
+
+msgid "CACHE_HELP_TWO"
+msgstr "Seleziona &quot;Cancella&quot; per cancellare i valori in cache, questi verranno rigenerati (quando richiesto) attraverso il frontend dell'API."
+
+msgid "SET"
+msgstr "Imposta"
+
+msgid "SIZE"
+msgstr "Dimensioni"
+
+msgid "YES"
+msgstr "Si"
+
+msgid "NO"
+msgstr "No"
+
+msgid "YOU_CAN"
+msgstr "Tu puoi"
+
+msgid "UNSET_ALL_KEYS"
+msgstr "Rimuovi tutte le chiavi"
+
+msgid "UNSET_ALL_CACHE_KEYS"
+msgstr "Rimuovi tutte le chiavi della cache"
+
+msgid "TO_CLEAR_CACHE"
+msgstr "per pulire la cache"
+
+msgid "HANDLE"
+msgstr "Handle"
+
+msgid "ADD_NEW_USER"
+msgstr "Aggiungi un nuovo Utente"
+
+msgid "SYNC_OUTPUT_TYPES"
+msgstr "Sincronizza i formati di Output"
+
+msgid "MAKE_DEFAULT"
+msgstr "Rendi predefinito"
+
+msgid "DISABLE"
+msgstr "Disabilita"
+
+msgid "ENABLE"
+msgstr "Abilita"
+
+msgid "DEFAULT_OUTPUT"
+msgstr "Formato di uscita predefinito"
+
+msgid "TYPE"
+msgstr "Tipo"
+
+msgid "VALUE"
+msgstr "Valore"
+
+msgid "KEY"
+msgstr "chiave"
+
+msgid "EDIT_DATABASE_SETTINGS"
+msgstr "Modifica le impostazioni del Database"
+
+# Tester Section
+msgid "QUERY_URI"
+msgstr "URI per le Query"
+
+msgid "PARAMS"
+msgstr "Parametri"
+
+msgid "TESTER_ADD_PARAMETER"
+msgstr "Aggiungi un parametero (&quot;nome=valore&quot;)"
+
+msgid "FORMAT"
+msgstr "Formato"
+
+msgid "METHOD"
+msgstr "Metodo"
+
+msgid "EMAIL"
+msgstr "Email"
+
+msgid "SECRET_KEY"
+msgstr "Chiave privata"
+
+msgid "LOAD_EMAIL_KEY"
+msgstr "Carica la combinazione Email/Chiave"
+
+msgid "SELECT_COMBO_OF_FIELDS"
+msgstr "Select a combination to fill the fields above."
+
+msgid "RUN_TEST"
+msgstr "Esegui il Test"
+
+msgid "TESTING"
+msgstr "In fase di Test"
+
+msgid "POST_FIELDS"
+msgstr "Campi da inviare"
+
+msgid "RESPONSE"
+msgstr "Risposta"
+
+msgid "NO_QUERY_URI"
+msgstr "Nessun URI a cui fare la richiesta"
+
+msgid "REQUEST"
+msgstr "Richiesta"
+
+msgid "CODE"
+msgstr "Codice"
+
+msgid "CONTENT_BODY"
+msgstr "Contenuto del corpo"
+
+msgid "TESTER_REQUEST_ERROR"
+msgstr "Errore: Non sei più loggato a causa di un lugo periodo di inattività. Per favore <a href=\"/login\" target=\"_blank\">accedi</a> nuovamente (apre in una nuova finestra) e prova nuovamente."
+
+# Other
+msgid "ADDED"
+msgstr "aggiunto"
+
+msgid "UPDATED"
+msgstr "aggiornato"
+
+msgid "ID_PARAM_MISSING"
+msgstr "Il parametro ID è mancante."
+
+msgid "NO_ACCESS_MESSAGE"
+msgstr "Non hai accesso alla sezione a cui stai cercando di accedere.<br />Contatta l'amministratore se credi di averne il diritto."
+
+msgid "VISIBILITY"
+msgstr "Visibilità"
+
+msgid "DETAIL"
+msgstr "Dettagli"
+
+# Database
+msgid "DATABASE_CONFIGURATION"
+msgstr "Configurazione del Database"
+
+msgid "ADD_NEW_DATABASE_CONFIGURATION"
+msgstr "Aggiungi una nuova configurazione per il database"
+
+msgid "EDIT_DATABASE_CONFIGURATION"
+msgstr "Modifica la configurazione del database"
+
+msgid "NO_DATABASE_CONFIGURATION_YET"
+msgstr "Non ci sono ancora configurazioni per il database"
+
+msgid "ADD_SOME"
+msgstr "Aggiungi"
+
+msgid "MAIN"
+msgstr "Principale"
+
+msgid "DATABASE_SELECT_ITEM"
+msgstr "Selezionare un elemento dal menu secondario presente alla vostra sinistra"
+
+# Error page
+msgid "ERROR_PAGE"
+msgstr "Pagina di errore"
+
+msgid "SORRY_ERROR_MESSAGE"
+msgstr "Spiacente! Un errore del sistema ha impedito l'esecuzione della tua Azione"
+
+# Warnings
+msgid "ACTION_WARNING_CONFIG"
+msgstr "La cartella &quot;<b>%s</b>&quot; non è scrivibile dall'utente corrente (%s), pertanto non sarà possibile salvare la configurazione delle API: (Azioni, Errori, Partners, Configurazioni, etc) fintanto che l'utente non riceverà i permessi di scrittura."
+
+msgid "ACTION_WARNING_ACTION"
+msgstr "La cartella &quot;<b>%s</b>&quot; non è scrivibile dall'utente corrente (%s), pertanto non sarà possibile sincronizzare il codice generato fino a che l'utente non riceverà i permessi di scrittura."
+
