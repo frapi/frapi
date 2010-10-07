@@ -271,7 +271,8 @@ class Frapi_Controller_Main
          *
          * Unhappy? Remove me.
          */
-        $puts = parse_str(file_get_contents("php://input"));
+
+        parse_str(file_get_contents("php://input"), $puts);
 
         if (!empty($puts)) {
             foreach ($puts as $put => $val) {
@@ -279,6 +280,7 @@ class Frapi_Controller_Main
             }
         }
         
+
         $this->request = $params;
         return $this->request;
     }
