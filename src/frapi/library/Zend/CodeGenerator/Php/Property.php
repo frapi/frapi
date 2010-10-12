@@ -65,7 +65,9 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
 
         $property->setDefaultValue($allDefaultProperties[$reflectionProperty->getName()]);
 
-        if ($reflectionProperty->getDocComment()->getDocComment() != '') {
+        if (is_object($reflectionProperty) && is_object($reflectionProperty->getDocComment()) && 
+            $reflectionProperty->getDocComment()->getDocComment() != '') 
+        {
             $property->setDocblock(Zend_CodeGenerator_Php_Docblock::fromReflection($reflectionProperty->getDocComment()));
         }
 

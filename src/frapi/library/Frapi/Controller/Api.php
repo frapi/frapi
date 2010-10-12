@@ -47,6 +47,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         'text/json'        => 'json',
         'text/html'        => 'html',
         'text/plain'       => 'json',
+        'text/javascript'  => 'js',
     );
 
     /**
@@ -160,7 +161,9 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
          */
         $out = $this->getOutputInstance($this->getFormat())
                     ->setOutputAction($this->getAction())
-                    ->populateOutput($response->getData(), $this->actionContext->getTemplateFileName())
+                    ->populateOutput(
+                        $response->getData(), 
+                        $this->actionContext->getTemplateFileName())
                     ->sendHeaders($response)
                     ->executeOutput();
 
@@ -297,16 +300,20 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      */
     public function detectAndSetMimeType()
     {
-        if (!isset($_SERVER['CONTENT_TYPE'])) {
+        $type = false;
+        
+        if (!isset($_SERVER['CONTENT_TYPE']) && !isset($_SERVER['ACCEPT'])) {
             return false;
         }
         
-        if (!isset($this->mimeMaps[$_SERVER['CONTENT_TYPE']])) {
+        $type = isset($_SERVER['ACCEPT']) ? $_SERVER['ACCEPT'] : $_SERVER['CONTENT_TYPE'];
+        
+        if (!isset($this->mimeMaps[$type])) {
             return false;
         }
         
-        $mimeType     = $_SERVER['CONTENT_TYPE'];
-        $outputFormat = strtoupper($this->mimeMaps[$_SERVER['CONTENT_TYPE']]);
+        $mimeType     = $type;
+        $outputFormat = strtoupper($this->mimeMaps[$type]);
         
         return array('mimeType' => $mimeType, 'outputFormat' => $outputFormat);
     }

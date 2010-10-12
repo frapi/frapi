@@ -36,7 +36,6 @@ class Action_Testing2 extends Frapi_Action implements Frapi_Action_Interface
      */
     public function toArray()
     {
-        $this->data['name'] = $this->getParam('name', self::TYPE_OUTPUT);
         return $this->data;
     }
 
@@ -66,8 +65,13 @@ class Action_Testing2 extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executeGet()
     {
-        $this->data['name'] = 'david';
-        
+        $callback = $this->getParam('callback', self::TYPE_OUTPUT);
+     
+        $this->data['name'] = 'davidf';   
+        if (!empty($callback)) {
+            $this->data['jsonp_callback'] = $callback;
+        }
+
         $this->setTemplateFileName('CustomTesting2');
         return $this->toArray();
     }
