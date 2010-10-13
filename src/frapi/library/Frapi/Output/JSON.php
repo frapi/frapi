@@ -47,6 +47,11 @@ class Frapi_Output_JSON  extends Frapi_Output implements Frapi_Output_Interface
      */
     public function populateOutput($response, $customTemplate = false)
     {
+        if (isset($response['jsonp_callback'])) {
+            $this->jsonpCallback = $response['jsonp_callback'];
+            unset($response['jsonp_callback']);
+        }
+        
         $this->response = $response;
         return $this;
     }
@@ -63,6 +68,12 @@ class Frapi_Output_JSON  extends Frapi_Output implements Frapi_Output_Interface
      */
     public function executeOutput()
     {
-        return json_encode($this->response);
+        $returnedData = json_encode($this->response);
+        
+        if ($this->jsonpCallback !== false) {
+            return $this->jsonpCallback . '('.$returnedData.');';
+        }
+        
+        return $returnedData;
     }
 }
