@@ -26,6 +26,14 @@
 class Frapi_Output_JSON  extends Frapi_Output implements Frapi_Output_Interface
 {
     /**
+     * The JSONP callback variable to append
+     * to the response output as the function to call.
+     *
+     * @var $jsonpCallback The json function to write.
+     */
+    private $jsonpCallback = false;
+
+    /**
      * JSON Mime Type
      *
      * @var string
