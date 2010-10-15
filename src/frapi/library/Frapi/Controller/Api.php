@@ -302,11 +302,11 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
     {
         $type = false;
         
-        if (!isset($_SERVER['CONTENT_TYPE']) && !isset($_SERVER['ACCEPT'])) {
+        if (!isset($_SERVER['CONTENT_TYPE']) && !isset($_SERVER['HTTP_ACCEPT'])) {
             return false;
         }
         
-        $type = isset($_SERVER['ACCEPT']) ? $_SERVER['ACCEPT'] : $_SERVER['CONTENT_TYPE'];
+        $type = isset($_SERVER['HTTP_ACCEPT']) ? $_SERVER['HTTP_ACCEPT'] : $_SERVER['CONTENT_TYPE'];
         
         if (!isset($this->mimeMaps[$type])) {
             return false;
