@@ -30,7 +30,7 @@ class Frapi_Output_XMLCustomTest extends PHPUnit_Framework_TestCase
     public function testCustomTemplate()
     {
         $outputXML = new Frapi_Output_XML();
-        $outputXML->populateOutput(null, 'CustomTesting2');
+        $outputXML->populateOutput(array('custom'), 'CustomTesting2');
         $this->assertXMLStringEqualsXMLString(
             '<response><custom /></response>', $outputXML->executeOutput()
         );
