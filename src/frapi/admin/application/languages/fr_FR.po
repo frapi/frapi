@@ -361,3 +361,12 @@ msgstr "Use HTTPS?"
 
 msgid "RETYPE"
 msgstr "Re-type"
+
+msgid "SYNC"
+msgstr "Sync No"
+
+msgid "SYNCRONIZE_TITLE"
+msgstr "Synchronize Development Codebase"
+
+msgid "ADMIN_INTERFACE"
+msgstr "Interface Administrative"

@@ -39,8 +39,12 @@ msgid "TESTER"
 msgstr "Test"
 
 # top right - sync
+
+msgid "SYNC"
+msgstr "Ora Sinc"
+
 msgid "SYNCING_MESSAGE"
-msgstr "&quot;Sincronizza&quot;: Sincronizza il tuo codice con le azioni create nella sezione &quot;Azioni&quot;"
+msgstr "<i><strong>\"Sincronizza\"</strong></i>: Sincronizza il tuo codice con le azioni create nella sezione \"<strong><a href=\"/action\" title=\"Azioni\">Azioni</a></strong>\""
 
 # Dashboard welcome
 msgid "AMAZING_WELCOME"
@@ -355,3 +359,9 @@ msgstr "Use HTTPS?"
 
 msgid "RETYPE"
 msgstr "Re-type"
+
+msgid "SYNCRONIZE_TITLE"
+msgstr "Synchronize Development Codebase"
+
+msgid "ADMIN_INTERFACE"
+msgstr "Admin Interface"

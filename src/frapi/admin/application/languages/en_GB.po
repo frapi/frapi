@@ -40,7 +40,7 @@ msgstr "Tester"
 
 # top right - sync
 msgid "SYNCING_MESSAGE"
-msgstr "&quot;Sync'ing&quot;: Synchronizing your codebase with the actions you created in &quot;Actions&quot;"
+msgstr "<i><strong>\"Sync'ing\"</strong></i>: Synchronizing your codebase with the actions you created in \"<strong><a href=\"/action\" title=\"Action management\">Actions</a></strong>\""
 
 # Dashboard welcome
 msgid "AMAZING_WELCOME"
@@ -355,3 +355,12 @@ msgstr "Use HTTPS?"
 
 msgid "RETYPE"
 msgstr "Re-type"
+
+msgid "SYNC"
+msgstr "Sync Now"
+
+msgid "SYNCRONIZE_TITLE"
+msgstr "Synchronize Development Codebase"
+
+msgid "ADMIN_INTERFACE"
+msgstr "Admin Interface"
