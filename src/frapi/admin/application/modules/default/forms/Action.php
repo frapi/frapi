@@ -18,28 +18,30 @@ class Default_Form_Action extends Lupin_Form
 {
     public function init()
     {
+        $tr = Zend_Registry::get('tr');
+
         $name = new Zend_Form_Element_Text('name');
-        $name->setLabel('Name');
+        $name->setLabel($tr->_('NAME'));
         $name->setRequired(true);
         $this->addElement($name);
 
         $enabled = new Zend_Form_Element_Checkbox('enabled');
-        $enabled->setLabel('Is the action enabled ?');
+        $enabled->setLabel($tr->_('IS_ACTION_ENABLED'));
         $this->addElement($enabled);
 
         $public = new Zend_Form_Element_Checkbox('public');
-        $public->setLabel('Is the action public ?');
+        $public->setLabel($tr->_('IS_ACTION_PUBLIC'));
         $this->addElement($public);
 
         $route = new Zend_Form_Element_Text('route');
-        $route->setLabel('Route');
+        $route->setLabel($tr->_('ROUTE'));
         $route->setRequired(true);
         $this->addElement($route);
 
         $desc = new Zend_Form_Element_Textarea('description');
         $desc->cols = 35;
         $desc->rows = 15;
-        $desc->setLabel('Description');
+        $desc->setLabel($tr->_('DESCRIPTION'));
         $desc->setRequired(false);
         $this->addElement($desc);
 

@@ -18,18 +18,20 @@ class Default_Form_Error extends Lupin_Form
 {
     public function init()
     {
+        $tr = Zend_Registry::get('tr');
+
         $http_code = new Zend_Form_Element_Text('http_code');
-        $http_code->setLabel('HTTP Code');
+        $http_code->setLabel($tr->_('HTTP_CODE'));
         $http_code->setRequired(false);
         $this->addElement($http_code);
 
         $name = new Zend_Form_Element_Text('name');
-        $name->setLabel('Name');
+        $name->setLabel($tr->_('NAME'));
         $name->setRequired(true);
         $this->addElement($name);
 
         $msg = new Zend_Form_Element_Textarea('message');
-        $msg->setLabel('Error Message');
+        $msg->setLabel($tr->_('ERROR_MESSAGE'));
         $msg->setAttribs(array('rows' => 10, 'cols' => 35));
         $msg->setRequired(true);
         $this->addElement($msg);
@@ -47,11 +49,11 @@ class Default_Form_Error extends Lupin_Form
         $desc = new Zend_Form_Element_Textarea('description');
         $desc->cols = 35;
         $desc->rows = 15;
-        $desc->setLabel('Description');
+        $desc->setLabel($tr->_('DESCRIPTION'));
         $desc->setRequired(false);
         $this->addElement($desc);
 
-        $this->addElement(new Zend_Form_Element_Submit('submit'));
+        $this->addElement(new Zend_Form_Element_Submit($tr->_('SUBMIT')));
 
         parent::init();
     }

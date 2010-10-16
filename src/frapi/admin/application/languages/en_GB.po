@@ -1,13 +1,4 @@
-msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: Trevor Morse <trevor.morse@gmail.com>\n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
-"Content-Transfer-Encoding: 8bit\n"
+domain "en_GB"
 
 # login page
 msgid "USERNAME"
@@ -358,3 +349,9 @@ msgstr "The &quot;<b>%s</b>&quot; directory is not writeable by the current user
 msgid "ACTION_WARNING_ACTION"
 msgstr "The &quot;<b>%s</b>&quot; directory is not writeable by the current user (%s), therefore we will not be able to synchronize the codebase until the user has write access."
 
+## extra post-pre
+msgid "USE_HTTPS"
+msgstr "Use HTTPS?"
+
+msgid "RETYPE"
+msgstr "Re-type"

@@ -18,12 +18,14 @@ class Default_Form_Configuration extends Lupin_Form
 {
     public function init()
     {
+        $tr = Zend_Registry::get('tr');
+        
         $api_url = new Zend_Form_Element_Text('api_url');
-        $api_url->setLabel('API Domain (for Tester)');
+        $api_url->setLabel($tr->_('API_DOMAIN') . ' ' . $tr->_('FOR_TESTER'));
         $api_url->setRequired(true);
         $this->addElement($api_url);
         
-        $this->addElement(new Zend_Form_Element_Submit('Update Configuration'));
+        $this->addElement(new Zend_Form_Element_Submit($tr->_('UPDATE_CONFIGURATION')));
         
         parent::init();
     }

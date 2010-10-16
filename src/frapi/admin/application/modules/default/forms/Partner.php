@@ -18,23 +18,25 @@ class Default_Form_Partner extends Lupin_Form
 {
     public function init()
     {
+        $tr = Zend_Registry::get('tr');
+        
         $name = new Zend_Form_Element_Text('firstname');
-        $name->setLabel('First Name');
+        $name->setLabel($tr->_('FIRSTNAME'));
         $name->setRequired(true);
         $this->addElement($name);
 
         $lastname = new Zend_Form_Element_Text('lastname');
-        $lastname->setLabel('Last Name');
+        $lastname->setLabel($tr->_('LASTNAME'));
         $lastname->setRequired(true);
         $this->addElement($lastname);
 
         $email = new Zend_Form_Element_Text('email');
-        $email->setLabel('Email/Username');
+        $email->setLabel($tr->_('EMAIL_USERNAME'));
         $email->setRequired(true);
         $this->addElement($email);
 
         $company = new Zend_Form_Element_Text('company');
-        $company->setLabel('Company');
+        $company->setLabel($tr->_('COMPANY'));
         $company->setRequired(true);
         $this->addElement($company);
     }

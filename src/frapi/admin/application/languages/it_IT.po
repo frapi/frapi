@@ -349,3 +349,9 @@ msgstr "La cartella &quot;<b>%s</b>&quot; non è scrivibile dall'utente corrente
 msgid "ACTION_WARNING_ACTION"
 msgstr "La cartella &quot;<b>%s</b>&quot; non è scrivibile dall'utente corrente (%s), pertanto non sarà possibile sincronizzare il codice generato fino a che l'utente non riceverà i permessi di scrittura."
 
+## extra post-pre
+msgid "USE_HTTPS"
+msgstr "Use HTTPS?"
+
+msgid "RETYPE"
+msgstr "Re-type"

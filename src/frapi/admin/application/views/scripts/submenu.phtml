@@ -22,20 +22,20 @@ if ($pos !== false && $pos === $lpos) {
 ?>	
     <?php if ($this->menuItem !== '/action/code') :?>
 	<div class="sidenav">
-		<h2>Submenu</h2>
+		<h2><?php echo $this->tr->_('SUBMENU'); ?></h2>
     <?php if (in_array($item, array('/configuration', '/database', '/cache', '/output'))) { ?>
-        <li<?php echo $item == '/cache' ? ' class="active"' : '' ?>><a href="/cache">Cache</a></li>
-      <li<?php echo $item == '/user' ? ' class="active"' : '' ?>><a href="/user">Users</a></li>
-      <li<?php echo $item == '/output' ? ' class="active"' : '' ?>><a href="/output">Output</a></li>
-      <li<?php echo $item == '/database' ? ' class="active"' : '' ?>><a href="/database">Database</a></li>
+        <li<?php echo $item == '/cache' ? ' class="active"' : '' ?>><a href="/cache"><?php echo $this->tr->_('CACHE'); ?></a></li>
+      <li<?php echo $item == '/user' ? ' class="active"' : '' ?>><a href="/user"><?php echo $this->tr->_('USERS'); ?></a></li>
+      <li<?php echo $item == '/output' ? ' class="active"' : '' ?>><a href="/output"><?php echo $this->tr->_('OUTPUT'); ?></a></li>
+      <li<?php echo $item == '/database' ? ' class="active"' : '' ?>><a href="/database"><?php echo $this->tr->_('DATABASE'); ?></a></li>
     <?php } elseif ($item == '/user') { ?>
-        <li<?php echo $item == '/user/add' ? ' class="active"' : '' ?>><a href="/user/add">Add new User</a></li>
+        <li<?php echo $item == '/user/add' ? ' class="active"' : '' ?>><a href="/user/add"><?php echo $this->tr->_('ADD_NEW_USER'); ?></a></li>
     <?php } elseif ($item == '/partners') { ?>
-        <li<?php echo $item == '/partners/add' ? ' class="active"' : '' ?>><a href="/partners/add">Add new Partner</a></li>
+        <li<?php echo $item == '/partners/add' ? ' class="active"' : '' ?>><a href="/partners/add"><?php echo $this->tr->_('ADD_NEW_PARTNER'); ?></a></li>
     <?php } elseif ($item == '/errors') { ?>
-        <li<?php echo $item == '/errors/add' ? ' class="active"' : '' ?>><a href="/errors/add">Add new Error</a></li>
+        <li<?php echo $item == '/errors/add' ? ' class="active"' : '' ?>><a href="/errors/add"><?php echo $this->tr->_('ADD_NEW_ERROR'); ?></a></li>
     <?php } elseif ($item == '/action') { ?>
-        <li<?php echo $item == '/action/add' ? ' class="active"' : '' ?>><a href="/action/add">Add new Action</a></li>
+        <li<?php echo $item == '/action/add' ? ' class="active"' : '' ?>><a href="/action/add"><?php echo $this->tr->_('ADD_NEW_ACTION'); ?></a></li>
     <?php } ?>
 	</div>
 	<?php endif; ?>

@@ -18,23 +18,25 @@ class Default_Form_Database extends Lupin_Form
 {
     public function init()
     {
+        $tr = Zend_Registry::get('tr');
+        
         $hostname = new Zend_Form_Element_Text('db_hostname');
-        $hostname->setLabel('Hostname');
+        $hostname->setLabel($tr->_('HOSTNAME'););
         $this->addElement($hostname);
 
         $username = new Zend_Form_Element_Text('db_username');
-        $username->setLabel('Username');
+        $username->setLabel($tr->_('USERNAME'));
         $this->addElement($username);
 
         $password = new Zend_Form_Element_Text('db_password');
-        $password->setLabel('password');
+        $password->setLabel($tr->_('PASSWORD'));
         $this->addElement($password);
         
         $database = new Zend_Form_Element_Text('db_database');
-        $database->setLabel('database');
+        $database->setLabel($tr->_('DATABASE'));
         $this->addElement($database);
         
-        $this->addElement(new Zend_Form_Element_Submit('submit'));
+        $this->addElement(new Zend_Form_Element_Submit($tr->_('SUBMIT')));
         
         parent::init();
     }

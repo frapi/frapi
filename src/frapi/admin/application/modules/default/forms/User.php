@@ -18,22 +18,24 @@ class Default_Form_User extends Lupin_Form
 {
     public function init()
     {
+        $tr = Zend_Registry::get('tr');
+        
         $handle = new Zend_Form_Element_Text('handle');
-        $handle->setLabel('Handle');
+        $handle->setLabel($tr->_('HANDLE'));
         $handle->setRequired(true);
         $this->addElement($handle);
 
         $password = new Zend_Form_Element_Password('password');
-        $password->setLabel('Password');
+        $password->setLabel($tr->_('PASSWORD'));
         $password->setRequired(true);
         $this->addElement($password);
 
         $password1 = new Zend_Form_Element_Password('password_again');
-        $password1->setLabel('Re-type Password');
+        $password1->setLabel($tr->_('RETYPE') . ' ' . $tr->_('PASSWORD'));
         $password1->setRequired(true);
         $this->addElement($password1);
 
-        $this->addElement(new Zend_Form_Element_Submit('submit'));
+        $this->addElement(new Zend_Form_Element_Submit($tr->_('SUBMIT')));
 
         parent::init();
     }
