@@ -65,12 +65,32 @@ class Default_Model_Action extends Lupin_Model
             throw new RuntimeException('Action name does not validate. Please ensure it contains only alpha-numeric characters, underscores and dashes.');
         }
 
+        // Validate the route does not already exist and is valid
+        $router = new Frapi_Router();
+        $router->loadAndPrepareRoutes();
+        if ($router->match($data['route'])) {
+            throw new RuntimeException('There is already an action with this route.');
+        }
+
+        $segments = Frapi_Router::parseSegments($data['route']);
+        foreach ($segments as $key => $value) {
+            if ($key == 0) {
+                if (!preg_match('/^[a-zA-Z][a-zA-Z0-9\-\_]+$/', $value)) {
+                    throw new RuntimeException('Action route does not validate. Action route does not validate. Please ensure each part contains only alpha-numeric characters, underscores, dashes and colons.');
+                }
+            } else {
+                if (!preg_match('/^:?[a-zA-Z][a-zA-Z0-9\-\_]+$/', $value)) {
+                    throw new RuntimeException('Action route does not validate. Action route does not validate. Please ensure each part contains only alpha-numeric characters, underscores, dashes and colons.');
+                }
+            }
+        }
+
         $values = array(
             'name'        =>  $data['name'],
             'enabled'     =>  $data['enabled'],
             'public'      =>  $data['public'],
             'description' =>  $data['description'],
-            'route'       =>  isset($data['use_custom_route']) ? $data['route'] : null
+            'route'       =>  $data['route'],
         );
 
         if (isset($data['param'])) {
@@ -134,12 +154,36 @@ class Default_Model_Action extends Lupin_Model
             throw new RuntimeException('Action name does not validate. Please ensure it contains only alpha-numeric characters, underscores and dashes.');
         }
 
+        // Validate the route does not already exist and is valid
+        if ($tempAction['route'] != $data['route']) {
+
+            // Validate the route does not already exist and is valid
+            $router = new Frapi_Router();
+            $router->loadAndPrepareRoutes();
+            if ($router->match($data['route'])) {
+                throw new RuntimeException('There is already an action with this route.');
+            }
+        }
+
+        $segments = Frapi_Router::parseSegments($data['route']);
+        foreach ($segments as $key => $value) {
+            if ($key == 0) {
+                if (!preg_match('/^[a-zA-Z][a-zA-Z0-9\-\_]+$/', $value)) {
+                    throw new RuntimeException('Action route does not validate. Please ensure each part contains only alpha-numeric characters, underscores, dashes and colons.');
+                }
+            } else {
+                if (!preg_match('/^:?[a-zA-Z][a-zA-Z0-9\-\_]+$/', $value)) {
+                    throw new RuntimeException('Action route does not validate. Please ensure each part contains only alpha-numeric characters, underscores, dashes and colons.');
+                }
+            }
+        }
+
         $values = array(
             'name'        =>  $data['name'],
             'enabled'     =>  $data['enabled'],
             'public'      =>  $data['public'],
             'description' =>  $data['description'],
-            'route'       =>  $data['use_custom_route'] ? $data['route'] : null
+            'route'       =>  $data['route'],
         );
 
         if (isset($data['param'])) {

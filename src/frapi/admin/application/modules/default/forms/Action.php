@@ -31,13 +31,10 @@ class Default_Form_Action extends Lupin_Form
         $public->setLabel('Is the action public ?');
         $this->addElement($public);
 
-        $use_custom_route = new Zend_Form_Element_Checkbox('use_custom_route');
-        $use_custom_route->setLabel('Custom Route');
-        $this->addElement($use_custom_route);
-
-        $custom_route = new Zend_Form_Element_Text('route');
-        //$custom_route->setLabel('Custom Route');
-        $this->addElement($custom_route);
+        $route = new Zend_Form_Element_Text('route');
+        $route->setLabel('Route');
+        $route->setRequired(true);
+        $this->addElement($route);
 
         $desc = new Zend_Form_Element_Textarea('description');
         $desc->cols = 35;

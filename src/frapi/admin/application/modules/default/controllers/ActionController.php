@@ -203,7 +203,6 @@ class ActionController extends Lupin_Controller_Base
         } else {
             $actionData = $model->get($id);
 
-            $actionData['use_custom_route'] = isset($actionData['route']) ? 1: 0;
             $form->populate($actionData);
         }
 

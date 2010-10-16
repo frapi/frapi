@@ -32,6 +32,22 @@ $(document).ready(function() {
         i++;
     });
 
+    if ($('#route').val() == '') {
+        $('#route').val('/custom/route/:var');
+    }
+
+    $('#route').focus(function() { 
+        if ($('#route').val() == '/custom/route/:var') {
+            $(this).val(''); 
+        }
+    });
+
+    $('#route').blur(function() { 
+        if ($(this).val() == '') { 
+            $(this).val('/custom/route/:var')
+        }
+    });
+
     function deleteButton()
     {
         $('a.delete-button').click(function () {
