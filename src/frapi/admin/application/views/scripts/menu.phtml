@@ -19,11 +19,11 @@ if ($pos !== false && $pos === $lpos) {
 
 ?>	
     <div class="navigation">
-        <a <?php echo $item == '/' ? ' class="active"' : '' ?> href="/">Dashboard</a>
-        <a <?php echo $item == '/action' ? ' class="active"' : '' ?> href="/action">Actions</a>
-        <a <?php echo $item == '/errors' ? ' class="active"' : '' ?> href="/errors">Errors</a>
-        <a <?php echo $item == '/partners' ? ' class="active"' : '' ?> href="/partners">Partners</a>
-        <a <?php echo $item == '/configuration' ? ' class="active"' : '' ?> href="/configuration">Configuration</a>
-        <a <?php echo $item == '/tester' ? ' class="active"' : '' ?> href="/tester">Tester</a>
+        <a <?php echo $item == '/' ? ' class="active"' : '' ?> href="/"><?php echo $this->tr->_('DASHBOARD'); ?></a>
+        <a <?php echo $item == '/action' ? ' class="active"' : '' ?> href="/action"><?php echo $this->tr->_('ACTIONS'); ?></a>
+        <a <?php echo $item == '/errors' ? ' class="active"' : '' ?> href="/errors"><?php echo $this->tr->_('ERRORS'); ?></a>
+        <a <?php echo $item == '/partners' ? ' class="active"' : '' ?> href="/partners"><?php echo $this->tr->_('PARTNERS'); ?></a>
+        <a <?php echo $item == '/configuration' ? ' class="active"' : '' ?> href="/configuration"><?php echo $this->tr->_('CONFIGURATION'); ?></a>
+        <a <?php echo $item == '/tester' ? ' class="active"' : '' ?> href="/tester"><?php echo $this->tr->_('TESTER'); ?></a>
 		<div class="clearer"><span></span></div>
     </div>

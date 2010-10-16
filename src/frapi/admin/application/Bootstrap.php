@@ -26,6 +26,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         
         $translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'en_GB.mo', 'en');
         $translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'fr_FR.mo', 'fr');
+        $translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'it_IT.mo', 'it');
 
         $locale = new Zend_Session_Namespace('locale');
         $translate->setLocale($locale->value);
@@ -33,7 +34,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Registry::set('tr', $translate);
         Zend_Registry::set('Zend_Translate', $translate);
         Zend_Registry::set('Zend_Locale', $locale);
-
     }
 
     protected function _initConfig()

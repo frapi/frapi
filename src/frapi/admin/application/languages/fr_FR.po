@@ -2,22 +2,22 @@ domain "fr_FR"
 
 # login page
 msgid "USERNAME"
-msgstr "Username"
+msgstr "Utilisateur"
 
 msgid "PASSWORD"
-msgstr "Password"
+msgstr "Mot de passe"
 
 msgid "LOGIN"
 msgstr "Login"
 
 msgid "SUBMENU"
-msgstr "Submenu"
+msgstr "Sousmenu"
 
 msgid "WELCOME"
-msgstr "Welcome"
+msgstr "Bienvenue"
 
 msgid "YOU_ARE_USING_FRAPI"
-msgstr "You are using the FRAPI admin system"
+msgstr "Vous utilisez le systeme FRAPI"
 
 #menu
 msgid "DASHBOARD"
@@ -45,16 +45,16 @@ msgstr "&quot;Sync'ing&quot;: Synchronizing your codebase with the actions you c
 # Dashboard welcome
 
 msgid "AMAZING_WELCOME"
-msgstr "Welcome to the amazing world of FRAPI"
+msgstr "Bienvenue dans le monde merveilleux de FRAPI"
 
 msgid "DASHBOARD_WELCOME_TITLE"
-msgstr "First of all, Welcome to your API! Now, see below"
+msgstr "Premierement, bienvenue chez FRAPI"
 
 msgid "CRITICAL_SETUP_ISSUES"
-msgstr "Critical Setup Issues"
+msgstr "Problemes d'installation critique"
 
 msgid "CRITICAL_SETUP_ISSUES_INTRO"
-msgstr "We have identified issues regarding your setup which means that your API will not function correctly until you resolved those issues."
+msgstr "Nous avons identifié certains problemes qui empecherons votre API de fonctionner correctement."
 
 msgid "THE"
 msgstr "The"
@@ -62,7 +62,7 @@ msgstr "The"
 # Action section
 
 msgid "ADD_NEW_ACTION"
-msgstr "Add new Action"
+msgstr "Ajoutez une action"
 
 msgid "SETUP_HELP_MESSAGE"
 msgstr "You might want to run <b>sh setup.sh</b> which sets the files to chmod 777. This file is located in the root of your FRAPI download/checkout."
@@ -71,221 +71,221 @@ msgid "ACTION_DIR_PROBLEM"
 msgstr "The <strong>%s</strong> is not currently writeable by this user, therefore we cannot update the configuration file."
 
 msgid "NAME"
-msgstr "Name"
+msgstr "Nom"
 
 msgid "IS_ACTION_PUBLIC"
-msgstr "Is the action public?"
+msgstr "Est-ce une action publique?"
 
 msgid "PRIVATE"
-msgstr "Private"
+msgstr "Privée"
 
 msgid "PUBLIC"
-msgstr "Public"
+msgstr "Publique"
 
 msgid "IS_ACTION_ENABLED"
-msgstr "Is the action enabled?"
+msgstr "En fonction?"
 
 msgid "CUSTOM_ROUTE"
-msgstr "Custom Route"
+msgstr "Route"
 
 msgid "DESCRIPTION"
 msgstr "Description"
 
 msgid "SAVE"
-msgstr "Save"
+msgstr "Enregistrer"
 
 msgid "ADD_PARAMETER"
-msgstr "Add Parameter"
+msgstr "Ajoutez un parametre"
 
 msgid "PARAMETER"
-msgstr "Parameter"
+msgstr "Parametre"
 
 msgid "REQUIRED"
-msgstr "Required"
+msgstr "Requis"
 
 msgid "ACTION"
 msgstr "Action"
 
 msgid "DELETE"
-msgstr "Delete"
+msgstr "Effacer"
 
 msgid "PLEASE_PROVIDE_USERNAME"
-msgstr "Please provide a username and password."
+msgstr "Veuillez donner un nom d'utilisateur et un mot de passe."
 
 # Error section
 
 msgid "ADD_NEW_ERROR"
-msgstr "Add new Error"
+msgstr "Ajoutez une erreur"
 
 msgid "FILTER"
-msgstr "Filter"
+msgstr "Filtre"
 
 msgid "MESSAGE"
 msgstr "Message"
 
 msgid "EDIT"
-msgstr "Edit"
+msgstr "Modifier"
 
 msgid "HTTP_CODE"
-msgstr "HTTP Code"
+msgstr "Code HTTP"
 
 msgid "ERROR_MESSAGE"
-msgstr "Error Message"
+msgstr "Message d'erreur"
 
 msgid "SUBMIT"
-msgstr "Submit"
+msgstr "Soumettre"
 
 # Partner Section
 
 msgid "ADD_NEW_PARTNER"
-msgstr "Add new Partner"
+msgstr "Ajoutez un partenaire"
 
 msgid "COMPANY"
-msgstr "Company"
+msgstr "Compagnie"
 
 msgid "API_KEY"
-msgstr "API Key"
+msgstr "Clé API"
 
 msgid "FIRSTNAME"
-msgstr "First Name"
+msgstr "Prénom"
 
 msgid "LASTNAME"
-msgstr "Last Name"
+msgstr "Nom de famille"
 
 msgid "EMAIL_USERNAME"
-msgstr "Email/Username"
+msgstr "Email/Utilisateur"
 
 # Configuration Section
 msgid "CACHE"
 msgstr "Cache"
 
 msgid "USERS"
-msgstr "Users"
+msgstr "Utilisateurs"
 
 msgid "OUTPUT"
 msgstr "Output"
 
 msgid "DATABASE"
-msgstr "Database"
+msgstr "Base de données"
 
 msgid "SELECT_ITEM_FROM_SUBMENU"
-msgstr "Please select an item from the submenu, to your left."
+msgstr "Veuillez selectionner un item sur la gauche"
 
 msgid "UPDATE_CONFIGURATION"
-msgstr "Update Configuration"
+msgstr "Mettre la Configuration a jour"
 
 msgid "API_DOMAIN"
-msgstr "API Domain"
+msgstr " Domaine API"
 
 msgid "FOR_TESTER"
-msgstr "for Tester"
+msgstr "pour Testeur"
 
 msgid "CACHE_HELP_ONE"
-msgstr "Listed below are Frapi's internal cache keys, colour-coded by status. Click to see cache contents."
+msgstr "Voici une liste d'items cachées par FRAPI par code-couleur. Cliquer pour détails."
 
 msgid "CACHE_HELP_TWO"
-msgstr "Click &quot;Delete&quot; to expire cache values, they will then be re-generated (when required) by the API front-end."
+msgstr "Cliquer &quot;Effacer&quot; pour effacer une clé du cache"
 
 msgid "SET"
 msgstr "Set"
 
 msgid "SIZE"
-msgstr "Size"
+msgstr "Taille"
 
 msgid "YES"
-msgstr "Yes"
+msgstr "Oui"
 
 msgid "NO"
-msgstr "No"
+msgstr "Non"
 
 msgid "YOU_CAN"
-msgstr "You can"
+msgstr "Vous pouvez"
 
 msgid "UNSET_ALL_KEYS"
-msgstr "unset all keys"
+msgstr "Effacer tous les clées"
 
 msgid "UNSET_ALL_CACHE_KEYS"
-msgstr "Unset all cache keys"
+msgstr "Effacer tous les clées cachées"
 
 msgid "TO_CLEAR_CACHE"
-msgstr "to clear the cache"
+msgstr "pour effacer le cache"
 
 msgid "HANDLE"
-msgstr "Handle"
+msgstr "Titre"
 
 msgid "ADD_NEW_USER"
-msgstr "Add new User"
+msgstr "Ajoutez un utilisateur"
 
 msgid "SYNC_OUTPUT_TYPES"
-msgstr "Sync Output Types"
+msgstr "Synchronizer les outputs"
 
 msgid "MAKE_DEFAULT"
-msgstr "Make Default"
+msgstr "Défaut"
 
 msgid "DISABLE"
-msgstr "Disable"
+msgstr "Désactiver"
 
 msgid "ENABLE"
-msgstr "Enabled"
+msgstr "Activer"
 
 msgid "DEFAULT_OUTPUT"
-msgstr "Default Output"
+msgstr "Output par defaut"
 
 msgid "TYPE"
 msgstr "Type"
 
 msgid "VALUE"
-msgstr "Value"
+msgstr "Valeur"
 
 msgid "KEY"
-msgstr "Key"
+msgstr "Clé"
 
 msgid "EDIT_DATABASE_SETTINGS"
-msgstr "Edit Database settings"
+msgstr "Modifier configuration de base de données"
 
 # Tester Section
 
 msgid "QUERY_URI"
-msgstr "Query URI"
+msgstr "Requete URI"
 
 msgid "PARAMS"
-msgstr "Params"
+msgstr "Parametres"
 
 msgid "TESTER_ADD_PARAMETER"
-msgstr "Add a parameter (&quot;name=value&quot;)"
+msgstr "Ajouter un parametre (&quot;nom=valeur&quot;)"
 
 msgid "FORMAT"
 msgstr "Format"
 
 msgid "METHOD"
-msgstr "Method"
+msgstr "Methode"
 
 msgid "EMAIL"
 msgstr "Email"
 
 msgid "SECRET_KEY"
-msgstr "Secret Key"
+msgstr "Clé Secrete"
 
 msgid "LOAD_EMAIL_KEY"
-msgstr "Load Email/Key Combo"
+msgstr "Charger Combo Email/Clé"
 
 msgid "SELECT_COMBO_OF_FIELDS"
-msgstr "Select a combination to fill the fields above."
+msgstr "Selectionner une combination pour completer le champs dessus"
 
 msgid "RUN_TEST"
-msgstr "Run Test"
+msgstr "Executer test"
 
 msgid "POST_FIELDS"
-msgstr "Post Fields"
+msgstr "Champs POST"
 
 msgid "RESPONSE"
-msgstr "Response"
+msgstr "Reponse"
 
 msgid "NO_QUERY_URI"
-msgstr "No query URI"
+msgstr "Aucune requete URI"
 
 msgid "REQUEST"
-msgstr "Request"
+msgstr "Requete"
 
 msgid "CODE"
 msgstr "Code"
