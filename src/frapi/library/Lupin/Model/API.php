@@ -142,11 +142,11 @@ class Lupin_Model_API extends Lupin_Model
      *
      * @return bool
      */
-    public function save(array $data, $primary = null)
+    public function save(array $data, $id = null)
     {
         $res = false;
         try {
-            $res = $this->_save($data, $primary);
+            $res = $this->_save($data, $id);
         } catch(Exception $e) {
             if (APPLICATION_ENV === 'development') {
                 echo '<pre>'; print_r($e);exit;

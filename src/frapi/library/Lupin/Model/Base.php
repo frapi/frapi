@@ -11,7 +11,7 @@ interface Lupin_Model_Base
      * @return void
      * @throws echolibre_Form_Excetion    In case the form does not have a token
      */
-    public function save(array $data, $primary = null);
+    public function save(array $data, $id = null);
 
     public function add(array $data);
 

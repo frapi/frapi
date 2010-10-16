@@ -13,7 +13,7 @@ class Lupin_Model
      *
      * @return bool Whether the save was successful
      */
-    public function save($data, $id = null)
+    public function save(array $data, $id = null)
     {
         if ($id === null) {
             return $this->add($data);

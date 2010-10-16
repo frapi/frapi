@@ -17,12 +17,12 @@ class Lupin_Model_DB extends Lupin_Model
      *
      * @return bool
      */
-    public function save(array $data, $primary = null)
+    public function save(array $data, $id = null)
     {
         $res = false;
         $this->db->beginTransaction();
         try {
-            $res = $this->_save($data, $primary);
+            $res = $this->_save($data, $id);
             if (true === $res) {
                 $this->db->commit();
                 return true;
