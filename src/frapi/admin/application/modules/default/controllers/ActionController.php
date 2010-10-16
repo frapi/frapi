@@ -31,7 +31,7 @@ class ActionController extends Lupin_Controller_Base
         parent::init($styles);
     }
 
-    /** 
+    /**
      * Empty error action
      *
      * This is only the action for errors
@@ -39,7 +39,7 @@ class ActionController extends Lupin_Controller_Base
      * @return void
      */
     public function errorAction() {}
-    
+
     /**
      * The index
      *
@@ -54,22 +54,22 @@ class ActionController extends Lupin_Controller_Base
         $model = new Default_Model_Action;
         $dir = Zend_Registry::get('localConfigPath');
         $dir = $dir . 'actions.xml';
-        
+
         $dir = Zend_Registry::get('localConfigPath');
-        $translate = Zend_Registry::get('tr');        
+        $translate = Zend_Registry::get('tr');
 
         if (!is_writable($dir)) {
 
             $actionPathMessage = sprintf($translate->_('ACTION_DIR_PROBLEM'), $dir);
             $setupHelpMessage  = $translate->_('SETUP_HELP_MESSAGE');
-        
+
             $this->addMessage(
                 $actionPathMessage .' <br /><br />' . $setupHelpMessage
             );
-            
+
             $this->_redirect('/action/error');
         }
-        
+
         $data = $model->getAll();
 
         if ($data == false) {
@@ -82,11 +82,11 @@ class ActionController extends Lupin_Controller_Base
     /**
      * Add an action
      *
-     * This is the add action method. It literally does what it say. 
+     * This is the add action method. It literally does what it say.
      * It adds an action.
      *
      * This method has a different output whether or not some data is posted
-     * to it. 
+     * to it.
      *
      * @uses Default_Form_Action
      * @uses Default_Model_Action
@@ -101,16 +101,21 @@ class ActionController extends Lupin_Controller_Base
         $request = $this->getRequest();
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
+
                 // Save data
-                $model->save($request->getParams());
-                $this->addMessage('Action ' . $request->getParam('name') . ' added.');
-                $this->_redirect('/action');
+                if ($model->save($request->getParams())) {
+                    $this->addMessage('Action ' . $request->getParam('name') . ' added.');
+                    $this->_redirect('/action');
+                } else {
+                    $this->addErrorMessage('Error adding action ' . $request->getParam('name') .
+                        '. Please ensure it does not already exist and the name contains only alpha-numeric characters, underscores and dashes.');
+                }
             }
         }
 
         $this->view->form = $form;
     }
-    
+
     /**
      * This is the code action
      *
@@ -125,15 +130,15 @@ class ActionController extends Lupin_Controller_Base
             $this->addErrorMessage('ID parameter is missing.');
             return;
         }
-        
+
         $data = $request->getParams();
-        
+
         $model = new Default_Model_Action;
 
         $actionData = $model->get($id);
         $name = $actionData['name'];
         $file = $name . '.php';
-        
+
         $dir = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
         $file = $dir . DIRECTORY_SEPARATOR . $file;
         $content = file_get_contents($file);
@@ -147,7 +152,7 @@ class ActionController extends Lupin_Controller_Base
      * Edit an action
      *
      * This method is invoked whenever an action has to be edited from the
-     * administration panel. 
+     * administration panel.
      *
      * An action is edited by it's id/hash
      *
@@ -169,7 +174,7 @@ class ActionController extends Lupin_Controller_Base
 
         $actionData = $model->get($id);
         $params     = array();
-        
+
         if (isset($actionData['parameters']) && !empty($actionData['parameters'])) {
             $params = $actionData['parameters'];
         }
@@ -185,9 +190,13 @@ class ActionController extends Lupin_Controller_Base
             if ($form->isValid($request->getPost())) {
                 // Save data
                 // This is xss right there.
-                $model->update($request->getParams(), $id);
-                $this->addMessage('Action ' . $request->getParam('name') . ' updated.');
-                $this->_redirect('/action/edit/id/' . $id);
+                if ($model->update($request->getParams(), $id)) {
+                    $this->addMessage('Action ' . $request->getParam('name') . ' updated.');
+                    $this->_redirect('/action/edit/id/' . $id);
+                } else {
+                    $this->addErrorMessage('Error updating action ' . $request->getParam('name') .
+                        '. Please ensure it does not already exist and the name contains only alpha-numeric characters, underscores and dashes.');
+                }
             }
         } else {
             $actionData = $model->get($id);
@@ -225,7 +234,7 @@ class ActionController extends Lupin_Controller_Base
      * Synchronize the codebase
      *
      * This method is used to synchronize the codebase and generate the
-     * code for the actions that don't exist yet. The synchronisation is 
+     * code for the actions that don't exist yet. The synchronisation is
      * done by comparing the existing file names. The ones that don't exist
      * will be created.
      *
@@ -235,11 +244,11 @@ class ActionController extends Lupin_Controller_Base
     {
         $this->_helper->viewRenderer->setNoRender();
         $model = new Default_Model_Action;
-        
+
         $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
         if (!is_writable($dir)) {
             $this->addMessage(
-                'The path : "' . $dir . '" is not currently writeable by this user, ' . 
+                'The path : "' . $dir . '" is not currently writeable by this user, ' .
                 'therefore we cannot synchronize the codebase'
             );
             $this->_redirect('/action');
@@ -248,33 +257,33 @@ class ActionController extends Lupin_Controller_Base
         $this->addMessage('Development environment has been sychronized');
         $this->_redirect('/action');
     }
-    
+
     public function testAction()
     {
         $name = 'Testing1';
         $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
         $file = $dir . DIRECTORY_SEPARATOR . $name . '.php';
         require_once $file;
-        
+
         $class = Zend_CodeGenerator_Php_Class::fromReflection(
             new Zend_Reflection_Class('Action_' . $name)
         );
 
         $error  = array();
         $errors = array();
-        
+
         foreach ($class->getMethods() as $key => $method) {
             $body = $method->getBody();
             $methodName = $method->getName();
 
             $toks = token_get_all('<?' . 'php ' . $body . '?>');
-            
+
             $it = new ArrayIterator($toks);
-            
+
             for ($it->rewind(); $it->valid(); $it->next()) {
                 $current = $it->current();
                 $key = $it->key();
-                
+
                 $item = (double)$current[0];
 
                 if ($item == T_STRING && stristr('frapi_error', $current[1]) !== false) {
@@ -282,16 +291,16 @@ class ActionController extends Lupin_Controller_Base
                         $errors[] = $error;
                     }
                 }
-                
+
             }
         }
-        
+
         //print_r($errors);
 
         die();
-        
+
     }
-    
+
     /**
      * Prototype getErrors
      *
@@ -321,17 +330,17 @@ class ActionController extends Lupin_Controller_Base
                 while ($it->valid()) {
                     $it->next();
                     $current = $it->current();
-                    
+
                     if ((double)$current[0] == T_CONSTANT_ENCAPSED_STRING) {
                         $error[$methodName][$key]['message'] = $current[1];
 
                         while ($it->valid()) {
-                            
+
                             $it->next();
                             $current = $it->current();
                             if ((double)$current[0] == T_LNUMBER) {
                                 $error[$methodName][$key]['code'] = $current[1];
-                                
+
                             }
                         }
                     } else {
@@ -346,7 +355,7 @@ class ActionController extends Lupin_Controller_Base
 
             }
         }
-        
+
         return !empty($error) ? $error : false;
     }
 }

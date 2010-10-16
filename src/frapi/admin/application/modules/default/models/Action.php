@@ -16,14 +16,14 @@
  */
 class Default_Model_Action extends Lupin_Model
 {
-    /** 
+    /**
      * A config object holding the Lupin_Config_Xml object
-     * 
+     *
      * @var Lupin_Config_Xml $config  The config object.
      */
     protected $config;
-    
-    /** 
+
+    /**
      * Constructor
      *
      * The constructor for the Action model
@@ -35,11 +35,11 @@ class Default_Model_Action extends Lupin_Model
         $this->config = new Lupin_Config_Xml('actions');
     }
 
-    /** 
+    /**
      * Add a new action
      *
      * This method is invoked whenever the action adding controller
-     * is invokved. It calls $this->generateAction() and creates a 
+     * is invokved. It calls $this->generateAction() and creates a
      * new action file if it doesn't exist.
      *
      * @param array $data The data to create the action with.
@@ -52,8 +52,16 @@ class Default_Model_Action extends Lupin_Model
             'name',  'enabled',  'description',  'public',
             'param', 'required', 'route', 'use_custom_route'
         );
-        
+
         $this->whiteList($whitelist, $data);
+
+        // Replace spaces with underscores, to attempt to make it a valid name
+        $data['name'] = str_replace(' ', '_', $data['name']);
+
+        // Validate the action doesn't already exist and is a valid name
+        if (in_array($data['name'], $this->getList()) || !preg_match('/^[a-zA-Z][a-z0-9\_\-]+$/', $data['name'])) {
+            return false;
+        }
 
         $values = array(
             'name'        =>  $data['name'],
@@ -66,7 +74,7 @@ class Default_Model_Action extends Lupin_Model
         if (isset($data['param'])) {
 
             $values['parameters'] = array();
-            
+
             if (isset($data['required']) && is_array($data['required'])) {
                  foreach ($data['required'] as $key => $value) {
                      if (isset($data['param'][$key])) {
@@ -79,7 +87,7 @@ class Default_Model_Action extends Lupin_Model
                      }
                  }
             }
-            
+
             foreach ($data['param'] as $param => $value) {
                 $values['parameters']['parameter'][] = array(
                     'name'     => $value,
@@ -87,17 +95,17 @@ class Default_Model_Action extends Lupin_Model
                 );
             }
         }
-        
+
         $this->config->add('action', $values);
-        
+
         $this->refreshAPCCache();
         return true;
     }
 
-    /** 
+    /**
      * Update an action
      *
-     * This method updates an action using data passed 
+     * This method updates an action using data passed
      * to the $data method parameter.
      *
      * @param array $data The data array to update the action with.
@@ -110,8 +118,18 @@ class Default_Model_Action extends Lupin_Model
             'name',  'enabled',  'description',  'public',
             'param', 'required', 'route', 'use_custom_route'
         );
-        
+
         $this->whiteList($whitelist, $data);
+
+        // Replace spaces with underscores, to attempt to make it a valid name
+        $data['name'] = str_replace(' ', '_', $data['name']);
+
+        // Validate the action doesn't already exist and is a valid name
+        $tempAction = $this->get($id);
+        if (($tempAction['name'] != $data['name'] && in_array($data['name'], $this->getList()))
+            || !preg_match('/^[a-zA-Z][a-z0-9\_\-]+$/', $data['name'])) {
+            return false;
+        }
 
         $values = array(
             'name'        =>  $data['name'],
@@ -120,13 +138,13 @@ class Default_Model_Action extends Lupin_Model
             'description' =>  $data['description'],
             'route'       =>  $data['use_custom_route'] ? $data['route'] : null
         );
-        
+
         if (isset($data['param'])) {
             $params = $data['param'];
             $values['parameters'] = array();
-            
+
             foreach ($params as $param => $value) {
-                if (strlen(trim($data['param'][$param])) <= 0) { 
+                if (strlen(trim($data['param'][$param])) <= 0) {
                     continue;
                 }
 
@@ -136,7 +154,7 @@ class Default_Model_Action extends Lupin_Model
                 );
             }
         }
-        
+
         try {
             $this->config->update('action', 'hash', $id, $values);
         } catch (Exception $e) {}
@@ -170,12 +188,12 @@ class Default_Model_Action extends Lupin_Model
      *                to an action or a boolean false when nothing is found.
      */
     public function get($id)
-    {        
+    {
         $action = $this->config->getByField('action', 'hash', $id);
         return isset($action) ? $action : false;
     }
 
-    /** 
+    /**
      * Get a list of actions
      *
      * This method is used to retrieve a list of actions.
@@ -207,7 +225,7 @@ class Default_Model_Action extends Lupin_Model
         return $action;
     }
 
-    /** 
+    /**
      * Synchronize the code base
      *
      * This method is invoked whenever someone clicks on the "Sync" button. It
@@ -220,7 +238,7 @@ class Default_Model_Action extends Lupin_Model
     public function sync()
     {
         $actions = $this->config->getAll('action');
-        
+
         foreach ($actions as $key => $a) {
             $description = isset($a['description']) ? $a['description'] : false;
             $route = isset($a['route']) ? $a['route'] : false;
@@ -231,11 +249,11 @@ class Default_Model_Action extends Lupin_Model
 
             $params = array();
             $params = $a['parameters']['parameter'];
-            
+
             if (isset($params) && !isset($params[0])) {
                 $params = array($params);
             }
-            
+
             $p = array();
             if (!empty($params)) {
                 foreach ($params as $param) {
@@ -266,10 +284,10 @@ class Default_Model_Action extends Lupin_Model
         }
     }
 
-    /** 
+    /**
      * Update an action
      *
-     * This method is used whenever an action is updated from the 
+     * This method is used whenever an action is updated from the
      * administration panel.
      *
      * @param string $file  The file to update.
@@ -305,25 +323,25 @@ class Default_Model_Action extends Lupin_Model
             $file->setClass($class);
         } catch (Exception $e) {
             return false;
-        } 
+        }
 
         return $file->generate();
     }
-    
-    /** 
+
+    /**
      * Generate the action
      *
      * This is a gigantic method used to generate the actual Action code. It
      * uses the properties, description, name, and routes passed to it.
      *
      * This method uses the Zend_CodeGenerator_Php_* family to identify and create the
-     * new files. 
+     * new files.
      *
      * @param string $name  The name of the action
      * @param array $properties An array of properties related to an action
      * @param string $description A description for an action. Default false.
      * @param string $route The custom route for that action. Default false.
-     * 
+     *
      * @return string A generated file.
      */
     private function generateAction($name, $properties, $description = false, $route = false)
@@ -343,7 +361,7 @@ class Default_Model_Action extends Lupin_Model
         $class->setName('Action_' . $name);
         $class->setExtendedClass('Frapi_Action');
         $class->setImplementedInterfaces(array('Frapi_Action_Interface'));
-        
+
         $tags = array(
             array(
                 'name'        => 'link',
@@ -354,19 +372,19 @@ class Default_Model_Action extends Lupin_Model
                 'description' => 'Frapi <frapi@getfrapi.com>',
             )
         );
-        
+
         if ($route !== false) {
             $tags[] = array('name' => 'link', 'description' => $route);
         }
-        
+
         $classDocblock = new Zend_CodeGenerator_Php_Docblock(array(
                 'shortDescription' => 'Action ' . $name . ' ',
-                'longDescription'  => ($description !== false) 
+                'longDescription'  => ($description !== false)
                                       ? $description : 'A class generated by Frapi',
                 'tags'             => $tags,
             )
         );
-        
+
         $class->setDocblock($classDocblock);
         $class->setProperties(array(
             array(
@@ -396,9 +414,9 @@ class Default_Model_Action extends Lupin_Model
 
         $docblock = new Zend_CodeGenerator_Php_Docblock(array(
             'shortDescription' => 'To Array',
-            'longDescription'  => "This method returns the value found in the database \n" . 
+            'longDescription'  => "This method returns the value found in the database \n" .
                                   'into an associative array.',
-                                  
+
             'tags'             => array(
                 new Zend_CodeGenerator_Php_Docblock_Tag_Return(array(
                     'datatype'  => 'array',
@@ -409,12 +427,12 @@ class Default_Model_Action extends Lupin_Model
         $toArrayBody = '        ' . "\n";
         if (!empty($properties)) {
             foreach ($properties as $p) {
-                $toArrayBody  .= 
-                    '$this->data[\'' . $p . '\'] = ' . 
+                $toArrayBody  .=
+                    '$this->data[\'' . $p . '\'] = ' .
                     '$this->getParam(\'' . $p . '\', self::TYPE_OUTPUT);' . "\n";
             }
         }
-        
+
         $toArrayBody.= 'return $this->data;';
 
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
@@ -432,7 +450,7 @@ if ($valid instanceof Frapi_Error) {
         }
 
         $executeActionBody .= "\n\n" . 'return $this->toArray();';
-        
+
         $docblockArray = array(
             'shortDescription' => '',
             'longDescription'  => '',
@@ -442,13 +460,13 @@ if ($valid instanceof Frapi_Error) {
                 )),
             )
         );
-        
+
         $docblock = new Zend_CodeGenerator_Php_Docblock(array());
-        
+
         $docblockArray['shortDescription'] = 'Default Call Method';
-        $docblockArray['longDescription']  = 'This method is called when no specific ' . 
+        $docblockArray['longDescription']  = 'This method is called when no specific ' .
                                              'request handler has been found';
-                                             
+
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
             'name' => 'executeAction',
             'body' => $executeActionBody,
@@ -462,7 +480,7 @@ if ($valid instanceof Frapi_Error) {
             'body' => $executeActionBody,
             'docblock' => $docblockArray,
         ));
-        
+
         $docblockArray['shortDescription'] = 'Post Request Handler';
         $docblockArray['longDescription']  = 'This method is called when a request is a POST';
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
@@ -470,7 +488,7 @@ if ($valid instanceof Frapi_Error) {
             'body' => $executeActionBody,
             'docblock' => $docblockArray,
         ));
-        
+
         $docblockArray['shortDescription'] = 'Put Request Handler';
         $docblockArray['longDescription']  = 'This method is called when a request is a PUT';
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
@@ -478,7 +496,7 @@ if ($valid instanceof Frapi_Error) {
             'body' => $executeActionBody,
             'docblock' => $docblockArray,
         ));
-    
+
         $docblockArray['shortDescription'] = 'Delete Request Handler';
         $docblockArray['longDescription']  = 'This method is called when a request is a DELETE';
         $methods[] = new Zend_CodeGenerator_Php_Method(array(
@@ -501,7 +519,7 @@ if ($valid instanceof Frapi_Error) {
         $file->setClass($class);
         return $file->generate();
     }
-    
+
     /**
      * Refresh the APC cache by deleting APC entries.
      *
@@ -512,9 +530,9 @@ if ($valid instanceof Frapi_Error) {
         $configModel = new Default_Model_Configuration();
         $server = $configModel->getKey('api_url');
         $hash = isset($server) ? hash('sha1', $server) : '';
-        
+
         $cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
-        
+
         $cache->delete($hash . '-Actions.enabled-public');
         $cache->delete($hash . '-Actions.enabled-private');
         $cache->delete($hash . '-Router.routes-prepared');
