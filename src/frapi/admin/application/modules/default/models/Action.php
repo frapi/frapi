@@ -58,9 +58,11 @@ class Default_Model_Action extends Lupin_Model
         // Replace spaces with underscores, to attempt to make it a valid name
         $data['name'] = str_replace(' ', '_', $data['name']);
 
-        // Validate the action doesn't already exist and is a valid name
-        if (in_array($data['name'], $this->getList()) || !preg_match('/^[a-zA-Z][a-z0-9\_\-]+$/', $data['name'])) {
-            return false;
+        // Validate the action doesn't already exist and is valid
+        if (in_array($data['name'], $this->getList())) {
+            throw new RuntimeException('There is already an action with this name.');
+        } else if (!preg_match('/^[a-zA-Z][a-z0-9\_\-]+$/', $data['name'])) {
+            throw new RuntimeException('Action name does not validate. Please ensure it contains only alpha-numeric characters, underscores and dashes.');
         }
 
         $values = array(
@@ -126,9 +128,10 @@ class Default_Model_Action extends Lupin_Model
 
         // Validate the action doesn't already exist and is a valid name
         $tempAction = $this->get($id);
-        if (($tempAction['name'] != $data['name'] && in_array($data['name'], $this->getList()))
-            || !preg_match('/^[a-zA-Z][a-z0-9\_\-]+$/', $data['name'])) {
-            return false;
+        if ($tempAction['name'] != $data['name'] && in_array($data['name'], $this->getList())) {
+            throw new RuntimeException('There is already an action with this name.');
+        } else if(!preg_match('/^[a-zA-Z][a-z0-9\_\-]+$/', $data['name'])) {
+            throw new RuntimeException('Action name does not validate. Please ensure it contains only alpha-numeric characters, underscores and dashes.');
         }
 
         $values = array(

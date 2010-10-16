@@ -6,28 +6,6 @@
 class Lupin_Model
 {
     /**
-     * Encapsulates the insertions and updates
-     *
-     * @param array $data    The data being inserted
-     * @param mixed $primary The primary key value if updating
-     *
-     * @return bool
-     */
-    public function save(array $data, $primary = null)
-    {
-        $res = false;
-        try {
-            $res = $this->_save($data, $primary);
-        } catch(Exception $e) {
-            if (APPLICATION_ENV === 'development') {
-                echo '<pre>'; print_r($e);exit;
-            }
-        }
-
-        return $res;
-    }
-
-    /**
      * Inserts or Updates the model and dependent tables.
      *
      * @param array        $data The data posted in the navigation type form
@@ -35,7 +13,7 @@ class Lupin_Model
      *
      * @return bool Whether the save was successful
      */
-    protected function _save($data, $id = null)
+    public function save($data, $id = null)
     {
         if ($id === null) {
             return $this->add($data);

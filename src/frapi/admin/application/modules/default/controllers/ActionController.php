@@ -103,12 +103,13 @@ class ActionController extends Lupin_Controller_Base
             if ($form->isValid($request->getPost())) {
 
                 // Save data
-                if ($model->save($request->getParams())) {
+                try {
+                    $model->save($request->getParams());
                     $this->addMessage('Action ' . $request->getParam('name') . ' added.');
                     $this->_redirect('/action');
-                } else {
+                } catch (RuntimeException $e) {
                     $this->addErrorMessage('Error adding action ' . $request->getParam('name') .
-                        '. Please ensure it does not already exist and the name contains only alpha-numeric characters, underscores and dashes.');
+                        '. ' . $e->getMessage());
                 }
             }
         }
@@ -190,12 +191,13 @@ class ActionController extends Lupin_Controller_Base
             if ($form->isValid($request->getPost())) {
                 // Save data
                 // This is xss right there.
-                if ($model->update($request->getParams(), $id)) {
+                try {
+                    $model->update($request->getParams(), $id) ;
                     $this->addMessage('Action ' . $request->getParam('name') . ' updated.');
                     $this->_redirect('/action/edit/id/' . $id);
-                } else {
+                } catch (RuntimeException $e) {
                     $this->addErrorMessage('Error updating action ' . $request->getParam('name') .
-                        '. Please ensure it does not already exist and the name contains only alpha-numeric characters, underscores and dashes.');
+                        '. ' . $e->getMessage());
                 }
             }
         } else {
