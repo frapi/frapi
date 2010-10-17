@@ -147,7 +147,7 @@ class ActionController
         // The options we are accepting for deleting
         $options = new Zend_Console_Getopt(
             array(
-                'name|n=s'                 => 'Name of the action.',
+                'name|n=s' => 'Name of the action.',
             )
         );
 

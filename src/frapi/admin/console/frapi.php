@@ -36,8 +36,9 @@ DIRECTORY_SEPARATOR . 'Frapi' . DIRECTORY_SEPARATOR . 'AllFiles.php';
 
 require_once ROOT_PATH . DIRECTORY_SEPARATOR . 'custom'. DIRECTORY_SEPARATOR . 'AllFiles.php';
 
-// Include our action controller here
+// Include our controllers here
 require APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'console'. DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'ActionController.php';
+require APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'console'. DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'ErrorsController.php';
 
 $app = new Zend_Application(
     APPLICATION_ENV, APPLICATION_PATH . DIRECTORY_SEPARATOR . 'config' .
@@ -53,10 +54,11 @@ $routes = array(
         'test'   => 'ActionController::testAction',
     ),
     'error' => array(
-        'create' => 'ErrorController::addError',
+        'add'    => 'ErrorsController::addAction',
+        'delete' => 'ErrorsController::deleteAction',
     ),
     'partner' => array(
-        'create' => 'PartnerController::addPartner',
+        'add' => 'PartnerController::addAction',
     ),
     'actions' => array(
         'list' => 'ActionController::listAction',
