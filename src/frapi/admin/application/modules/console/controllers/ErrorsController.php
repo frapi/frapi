@@ -16,6 +16,34 @@
  */
 class ErrorsController
 {
+    /*
+     *  List action
+     *
+     * This is the list action. It will list all available actions.
+     *
+     * @return void
+     */
+    public function listAction()
+    {
+        $model  = new Default_Model_Error();
+        $errors = $model->getAll();
+
+        // Determine our max field widths so we can pad things out appropriately
+        $error_name_max_length     = 0;
+        foreach ($errors as $key => $error) {
+
+            if (strlen($error['name']) > $error_name_max_length) {
+                $error_name_max_length = strlen($error['name']);
+            }
+        }
+
+        $error_name_max_length++;
+
+        echo  str_pad('Name', $error_name_max_length) . 'HTTP Code' . PHP_EOL;
+        foreach ($errors as $key => $error) {
+            echo str_pad($error['name'], $error_name_max_length). $error['http_code'] . PHP_EOL;
+        }
+    }
 
     /**
      * Add an error

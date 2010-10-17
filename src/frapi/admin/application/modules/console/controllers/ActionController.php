@@ -43,14 +43,16 @@ class ActionController
             }
         }
 
+        $action_name_max_length++;
+        $action_route_max_length++;
+
         echo  str_pad('Name', $action_name_max_length) . ' Enabled Public '
             . str_pad('Route', $action_route_max_length) . PHP_EOL;
-
         foreach ($actions as $key => $action) {
             echo str_pad($action['name'], $action_name_max_length)
                 . ' ' . str_pad($action['enabled'], strlen('Enabled'))
                 . ' ' . str_pad($action['public'], strlen('Public'))
-                . str_pad($action['route'], $action_route_max_length) . PHP_EOL;
+                . ' ' . str_pad($action['route'], $action_route_max_length) . PHP_EOL;
         }
     }
 

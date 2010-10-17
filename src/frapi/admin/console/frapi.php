@@ -53,17 +53,21 @@ $routes = array(
         'delete' => 'ActionController::deleteAction',
         'test'   => 'ActionController::testAction',
     ),
-    'error' => array(
-        'add'    => 'ErrorsController::addAction',
-        'delete' => 'ErrorsController::deleteAction',
-    ),
-    'partner' => array(
-        'add' => 'PartnerController::addAction',
-    ),
     'actions' => array(
         'list' => 'ActionController::listAction',
         'sync' => 'ActionController::syncAction',
     ),
+    'error' => array(
+        'add'    => 'ErrorsController::addAction',
+        'delete' => 'ErrorsController::deleteAction',
+    ),
+    'errors' => array(
+        'list' => 'ErrorsController::listAction',
+    ),
+    'partner' => array(
+        'add' => 'PartnerController::addAction',
+    ),
+
 );
 
 if ($argc < 3) {
