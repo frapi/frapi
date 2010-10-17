@@ -45,40 +45,48 @@ $app = new Zend_Application(
 );
 $app->bootstrap(array('config', 'db', 'defaultAutoloader', 'acl'));
 
-// Valid routes we will handle
-$routes = array (
-    'list-actions'  => 'ActionController::listAction',
-    'add-action'    => 'ActionController::addAction',
-    'delete-action' => 'ActionController::deleteAction',
-    'edit-action'   => 'ActionController::editAction',
-    'test-action'   => 'ActionController::testAction',
-    'sync-actions'  => 'ActionController::syncAction',
-    'exit'          => '',
+// Valid things we can do
+$routes = array(
+    'action' => array(
+        'add'    => 'ActionController::addAction',
+        'delete' => 'ActionController::deleteAction',
+        'test'   => 'ActionController::testAction',
+    ),
+    'error' => array(
+        'create' => 'ErrorController::addError',
+    ),
+    'partner' => array(
+        'create' => 'PartnerController::addPartner',
+    ),
+    'actions' => array(
+        'list' => 'ActionController::listAction',
+        'sync' => 'ActionController::syncAction',
+    ),
 );
 
-$command = '';
-while (true) {
-
-    // What would you like to do today?
-    fwrite(STDOUT, "frapi> ");
-    $command = trim(fgets(STDIN));
-
-    if (!in_array($command, array_keys($routes))) {
-        fwrite(STDOUT, 'Valid commands are: ' . PHP_EOL);
-
-        foreach ($routes as $route_command => $action) {
-            fwrite(STDOUT, $route_command . PHP_EOL);
-        }
-        continue;
-    }
-
-    if ($command == 'exit') {
-        fwrite(STDOUT, 'Goodbye' . PHP_EOL);
-        exit(0);
-    }
-
-    list($controller, $method) = explode('::', $routes[$command]);
-
-    $controller = new $controller();
-    $controller->$method();
+if ($argc < 3) {
+    echo 'Usage: frapi.php [action] [module] [options]' . PHP_EOL;
+    exit();
 }
+
+$action = $argv[1];
+$module = $argv[2];
+
+if (!isset($routes[$module][$action])) {
+    echo 'Invalid module or action.' . PHP_EOL;
+    echo 'Valid options are:' . PHP_EOL;
+    foreach ($routes as $module => $actions) {
+        echo $module . PHP_EOL;
+        foreach ($actions as $action_name => $controller) {
+            echo "\t" . $action_name . PHP_EOL;
+        }
+    }
+    exit;
+}
+
+//Determine what we are calling
+list($controller, $method) = explode('::', $routes[$module][$action]);
+
+// Now call it
+$controller = new $controller();
+$controller->$method();

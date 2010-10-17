@@ -16,7 +16,7 @@
  */
 class ActionController
 {
-    private $yes_no_values = array('y', 'n');
+
     /**
      *  List action
      *
@@ -43,21 +43,14 @@ class ActionController
             }
         }
 
-        fwrite(
-            STDOUT,
-            str_pad('Name', $action_name_max_length)
-            . ' Enabled Public '
-            . str_pad('Route', $action_route_max_length) . PHP_EOL
-        );
+        echo  str_pad('Name', $action_name_max_length) . ' Enabled Public '
+            . str_pad('Route', $action_route_max_length) . PHP_EOL;
 
         foreach ($actions as $key => $action) {
-            fwrite(
-                STDOUT,
-                str_pad($action['name'], $action_name_max_length)
+            echo str_pad($action['name'], $action_name_max_length)
                 . ' ' . str_pad($action['enabled'], strlen('Enabled'))
                 . ' ' . str_pad($action['public'], strlen('Public'))
-                . str_pad($action['route'], $action_route_max_length) . PHP_EOL
-            );
+                . str_pad($action['route'], $action_route_max_length) . PHP_EOL;
         }
     }
 
@@ -72,113 +65,74 @@ class ActionController
      */
     public function addAction()
     {
-        $action_name = '';
-        while ($action_name == '') {
-            fwrite(STDOUT, 'Action Name: ');
-            $action_name = trim(fgets(STDIN));
+        // The options we are accepting for adding
+        $options = new Zend_Console_Getopt(
+            array(
+                'name|n=s'                 => 'Name of the action.',
+                'enabled|e'                => 'Is the action enabled?',
+                'public|p'                 => 'Is the action public?',
+                'route|r=s'                => 'Custom route of the action.',
+                'description|d=s'          => 'Description of the action.',
+                'parameters|pa=s'          => 'List of comma-seperated optional parameters.',
+                'required-parameters|rp=s' => 'List of comma-seperated required parameters.'
+            )
+        );
+
+        try {
+            $options->parse();
+        } catch (Zend_Console_Getopt_Exception $e) {
+            echo $e->getUsageMessage();
+            exit();
         }
 
-        $action_enabled = '';
-        while (!in_array($action_enabled, $this->yes_no_values)) {
-            fwrite(STDOUT, 'Action Enabled(y/n): ');
-            $action_enabled = trim(strtolower(fgets(STDIN)));
-        }
-        $action_enabled = ($action_enabled == 'y' ? '1' : '0');
-
-        $action_public = '';
-        while (!in_array($action_public, $this->yes_no_values)) {
-            fwrite(STDOUT, 'Action Public(y/n): ');
-            $action_public = trim(strtolower(fgets(STDIN)));
-        }
-        $action_public = ($action_public == 'y' ? '1' : '0');
-
-        $action_custom_route = '' ;
-        while (!in_array($action_custom_route, $this->yes_no_values)) {
-            fwrite(STDOUT, 'Custom Route(y/n): ');
-            $action_custom_route = trim(strtolower(fgets(STDIN)));
-        }
-        $action_custom_route = ($action_custom_route == 'y' ? '1' : '0');
-
-        if ($action_custom_route == 1) {
-            $action_custom_route_route = '';
-            while ($action_custom_route_route == '') {
-                fwrite(STDOUT, 'Custom Route: ');
-                $action_custom_route_route = trim(strtolower(fgets(STDIN)));
-            }
+        if ($options->name == '') {
+            echo $options->getUsageMessage();
+            exit();
+        } else if ($options->route == '') {
+            echo $options->getUsageMessage();
+            exit();
         }
 
-        $action_description = '';
-        while ($action_description == '') {
-            fwrite(STDOUT, 'Description: ');
-            $action_description = trim(fgets(STDIN));
-        }
-
-        $add_parameters = '';
-        while (!in_array($add_parameters, $this->yes_no_values)) {
-            fwrite(STDOUT, 'Add parameters(y/n): ');
-            $add_parameters = trim(strtolower(fgets(STDIN)));
-        }
-
-        $action_parameters = array();
-        if ($add_parameters == 'y') {
-
-            while ($add_parameters == 'y') {
-
-                $parameter_name = '';
-                while ($parameter_name == '') {
-                    fwrite(STDOUT, 'Parameter Name: ');
-                    $parameter_name = trim(fgets(STDIN));
-                }
-
-                $parameter_required = '';
-                while (!in_array($parameter_required, $this->yes_no_values)) {
-                    fwrite(STDOUT, 'Parameter Required(y/n): ');
-                    $parameter_required = trim(strtolower(fgets(STDIN)));
-                }
-                $parameter_required = ($parameter_required == 'y' ? 'on' : null);
-
-                $action_parameters[] = array('parameter_name' => $parameter_name, 'parameter_required' => $parameter_required);
-
-                $add_parameters = '';
-                while (!in_array($add_parameters, $this->yes_no_values)) {
-                    fwrite(STDOUT, 'Add another Parameter(y/n): ');
-                    $add_parameters = trim(strtolower(fgets(STDIN)));
-                }
-            }
-        }
+        $action_name               = $options->name;
+        $action_enabled            = $options->enabled === true ? '1' : '0';
+        $action_public             = $options->public === true ? '1' : '0';
+        $action_route              = $options->route;
+        $action_description        = $options->description;
 
         $submit_data = array (
             'name'              => $action_name,
             'enabled'           => $action_enabled,
             'public'            => $action_public,
-            'use_custom_route'  => $action_custom_route,
-            'route'             => $action_custom_route_route,
+            'route'             => $action_route,
             'description'       => $action_description
         );
 
-        foreach ($action_parameters as $parameter_data) {
-           $submit_data['param'][]      = $parameter_data['parameter_name'];
-           $submit_data['required'][]   = $parameter_data['parameter_required'];
+        // Handle parameters passed
+        $action_optional_parameters = explode(',', $options->parameters);
+        $i = 0;
+        foreach ($action_optional_parameters as $parameter) {
+            if ($parameter != '') {
+                $submit_data['param'][$i] = $parameter;
+                $i++;
+            }
+        }
+
+        $action_required_parameters = explode(',', $options->getOption('required-parameters'));
+        foreach ($action_required_parameters as $parameter) {
+            if ($parameter != '') {
+                $submit_data['param'][$i]    = $parameter;
+                $submit_data['required'][$i] = '1';
+                $i++;
+            }
         }
 
         $model = new Default_Model_Action();
-        if ($model->add($submit_data)) {
-            fwrite(STDOUT, 'Action added successfully.' . PHP_EOL);
-        } else {
-            fwrite(STDOUT, 'Error adding action.' . PHP_EOL);
+        try {
+            $model->add($submit_data);
+            echo 'Successfully added action: ' . $action_name . PHP_EOL;
+        } catch (RuntimeException $e) {
+            echo 'Error adding action: ' . $action_name . '. ' . $e->getMessage() . PHP_EOL;
         }
-    }
-
-    /**
-     * Edit an action
-     *
-     * This is the edit action method. It allows you to edit an action.
-     *
-     * @return void
-     */
-    public function editAction()
-    {
-        fwrite(STDOUT, 'editAction has not been implemented yet.' . PHP_EOL);
     }
 
     /**
@@ -190,35 +144,48 @@ class ActionController
      */
     public function deleteAction()
     {
-        fwrite(STDOUT, 'Which action would you like to delete? ' . PHP_EOL);
+        // The options we are accepting for deleting
+        $options = new Zend_Console_Getopt(
+            array(
+                'name|n=s'                 => 'Name of the action.',
+            )
+        );
 
-        $model      = new Default_Model_Action();
-        $actions    = $model->getAll();
+        try {
+            $options->parse();
+        } catch (Zend_Console_Getopt_Exception $e) {
+            echo $e->getUsageMessage();
+            exit();
+        }
+        if ($options->name == '') {
+            echo $options->getUsageMessage();
+            exit();
+        }
 
-        $max_action = 0;
-        $action_to_delete = null;
-        while (!in_array($action_to_delete, array_keys($actions), true)) {
-            foreach ($actions as $key => $action) {
-                fwrite(STDOUT, $key . ' - ' . $action['name'] . PHP_EOL);
-                $max_action = $key;
+        $action_name = ucfirst(strtolower($options->name));
+
+        $model       = new Default_Model_Action();
+        $tempActions = $model->getList();
+        $action_id   = null;
+        foreach ($tempActions as $hash => $tempName) {
+            if ($action_name == $tempName) {
+                $action_id = $hash;
+                break;
             }
-            fwrite(STDOUT, '(0 - ' . $max_action . '): ');
-            $action_to_delete = (int)trim(fgets(STDIN));
         }
 
-        $confirm = '';
-        while (!in_array($confirm, $this->yes_no_values)) {
-            fwrite(STDOUT, 'Are you sure you want to delete ' . $actions[$action_to_delete]['name'] . '(y/n):');
-            $confirm = trim(strtolower(fgets(STDIN)));
+        if (!$action_id) {
+            echo 'Could not delete action: ' . $action_name . '. Could not find match.' . PHP_EOL;
+            exit();
         }
 
-        if ($confirm == 'y') {
-            $hash = $actions[$action_to_delete]['hash'];
-            if ($hash) {
-                $model->delete($hash);
-                fwrite(STDOUT, $actions[$action_to_delete]['name'] . ' was deleted successfully.' . PHP_EOL);
-            }
+        try {
+            $model->delete($action_id);
+            echo 'Successfully deleted action: ' . $action_name . PHP_EOL;
+        } catch (RuntimeException $e) {
+            echo 'Error deleting action: ' . $action_name . '. ' . $e->getMessage() . PHP_EOL;
         }
+
     }
 
     /**
@@ -233,17 +200,20 @@ class ActionController
         $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
 
         if (!is_writable($dir)) {
-                fwrite(STDOUT, 'The path : "' . $dir .
-                    '" is not currently writeable by this user, ' .
-                    'therefore we cannot synchronize the codebase' . PHP_EOL
-                );
-                return;
+            echo STDOUT, 'The path : "' . $dir
+                . '" is not currently writeable by this user, '
+                . 'therefore we cannot synchronize the codebase' . PHP_EOL;
+            exit();
         }
 
         $model = new Default_Model_Action();
-        $model->sync();
 
-        fwrite(STDOUT, 'All actions have been synced successfully.' . PHP_EOL);
+        try {
+            $model->sync();
+            echo 'All actions have been synced successfully.' . PHP_EOL;
+        } catch (RuntimeException $e) {
+            echo 'Error synchronizing actions. ' . $e->getMessage();
+        }
     }
 
     /**
@@ -255,6 +225,6 @@ class ActionController
      */
     public function testAction()
     {
-        fwrite(STDOUT, 'testAction has not been implemented yet.' . PHP_EOL);
+        echo 'Coming soon to a FRAPI install near you!' . PHP_EOL;
     }
 }
