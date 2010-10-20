@@ -96,9 +96,9 @@ class Default_Model_Action extends Lupin_Model
             'route'       =>  $data['route'],
         );
 
-        if (isset($data['param'])) {
+        $values['parameters'] = array();
 
-            $values['parameters'] = array();
+        if (isset($data['param'])) {
 
             if (isset($data['required']) && is_array($data['required'])) {
                  foreach ($data['required'] as $key => $value) {
@@ -119,6 +119,15 @@ class Default_Model_Action extends Lupin_Model
                     'required' => '0',
                 );
             }
+
+        }
+
+        /*
+         * If we have no parameters we still need a <parameters> entry in the
+         * config file.
+         */
+        if (!count($values['parameters'])) {
+            $values['parameters'] = '';
         }
 
         $this->config->add('action', $values);
@@ -192,9 +201,10 @@ class Default_Model_Action extends Lupin_Model
             'route'       =>  $data['route'],
         );
 
+        $values['parameters'] = array();
+
         if (isset($data['param'])) {
             $params = $data['param'];
-            $values['parameters'] = array();
 
             foreach ($params as $param => $value) {
                 if (strlen(trim($data['param'][$param])) <= 0) {
@@ -206,6 +216,14 @@ class Default_Model_Action extends Lupin_Model
                     'required' => (isset($data['required'][$param]) ? '1' : '0'),
                 );
             }
+        }
+
+        /*
+         * If we have no parameters we still need a <parameters> entry in the
+         * config file.
+         */
+        if (!count($values['parameters'])) {
+            $values['parameters'] = '';
         }
 
         try {
@@ -301,9 +319,12 @@ class Default_Model_Action extends Lupin_Model
             }
 
             $params = array();
-            $params = $a['parameters']['parameter'];
 
-            if (isset($params) && !isset($params[0])) {
+            if (isset($a['parameters']['parameter'])) {
+                $params = $a['parameters']['parameter'];
+            }
+
+            if (count($params) && !isset($params[0])) {
                 $params = array($params);
             }
 
