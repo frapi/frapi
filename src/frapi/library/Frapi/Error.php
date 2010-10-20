@@ -93,7 +93,12 @@ class Frapi_Error extends Frapi_Exception
      */
     public function __construct($error_name, $error_msg = false, $http_code = false)
     {
-        $error = self::_get($error_name, $error_msg, $http_code);
+        if ($error_name instanceof Exception) {
+            $error = self::_get($error_name->getCode(), $error_name->getMessage(), 400);
+        } else {
+            $error = self::_get($error_name, $error_msg, $http_code);
+        }
+
         parent::__construct($error['message'], $error['name'], $error['http_code']);
     }
     

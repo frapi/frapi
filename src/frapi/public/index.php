@@ -12,4 +12,7 @@ try {
 } catch (Frapi_Exception $e) {
     echo $controller->processError($e);
     exit;
+} catch (Exception $e) {
+    echo $controller->processError(new Frapi_Error($e));
+    exit;
 }

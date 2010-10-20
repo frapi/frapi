@@ -29,6 +29,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'it_IT.mo', 'it');
 
         $locale = new Zend_Session_Namespace('locale');
+        if ($locale->value === null) {
+            $locale->value = 'en';
+        }
+
         $translate->setLocale($locale->value);
 
         Zend_Registry::set('tr', $translate);
