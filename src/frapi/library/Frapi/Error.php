@@ -116,22 +116,34 @@ class Frapi_Error extends Frapi_Exception
      * @throws Frapi_Error
      * @return void
      */
-    public function errorHandler($errno, $errstr, $errfile, $errline)
+    public static function errorHandler($errno, $errstr, $errfile, $errline)
     {
         $errorType = 'Fatal';
         
         switch ($errno) {
             case E_ERROR:
+            case E_CORE_ERROR:
             case E_USER_ERROR:
                 $errorType = 'Fatal';
                 break;
             case E_WARNING:
+            case E_CORE_WARNING:
             case E_USER_WARNING:
+            case E_COMPILE_WARNING:
                 $errorType = 'Warning';
                 break;
             case E_NOTICE:
             case E_USER_NOTICE:
                 $errorType = 'Notice';
+                break;
+            case E_PARSE:
+                $errorType = 'Parse';
+                break;
+            case E_STRICT:
+                $errorType = 'Strict';
+                break;
+            case E_RECOVERABLE_ERROR:
+                $errorType = 'Recoverable';
                 break;
             default:
                 $errorType = 'Unknown';
