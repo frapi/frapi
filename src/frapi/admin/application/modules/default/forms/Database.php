@@ -21,7 +21,7 @@ class Default_Form_Database extends Lupin_Form
         $tr = Zend_Registry::get('tr');
         
         $hostname = new Zend_Form_Element_Text('db_hostname');
-        $hostname->setLabel($tr->_('HOSTNAME'););
+        $hostname->setLabel($tr->_('HOSTNAME'));
         $this->addElement($hostname);
 
         $username = new Zend_Form_Element_Text('db_username');
