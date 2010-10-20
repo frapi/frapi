@@ -30,22 +30,7 @@ class Frapi_Output_CLI extends Frapi_Output implements Frapi_Output_Interface
      * @var string
      */
     public $mimeType = 'text/plain';
-    
-    /**
-     * Re-defining sendHeaders not to send headers
-     * in CLI environment.
-     *
-     * @return Object $this
-     **/
-    public function sendHeaders()
-    {
-        //Do nothing!
-        //Could output the status code for
-        //information like "Header Would Have Been Sent: xxx"
-        //but nothing for now.
-        return $this;
-    }
-    
+
     /**
      * Populate the Output
      *
