@@ -324,7 +324,7 @@ class Frapi_Action
              return $this->paramInvalid($default, $error_name);
          }
          
-         return $param;
+         return empty($param) ? null : $param;
      }
 
      /**
