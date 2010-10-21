@@ -29,7 +29,7 @@ class ErrorsController
         $errors = $model->getAll();
 
         // Determine our max field widths so we can pad things out appropriately
-        $error_name_max_length = strlen('Name');
+        $error_name_max_length = strlen('Name ');
 
         if ($errors) {
             foreach ($errors as $key => $error) {

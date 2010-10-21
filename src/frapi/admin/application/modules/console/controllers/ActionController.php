@@ -30,8 +30,8 @@ class ActionController
         $actions    = $model->getAll();
 
         // Determine our max field widths so we can pad things out appropriately
-        $action_name_max_length  = strlen('Name') + 1;
-        $action_route_max_length = strlen('Route') + 1;
+        $action_name_max_length  = strlen('Name ');
+        $action_route_max_length = strlen('Route ');
 
         if ($actions) {
             foreach ($actions as $key => $action) {
