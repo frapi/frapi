@@ -279,7 +279,6 @@ class Frapi_Action
                 }
 
                 break;
-            case null:
             case self::TYPE_STRING:
                 $param = (string)$param;
                 break;
@@ -319,34 +318,7 @@ class Frapi_Action
             default:
                 $param = null;
          }
-         
-         if ($param === null) {
-             return $this->paramInvalid($default, $error_name);
-         }
-         
-         return empty($param) ? null : $param;
+                 
+         return $param;
      }
-
-     /**
-      * This method is called when a param from getParam is invalid,
-      * and thus we must return the default value specified, an error
-      * or false, as a last resort.
-      *
-      * @param mixed     $default
-      * @param string    $error_name
-      *
-      * @throws Frapi_Error
-      * @return mixed Either a boolean false or the value of default
-      */
-     protected function paramInvalid($default = null, $error_name = null)
-     {
-         if (!is_null($default)) {
-             return $default;
-         } elseif (!empty($error_name) && !is_null($error_name)) {
-             throw new Frapi_Error($error_name);
-         }
-
-         return false;
-     }
-
 }
