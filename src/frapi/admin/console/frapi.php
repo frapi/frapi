@@ -46,6 +46,15 @@ $app = new Zend_Application(
 );
 $app->bootstrap(array('config', 'db', 'defaultAutoloader', 'acl'));
 
+/**
+ * Set our HTTP_HOST so hashing will work properly
+ */
+global $_SERVER;
+
+$_SERVER['HTTP_HOST'] = '';
+$configModel          = new Default_Model_Configuration();
+$_SERVER['HTTP_HOST'] = $configModel->getKey('api_url');
+
 // Valid things we can do
 $routes = array(
     'action' => array(
