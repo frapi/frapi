@@ -30,29 +30,32 @@ class ActionController
         $actions    = $model->getAll();
 
         // Determine our max field widths so we can pad things out appropriately
-        $action_name_max_length     = 0;
-        $action_route_max_length   = 0;
-        foreach ($actions as $key => $action) {
+        $action_name_max_length  = strlen('Name') + 1;
+        $action_route_max_length = strlen('Route') + 1;
 
-            if (strlen($action['name']) > $action_name_max_length) {
-                $action_name_max_length = strlen($action['name']);
-            }
+        if ($actions) {
+            foreach ($actions as $key => $action) {
 
-            if (strlen($action['route']) > $action_route_max_length) {
-                $action_route_max_length = strlen($action['route']);
+                if (strlen($action['name']) > $action_name_max_length) {
+                    $action_name_max_length = strlen($action['name']) + 1;
+                }
+
+                if (strlen($action['route']) > $action_route_max_length) {
+                    $action_route_max_length = strlen($action['route']) + 1;
+                }
             }
         }
 
-        $action_name_max_length++;
-        $action_route_max_length++;
-
-        echo  str_pad('Name', $action_name_max_length) . ' Enabled Public '
+        echo  str_pad('Name', $action_name_max_length) . 'Enabled Public '
             . str_pad('Route', $action_route_max_length) . PHP_EOL;
-        foreach ($actions as $key => $action) {
-            echo str_pad($action['name'], $action_name_max_length)
-                . ' ' . str_pad($action['enabled'], strlen('Enabled'))
-                . ' ' . str_pad($action['public'], strlen('Public'))
-                . ' ' . str_pad($action['route'], $action_route_max_length) . PHP_EOL;
+
+        if ($actions) {
+            foreach ($actions as $key => $action) {
+                echo str_pad($action['name'], $action_name_max_length) .
+                    str_pad($action['enabled'], strlen('Enabled ')) .
+                    str_pad($action['public'], strlen('Public')) .
+                    str_pad($action['route'], $action_route_max_length) . PHP_EOL;
+            }
         }
     }
 

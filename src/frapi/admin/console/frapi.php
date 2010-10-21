@@ -39,6 +39,7 @@ require_once ROOT_PATH . DIRECTORY_SEPARATOR . 'custom'. DIRECTORY_SEPARATOR . '
 // Include our controllers here
 require APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'console'. DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'ActionController.php';
 require APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'console'. DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'ErrorsController.php';
+require APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'console'. DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'PartnerController.php';
 
 $app = new Zend_Application(
     APPLICATION_ENV, APPLICATION_PATH . DIRECTORY_SEPARATOR . 'config' .
@@ -74,7 +75,11 @@ $routes = array(
         'list' => 'ErrorsController::listAction',
     ),
     'partner' => array(
-        'add' => 'PartnerController::addAction',
+        'add'    => 'PartnerController::addAction',
+        'delete' => 'PartnerController::deleteAction',
+    ),
+    'partners' => array(
+        'list' => 'PartnerController::listAction',
     ),
 
 );
