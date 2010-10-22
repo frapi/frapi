@@ -32,7 +32,6 @@ set_include_path('.' . PATH_SEPARATOR . ROOT_PATH . DIRECTORY_SEPARATOR . 'libra
 
 // Create application, bootstrap, and run
 require_once 'Zend/Application.php';
-require_once 'Zend/Controller/Plugin/Abstract.php';
 
 require_once ROOT_PATH . DIRECTORY_SEPARATOR . 'library' .
 DIRECTORY_SEPARATOR . 'Frapi' . DIRECTORY_SEPARATOR . 'AllFiles.php';
