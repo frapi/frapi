@@ -96,12 +96,18 @@ class TesterController extends Lupin_Controller_Base
         $pass = $this->_request->getParam('secretKey');
 
         $request_url = 'http' . ($ssl !== null ? 's' : '') . '://' . $url . '/' . $query_uri;
-
-        $request = new HttpRequest($request_url, $newMethod);
+        
+        $httpOptions = array();
+        
         if ($email && $pass) {
-            $encoded_auth = base64_encode($email . ':' . $pass);
-            $request->addHeaders(array('Authorization' => 'Basic ' . $encoded_auth));
+            $httpOptions = array(
+                'headers'      => array('Accept' => '*/*'),
+                'httpauth'     => $email . ':' . $pass,
+                'httpauthtype' => HTTP_AUTH_DIGEST,
+            ));
         }
+        
+        $request = new HttpRequest($request_url, $newMethod, $httpOptions);
 
         if ("post" == $method) {
             $request->addPostFields($params);
@@ -122,7 +128,7 @@ class TesterController extends Lupin_Controller_Base
             }
             return $header_string;
         }
-
+        
         $responseInfo = $request->getResponseInfo();
         $response = array(
             'request_url' => $responseInfo['effective_url'],
@@ -131,7 +137,9 @@ class TesterController extends Lupin_Controller_Base
             'content'     => $res->getBody(),
             'status'      => $res->getResponseCode(),
             'method'      => strtoupper($method),
-            'request_post_fields' => http_build_query(!is_null($postFields = $request->getPostFields()) ? $postFields : array())
+            'request_post_fields' => http_build_query(
+                !is_null($postFields = $request->getPostFields()) ? $postFields : array()
+            )
         );
 
         $this->view->renderJson($response);
