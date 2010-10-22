@@ -9,12 +9,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $autoloader = new Zend_Application_Module_Autoloader(array(
             'namespace' => 'Default',
-            'basePath'  => APPLICATION_PATH . DIRECTORY_SEPARATOR . 
+            'basePath'  => APPLICATION_PATH . DIRECTORY_SEPARATOR .
                            'modules' . DIRECTORY_SEPARATOR . 'default',
         ));
-        
     }
-    
+
     protected function _initLanguages()
     {
         $languageDir = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'languages';
@@ -23,7 +22,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $translate = new Zend_Translate(
             'gettext', $languageDir
         );
-        
+
         $translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'en_GB.mo', 'en');
         $translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'fr_FR.mo', 'fr');
         $translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'it_IT.mo', 'it');
@@ -43,10 +42,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initConfig()
     {
         Zend_Registry::set('config', new Zend_Config($this->getOptions()));
-        
-        $localConfigPath = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . 
+
+        $localConfigPath = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' .
                           DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR;
-                          
+
         Zend_Registry::set('localConfigPath', $localConfigPath);
     }
 
@@ -62,7 +61,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $routes = new Zend_Config_Ini(
             APPLICATION_PATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'routes.ini'
         );
-        
+
         $fc->getRouter()->addConfig($routes);
     }
 
@@ -70,11 +69,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         $viewRenderer->initView();
-        
+
         $viewRenderer->view->addHelperPath(
-            'echolibre' . DIRECTORY_SEPARATOR . 
+            'echolibre' . DIRECTORY_SEPARATOR .
             'View' . DIRECTORY_SEPARATOR. 'Helper',
-            
+
             'Zend_View_Helper_FormStatic'
         );
     }
@@ -117,5 +116,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $this->bootstrap('Config');
         Zend_Registry::set('db', $this->getPluginResource('db')->getDbAdapter());
-    } 
+    }
 }

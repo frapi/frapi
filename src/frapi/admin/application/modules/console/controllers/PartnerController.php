@@ -14,7 +14,7 @@
  * @copyright echolibre ltd.
  * @package   frapi-admin
  */
-class PartnerController
+class PartnerController extends Zend_Controller_Action
 {
 
     /**
@@ -26,6 +26,8 @@ class PartnerController
      */
     public function listAction()
     {
+        $this->_helper->viewRenderer->setNoRender();
+
         $model      = new Default_Model_Partner();
         $partners = $model->getAll();
 
@@ -80,6 +82,8 @@ class PartnerController
      */
     public function addAction()
     {
+        $this->_helper->viewRenderer->setNoRender();
+
         // The options we are accepting for adding
         $options = new Zend_Console_Getopt(
             array(
@@ -135,6 +139,8 @@ class PartnerController
      */
     public function deleteAction()
     {
+        $this->_helper->viewRenderer->setNoRender();
+
         // The options we are accepting for deleting
         $options = new Zend_Console_Getopt(
             array(

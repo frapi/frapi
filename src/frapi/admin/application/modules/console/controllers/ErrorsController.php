@@ -14,7 +14,7 @@
  * @copyright echolibre ltd.
  * @package   frapi-admin
  */
-class ErrorsController
+class ErrorsController extends Zend_Controller_Action
 {
     /*
      *  List action
@@ -25,6 +25,8 @@ class ErrorsController
      */
     public function listAction()
     {
+        $this->_helper->viewRenderer->setNoRender();
+
         $model  = new Default_Model_Error();
         $errors = $model->getAll();
 
@@ -60,6 +62,9 @@ class ErrorsController
      */
     public function addAction()
     {
+        $this->_helper->viewRenderer->setNoRender();
+
+        // The options we allow for adding
         $options = new Zend_Console_Getopt(
             array (
                 'name|n=s' => 'Name of the error.',
@@ -115,6 +120,8 @@ class ErrorsController
      */
     public function deleteAction()
     {
+        $this->_helper->viewRenderer->setNoRender();
+
         // The options we are accepting for deleting
         $options = new Zend_Console_Getopt(
             array(

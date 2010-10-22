@@ -14,7 +14,7 @@
  * @copyright echolibre ltd.
  * @package   frapi-admin
  */
-class ActionController
+class ActionController extends Zend_Controller_Action
 {
 
     /**
@@ -26,6 +26,8 @@ class ActionController
      */
     public function listAction()
     {
+        $this->_helper->viewRenderer->setNoRender();
+
         $model      = new Default_Model_Action();
         $actions    = $model->getAll();
 
@@ -70,6 +72,8 @@ class ActionController
      */
     public function addAction()
     {
+        $this->_helper->viewRenderer->setNoRender();
+
         // The options we are accepting for adding
         $options = new Zend_Console_Getopt(
             array(
@@ -149,6 +153,8 @@ class ActionController
      */
     public function deleteAction()
     {
+        $this->_helper->viewRenderer->setNoRender();
+
         // The options we are accepting for deleting
         $options = new Zend_Console_Getopt(
             array(
@@ -202,6 +208,8 @@ class ActionController
      */
     public function syncAction()
     {
+        $this->_helper->viewRenderer->setNoRender();
+
         $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
 
         if (!is_writable($dir)) {
@@ -230,6 +238,8 @@ class ActionController
      */
     public function testAction()
     {
+        $this->_helper->viewRenderer->setNoRender();
+
         echo 'Coming soon to a FRAPI install near you!' . PHP_EOL;
     }
 }
