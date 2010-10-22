@@ -20,32 +20,30 @@
 // Define path to application directory
 define('ROOT_PATH',        dirname(dirname(dirname(__FILE__))));
 define('APPLICATION_PATH', ROOT_PATH . DIRECTORY_SEPARATOR .
-                           'admin' . DIRECTORY_SEPARATOR.'application');
+       'admin' . DIRECTORY_SEPARATOR.'application');
+define('CONSOLE_CONTROLLERS_PATH', APPLICATION_PATH . DIRECTORY_SEPARATOR .
+       'modules' . DIRECTORY_SEPARATOR . 'console' . DIRECTORY_SEPARATOR .
+       'controllers');
 
 // Define application environment
 define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
-
 
 set_include_path('.' . PATH_SEPARATOR . ROOT_PATH . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR . get_include_path());
 
 // Create application, bootstrap, and run
 require_once 'Zend/Application.php';
+require_once 'Zend/Controller/Plugin/Abstract.php';
 
 require_once ROOT_PATH . DIRECTORY_SEPARATOR . 'library' .
 DIRECTORY_SEPARATOR . 'Frapi' . DIRECTORY_SEPARATOR . 'AllFiles.php';
 
 require_once ROOT_PATH . DIRECTORY_SEPARATOR . 'custom'. DIRECTORY_SEPARATOR . 'AllFiles.php';
 
-// Include our controllers here
-require APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'console'. DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'ActionController.php';
-require APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'console'. DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'ErrorsController.php';
-require APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'console'. DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'PartnerController.php';
-
 $app = new Zend_Application(
     APPLICATION_ENV, APPLICATION_PATH . DIRECTORY_SEPARATOR . 'config' .
     DIRECTORY_SEPARATOR.'application.ini'
 );
-$app->bootstrap(array('config', 'db', 'defaultAutoloader', 'acl'));
+$app->bootstrap(array('config', 'db', 'defaultAutoloader'));
 
 /**
  * Set our HTTP_HOST so hashing will work properly
@@ -59,29 +57,28 @@ $_SERVER['HTTP_HOST'] = $configModel->getKey('api_url');
 // Valid things we can do
 $routes = array(
     'action' => array(
-        'add'    => 'ActionController::addAction',
-        'delete' => 'ActionController::deleteAction',
-        'test'   => 'ActionController::testAction',
+        'add'    => 'action/add',
+        'delete' => 'action/delete',
+        'test'   => 'action/test',
     ),
     'actions' => array(
-        'list' => 'ActionController::listAction',
-        'sync' => 'ActionController::syncAction',
+        'list' => 'action/list',
+        'sync' => 'action/sync',
     ),
     'error' => array(
-        'add'    => 'ErrorsController::addAction',
-        'delete' => 'ErrorsController::deleteAction',
+        'add'    => 'errors/add',
+        'delete' => 'errors/delete',
     ),
     'errors' => array(
-        'list' => 'ErrorsController::listAction',
+        'list' => 'errors/list',
     ),
     'partner' => array(
-        'add'    => 'PartnerController::addAction',
-        'delete' => 'PartnerController::deleteAction',
+        'add'    => 'partner/add',
+        'delete' => 'partner/delete',
     ),
     'partners' => array(
-        'list' => 'PartnerController::listAction',
+        'list' => 'partner/list',
     ),
-
 );
 
 if ($argc < 3) {
@@ -104,9 +101,14 @@ if (!isset($routes[$module][$action])) {
     exit;
 }
 
-//Determine what we are calling
-list($controller, $method) = explode('::', $routes[$module][$action]);
+// setup controller
+$controller = Zend_Controller_Front::getInstance();
+$controller->throwExceptions(true);
+$controller->setControllerDirectory(CONSOLE_CONTROLLERS_PATH);
 
-// Now call it
-$controller = new $controller();
-$controller->$method();
+$request = new Zend_Controller_Request_Http();
+$request->setRequestUri($routes[$module][$action]);
+
+$response = new Zend_Controller_Response_Cli();
+
+$controller->dispatch($request, $response);
