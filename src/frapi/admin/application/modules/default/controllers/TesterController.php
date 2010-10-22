@@ -104,7 +104,7 @@ class TesterController extends Lupin_Controller_Base
                 'headers'      => array('Accept' => '*/*'),
                 'httpauth'     => $email . ':' . $pass,
                 'httpauthtype' => HTTP_AUTH_DIGEST,
-            ));
+            )
         }
         
         $request = new HttpRequest($request_url, $newMethod, $httpOptions);
