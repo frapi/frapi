@@ -26,39 +26,10 @@ class ActionController extends Zend_Controller_Action
      */
     public function listAction()
     {
-        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setViewSuffix('txt');
 
-        $model      = new Default_Model_Action();
-        $actions    = $model->getAll();
-
-        // Determine our max field widths so we can pad things out appropriately
-        $action_name_max_length  = strlen('Name ');
-        $action_route_max_length = strlen('Route ');
-
-        if ($actions) {
-            foreach ($actions as $key => $action) {
-
-                if (strlen($action['name']) > $action_name_max_length) {
-                    $action_name_max_length = strlen($action['name']) + 1;
-                }
-
-                if (strlen($action['route']) > $action_route_max_length) {
-                    $action_route_max_length = strlen($action['route']) + 1;
-                }
-            }
-        }
-
-        echo  str_pad('Name', $action_name_max_length) . 'Enabled Public '
-            . str_pad('Route', $action_route_max_length) . PHP_EOL;
-
-        if ($actions) {
-            foreach ($actions as $key => $action) {
-                echo str_pad($action['name'], $action_name_max_length) .
-                    str_pad($action['enabled'], strlen('Enabled ')) .
-                    str_pad($action['public'], strlen('Public')) .
-                    str_pad($action['route'], $action_route_max_length) . PHP_EOL;
-            }
-        }
+        $model               = new Default_Model_Action();
+        $this->view->actions = $model->getAll();
     }
 
     /**
@@ -72,7 +43,7 @@ class ActionController extends Zend_Controller_Action
      */
     public function addAction()
     {
-        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setViewSuffix('txt');
 
         // The options we are accepting for adding
         $options = new Zend_Console_Getopt(
@@ -90,16 +61,16 @@ class ActionController extends Zend_Controller_Action
         try {
             $options->parse();
         } catch (Zend_Console_Getopt_Exception $e) {
-            echo $e->getUsageMessage();
-            exit();
+            $this->view->message = $e->getUsageMessage();
+            return;
         }
 
         if ($options->name == '') {
-            echo $options->getUsageMessage();
-            exit();
+            $this->view->message = $options->getUsageMessage();
+            return;
         } else if ($options->route == '') {
-            echo $options->getUsageMessage();
-            exit();
+            $this->view->message = $options->getUsageMessage();
+            return;
         }
 
         $action_name               = $options->name;
@@ -138,9 +109,9 @@ class ActionController extends Zend_Controller_Action
         $model = new Default_Model_Action();
         try {
             $model->add($submit_data);
-            echo 'Successfully added action: ' . $action_name . PHP_EOL;
+            $this->view->message = 'Successfully added action: ' . $action_name . PHP_EOL;
         } catch (RuntimeException $e) {
-            echo 'Error adding action: ' . $action_name . '. ' . $e->getMessage() . PHP_EOL;
+            $this->view->message = 'Error adding action: ' . $action_name . '. ' . $e->getMessage() . PHP_EOL;
         }
     }
 
@@ -153,7 +124,7 @@ class ActionController extends Zend_Controller_Action
      */
     public function deleteAction()
     {
-        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setViewSuffix('txt');
 
         // The options we are accepting for deleting
         $options = new Zend_Console_Getopt(
@@ -165,8 +136,8 @@ class ActionController extends Zend_Controller_Action
         try {
             $options->parse();
         } catch (Zend_Console_Getopt_Exception $e) {
-            echo $e->getUsageMessage();
-            exit();
+            $this->view->message = $e->getUsageMessage();
+            return;
         }
         if ($options->name == '') {
             echo $options->getUsageMessage();
@@ -186,15 +157,15 @@ class ActionController extends Zend_Controller_Action
         }
 
         if (!$action_id) {
-            echo 'Could not delete action: ' . $action_name . '. Could not find match.' . PHP_EOL;
-            exit();
+            $this->view->message = 'Could not delete action: ' . $action_name . '. Could not find match.' . PHP_EOL;
+            return;
         }
 
         try {
             $model->delete($action_id);
-            echo 'Successfully deleted action: ' . $action_name . PHP_EOL;
+            $this->view->message = 'Successfully deleted action: ' . $action_name . PHP_EOL;
         } catch (RuntimeException $e) {
-            echo 'Error deleting action: ' . $action_name . '. ' . $e->getMessage() . PHP_EOL;
+            $this->view->message = 'Error deleting action: ' . $action_name . '. ' . $e->getMessage() . PHP_EOL;
         }
 
     }
@@ -208,24 +179,24 @@ class ActionController extends Zend_Controller_Action
      */
     public function syncAction()
     {
-        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setViewSuffix('txt');
 
         $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
 
         if (!is_writable($dir)) {
-            echo STDOUT, 'The path : "' . $dir
+            $this->view->message = 'The path : "' . $dir
                 . '" is not currently writeable by this user, '
                 . 'therefore we cannot synchronize the codebase' . PHP_EOL;
-            exit();
+           return;
         }
 
         $model = new Default_Model_Action();
 
         try {
             $model->sync();
-            echo 'All actions have been synced successfully.' . PHP_EOL;
+            $this->view->message = 'All actions have been synced successfully.' . PHP_EOL;
         } catch (RuntimeException $e) {
-            echo 'Error synchronizing actions. ' . $e->getMessage();
+            $this->view->message = 'Error synchronizing actions. ' . $e->getMessage();
         }
     }
 
@@ -238,8 +209,8 @@ class ActionController extends Zend_Controller_Action
      */
     public function testAction()
     {
-        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setViewSuffix('txt');
 
-        echo 'Coming soon to a FRAPI install near you!' . PHP_EOL;
+        $this->view->message = 'Coming soon to a FRAPI install near you!' . PHP_EOL;
     }
 }
