@@ -34,7 +34,7 @@ class Frapi_Error extends Frapi_Exception
     const ERROR_INVALID_URL_PROMPT_FORMAT_NO   = 400;
     const ERROR_INVALID_ACTION_REQUEST_NO      = 404;
     const ERROR_INVALID_PARTNER_ID_NO          = 403;
-    const ERROR_MISSING_REQUEST_ARG_NO         = 401; // Malformed.
+    const ERROR_MISSING_REQUEST_ARG_NO         = 412; // Precondition Failed.
 
     const ERROR_INVALID_SECRET_KEY_MSG         = 'Invalid secret key';
     const ERROR_INVALID_URL_PROMPT_FORMAT_MSG  = 'Invalid format';
