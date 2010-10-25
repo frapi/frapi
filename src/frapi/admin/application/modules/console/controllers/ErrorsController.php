@@ -25,30 +25,10 @@ class ErrorsController extends Zend_Controller_Action
      */
     public function listAction()
     {
-        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setViewSuffix('txt');
 
-        $model  = new Default_Model_Error();
-        $errors = $model->getAll();
-
-        // Determine our max field widths so we can pad things out appropriately
-        $error_name_max_length = strlen('Name ');
-
-        if ($errors) {
-            foreach ($errors as $key => $error) {
-
-                if (strlen($error['name']) > $error_name_max_length) {
-                    $error_name_max_length = strlen($error['name']) + 1;
-                }
-            }
-        }
-
-        echo  str_pad('Name', $error_name_max_length) . 'HTTP Code' . PHP_EOL;
-
-        if ($errors) {
-            foreach ($errors as $key => $error) {
-                echo str_pad($error['name'], $error_name_max_length). $error['http_code'] . PHP_EOL;
-            }
-        }
+        $model              = new Default_Model_Error();
+        $this->view->errors = $model->getAll();
     }
 
     /**
@@ -62,7 +42,7 @@ class ErrorsController extends Zend_Controller_Action
      */
     public function addAction()
     {
-        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setViewSuffix('txt');
 
         // The options we allow for adding
         $options = new Zend_Console_Getopt(
@@ -77,16 +57,16 @@ class ErrorsController extends Zend_Controller_Action
         try {
             $options->parse();
         } catch (Exception $e) {
-            echo $e->getUsageMessage();
-            exit();
+            $this->view->message =  $e->getUsageMessage();
+            return;
         }
 
         if ($options->name == '') {
-            echo $options->getUsageMessage();
-            exit();
+            $this->view->message = $options->getUsageMessage();
+            return;
         } else if ($options->message == '') {
-            echo $options->getUsageMessage();
-            exit();
+            $this->view->message = $options->getUsageMessage();
+            return;
         }
 
         $error_name        = $options->name;
@@ -105,9 +85,9 @@ class ErrorsController extends Zend_Controller_Action
 
         try {
             $model->add($submit_data);
-            echo 'Successfully added error: ' . $error_name . PHP_EOL;
+            $this->view->message = 'Successfully added error: ' . $error_name . PHP_EOL;
         } catch (RuntimeException $e) {
-            echo 'Error adding error: ' . $error_name . '. ' . $e->getMessage() . PHP_EOL;
+            $this->view->message = 'Error adding error: ' . $error_name . '. ' . $e->getMessage() . PHP_EOL;
         }
     }
 
@@ -120,7 +100,7 @@ class ErrorsController extends Zend_Controller_Action
      */
     public function deleteAction()
     {
-        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setViewSuffix('txt');
 
         // The options we are accepting for deleting
         $options = new Zend_Console_Getopt(
@@ -132,12 +112,12 @@ class ErrorsController extends Zend_Controller_Action
         try {
             $options->parse();
         } catch (Zend_Console_Getopt_Exception $e) {
-            echo $e->getUsageMessage();
-            exit();
+            $this->view->message = $e->getUsageMessage();
+            return;
         }
         if ($options->name == '') {
-            echo $options->getUsageMessage();
-            exit();
+            $this->view->message = $options->getUsageMessage();
+            return;
         }
 
         $error_name = strtoupper($options->name);
@@ -152,15 +132,15 @@ class ErrorsController extends Zend_Controller_Action
         }
 
         if (!$error_id) {
-            echo 'Could not delete error: ' . $error_name . '. Could not find match.' . PHP_EOL;
-            exit();
+            $this->view->message = 'Could not delete error: ' . $error_name . '. Could not find match.' . PHP_EOL;
+            return;
         }
 
         try {
             $model->delete($error_id);
-            echo 'Successfully deleted error: ' . $error_name . PHP_EOL;
+            $this->view->message = 'Successfully deleted error: ' . $error_name . PHP_EOL;
         } catch (RuntimeException $e) {
-            echo 'Error deleting errror: ' . $error_name . '. ' . $e->getMessage() . PHP_EOL;
+            $this->view->message = 'Error deleting errror: ' . $error_name . '. ' . $e->getMessage() . PHP_EOL;
         }
     }
 }
