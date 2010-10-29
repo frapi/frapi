@@ -13,15 +13,11 @@
 	<script src="/scripts/jquery.metadata.js" type="text/javascript"></script>
 	<script src="/scripts/jquery.uitablefilter.js" type="text/javascript"></script>
 	<script src="/scripts/jquery.tablesorter.min.js" type="text/javascript"></script>
-	<script type="text/javascript">
-	   $(function() {
-	       $('#sync').live('click', function() {
-	           document.location.href = '/action/sync';
-	       });
-	   });
-	</script>
 	<!-- compliance patch for microsoft browsers -->
 	<!--[if lt IE 8]><script src="/scripts/IE8.js" type="text/javascript"></script><![endif]-->
+    <link id="bespin_base" href="/bespin" />
+    
+    <script type="text/javascript" src="/bespin/BespinEmbedded.js"></script>
 	<title>FRAPI <?php echo $this->tr->_('ADMIN_INTERFACE'); ?></title>
 </head>
 

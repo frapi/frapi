@@ -125,6 +125,8 @@ class ActionController extends Lupin_Controller_Base
      */
     public function codeAction()
     {
+        $translate = Zend_Registry::get('tr');
+
         $request = $this->getRequest();
         $this->view->id = $id = $request->getParam('id');
         if ($id === null) {
@@ -132,21 +134,37 @@ class ActionController extends Lupin_Controller_Base
             return;
         }
 
-        $data = $request->getParams();
-
         $model = new Default_Model_Action;
 
+        $data       = $request->getParams();
         $actionData = $model->get($id);
-        $name = $actionData['name'];
-        $file = $name . '.php';
+        $name       = $actionData['name'];
+        $file       = $name . '.php';
 
         $dir = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
         $file = $dir . DIRECTORY_SEPARATOR . $file;
-        $content = file_get_contents($file);
-        $content = str_replace('<?php', '', $content);
-        $this->view->name = $name;
-        $this->view->content = $content;
 
+        if ($this->_request->isPost()) {
+            $content = $this->_request->getParam('code');
+            if (!is_writable($file)) {
+                $this->addMessage($translate->_('FILE_NOT_WRITABLE'));
+                $this->_redirect('/action/code/id/' . htmlentities($id));
+            }
+
+            file_put_contents($file, $content);
+            $this->addMessage($translate->_('FILE_CONTENT_UPDATED'));
+            $this->_redirect('/action');
+
+        } else {
+            if (!file_exists($file)) {
+                $this->addMessage($translate->_('FILE_NOT_EXIST_HAVE_YOU_SYNCED'));
+                $this->_redirect('/action');
+            }
+
+            $content = file_get_contents($file);
+            $this->view->name = $name;
+            $this->view->content = $content;
+        }
     }
 
     /**

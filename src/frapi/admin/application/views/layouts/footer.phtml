@@ -1,6 +1,13 @@
 	<div class="footer">FRAPI &#8212; &copy; <?php echo date('Y'); ?>, echolibre.</div>
 
 </div>
+	<script type="text/javascript">
+	   $(document).ready(function() {
+	       $('#sync').live('click', function() {
+	           document.location.href = '/action/sync';
+	       });
+	   });
+	</script>
 
 </body>
 

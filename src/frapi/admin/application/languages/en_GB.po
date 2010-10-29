@@ -364,3 +364,15 @@ msgstr "Synchronize Development Codebase"
 
 msgid "ADMIN_INTERFACE"
 msgstr "Admin Interface"
+
+msgid "FILE_NOT_EXIST_HAVE_YOU_SYNCED"
+msgstr "This file doesn't exist... have you sync'ed since you created this action?"
+
+msgid "EDITING_ACTION"
+msgstr "Editing Action"
+
+msgid "FILE_NOT_WRITABLE"
+msgstr "This file is not writeable, please give the web-user write access to the custom directory."
+
+msgid "FILE_CONTENT_UPDATED"
+msgstr "The content of the file has been updated with success."

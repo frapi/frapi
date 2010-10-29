@@ -20,7 +20,8 @@ if ($pos !== false && $pos === $lpos) {
 
 
 ?>	
-    <?php if ($this->menuItem !== '/action/code') :?>
+
+    <?php if ($this->menuItem != '/action/code') : ?>
 	<div class="sidenav">
 		<h2><?php echo $this->tr->_('SUBMENU'); ?></h2>
     <?php if (in_array($item, array('/configuration', '/database', '/cache', '/output'))) { ?>
@@ -38,4 +39,5 @@ if ($pos !== false && $pos === $lpos) {
         <li<?php echo $item == '/action/add' ? ' class="active"' : '' ?>><a href="/action/add"><?php echo $this->tr->_('ADD_NEW_ACTION'); ?></a></li>
     <?php } ?>
 	</div>
-	<?php endif; ?>
+    <?php endif; ?>
+    <div class="sidenav" style="display: none; visibility: hidden;"></div>

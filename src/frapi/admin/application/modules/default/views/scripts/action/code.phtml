@@ -1,0 +1,18 @@
+
+<h2><?php echo $this->tr->_('EDITING_ACTION'); ?>: <?php echo $this->name; ?></h2>
+<br />
+<br />
+<form method="post" style="width: 750px;">
+  <textarea id="edit" name="code" style="width: 750px; height: 500px; font-size: 11px;" ><?php echo $this->content; ?></textarea>
+  <br /><br /><br />
+  <input type="submit" value="<?php echo $this->tr->_('SAVE'); ?>" />
+</form>
+<script type="text/javascript">
+window.onBespinLoad = function() {
+    var edit = document.getElementById('edit');
+    bespin.useBespin(edit, {
+        stealFocus: true,
+        syntax: 'php'
+    });
+};
+</script>

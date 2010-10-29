@@ -31,6 +31,7 @@
         <td class="<?php echo $class; ?>"><?php echo $enabled; ?></td>
         <td style="text-align: center;">
             <a href="/action/edit/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('EDIT'); ?></a> |
+            <a href="/action/code/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('CODE'); ?></a> |
             <?php
                 if ($d['enabled'] == '1') {
 //                    echo '<a href="#">Disable</a>';
