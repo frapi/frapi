@@ -96,9 +96,9 @@ class TesterController extends Lupin_Controller_Base
         $pass = $this->_request->getParam('secretKey');
 
         $request_url = 'http' . ($ssl !== null ? 's' : '') . '://' . $url . '/' . $query_uri;
-        
+
         $httpOptions = array();
-        
+
         if ($email && $pass) {
             $httpOptions = array(
                 'headers'      => array('Accept' => '*/*'),
@@ -106,7 +106,7 @@ class TesterController extends Lupin_Controller_Base
                 'httpauthtype' => HTTP_AUTH_DIGEST,
             );
         }
-        
+
         $request = new HttpRequest($request_url, $newMethod, $httpOptions);
 
         if ("post" == $method) {
@@ -117,31 +117,30 @@ class TesterController extends Lupin_Controller_Base
 
         $res = $request->send();
 
-        function collapseHeaders($headers) {
-            $header_string = "";
-            foreach ($headers as $name => $value) {
-                if (is_array($value)) {
-                    $value = implode("\n\t", $value);
-                }
-
-                $header_string .= $name . ": " . wordwrap($value, 45, "\n\t") . "\n";
-            }
-            return $header_string;
-        }
-        
         $responseInfo = $request->getResponseInfo();
         $response = array(
-            'request_url' => $responseInfo['effective_url'],
-            //'request_headers' => collapseHeaders($res->getResponse()->getRequestHeaders()),
-            'response_headers' => collapseHeaders($res->getHeaders()),
-            'content'     => $res->getBody(),
-            'status'      => $res->getResponseCode(),
-            'method'      => strtoupper($method),
+            'request_url'         => $responseInfo['effective_url'],
+            'response_headers'    => $this->collapseHeaders($res->getHeaders()),
+            'content'             => $res->getBody(),
+            'status'              => $res->getResponseCode(),
+            'method'              => strtoupper($method),
             'request_post_fields' => http_build_query(
                 !is_null($postFields = $request->getPostFields()) ? $postFields : array()
             )
         );
 
         $this->view->renderJson($response);
+    }
+
+    protected function collapseHeaders($headers) {
+        $header_string = "";
+        foreach ($headers as $name => $value) {
+            if (is_array($value)) {
+                $value = implode("\n\t", $value);
+            }
+
+            $header_string .= $name . ": " . wordwrap($value, 45, "\n\t") . "\n";
+        }
+        return $header_string;
     }
 }
