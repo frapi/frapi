@@ -1,2 +1,22 @@
 <?php
-echo $this->message;
+if ($this->message) {
+    echo $this->message;
+    exit();
+}
+
+echo PHP_EOL . 'Request (' . $this->method . ')' . PHP_EOL;
+echo str_repeat('=', 20) . PHP_EOL;
+echo $this->request_url . PHP_EOL . PHP_EOL;
+echo 'Response (Code ' . $this->status . ')' . PHP_EOL;
+echo str_repeat('=', 20) . PHP_EOL;
+echo $this->response_header . PHP_EOL . PHP_EOL;
+
+if ($this->request_post_fields != '') {
+    echo 'Post Fields' . PHP_EOL;
+    echo str_repeat('=', 20) . PHP_EOL;
+    echo $this->request_post_fields . PHP_EOL . PHP_EOL;
+}
+
+echo 'Content Body' . PHP_EOL;
+echo str_repeat('=', 20) . PHP_EOL;
+echo $this->content . PHP_EOL . PHP_EOL;

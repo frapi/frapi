@@ -132,7 +132,8 @@ class TesterController extends Lupin_Controller_Base
         $this->view->renderJson($response);
     }
 
-    protected function collapseHeaders($headers) {
+    protected function collapseHeaders($headers)
+    {
         $header_string = "";
         foreach ($headers as $name => $value) {
             if (is_array($value)) {

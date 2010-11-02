@@ -210,7 +210,134 @@ class ActionController extends Zend_Controller_Action
     public function testAction()
     {
         $this->_helper->viewRenderer->setViewSuffix('txt');
+        // The options we are accepting for adding
+        $options = new Zend_Console_Getopt(
+            array(
+                'name|n=s'       => 'Name of the action to call.',
+                'parameters|p=s' => 'Paramters to use. For example var1=val1&var2=val2',
+                'format|f=s'     => 'Format to return. Defaults to XML.',
+                'method|m=s'     => 'Method to use. Defaults to GET.',
+                'email|e=s'      => 'Email or username to use.',
+                'secretkey|sk=s' => 'Secret key associated with email passed.',
+                'domain|d=s'     => 'Domain to use, if not included will use default',
+                'query-uri|u=s'  => 'Query uri to use. For example /testing/1',
+                'https|h'        => 'Use https.',
+            )
+        );
 
-        $this->view->message = 'Coming soon to a FRAPI install near you!' . PHP_EOL;
+        try {
+            $options->parse();
+        } catch (Zend_Console_Getopt_Exception $e) {
+            $this->view->message = $e->getUsageMessage();
+            return;
+        }
+
+        if ($options->name == '') {
+            $this->view->message = $options->getUsageMessage();
+            return;
+        }
+
+        $confModel   = new Default_Model_Configuration();
+        if (!$confModel->getKey('api_url')) {
+            $this->view->message = 'Remember you can set the default API domain name in your admin configuration.' . PHP_EOL;
+        }
+
+        if (!class_exists('HttpRequest')) {
+            $this->view->message = 'HttpRequest class was not found the pecl_http (http://pecl.php.net/package/pecl_http) package is required to use the tester.' . PHP_EOL;
+            return;
+        }
+
+        $action_name   = $options->name;
+        $params        = $options->parameters;
+        $format        = $options->format;
+        $method        = $options->method;
+        $email         = $options->email;
+        $password      = $options->secretkey;
+        $url           = $options->domain;
+        $ssl           = $options->https;
+        $query_uri     = $options->getOption('query-uri');
+
+        if ($url == '') {
+            $url = $confModel->getKey('api_url');
+        }
+
+        if ($query_uri == '') {
+            $actionModel = new Default_Model_Action();
+            $actions     = $actionModel->getAll();
+
+            foreach( $actions as $action_details) {
+                if ($action_details['name'] == $action_name) {
+                    $query_uri = $action_details['route'];
+                }
+            }
+        }
+
+        $newMethod = HTTP_METH_GET;
+
+        switch (strtolower($method)) {
+            case 'get':
+                $newMethod = HTTP_METH_GET;
+                break;
+
+            case 'post':
+                $newMethod = HTTP_METH_POST;
+                break;
+
+            case 'put':
+                $newMethod = HTTP_METH_PUT;
+                break;
+
+            case 'delete':
+                $newMethod = HTTP_METH_DELETE;
+                break;
+
+            case 'head':
+                $newMethod = HTTP_METH_HEAD;
+                break;
+        }
+
+        $request_url = 'http' . ($ssl !== null ? 's' : '') . '://' . $url . '/' . $query_uri . '.' . strtolower($format);
+
+        $httpOptions = array();
+
+        if ($email && $password) {
+            $httpOptions = array(
+                'headers'      => array('Accept' => '*/*'),
+                'httpauth'     => $email . ':' . $password,
+                'httpauthtype' => HTTP_AUTH_DIGEST,
+            );
+        }
+
+        $request = new HttpRequest($request_url, $newMethod, $httpOptions);
+
+        if ("POST" == strtoupper($method)) {
+            $request->setBody($params);
+        } else {
+            $request->setQueryData($params);
+        }
+
+        $res = $request->send();
+
+        $responseInfo                    = $request->getResponseInfo();
+        $this->view->request_url         = $responseInfo['effective_url'];
+        $this->view->response_header     = $this->collapseHeaders($res->getHeaders());
+        $this->view->content             = $res->getBody();
+        $this->view->status              = $res->getResponseCode();
+        $this->view->method              = isset($method) ? strtoupper($method) : 'GET';
+        $this->view->request_post_fields = ($newMethod == HTTP_METH_POST) ? $params : '';
+
+    }
+
+    protected function collapseHeaders($headers)
+    {
+        $header_string = "";
+        foreach ($headers as $name => $value) {
+            if (is_array($value)) {
+                $value = implode("\n\t", $value);
+            }
+
+            $header_string .= $name . ": " . wordwrap($value, 45, "\n\t") . "\n";
+        }
+        return $header_string;
     }
 }
