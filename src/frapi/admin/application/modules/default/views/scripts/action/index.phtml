@@ -39,7 +39,7 @@
 //                    echo '<a href="#">Enable</a>';
                 }
             ?>
-            <a href="/action/delete/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('DELETE'); ?></a>
+            <a href="/action/delete/id/<?php echo $d['hash']; ?>" onclick="return confirm('Are you sure you want to delete this action?');"><?php echo $this->tr->_('DELETE'); ?></a>
         </td>
       </tr>
 <?php endif; endforeach; ?>
