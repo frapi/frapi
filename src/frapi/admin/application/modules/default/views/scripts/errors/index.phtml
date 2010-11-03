@@ -20,7 +20,7 @@
         <td><?php echo $d['name']; ?></td>
         <td><?php echo $d['message']; ?></td>
         <td style="text-align: center;">
-            <a href="/errors/edit/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('EDIT'); ?></a> | <a href="/errors/delete/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('DELETE'); ?></a>
+            <a href="/errors/edit/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('EDIT'); ?></a> | <a href="/errors/delete/id/<?php echo $d['hash']; ?>" onclick="return confirm('Are you sure you want to delete this error?');"><?php echo $this->tr->_('DELETE'); ?></a>
         </td>
       </tr>
 <?php endif; endforeach; ?>
