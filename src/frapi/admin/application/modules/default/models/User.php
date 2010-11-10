@@ -135,7 +135,7 @@ class Default_Model_User extends Lupin_Model_DB
     public function handleAvailable($handle)
     {
         $user = $this->config->getByField('user', 'handle', $handle);
-        if (isset($user)) {
+        if (isset($user) && $user !== false) {
             return false;
         }
         
