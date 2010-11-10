@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<frapi-config>
+ <versions>
+  <version>
+   <name>latest</name>
+   <value>latest</value>
+   <urlPrefix>latest</urlPrefix>
+   <hash>d7b36825b1141a96e7181a6fee277944d61edd9a</hash>
+  </version>
+ </versions>
+</frapi-config>
