@@ -356,6 +356,8 @@ class Default_Model_Action extends Lupin_Model
                 chmod($file, 0777);
             }
         }
+
+        $this->refreshAPCCache();
     }
 
     /**
