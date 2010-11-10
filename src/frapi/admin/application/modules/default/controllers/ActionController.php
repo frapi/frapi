@@ -95,8 +95,9 @@ class ActionController extends Lupin_Controller_Base
      */
     public function addAction()
     {
-        $form  = new Default_Form_Action;
-        $model = new Default_Model_Action;
+        $form     = new Default_Form_Action;
+        $model    = new Default_Model_Action;
+        $versions = new Default_Model_Versions;
 
         $request = $this->getRequest();
         if ($request->isPost()) {

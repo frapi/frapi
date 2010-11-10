@@ -376,3 +376,12 @@ msgstr "This file is not writeable, please give the web-user write access to the
 
 msgid "FILE_CONTENT_UPDATED"
 msgstr "The content of the file has been updated with success."
+
+msgid "VERSIONS"
+msgstr "Versions"
+
+msgid "URL_PREFIX"
+msgstr "URL Prefix"
+
+msgid "ADD_NEW_VERSION"
+msgstr "Add new version"

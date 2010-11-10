@@ -29,6 +29,8 @@ if ($pos !== false && $pos === $lpos) {
       <li<?php echo $item == '/user' ? ' class="active"' : '' ?>><a href="/user"><?php echo $this->tr->_('USERS'); ?></a></li>
       <li<?php echo $item == '/output' ? ' class="active"' : '' ?>><a href="/output"><?php echo $this->tr->_('OUTPUT'); ?></a></li>
       <li<?php echo $item == '/database' ? ' class="active"' : '' ?>><a href="/database"><?php echo $this->tr->_('DATABASE'); ?></a></li>
+      <li<?php echo $item == '/versions' ? ' class="active"' : '' ?>><a href="/versions"><?php echo $this->tr->_('VERSIONS'); ?></a></li>
+      
     <?php } elseif ($item == '/user') { ?>
         <li<?php echo $item == '/user/add' ? ' class="active"' : '' ?>><a href="/user/add"><?php echo $this->tr->_('ADD_NEW_USER'); ?></a></li>
     <?php } elseif ($item == '/partners') { ?>
@@ -37,6 +39,8 @@ if ($pos !== false && $pos === $lpos) {
         <li<?php echo $item == '/errors/add' ? ' class="active"' : '' ?>><a href="/errors/add"><?php echo $this->tr->_('ADD_NEW_ERROR'); ?></a></li>
     <?php } elseif ($item == '/action') { ?>
         <li<?php echo $item == '/action/add' ? ' class="active"' : '' ?>><a href="/action/add"><?php echo $this->tr->_('ADD_NEW_ACTION'); ?></a></li>
+    <?php } elseif ($item == '/versions') { ?>
+        <li<?php echo $item == '/versions/add' ? ' class="active"' : '' ?>><a href="/versions/add"><?php echo $this->tr->_('ADD_NEW_VERSION'); ?></a></li>
     <?php } ?>
 	</div>
     <?php endif; ?>

@@ -28,5 +28,15 @@
     </parameter>
    </parameters>
   </action>
+  <action>
+   <name>Testing3</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description></description>
+   <route>/custom/route/:var</route>
+   <version>d7b36825b1141a96e7181a6fee277944d61edd9a</version>
+   <parameters></parameters>
+   <hash>95f61f431f09d2b8dc13c173d570edf8776b785e</hash>
+  </action>
  </actions>
 </frapi-config>

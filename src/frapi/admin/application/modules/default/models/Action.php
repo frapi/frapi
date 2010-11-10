@@ -50,7 +50,8 @@ class Default_Model_Action extends Lupin_Model
     {
         $whitelist = array(
             'name',  'enabled',  'description',  'public',
-            'param', 'required', 'route', 'use_custom_route'
+            'param', 'required', 'route', 'use_custom_route',
+            'version',
         );
 
         $this->whiteList($whitelist, $data);
@@ -67,7 +68,7 @@ class Default_Model_Action extends Lupin_Model
 
         // Routes can only be lower case!
         $data['route'] = strtolower($data['route']);
-
+       
         // Validate the route does not already exist and is valid
         $router = new Frapi_Router();
         $router->loadAndPrepareRoutes();
@@ -94,6 +95,7 @@ class Default_Model_Action extends Lupin_Model
             'public'      =>  $data['public'],
             'description' =>  $data['description'],
             'route'       =>  $data['route'],
+            'version'     =>  $data['version'],
         );
 
         $values['parameters'] = array();
@@ -356,6 +358,8 @@ class Default_Model_Action extends Lupin_Model
                 chmod($file, 0777);
             }
         }
+
+        $this->refreshAPCCache();
     }
 
     /**

@@ -25,6 +25,19 @@ class Default_Form_Action extends Lupin_Form
         $name->setRequired(true);
         $this->addElement($name);
 
+        $model = new Default_Model_Versions;
+        $versions = $model->getAll();
+        $select = array();
+        foreach ($versions as $key => $version) {
+            $select[$version['hash']] = $version['name'];
+        }
+
+        $version = new Zend_Form_Element_Select('version');
+        $version->setLabel($tr->_('VERSION'));
+        $version->setRequired(true);
+        $version->addMultioptions(array(null => 'API Version') + $select);
+        $this->addElement($version);
+
         $enabled = new Zend_Form_Element_Checkbox('enabled');
         $enabled->setLabel($tr->_('IS_ACTION_ENABLED'));
         $this->addElement($enabled);
