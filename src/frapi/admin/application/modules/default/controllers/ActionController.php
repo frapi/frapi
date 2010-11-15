@@ -139,10 +139,10 @@ class ActionController extends Lupin_Controller_Base
         $data       = $request->getParams();
         $actionData = $model->get($id);
         $name       = $actionData['name'];
-        $file       = $name . '.php';
+        $file       = strtolower($name) . '.php';
 
         $dir = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
-        $file = $dir . DIRECTORY_SEPARATOR . $file;
+        $file = $dir . DIRECTORY_SEPARATOR . ucfirst($file);
 
         if ($this->_request->isPost()) {
             $content = $this->_request->getParam('code');
