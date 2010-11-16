@@ -132,15 +132,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         $action = 'executeAction';
 
         if ($method !== false) {
-            switch (strtolower($method)) {
-                case 'get':
-                case 'post':
-                case 'put':
-                case 'delete':
-                case 'head':
-                    $action = 'execute' . ucfirst(strtolower($method));
-                    break;
-            }
+            $action = 'execute' . ucfirst(strtolower($method));
         }
 
         $response = $this->actionContext->$action();
