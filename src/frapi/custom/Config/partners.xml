@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <frapi-config>
- <partners/>
+ <partners>
+  <partner>
+   <firstname>test</firstname>
+   <lastname>test</lastname>
+   <email>test</email>
+   <company>test</company>
+   <api_key>34c285b25ac62f9472265d1e41f8a77f5d2382f6</api_key>
+   <hash>e326a4351d1fc4399b68eba62f15a52a7335b7a0</hash>
+  </partner>
+ </partners>
 </frapi-config>
