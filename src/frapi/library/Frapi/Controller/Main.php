@@ -23,8 +23,15 @@
  */
 class Frapi_Controller_Main
 {
+    /**
+     * Constant used to retrieve extra caching information
+     * through the headers. If this is set to true, you will
+     * receive the size of the reuqest, the size of each 
+     * key in the cache and such information.
+     *
+     * @var bool Whether or not the webservice should be in debug mode.
+     */
     const MAIN_WEBSERVICE_DEBUG  = false;
-    const MAIN_WESERVICE_TESTING = true;
     
     /**
      * The request parameter
@@ -400,28 +407,5 @@ class Frapi_Controller_Main
     private function setAction($action = false)
     {
         $this->action = strtolower($action);
-    }
-
-    /**
-     * Set headers
-     *
-     * Set the headers to the type of
-     * output we have. (json,xml)
-     *
-     * @return void
-     */
-    public function setHeaders()
-    {
-        if (!self::MAIN_WESERVICE_TESTING && $this->getFormat() != 'cli') {
-            $type    = 'application/' . $this->getFormat();
-            $charset = $this->encoding;
-            $file    = strtolower($this->getFormat());
-
-            if (self::MAIN_WEBSERVICE_DEBUG && $this->getFormat() != 'xml') {
-                $type = 'text/plain';
-            }
-            
-            
-        }
     }
 }

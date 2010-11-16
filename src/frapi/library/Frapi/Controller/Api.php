@@ -63,7 +63,6 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
     public function __construct()
     {
         parent::__construct();
-        $this->setHeaders();
     }
 
     /**
