@@ -19,6 +19,9 @@ set_include_path(
 require_once 'Zend/Application.php';
 $app = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/config/application.ini');
 
+// HTTP_HOST is required by most tests
+$_SERVER['HTTP_HOST'] = 'test';
+
 /**
  * shorthand debug functions via Jaybill
  * http://jaybill.com/2007/10/01/the-most-useful-function-you-will-ever-use-in-the-zend-framework/
