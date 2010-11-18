@@ -18,7 +18,7 @@
  */
 
 // Define path to application directory
-define('ROOT_PATH',        dirname(dirname(dirname(__FILE__))));
+define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
 define('APPLICATION_PATH', ROOT_PATH . DIRECTORY_SEPARATOR .
        'admin' . DIRECTORY_SEPARATOR.'application');
 define('CONSOLE_CONTROLLERS_PATH', APPLICATION_PATH . DIRECTORY_SEPARATOR .
@@ -101,13 +101,15 @@ if (!isset($routes[$module][$action])) {
 }
 
 // setup controller
-$controller = Zend_Controller_Front::getInstance();
-$controller->throwExceptions(true);
-$controller->setControllerDirectory(CONSOLE_CONTROLLERS_PATH);
+$frontController = Zend_Controller_Front::getInstance();
+$frontController->throwExceptions(true);
+$frontController->addModuleDirectory(APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules');
+
+$route = 'console/' . $routes[$module][$action];
 
 $request = new Zend_Controller_Request_Http();
-$request->setRequestUri($routes[$module][$action]);
+$request->setRequestUri($route);
 
 $response = new Zend_Controller_Response_Cli();
 
-$controller->dispatch($request, $response);
+$frontController->dispatch($request, $response);

@@ -14,7 +14,7 @@
  * @copyright echolibre ltd.
  * @package   frapi-admin
  */
-class ErrorsController extends Zend_Controller_Action
+class Console_ErrorsController extends Zend_Controller_Action
 {
     /*
      *  List action
