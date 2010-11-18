@@ -4,3 +4,8 @@
 .buildpath
 .project
 .settings
+
+#
+# Ignore the Netbeans nbproject folder
+#
+nbproject
