@@ -30,7 +30,9 @@ class LanguageController extends Lupin_Controller_Base
 
         if ($this->_request->isPost()) {
 
-            $config_model->updateLocale($data['languages']);
+            if (isset($data['system_wide']) && $data['system_wide'] == 1) {
+                $config_model->updateLocale($data['languages']);
+            }
 
             $localeSession = new Zend_Session_Namespace('locale');
             $translate = Zend_Registry::get('tr');

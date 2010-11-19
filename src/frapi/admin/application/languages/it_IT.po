@@ -177,6 +177,15 @@ msgstr "Aggiorna la configurazione"
 msgid "API_DOMAIN"
 msgstr "Dominio dell'API"
 
+msgid "ADMIN_LANGUAGE"
+msgstr "FRAPI Amministrazione Lingua"
+
+msgid "LANGUAGE"
+msgstr "Lingua"
+
+msgid "UPDATE_SYSTEM_WIDE"
+msgstr "Aggiorna tutto il sistema"
+
 msgid "FOR_TESTER"
 msgstr "Per i Tester"
 

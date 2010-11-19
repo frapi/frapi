@@ -176,6 +176,15 @@ msgstr "API Domain"
 msgid "FOR_TESTER"
 msgstr "for Tester"
 
+msgid "ADMIN_LANGUAGE"
+msgstr "FRAPI Administration Language"
+
+msgid "LANGUAGE"
+msgstr "Language"
+
+msgid "UPDATE_SYSTEM_WIDE"
+msgstr "Update system wide"
+
 msgid "CACHE_HELP_ONE"
 msgstr "Listed below are Frapi's internal cache keys, colour-coded by status. Click to see cache contents."
 

@@ -7,16 +7,11 @@
 
 <br />
 
-<h2>FRAPI Administration Language</h2>
+<h2><?php echo $this->tr->_('ADMIN_LANGUAGE'); ?></h2>
 <div id="langSelector">
-    <form action="/language" method="post">
-        <select name="languages" style="width: 200px;">
-            <option value="en">English</option>
-            <option value="fr">Francais</option>
-            <option value="it">Italiano</option>
-        </select>
-        <br />
 
-        <input type="submit" value="<?php echo $this->tr->_('SAVE'); ?>" />
-    </form>
+<?php
+    echo $this->lang_form;
+?>
+</form>
 </div>
