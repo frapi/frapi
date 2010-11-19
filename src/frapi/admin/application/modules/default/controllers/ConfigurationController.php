@@ -20,20 +20,21 @@ class ConfigurationController extends Lupin_Controller_Base
     {
         $actions = array('index');
         $this->_helper->_acl->allow('admin', $actions);
-        
+
         parent::init($styles);
     }
 
-    public function indexAction() 
+    public function indexAction()
     {
         $config_model = new Default_Model_Configuration();
         $form         = new Default_Form_Configuration();
+        $lang_form    = new Default_Form_Language();
         $data         = $this->_request->getParams();
-        
+
         if ($this->_request->isPost()) {
             if ($form->isValid($data)) {
                 $res = $config_model->updateApiUrl($data['api_url']);
-                
+
                 if ($res !== false) {
                     $this->addMessage('Configuration updated!');
                     $this->_redirect('/configuration');
@@ -43,8 +44,10 @@ class ConfigurationController extends Lupin_Controller_Base
             $form->populate(array(
                 'api_url' => $config_model->getKey('api_url')
             ));
-            
+
             $this->view->form = $form;
         }
+
+        $this->view->lang_form = $lang_form;
     }
 }

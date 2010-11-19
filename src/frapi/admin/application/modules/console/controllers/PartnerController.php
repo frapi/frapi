@@ -14,7 +14,7 @@
  * @copyright echolibre ltd.
  * @package   frapi-admin
  */
-class PartnerController extends Zend_Controller_Action
+class Console_PartnerController extends Zend_Controller_Action
 {
 
     /**
