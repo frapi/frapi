@@ -36,14 +36,14 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
      * @var string
      */
     private $_typeHinting = false;
-    
+
     /**
      * XML Mime Type
      *
      * @var string
      */
     public $mimeType = 'application/xml';
-    
+
     /**
      * Populate the Output
      *
@@ -53,16 +53,16 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
      *
      * @param Mixed  $response Most of the times an array but could be and stdClass
      * @param String $customTemplate The custom template file to use instead of the default one.
-     *                        
+     *
      * @return Object $This object
      */
     public function populateOutput($data, $customTemplate = false)
     {
         $directory = CUSTOM_OUTPUT . DIRECTORY_SEPARATOR . 'xml';
-        
+
         $file = $directory . DIRECTORY_SEPARATOR .
                 ucfirst(strtolower($this->action)) . '.xml.tpl';
-                
+
         if ($customTemplate !== false) {
             $file = $directory . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR .
                     $customTemplate . '.xml.tpl';
@@ -70,11 +70,13 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
 
         $xml = '';
 
-        $print = hash('md5', json_encode($data));
-        
+        $print = hash('md5', json_encode(
+            $data + array('__action__name' => $this->action)
+        ));
+
         if ($response = Frapi_Internal::getCached($print)) {
             $this->response = json_decode($response);
-            
+
         } elseif (file_exists($file)) {
             ob_start();
             echo '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
@@ -83,7 +85,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
             ob_end_clean();
             $this->response = $xml;
             Frapi_Internal::setCached($print, json_encode($xml));
-            
+
         } elseif ($this->action == 'defaultError') {
             $directory = LIBRARY_OUTPUT . DIRECTORY_SEPARATOR . 'xml';
             $file      = $directory . DIRECTORY_SEPARATOR . 'Defaulterror.xml.tpl';
@@ -92,16 +94,16 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
             include $file;
             $xml = ob_get_contents();
             ob_end_clean();
-            
+
             $this->response = $xml;
-            Frapi_Internal::setCached($print, json_encode($xml));          
+            Frapi_Internal::setCached($print, json_encode($xml));
         } else {
             $this->response = $this->_generateXML($data);
         }
 
         return $this;
     }
-    
+
     /**
      * Execute the output
      *
@@ -114,7 +116,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
     {
         return $this->response;
     }
-    
+
     /**
      * Set type hinting on/off.
      *
@@ -129,10 +131,10 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
             $this->_typeHinting = true;
         }
     }
-    
+
     /**
      * Generate XML representation of PHP Array
-     * 
+     *
      * Using a named hierarchy, the XML can encode
      * associative arrays, objects, numeric arrays (using <key> nodes)
      * and scalars using PCDATA.
@@ -148,34 +150,34 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
         //We want to write to memory
         if ($writer->openMemory()) {
             //Start document and set indent
-            $writer->startDocument('1.0'); 
+            $writer->startDocument('1.0');
             $writer->setIndent(4);
-            
+
             //Start main response element
             $writer->startElement('response');
-            
+
             //First call to _generateItemXML which generates the
             //XML for a single variable, array entry etc.
             //This is recursive, we start with the response array.
             if (is_scalar($response)) {
                 $response = array();
             }
-            
+
             $this->_generateItemXML($writer, $response);
-            
+
             //Close response element and end document
             $writer->endElement();
             $writer->endDocument();
-            
-            return $writer->outputMemory(); 
+
+            return $writer->outputMemory();
         } else {
             //@Throw XML openMemory Exception
         }
     }
-    
+
     /**
      * Generate XML for a single variable item
-     * 
+     *
      * Scalars will become simply VALUE, numeric arrays
      * will become variously <numeric-key> or <VALUE>
      * and assoc arrays will become <$NAME>$VALUE1</$NAME><$NAME>$VALUE2</$NAME>.
@@ -191,7 +193,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
         if ($this->_typeHinting) {
             $writer->writeAttribute('type', gettype($variable));
         }
-        
+
         //Now, handle this item's content and sub-elements.
         if (is_array($variable)) {
             if ($this->_arrayIsAssoc($variable)) {
@@ -205,12 +207,12 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
             }
         } else {
             $writer->text($variable);
-        }        
+        }
     }
-    
+
     /**
      * Generate the XML for a known key and value
-     * 
+     *
      * Abstracts handling for numeric, self-indexing numeric and assoc.
      *
      * @param XMLWriter $writer The XMLWriter object to be written to.
@@ -222,14 +224,14 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
     private function _generateKeyValueXML($writer, $key, $value)
     {
         //If key is numeric and value is string, make empty element: <VALUESTRING />
-        if ((is_numeric($key) || is_null($key)) 
-            && is_string($value) 
+        if ((is_numeric($key) || is_null($key))
+            && is_string($value)
             && preg_match('/^[_A-Za-z\:]{1}[\-\.0-9a-zA-Z]*$/', $value)
         ) {
             $key = $value;
             $value = null;
         }
-        
+
         /**
          * Algo for handling keys and values:
          * 1. If key is not a normal (valid XML) element name write <numeric-key>
@@ -243,7 +245,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
             if (!is_null($key)) {
                 $writer->writeAttribute('key', $key);
             }
-            
+
             $this->_generateItemXML($writer, $value);
         } else {
             try {
@@ -251,15 +253,15 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
             } catch (Exception $e) {
                 throw new Frapi_Output_XML_Exception('Invalid XML element name, cannot create element.', 'Frapi_Output_XML_Exception');
             }
-            
+
             if (!is_null($value)) {
                 $this->_generateItemXML($writer, $value);
             }
         }
-        
+
         $writer->endElement();
     }
-    
+
     /**
      * Utility is array assoc
      *
