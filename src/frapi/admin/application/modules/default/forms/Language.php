@@ -25,7 +25,7 @@ class Default_Form_Language extends Lupin_Form
             'en' => 'English',
             'fr' => 'Francais',
             'it' => 'Italiano',
-            'ru' => 'Россию',
+            'ru' => 'Русский',
         );
 
         $this->setAction('/language');
