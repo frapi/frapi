@@ -39,10 +39,6 @@ msgid "TESTER"
 msgstr "Test"
 
 # top right - sync
-
-msgid "SYNC"
-msgstr "Ora Sinc"
-
 msgid "SYNCING_MESSAGE"
 msgstr "<i><strong>\"Sincronizza\"</strong></i>: Sincronizza il tuo codice con le azioni create nella sezione \"<strong><a href=\"/action\" title=\"Azioni\">Azioni</a></strong>\""
 
@@ -364,13 +360,28 @@ msgstr "La cartella &quot;<b>%s</b>&quot; non è scrivibile dall'utente corrente
 
 ## extra post-pre
 msgid "USE_HTTPS"
-msgstr "Use HTTPS?"
+msgstr "Utilizzare HTTPS?"
 
 msgid "RETYPE"
-msgstr "Re-type"
+msgstr "Digita nuovamente"
+
+msgid "SYNC"
+msgstr "Sincronizza ora"
 
 msgid "SYNCRONIZE_TITLE"
-msgstr "Synchronize Development Codebase"
+msgstr "Sincronizza il codice di sviluppo"
 
 msgid "ADMIN_INTERFACE"
-msgstr "Admin Interface"
+msgstr "Interfaccia di amministrazione"
+
+msgid "FILE_NOT_EXIST_HAVE_YOU_SYNCED"
+msgstr "Il file non esiste... lo hai sincronizzato dopo aver creato questa Azione?"
+
+msgid "EDITING_ACTION"
+msgstr "Modifica l'azione"
+
+msgid "FILE_NOT_WRITABLE"
+msgstr "Il file non è scrivibile, dai accesso alla cartella all'utente web."
+
+msgid "FILE_CONTENT_UPDATED"
+msgstr "Il contenuto del file è stato aggiornato con successo."
