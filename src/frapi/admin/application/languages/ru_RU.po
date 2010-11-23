@@ -1,0 +1,388 @@
+domain "ru_RU"
+
+# login page
+msgid "USERNAME"
+msgstr "Пользователь"
+
+msgid "PASSWORD"
+msgstr "Пароль"
+
+msgid "LOGIN"
+msgstr "Войти"
+
+msgid "SUBMENU"
+msgstr "Меню"
+
+msgid "WELCOME"
+msgstr "Добро пожаловать"
+
+msgid "YOU_ARE_USING_FRAPI"
+msgstr "Вы изпользуете админ-панель FRAPI"
+
+#menu
+msgid "DASHBOARD"
+msgstr "Управление"
+
+msgid "ACTIONS"
+msgstr "Действия"
+
+msgid "ERRORS"
+msgstr "Ошибки"
+
+msgid "PARTNERS"
+msgstr "Партнеры"
+
+msgid "CONFIGURATION"
+msgstr "Конфигурация"
+
+msgid "TESTER"
+msgstr "Тестер"
+
+# top right - sync
+msgid "SYNCING_MESSAGE"
+msgstr "<i><strong>\"Синхронизация в процессе\"</strong></i>: Синхронизируем код с измененными действиями \"<strong><a href=\"/action\" title=\"Управление действий \">Действия</a></strong>\""
+
+# Dashboard welcome
+msgid "AMAZING_WELCOME"
+msgstr "Добро пожаловать в мир FRAPI"
+
+msgid "DASHBOARD_WELCOME_TITLE"
+msgstr "Еще разок, добро пожаловать в ваш новый ППИ (API)! Читаем дальше,"
+
+msgid "CRITICAL_SETUP_ISSUES"
+msgstr "Критические ошибки в установке"
+
+msgid "CRITICAL_SETUP_ISSUES_INTRO"
+msgstr "Обнаружены неполадки в установке. Ваш ППИ не будет действовать пока эти неполадки не будут устранены."
+
+msgid "THE"
+msgstr ""
+
+# Action section
+msgid "ADD_NEW_ACTION"
+msgstr "Добавить действие"
+
+msgid "SETUP_HELP_MESSAGE"
+msgstr "Следует запустить <b>sh setup.sh</b> который изменит разрешения файлов на chmod 777. Этот файл находится в корне вашей инсталяции FRAPI."
+
+msgid "ACTION_DIR_PROBLEM"
+msgstr "<strong>%s</strong> не подлежит изменениям этим пользователем, конфигурационный файл не сохранится"
+
+msgid "NAME"
+msgstr "Имя"
+
+msgid "IS_ACTION_PUBLIC"
+msgstr "Это публичное действие?"
+
+msgid "PRIVATE"
+msgstr "Тайное"
+
+msgid "PUBLIC"
+msgstr "Публичное"
+
+msgid "IS_ACTION_ENABLED"
+msgstr "Это действие включено?"
+
+msgid "CUSTOM_ROUTE"
+msgstr "Модифицированный Раутинг"
+
+msgid "DESCRIPTION"
+msgstr "Описание"
+
+msgid "SAVE"
+msgstr "Сохранить"
+
+msgid "ADD_PARAMETER"
+msgstr "Добавить параметр"
+
+msgid "PARAMETER"
+msgstr "Параметр"
+
+msgid "REQUIRED"
+msgstr "Обязателен"
+
+msgid "ACTION"
+msgstr "Действие"
+
+msgid "DELETE"
+msgstr "Удалить"
+
+msgid "PLEASE_PROVIDE_USERNAME"
+msgstr "Заведите имя пользователя и пароль"
+
+# Error section
+msgid "ADD_NEW_ERROR"
+msgstr "Добавить новую ошибку"
+
+msgid "FILTER"
+msgstr "Фильтр"
+
+msgid "MESSAGE"
+msgstr "Сообщение"
+
+msgid "EDIT"
+msgstr "Изменить"
+
+msgid "HTTP_CODE"
+msgstr "HTTP Код"
+
+msgid "ERROR_MESSAGE"
+msgstr "Описание ошибки"
+
+msgid "SUBMIT"
+msgstr "Отправить"
+
+# Partner Section
+msgid "ADD_NEW_PARTNER"
+msgstr "Добавить нового партнера"
+
+msgid "COMPANY"
+msgstr "Компания"
+
+msgid "API_KEY"
+msgstr "ППИ (API) Ключ"
+
+msgid "FIRSTNAME"
+msgstr "Имя"
+
+msgid "LASTNAME"
+msgstr "Фамилия"
+
+msgid "EMAIL_USERNAME"
+msgstr "Адресс почты/Пользователь"
+
+# Configuration Section
+msgid "CACHE"
+msgstr "Кэш"
+
+msgid "USERS"
+msgstr "Пользователи"
+
+msgid "OUTPUT"
+msgstr "Вывод"
+
+msgid "DATABASE"
+msgstr "База данных"
+
+msgid "SELECT_ITEM_FROM_SUBMENU"
+msgstr "Пожалуйста, сделайте выбор из левого меню."
+
+msgid "UPDATE_CONFIGURATION"
+msgstr "Обновить конфигурацию"
+
+msgid "API_DOMAIN"
+msgstr "ППИ (API) Домен"
+
+msgid "FOR_TESTER"
+msgstr "для Тестера"
+
+msgid "ADMIN_LANGUAGE"
+msgstr "Администрационный язык FRAPI"
+
+msgid "LANGUAGE"
+msgstr "Язык"
+
+msgid "UPDATE_SYSTEM_WIDE"
+msgstr "Обновить полностью"
+
+msgid "CACHE_HELP_ONE"
+msgstr "Сдесь перечислены внутренние кэш ключи Frapi, окрашенные по статусу. Нажмите чтобы увидеть их значения."
+
+msgid "CACHE_HELP_TWO"
+msgstr "Нажмите &quot;Удалить&quot; для форсированного истечения срока действия ключей кэша, все регенерируется по надобности ППИ."
+
+msgid "SET"
+msgstr "Завести"
+
+msgid "SIZE"
+msgstr "Размер"
+
+msgid "YES"
+msgstr "Да"
+
+msgid "NO"
+msgstr "Нет"
+
+msgid "YOU_CAN"
+msgstr "Вы можете"
+
+msgid "UNSET_ALL_KEYS"
+msgstr "Удалить все ключи"
+
+msgid "UNSET_ALL_CACHE_KEYS"
+msgstr "Удалить все ключи кэша"
+
+msgid "TO_CLEAR_CACHE"
+msgstr "очистить кэш"
+
+msgid "HANDLE"
+msgstr "Название"
+
+msgid "ADD_NEW_USER"
+msgstr "Добавить нового пользователя"
+
+msgid "SYNC_OUTPUT_TYPES"
+msgstr "Синхронизировать тип вывода"
+
+msgid "MAKE_DEFAULT"
+msgstr "Установить по умолчанию"
+
+msgid "DISABLE"
+msgstr "Запретить"
+
+msgid "ENABLE"
+msgstr "Разрешить"
+
+msgid "DEFAULT_OUTPUT"
+msgstr "Вывод по умолчанию"
+
+msgid "TYPE"
+msgstr "Тип"
+
+msgid "VALUE"
+msgstr "Значение"
+
+msgid "KEY"
+msgstr "Ключ"
+
+msgid "EDIT_DATABASE_SETTINGS"
+msgstr "Изменить параметры базы данных"
+
+# Tester Section
+msgid "QUERY_URI"
+msgstr "URI запроса"
+
+msgid "PARAMS"
+msgstr "Параметры"
+
+msgid "TESTER_ADD_PARAMETER"
+msgstr "Добавить параметр (&quot;имя=значение&quot;)"
+
+msgid "FORMAT"
+msgstr "Формат"
+
+msgid "METHOD"
+msgstr "Метод"
+
+msgid "EMAIL"
+msgstr "Почта"
+
+msgid "SECRET_KEY"
+msgstr "Секретный ключ"
+
+msgid "LOAD_EMAIL_KEY"
+msgstr "Загрузить почтовый адрес/ключ"
+
+msgid "SELECT_COMBO_OF_FIELDS"
+msgstr "Выберете комбинацию заполнения верхних полей"
+
+msgid "RUN_TEST"
+msgstr "Запустить тест"
+
+msgid "TESTING"
+msgstr "Тест в прогрессе"
+
+msgid "POST_FIELDS"
+msgstr "Поля запроса (post fields)"
+
+msgid "RESPONSE"
+msgstr "Ответ"
+
+msgid "NO_QUERY_URI"
+msgstr "Нет запроса URI"
+
+msgid "REQUEST"
+msgstr "Запрос"
+
+msgid "CODE"
+msgstr "Код"
+
+msgid "CONTENT_BODY"
+msgstr "Содержание"
+
+msgid "TESTER_REQUEST_ERROR"
+msgstr "Ошибка: Вы были отключены из-за неактивности. <a href=\"/login\" target=\"_blank\">Зайдите</a> (в новом окне) снова."
+
+# Other
+msgid "ADDED"
+msgstr "Добавленно"
+
+msgid "UPDATED"
+msgstr "Обновленно"
+
+msgid "ID_PARAM_MISSING"
+msgstr "Не хватает ID параметра."
+
+msgid "NO_ACCESS_MESSAGE"
+msgstr "У вас нет доступа в эту секцию.<br />Обратитесь к администрации за помощью."
+
+msgid "VISIBILITY"
+msgstr "Видимость"
+
+msgid "DETAIL"
+msgstr "Детали"
+
+# Database
+msgid "DATABASE_CONFIGURATION"
+msgstr "Конфигурация базы данных"
+
+msgid "ADD_NEW_DATABASE_CONFIGURATION"
+msgstr "Добавить новую конфигурацию базы данных"
+
+msgid "EDIT_DATABASE_CONFIGURATION"
+msgstr "Изменить конфигурацию базы данных"
+
+msgid "NO_DATABASE_CONFIGURATION_YET"
+msgstr "Нету конфигурации базы данных"
+
+msgid "ADD_SOME"
+msgstr "Добавить"
+
+msgid "MAIN"
+msgstr "Главное"
+
+msgid "DATABASE_SELECT_ITEM"
+msgstr "Пожалуйста, сделайте выбор из левого меню"
+
+# Error page
+msgid "ERROR_PAGE"
+msgstr "Страница ошибки"
+
+msgid "SORRY_ERROR_MESSAGE"
+msgstr "Системная ошибка в Действии!"
+
+# Warnings
+msgid "ACTION_WARNING_CONFIG"
+msgstr "&quot;<b>%s</b>&quot; директория не подлежит изменениям пользователем (%s), конфигурация ППИ (API) не будет сохранена: (Действия, Ошибки, Партнеры, Конфигурация, и тп и тд) пока права пользователя не будут изменены."
+
+msgid "ACTION_WARNING_ACTION"
+msgstr "&quot;<b>%s</b>&quot; директория не подлежит изменениям пользователем (%s), обновление и синхронизация не будут выполнены пока права пользователя не будут изменены."
+
+## extra post-pre
+msgid "USE_HTTPS"
+msgstr "Использовать HTTPS?"
+
+msgid "RETYPE"
+msgstr "Заведите повторно"
+
+msgid "SYNC"
+msgstr "Обновить и синхронизировать"
+
+msgid "SYNCRONIZE_TITLE"
+msgstr "Синхронизировать среду разработки (код-базу)"
+
+msgid "ADMIN_INTERFACE"
+msgstr "Панель Администратора"
+
+msgid "FILE_NOT_EXIST_HAVE_YOU_SYNCED"
+msgstr "Этот файл не существует... Не забудте обновить/синхронизировать после добавки или изменения действий"
+
+msgid "EDITING_ACTION"
+msgstr "Изменяемое действие"
+
+msgid "FILE_NOT_WRITABLE"
+msgstr "Этот файл не подлежит изменениям, пожалуйста измените права веб-пользователя в директории"
+
+msgid "FILE_CONTENT_UPDATED"
+msgstr "Файл обновлен"
+
