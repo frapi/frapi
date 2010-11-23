@@ -34,7 +34,7 @@ class Default_Form_Action extends Lupin_Form
         $this->addElement($public);
 
         $route = new Zend_Form_Element_Text('route');
-        $route->setLabel($tr->_('ROUTE'));
+        $route->setLabel($tr->_('CUSTOM_ROUTE'));
         $route->setRequired(true);
         $this->addElement($route);
 
