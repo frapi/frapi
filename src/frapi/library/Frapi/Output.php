@@ -53,7 +53,7 @@ class Frapi_Output
      * @var string $type  The type of outputaction
      */
     public $type;
-    
+
     /**
      * The MIME type to send in the headers.
      *
@@ -69,7 +69,7 @@ class Frapi_Output
      * @param string $outputFormat The output format to invoke.
      */
     public $outputFormat;
-    
+
     /**
      * This method sets the value of the action requested
      * by the partner using the webservice.
@@ -95,10 +95,10 @@ class Frapi_Output
         $this->type = $type;
         return $this;
     }
-    
+
     /**
      * Send HTTP headers, namely HTTP Status Code.
-     * We need the unformatted content to determine 
+     * We need the unformatted content to determine
      * what headers to send.
      *
      * @param Mixed $response
@@ -106,33 +106,33 @@ class Frapi_Output
      * @return Object $this
      **/
     public function sendHeaders($response)
-    {   
+    {
         header('HTTP/1.1 '.intval($response->getStatusCode()));
 
         header('Content-type: '.$this->mimeType.'; charset=utf-8');
-        
+
         //IF debugging is turned on, then send cache info
         //headers - very useful for seeing what's happening.
         if (Frapi_Controller_Main::MAIN_WEBSERVICE_DEBUG) {
             $log = Frapi_Internal::getLog();
-            
+
             $cache_info = 'Cache Fetches(' . $log['cache-get']['times'] . ') ' .
                           'Cache Stores(' . $log['cache-set']['times'] . ') ' .
                           'DbHandles(' . $log['db']['times'] . ')';
-                          
+
             header('X-Cache-Info: '.$cache_info);
-            
+
             if (!empty($log['cache-get']['keys'])) {
                 sort($log['cache-get']['keys']);
                 header('X-Cache-Lookups: '.implode(' ', $log['cache-get']['keys']));
             }
-            
+
             if (!empty($log['cache-set']['keys'])) {
                 sort($log['cache-set']['keys']);
                 header('X-Cache-Stores: '.implode(' ', $log['cache-set']['keys']));
             }
         }
-        
+
         return $this;
     }
 
@@ -169,15 +169,15 @@ class Frapi_Output
     public static function getInstance($type, $options)
     {
         // We always override the extension if a content-type is requested.
-        $type = isset($options['outputFormat']) 
-            ? $options['outputFormat'] 
+        $type = isset($options['outputFormat'])
+            ? $options['outputFormat']
             : $type;
-        
+
         $class = 'Frapi_Output_' . strtoupper($type);
         $obj = new $class;
-        
+
         $obj->type     = $type;
-        
+
         $obj->mimeType = isset($options['mimeType'])
             ? $options['mimeType']
             : $obj->mimeType;

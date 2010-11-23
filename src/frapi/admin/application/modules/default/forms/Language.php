@@ -20,10 +20,12 @@ class Default_Form_Language extends Lupin_Form
     {
         $tr = Zend_Registry::get('tr');
 
+
         $available_languages = array (
             'en' => 'English',
             'fr' => 'Francais',
             'it' => 'Italiano',
+            'ru' => 'Россию',
         );
 
         $this->setAction('/language');
