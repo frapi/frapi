@@ -16,6 +16,8 @@
  */
 class ActionController extends Lupin_Controller_Base
 {
+
+     private $tr;
     /**
      * Main Initializer
      *
@@ -26,6 +28,7 @@ class ActionController extends Lupin_Controller_Base
      */
     public function init($styles = array())
     {
+        $this->tr = Zend_Registry::get('tr');
         $actions = array('index', 'add', 'edit', 'delete', 'sync', 'test', 'code', 'error');
         $this->_helper->_acl->allow('admin', $actions);
         parent::init($styles);
@@ -56,12 +59,11 @@ class ActionController extends Lupin_Controller_Base
         $dir = $dir . 'actions.xml';
 
         $dir = Zend_Registry::get('localConfigPath');
-        $translate = Zend_Registry::get('tr');
 
         if (!is_writable($dir)) {
 
-            $actionPathMessage = sprintf($translate->_('ACTION_DIR_PROBLEM'), $dir);
-            $setupHelpMessage  = $translate->_('SETUP_HELP_MESSAGE');
+            $actionPathMessage = sprintf($this->tr->_('ACTION_DIR_PROBLEM'), $dir);
+            $setupHelpMessage  = $this->tr->_('SETUP_HELP_MESSAGE');
 
             $this->addMessage(
                 $actionPathMessage .' <br /><br />' . $setupHelpMessage
@@ -105,10 +107,10 @@ class ActionController extends Lupin_Controller_Base
                 // Save data
                 try {
                     $model->save($request->getParams());
-                    $this->addMessage('Action ' . $request->getParam('name') . ' added.');
+                    $this->addMessage($this->tr->_('ACTION_ADD_SUCCESS') . ': ' . $request->getParam('name'));
                     $this->_redirect('/action');
                 } catch (RuntimeException $e) {
-                    $this->addErrorMessage('Error adding action ' . $request->getParam('name') .
+                    $this->addErrorMessage($this->tr->_('ACTION_ADD_FAIL') . ': '  .  $request->getParam('name') .
                         '. ' . $e->getMessage());
                 }
             }
@@ -125,12 +127,10 @@ class ActionController extends Lupin_Controller_Base
      */
     public function codeAction()
     {
-        $translate = Zend_Registry::get('tr');
-
         $request = $this->getRequest();
         $this->view->id = $id = $request->getParam('id');
         if ($id === null) {
-            $this->addErrorMessage('ID parameter is missing.');
+            $this->addErrorMessage($this->tr->_('ACTION_MISSING_ID'));
             return;
         }
 
@@ -147,17 +147,17 @@ class ActionController extends Lupin_Controller_Base
         if ($this->_request->isPost()) {
             $content = $this->_request->getParam('code');
             if (!is_writable($file)) {
-                $this->addMessage($translate->_('FILE_NOT_WRITABLE'));
+                $this->addMessage($this->tr->_('FILE_NOT_WRITABLE'));
                 $this->_redirect('/action/code/id/' . htmlentities($id));
             }
 
             file_put_contents($file, $content);
-            $this->addMessage($translate->_('FILE_CONTENT_UPDATED'));
+            $this->addMessage($this->tr->_('FILE_CONTENT_UPDATED'));
             $this->_redirect('/action');
 
         } else {
             if (!file_exists($file)) {
-                $this->addMessage($translate->_('FILE_NOT_EXIST_HAVE_YOU_SYNCED'));
+                $this->addMessage($this->tr->_('FILE_NOT_EXIST_HAVE_YOU_SYNCED'));
                 $this->_redirect('/action');
             }
 
@@ -182,7 +182,7 @@ class ActionController extends Lupin_Controller_Base
         $request = $this->getRequest();
         $this->view->id = $id = $request->getParam('id');
         if ($id === null) {
-            $this->addErrorMessage('ID parameter is missing.');
+            $this->addErrorMessage($this->tr->_('ACTION_MISSING_ID'));
             return;
         }
 
@@ -211,10 +211,10 @@ class ActionController extends Lupin_Controller_Base
                 // This is xss right there.
                 try {
                     $model->update($request->getParams(), $id) ;
-                    $this->addMessage('Action ' . $request->getParam('name') . ' updated.');
+                    $this->addMessage($this->tr->_('ACTION_UPDATE_SUCCESS') . ': '  . $request->getParam('name'));
                     $this->_redirect('/action/edit/id/' . $id);
                 } catch (RuntimeException $e) {
-                    $this->addErrorMessage('Error updating action ' . $request->getParam('name') .
+                    $this->addErrorMessage($this->tr->_('ACTION_UPDATE_FAIL') . ': ' . $request->getParam('name') .
                         '. ' . $e->getMessage());
                 }
             }
@@ -239,13 +239,13 @@ class ActionController extends Lupin_Controller_Base
     {
         $id = $this->getRequest()->getParam('id');
         if ($id === null) {
-            $this->addErrorMessage('ID parameter is missing.');
+            $this->addErrorMessage($this->tr->_('ACTION_MISSING_ID'));
             return;
         }
 
         $model = new Default_Model_Action;
         $model->delete($id);
-        $this->addMessage('Action deleted');
+        $this->addMessage($this->tr->_('ACTION_DELETE'));
         $this->_redirect('/action');
     }
 
@@ -270,10 +270,11 @@ class ActionController extends Lupin_Controller_Base
                 'The path : "' . $dir . '" is not currently writeable by this user, ' .
                 'therefore we cannot synchronize the codebase'
             );
+            $this->addMessage(sprintf($this->tr->_('ACTION_WRITE_ERROR'), $dir));
             $this->_redirect('/action');
         }
         $model->sync();
-        $this->addMessage('Development environment has been sychronized');
+        $this->addMessage($this->tr->_('ACTION_DEV_SYNC_SUCCESS'));
         $this->_redirect('/action');
     }
 

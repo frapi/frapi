@@ -16,8 +16,11 @@
  */
 class IndexController extends Lupin_Controller_Base
 {
+    private $tr;
+
     public function init($styles = array())
     {
+        $this->tr = Zend_Registry::get('tr');
         $this->_helper->_acl->allow('admin', array('index'));
         parent::init($styles);
     }
@@ -37,17 +40,16 @@ class IndexController extends Lupin_Controller_Base
         $user   = get_current_user();
 
         $dir = Zend_Registry::get('localConfigPath');
-        $translate = Zend_Registry::get('tr');
         
         if (!is_writable($dir)) {
-            $configPathMessage = $translate->_('ACTION_WARNING_CONFIG');
+            $configPathMessage = $this->tr->_('ACTION_WARNING_CONFIG');
             $issues['config-path'] = sprintf($configPathMessage, $dir, $user);
         }
         
         $dir    = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
 
         if (!is_writable($dir)) {
-            $actionPathMessage = $translate->_('ACTION_WARNING_ACTION');
+            $actionPathMessage = $this->tr->_('ACTION_WARNING_ACTION');
             $issues['custom-action-path'] = sprintf($actionPathMessage, $dir, $user);
         }
 

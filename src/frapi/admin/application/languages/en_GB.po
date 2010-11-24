@@ -80,6 +80,9 @@ msgstr "Private"
 msgid "PUBLIC"
 msgstr "Public"
 
+msgid "ENABLED"
+msgstr "Enabled"
+
 msgid "IS_ACTION_ENABLED"
 msgstr "Is the action enabled?"
 
@@ -109,6 +112,30 @@ msgstr "Delete"
 
 msgid "PLEASE_PROVIDE_USERNAME"
 msgstr "Please provide a username and password."
+
+msgid "ACTION_ADD_SUCCESS"
+msgstr "Action added"
+
+msgid "ACTION_ADD_FAIL"
+msgstr "Error adding action"
+
+msgid "ACTION_MISSING_ID"
+msgstr "Required parameter ID not found"
+
+msgid "ACTION_UPDATE_SUCCESS"
+msgstr "Action updated"
+
+msgid "ACTION_UPDATE_FAIL"
+msgstr "Action update failed"
+
+msgid "ACTION_DELETE"
+msgstr "Action deleted"
+
+msgid "ACTION_WRITE_ERROR"
+msgstr "The path (%s) is not currently writeable by this user, therefore we cannot synchronize the codebase"
+
+msgid "ACTION_DEV_SYNC_SUCCESS"
+msgstr "Development environment has been synchronized"
 
 # Error section
 msgid "ADD_NEW_ERROR"

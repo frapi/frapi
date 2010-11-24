@@ -69,7 +69,7 @@ msgid "ACTION_DIR_PROBLEM"
 msgstr "<strong>%s</strong> не подлежит изменениям этим пользователем, конфигурационный файл не сохранится"
 
 msgid "NAME"
-msgstr "Имя"
+msgstr "Название"
 
 msgid "IS_ACTION_PUBLIC"
 msgstr "Это публичное действие?"
@@ -79,6 +79,9 @@ msgstr "Тайное"
 
 msgid "PUBLIC"
 msgstr "Публичное"
+
+msgid "ENABLED"
+msgstr "Включено"
 
 msgid "IS_ACTION_ENABLED"
 msgstr "Это действие включено?"
@@ -109,6 +112,30 @@ msgstr "Удалить"
 
 msgid "PLEASE_PROVIDE_USERNAME"
 msgstr "Заведите имя пользователя и пароль"
+
+msgid "ACTION_ADD_SUCCESS"
+msgstr "Действие добавлено"
+
+msgid "ACTION_ADD_FAIL"
+msgstr "Ошибка в добавлении действия"
+
+msgid "ACTION_MISSING_ID"
+msgstr "Обязательный параметр ID не найден"
+
+msgid "ACTION_UPDATE_SUCCESS"
+msgstr "Действие обновлено"
+
+msgid "ACTION_UPDATE_FAIL"
+msgstr "Ошибка в изменении действия"
+
+msgid "ACTION_DELETE"
+msgstr "Действие удалено"
+
+msgid "ACTION_WRITE_ERROR"
+msgstr "Путь (%s) не подлежит изменениям вашим пользователем, синхронизация не возможна"
+
+msgid "ACTION_DEV_SYNC_SUCCESS"
+msgstr "Среда разработки синхронизирована"
 
 # Error section
 msgid "ADD_NEW_ERROR"
@@ -256,7 +283,7 @@ msgid "PARAMS"
 msgstr "Параметры"
 
 msgid "TESTER_ADD_PARAMETER"
-msgstr "Добавить параметр (&quot;имя=значение&quot;)"
+msgstr "Добавить параметр (&quot;название=значение&quot;)"
 
 msgid "FORMAT"
 msgstr "Формат"
