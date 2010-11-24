@@ -14,7 +14,7 @@ msgid "SUBMENU"
 msgstr "Меню"
 
 msgid "WELCOME"
-msgstr "Добро пожаловать"
+msgstr "Привет!"
 
 msgid "YOU_ARE_USING_FRAPI"
 msgstr "Вы изпользуете админ-панель FRAPI"
@@ -40,7 +40,7 @@ msgstr "Тестер"
 
 # top right - sync
 msgid "SYNCING_MESSAGE"
-msgstr "<i><strong>\"Синхронизация в процессе\"</strong></i>: Синхронизируем код с измененными действиями \"<strong><a href=\"/action\" title=\"Управление действий \">Действия</a></strong>\""
+msgstr "<i><strong>\"Обновление\"</strong></i>: Обновляем код с новыми \"<strong><a href=\"/action\" title=\"Управление действий \">действиями</a></strong>\""
 
 # Dashboard welcome
 msgid "AMAZING_WELCOME"
@@ -132,10 +132,10 @@ msgid "ACTION_DELETE"
 msgstr "Действие удалено"
 
 msgid "ACTION_WRITE_ERROR"
-msgstr "Путь (%s) не подлежит изменениям вашим пользователем, синхронизация не возможна"
+msgstr "Путь (%s) не подлежит изменениям вашим пользователем, обновление не возможно"
 
 msgid "ACTION_DEV_SYNC_SUCCESS"
-msgstr "Среда разработки синхронизирована"
+msgstr "Среда разработки обновлена"
 
 # Error section
 msgid "ADD_NEW_ERROR"
@@ -176,7 +176,7 @@ msgid "LASTNAME"
 msgstr "Фамилия"
 
 msgid "EMAIL_USERNAME"
-msgstr "Адресс почты/Пользователь"
+msgstr "Адрес почты/Пользователь"
 
 # Configuration Section
 msgid "CACHE"
@@ -249,7 +249,7 @@ msgid "ADD_NEW_USER"
 msgstr "Добавить нового пользователя"
 
 msgid "SYNC_OUTPUT_TYPES"
-msgstr "Синхронизировать тип вывода"
+msgstr "Обновить тип вывода (output)"
 
 msgid "MAKE_DEFAULT"
 msgstr "Установить по умолчанию"
@@ -399,10 +399,10 @@ msgid "RETYPE"
 msgstr "Заведите повторно"
 
 msgid "SYNC"
-msgstr "Обновить и синхронизировать"
+msgstr "Обновить"
 
 msgid "SYNCRONIZE_TITLE"
-msgstr "Синхронизировать среду разработки (код-базу)"
+msgstr "Обновить среду разработки (код-базу)"
 
 msgid "ADMIN_INTERFACE"
 msgstr "Панель Администратора"
