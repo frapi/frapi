@@ -303,6 +303,12 @@ msgstr "Content Body"
 msgid "TESTER_REQUEST_ERROR"
 msgstr "Error: You were logged out due to inactivity. Please <a href=\"/login\" target=\"_blank\">log in</a> (opens in new tab) and try again."
 
+msgid "TESTER_HTTP_REQUEST_MISSING"
+msgstr "HttpRequest class was not found &#8212; the <a href=\"http://pecl.php.net/package/pecl_http\" title=\"PECL HTTP\">pecl_http</a> package is required to use the tester."
+
+msgid "TESTER_API_INFO_MESSAGE"
+msgstr "Remember, you can set the default API domain name in <a href=\"/configuration\">configuration</a>!"
+
 # Other
 msgid "ADDED"
 msgstr "added"

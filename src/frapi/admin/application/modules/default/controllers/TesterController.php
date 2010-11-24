@@ -16,12 +16,13 @@
  */
 class TesterController extends Lupin_Controller_Base
 {
+    private $tr; 
+
     public function init($styles = array())
     {
+        $this->tr = Zend_Registry::get('tr');
         $actions = array('index', 'ajax');
-
         $this->_helper->_acl->allow('admin', $actions);
-        //$this->view->addHelperPath('echolibre/View/Helper', 'Zend_View_Helper_FormStatic');
         parent::init($styles);
     }
 
@@ -32,18 +33,11 @@ class TesterController extends Lupin_Controller_Base
 
         $confModel   = new Default_Model_Configuration();
         if (!$confModel->getKey("api_url")) {
-            $this->addInfoMessage(
-                "Remember, you can set the default API domain name in " .
-                "<a href=\"/configuration\">configuration</a>!"
-            );
+            $this->addInfoMessage($this->tr->_('TESTER_API_INFO_MESSAGE'));
         }
 
         if (!class_exists("HttpRequest")) {
-            $this->addErrorMessage(
-                "HttpRequest class was not found &#8212; the " .
-                "<a href=\"http://pecl.php.net/package/pecl_http\" title=\"PECL HTTP\">" .
-                "pecl_http</a> package is required to use the tester."
-            );
+            $this->addErrorMessage($this->tr->_('TESTER_HTTP_REQUEST_MISSING'));
         }
 
         $this->view->form = $form;

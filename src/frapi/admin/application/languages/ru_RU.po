@@ -303,6 +303,12 @@ msgstr "Содержание"
 msgid "TESTER_REQUEST_ERROR"
 msgstr "Ошибка: Вы были отключены из-за неактивности. <a href=\"/login\" target=\"_blank\">Зайдите</a> (в новом окне) снова."
 
+msgid "TESTER_HTTP_REQUEST_MISSING"
+msgstr "Не найден класс HttpRequest - пакет <a href=\"http://pecl.php.net/package/pecl_http\" target=\"_blank\">pecl_http</a> должен присутствовать для использования модуля Тестер"
+
+msgid "TESTER_API_INFO_MESSAGE"
+msgstr "Не забудте завести домен ППИ (API) по умолчанию в секции <a href=\"/configuration\">конфигурации</a>!"
+
 # Other
 msgid "ADDED"
 msgstr "Добавленно"
