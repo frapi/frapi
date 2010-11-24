@@ -266,10 +266,6 @@ class ActionController extends Lupin_Controller_Base
 
         $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
         if (!is_writable($dir)) {
-            $this->addMessage(
-                'The path : "' . $dir . '" is not currently writeable by this user, ' .
-                'therefore we cannot synchronize the codebase'
-            );
             $this->addMessage(sprintf($this->tr->_('ACTION_WRITE_ERROR'), $dir));
             $this->_redirect('/action');
         }
