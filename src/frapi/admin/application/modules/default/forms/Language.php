@@ -19,7 +19,7 @@ class Default_Form_Language extends Lupin_Form
     public function init()
     {
         $tr = Zend_Registry::get('tr');
-
+        $locale = Zend_Registry::get('Zend_Locale');
 
         $available_languages = array (
             'en' => 'English',
@@ -34,6 +34,7 @@ class Default_Form_Language extends Lupin_Form
         $languages = new Zend_Form_Element_Select('languages');
         $languages->setLabel($tr->_('LANGUAGE'));
         $languages->addMultiOptions($available_languages);
+        $languages->setValue(isset($locale->value) ? $locale->value : 'en');
         $this->addElement($languages);
 
         $system_wide = new Zend_Form_Element_Checkbox('system_wide');
