@@ -47,7 +47,7 @@ msgid "AMAZING_WELCOME"
 msgstr "Добро пожаловать в мир FRAPI"
 
 msgid "DASHBOARD_WELCOME_TITLE"
-msgstr "Еще разок, добро пожаловать в ваш новый ППИ (API)! Читаем дальше,"
+msgstr "Добро пожаловать в ваш новый ППИ (API)!"
 
 msgid "CRITICAL_SETUP_ISSUES"
 msgstr "Критические ошибки в установке"
@@ -141,6 +141,15 @@ msgstr "Среда разработки обновлена"
 msgid "ADD_NEW_ERROR"
 msgstr "Добавить новую ошибку"
 
+msgid "ERROR_ADD_SUCCESS"
+msgstr "Новая ошибка (%s) добавлена"
+
+msgid "ERROR_UPDATE_SUCCESS"
+msgstr "Ошибка (%s) изменена"
+
+msgid "ERROR_DELETE"
+msgstr "Ошибка удалена"
+
 msgid "FILTER"
 msgstr "Фильтр"
 
@@ -157,7 +166,7 @@ msgid "ERROR_MESSAGE"
 msgstr "Описание ошибки"
 
 msgid "SUBMIT"
-msgstr "Отправить"
+msgstr "Сохранить"
 
 # Partner Section
 msgid "ADD_NEW_PARTNER"
@@ -192,7 +201,7 @@ msgid "DATABASE"
 msgstr "База данных"
 
 msgid "SELECT_ITEM_FROM_SUBMENU"
-msgstr "Пожалуйста, сделайте выбор из левого меню."
+msgstr "Выбор дополнительных опций слева"
 
 msgid "UPDATE_CONFIGURATION"
 msgstr "Обновить конфигурацию"
@@ -301,7 +310,7 @@ msgid "LOAD_EMAIL_KEY"
 msgstr "Загрузить почтовый адрес/ключ"
 
 msgid "SELECT_COMBO_OF_FIELDS"
-msgstr "Выберете комбинацию заполнения верхних полей"
+msgstr "Выбрать комбинацию почты/ключа"
 
 msgid "RUN_TEST"
 msgstr "Запустить тест"
@@ -322,7 +331,7 @@ msgid "REQUEST"
 msgstr "Запрос"
 
 msgid "CODE"
-msgstr "Код"
+msgstr "Исходники"
 
 msgid "CONTENT_BODY"
 msgstr "Содержание"
@@ -375,7 +384,7 @@ msgid "MAIN"
 msgstr "Главное"
 
 msgid "DATABASE_SELECT_ITEM"
-msgstr "Пожалуйста, сделайте выбор из левого меню"
+msgstr "Выбор дополнительных опций слева"
 
 # Error page
 msgid "ERROR_PAGE"
@@ -402,7 +411,7 @@ msgid "SYNC"
 msgstr "Обновить"
 
 msgid "SYNCRONIZE_TITLE"
-msgstr "Обновить среду разработки (код-базу)"
+msgstr "Обновить среду разработки (исходники)"
 
 msgid "ADMIN_INTERFACE"
 msgstr "Панель Администратора"

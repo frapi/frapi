@@ -16,8 +16,11 @@
  */
 class ErrorsController extends Lupin_Controller_Base
 {
+    private $tr;
+
     public function init($styles = array())
     {
+        $this->tr = Zend_Registry::get('tr');
         $actions = array('index', 'add', 'edit', 'delete');
         $this->_helper->_acl->allow('admin', $actions);
         parent::init($styles);
@@ -45,7 +48,7 @@ class ErrorsController extends Lupin_Controller_Base
                 // Save data
                 $model->add($form->getValues());
                 $model->refreshAPCCache();
-                $this->addMessage('Error code ' . $request->getParam('name') . ' added.');
+                $this->addMessage(sprintf($this->tr->_('ERROR_ADD_SUCCESS'), $request->getParam('name')));
                 $this->_redirect('/errors');
             }
         }
@@ -58,7 +61,7 @@ class ErrorsController extends Lupin_Controller_Base
         $request = $this->getRequest();
         $id      = $request->getParam('id');
         if ($id === null) {
-            $this->addErrorMessage('ID parameter is missing.');
+            $this->addErrorMessage($this->tr->_('ACTION_MISSING_ID'));
             return;
         }
 
@@ -68,10 +71,8 @@ class ErrorsController extends Lupin_Controller_Base
             if ($form->isValid($request->getPost())) {
                 // Save data
                 $model->update($form->getValues(), $id);
-                
                 $model->refreshAPCCache();
-                
-                $this->addMessage('Error code ' . $request->getParam('name') . ' updated.');
+                $this->addMessage(sprintf($this->tr->_('ERROR_UPDATE_SUCCESS'), $request->getParam('name')));
                 $this->_redirect('/errors/edit/id/' . $id);
             }
         } else {
@@ -88,13 +89,13 @@ class ErrorsController extends Lupin_Controller_Base
     {
         $id = $this->getRequest()->getParam('id');
         if ($id === null) {
-            $this->addErrorMessage('ID parameter is missing.');
+            $this->addErrorMessage($this->tr->_('ACTION_MISSING_ID'));
             return;
         }
 
         $model = new Default_Model_Error;
         $model->delete($id);
-        $this->addMessage('Error code deleted');
+        $this->addMessage($this->tr->_('ERROR_DELETE'));
         $this->_redirect('/errors');
     }
 }

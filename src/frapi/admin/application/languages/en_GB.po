@@ -141,6 +141,15 @@ msgstr "Development environment has been synchronized"
 msgid "ADD_NEW_ERROR"
 msgstr "Add new Error"
 
+msgid "ERROR_ADD_SUCCESS"
+msgstr "Error (%s) added"
+
+msgid "ERROR_UPDATE_SUCCESS"
+msgstr "Error (%s) updated"
+
+msgid "ERROR_DELETE"
+msgstr "Error removed"
+
 msgid "FILTER"
 msgstr "Filter"
 
