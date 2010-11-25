@@ -8,7 +8,7 @@ msgid "PASSWORD"
 msgstr "Mot de passe"
 
 msgid "LOGIN"
-msgstr "Login"
+msgstr "Enregistrement"
 
 msgid "SUBMENU"
 msgstr "Sousmenu"
