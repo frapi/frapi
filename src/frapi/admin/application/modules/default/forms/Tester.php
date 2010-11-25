@@ -19,33 +19,36 @@ class Default_Form_Tester extends Lupin_Form
     public function init()
     {
         $tr = Zend_Registry::get('tr');
-        $routesAndActions = array('Actions' => array(), 'Routes' => array());
+        $routesAndActions = array('Routes' => array(), 'History' => array());
         $model = new Default_Model_Action();
         $allActions = $model->getAll();
         foreach ($allActions as $db_action) {
-            $routesAndActions ['Actions'][$db_action['hash']] = $db_action['name'];
             if (!empty($db_action['route'])) {
                 $routesAndActions ['Routes']['route-' . $db_action['hash']] = $db_action['route'];
             }
         }
+
+        // @TODO Insert history loop here and append to $routesAndActions
+
+
         $action = new Zend_Form_Element_Select('action');
         $action->setLabel($tr->_('ACTION'));
         $action->addMultiOptions($routesAndActions);
         $this->addElement($action);
-        
+
         $params = new Zend_Form_Element_Text('query_uri');
         $params->setLabel($tr->_('QUERY_URI'));
         $params->setRequired(true);
         $params->setAttrib('size', '80');
         $this->addElement($params);
-        
+
         $t = new Default_Model_Tester;
         $output = $t->buildForm();
         $p = new Lupin_Form_Element_Static('params');
         $p->setValue($output);
         $p->setLabel($tr->_('PARAMS'));
         $this->addElement($p);
-        
+
         $formats = array();
         $outputModel = new Default_Model_Output;
         $format = new Zend_Form_Element_Select('format');
@@ -59,7 +62,7 @@ class Default_Form_Tester extends Lupin_Form
         }
         $format->addMultiOptions($formats);
         $this->addElement($format);
-        
+
         $methods = array(
             'get'    => 'GET',
             'post'   => 'POST',
@@ -67,23 +70,23 @@ class Default_Form_Tester extends Lupin_Form
             'delete' => 'DELETE',
             'head'   => 'HEAD'
         );
-        
+
         $method = new Zend_Form_Element_Select('method');
         $method->setLabel($tr->_('METHOD'));
         $method->setRequired(true);
         $method->addMultiOptions($methods);
         $this->addElement($method);
-        
+
         $email = new Zend_Form_Element_Text('email');
         $email->setLabel($tr->_('EMAIL'));
         $email->setAttrib('size', '40');
         $this->addElement($email);
-        
+
         $key = new Zend_Form_Element_Text('key');
         $key->setLabel($tr->_('SECRET_KEY'));
         $key->setAttrib('size', '40');
         $this->addElement($key);
-        
+
         $email_key = new Zend_Form_Element_Select('email-key');
         $email_key->setLabel($tr->_('LOAD_EMAIL_KEY'));
         $params->setAttrib('size', '55');
@@ -98,17 +101,17 @@ class Default_Form_Tester extends Lupin_Form
                 }
             }
         }
-        
+
         $email_key->addMultiOptions($emails_keys);
         $this->addElement($email_key);
-        
+
         $config_model = new Default_Model_Configuration();
         $url = new Zend_Form_Element_Text('url');
         $url->setLabel($tr->_('API_DOMAIN'));
         $url->setRequired(true);
         $url->setValue($config_model->getKey("api_url"));
         $this->addElement($url);
-        
+
         $ssl = new Zend_Form_Element_Checkbox('ssl');
         $ssl->setLabel($tr->_('USE_HTTPS'));
         $this->addElement($ssl);
