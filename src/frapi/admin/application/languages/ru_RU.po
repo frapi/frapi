@@ -172,7 +172,7 @@ msgid "SUBMIT"
 msgstr "Сохранить"
 
 msgid "ERROR_CONFIRM_DELETE"
-msgstr "Бы уверены что вы хотите удалить этu oшибку?"
+msgstr "Бы уверены что вы хотите удалить эту ошибку?"
 
 # Partner Section
 msgid "ADD_NEW_PARTNER"
