@@ -303,7 +303,7 @@ msgid "CONTENT_BODY"
 msgstr "Corps du contenu" 
 
 msgid "TESTER_REQUEST_ERROR"
-msgstr "Erreur: Vous avez été déconnecté pour des raisons d'inactivité. S'il vous plaît, veuillez vous <a href=\"/login\" target=\"_blank\"> reconnectez</a> (ouvrir dans un nouvel onglet) et essayez à nouveau."
+msgstr "Erreur: Vous avez été déconnecté pour des raisons d&#145;inactivité. S&#145;il vous plaît, veuillez vous <a href=\"/login\" target=\"_blank\"> reconnectez</a> (ouvrir dans un nouvel onglet) et essayez à nouveau."
 
 
 # Other
