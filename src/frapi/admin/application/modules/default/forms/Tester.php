@@ -30,7 +30,6 @@ class Default_Form_Tester extends Lupin_Form
 
         // @TODO Insert history loop here and append to $routesAndActions
 
-
         $action = new Zend_Form_Element_Select('action');
         $action->setLabel($tr->_('ACTION'));
         $action->addMultiOptions($routesAndActions);
@@ -70,8 +69,9 @@ class Default_Form_Tester extends Lupin_Form
             'delete' => 'DELETE',
             'head'   => 'HEAD'
         );
-
-        $method = new Zend_Form_Element_Select('method');
+        
+        // Explicitly turn off translations, our DELETE got translated
+        $method = new Zend_Form_Element_Select('method', array('disableTranslator' => true));
         $method->setLabel($tr->_('METHOD'));
         $method->setRequired(true);
         $method->addMultiOptions($methods);
