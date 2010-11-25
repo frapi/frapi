@@ -137,6 +137,9 @@ msgstr "Путь (%s) не подлежит изменениям вашим по
 msgid "ACTION_DEV_SYNC_SUCCESS"
 msgstr "Среда разработки обновлена"
 
+msgid "ACTION_CONFIRM_DELETE"
+msgstr "Бы уверены что вы хотите удалить это действие?"
+
 # Error section
 msgid "ADD_NEW_ERROR"
 msgstr "Добавить новую ошибку"
@@ -167,6 +170,9 @@ msgstr "Описание ошибки"
 
 msgid "SUBMIT"
 msgstr "Сохранить"
+
+msgid "ERROR_CONFIRM_DELETE"
+msgstr "Бы уверены что вы хотите удалить этu oшибку?"
 
 # Partner Section
 msgid "ADD_NEW_PARTNER"

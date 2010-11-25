@@ -137,6 +137,9 @@ msgstr "The path (%s) is not currently writeable by this user, therefore we cann
 msgid "ACTION_DEV_SYNC_SUCCESS"
 msgstr "Development environment has been synchronized"
 
+msgid "ACTION_CONFIRM_DELETE"
+msgstr "Are you sure you want to delete this action?"
+
 # Error section
 msgid "ADD_NEW_ERROR"
 msgstr "Add new Error"
@@ -167,6 +170,9 @@ msgstr "Error Message"
 
 msgid "SUBMIT"
 msgstr "Submit"
+
+msgid "ERROR_CONFIRM_DELETE"
+msgstr "Are you sure you want to delete this error?"
 
 # Partner Section
 msgid "ADD_NEW_PARTNER"
