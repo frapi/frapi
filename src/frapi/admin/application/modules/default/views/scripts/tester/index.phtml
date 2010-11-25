@@ -220,6 +220,18 @@ echo $this->form;
 
                $('#submitter').attr('disabled', false)
                               .attr('value', '<?php echo $this->tr->_('RUN_TEST'); ?>');
+            
+               var inHistory = false;
+               var uri       = queryURI.replace('\.' + format.toLowerCase(), '');
+               $('#action optgroup[label=History] option').each(function() {
+                   if ($(this).val() == uri) {
+                     inHistory = true;
+                   }
+               });
+               if (!inHistory) {
+                   $('#action optgroup[label=History]').append('<option value="' + uri + '"" selected="selected">' + uri + '</option>');
+               }
+
                $('#testing').hide();
            },
            dataType: "json",

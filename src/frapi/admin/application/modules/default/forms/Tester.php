@@ -28,7 +28,16 @@ class Default_Form_Tester extends Lupin_Form
             }
         }
 
-        // @TODO Insert history loop here and append to $routesAndActions
+        $test_history = new Zend_Session_Namespace('test_history');
+        $history      = $test_history->value;
+
+        if ($history) {
+            foreach ($history as $route) {
+                if (!empty($route)) {
+                    $routesAndActions['History'][$route] = $route;
+                }
+            }
+        }
 
 
         $action = new Zend_Form_Element_Select('action');
