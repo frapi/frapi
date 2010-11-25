@@ -2,26 +2,26 @@ domain "fr_FR"
 
 # login page
 msgid "USERNAME"
-msgstr "Utilisateur"
+msgstr "Nom d'utilisateur"
 
 msgid "PASSWORD"
 msgstr "Mot de passe"
 
 msgid "LOGIN"
-msgstr "Enregistrement"
+msgstr "Se connecter"
 
 msgid "SUBMENU"
-msgstr "Sousmenu"
+msgstr "Sous-menu"
 
 msgid "WELCOME"
 msgstr "Bienvenue"
 
 msgid "YOU_ARE_USING_FRAPI"
-msgstr "Vous utilisez le systeme FRAPI"
+msgstr "Vous utilisez le système FRAPI"
 
 #menu
 msgid "DASHBOARD"
-msgstr "Controle"
+msgstr "Contrôle"
 
 msgid "ACTIONS"
 msgstr "Actions"
@@ -40,7 +40,7 @@ msgstr "Testeur"
 
 # top right - sync
 msgid "SYNCING_MESSAGE"
-msgstr "&quot;Sync'ing&quot;: Synchronizing your codebase with the actions you created in &quot;Actions&quot;"
+msgstr "&quot;Sync'ing&quot;: Synchroniser votre code avec les actions que vous venez de créer &quot;Actions&quot;" 
 
 # Dashboard welcome
 
@@ -48,16 +48,16 @@ msgid "AMAZING_WELCOME"
 msgstr "Bienvenue dans le monde merveilleux de FRAPI"
 
 msgid "DASHBOARD_WELCOME_TITLE"
-msgstr "Premierement, bienvenue chez FRAPI"
+msgstr "Premièrement, bienvenue chez FRAPI"
 
 msgid "CRITICAL_SETUP_ISSUES"
-msgstr "Problemes d'installation critique"
+msgstr "Problèmes d'installation critique"
 
 msgid "CRITICAL_SETUP_ISSUES_INTRO"
-msgstr "Nous avons identifié certains problemes qui empecherons votre API de fonctionner correctement."
+msgstr "Attention : identification de problèmes pouvant altérer au bond fonctionnement de votre API."
 
 msgid "THE"
-msgstr "The"
+msgstr "Le"
 
 # Action section
 
@@ -65,16 +65,16 @@ msgid "ADD_NEW_ACTION"
 msgstr "Ajoutez une action"
 
 msgid "SETUP_HELP_MESSAGE"
-msgstr "You might want to run <b>sh setup.sh</b> which sets the files to chmod 777. This file is located in the root of your FRAPI download/checkout."
+msgstr "Vous voudrez peut-être exécuter <b>sh setup.sh</b> qui permet de définir les fichiers au chmod 777. Ce fichier est situé à la racine de votre  Téléchargement/Clone FRAPI."
 
 msgid "ACTION_DIR_PROBLEM"
-msgstr "The <strong>%s</strong> is not currently writeable by this user, therefore we cannot update the configuration file."
+msgstr "Le <strong>%s</strong> n'est pas accessible en écriture par l'utilisateur en cours, donc nous ne pouvons pas mettre à jour le fichier de configuration."
 
 msgid "NAME"
 msgstr "Nom"
 
 msgid "IS_ACTION_PUBLIC"
-msgstr "Est-ce une action publique?"
+msgstr "Est-ce une action publique?" 
 
 msgid "PRIVATE"
 msgstr "Privée"
@@ -83,7 +83,7 @@ msgid "PUBLIC"
 msgstr "Publique"
 
 msgid "IS_ACTION_ENABLED"
-msgstr "En fonction?"
+msgstr "En fonction?" 
 
 msgid "CUSTOM_ROUTE"
 msgstr "Route"
@@ -95,10 +95,10 @@ msgid "SAVE"
 msgstr "Enregistrer"
 
 msgid "ADD_PARAMETER"
-msgstr "Ajoutez un parametre"
+msgstr "Ajoutez un paramètre"
 
 msgid "PARAMETER"
-msgstr "Parametre"
+msgstr "Paramètre"
 
 msgid "REQUIRED"
 msgstr "Requis"
@@ -138,10 +138,10 @@ msgstr "Soumettre"
 # Partner Section
 
 msgid "ADD_NEW_PARTNER"
-msgstr "Ajoutez un partenaire"
+msgstr "Ajoutez un nouveau partenaire"
 
 msgid "COMPANY"
-msgstr "Compagnie"
+msgstr "Entreprise"
 
 msgid "API_KEY"
 msgstr "Clé API"
@@ -153,7 +153,7 @@ msgid "LASTNAME"
 msgstr "Nom de famille"
 
 msgid "EMAIL_USERNAME"
-msgstr "Email/Utilisateur"
+msgstr "E-mail/Nom d'utilisateur"
 
 # Configuration Section
 msgid "CACHE"
@@ -169,16 +169,16 @@ msgid "DATABASE"
 msgstr "Base de données"
 
 msgid "SELECT_ITEM_FROM_SUBMENU"
-msgstr "Veuillez selectionner un item sur la gauche"
+msgstr "Veuillez sélectionner un item sur la gauche dans le sous-menu."
 
 msgid "UPDATE_CONFIGURATION"
-msgstr "Mettre la Configuration a jour"
+msgstr "Mise à jour de la configuration"
 
 msgid "API_DOMAIN"
-msgstr " Domaine API"
+msgstr "Nom de domaine de l'API"
 
 msgid "ADMIN_LANGUAGE"
-msgstr "Langue Administration FRAPI"
+msgstr "Langue d'administration de FRAPI"
 
 msgid "LANGUAGE"
 msgstr "Langue"
@@ -190,7 +190,7 @@ msgid "FOR_TESTER"
 msgstr "pour Testeur"
 
 msgid "CACHE_HELP_ONE"
-msgstr "Voici une liste d'items cachées par FRAPI par code-couleur. Cliquer pour détails."
+msgstr "Voici une liste d'items cachées par code-couleur par FRAPI. Cliquer pour plus de détails."
 
 msgid "CACHE_HELP_TWO"
 msgstr "Cliquer &quot;Effacer&quot; pour effacer une clé du cache"
@@ -211,13 +211,13 @@ msgid "YOU_CAN"
 msgstr "Vous pouvez"
 
 msgid "UNSET_ALL_KEYS"
-msgstr "Effacer tous les clées"
+msgstr "Enlever toutes les clés" 
 
 msgid "UNSET_ALL_CACHE_KEYS"
-msgstr "Effacer tous les clées cachées"
+msgstr "Enlever tous les clées du cache." 
 
 msgid "TO_CLEAR_CACHE"
-msgstr "pour effacer le cache"
+msgstr "Pour effacer le cache"
 
 msgid "HANDLE"
 msgstr "Titre"
@@ -226,10 +226,10 @@ msgid "ADD_NEW_USER"
 msgstr "Ajoutez un utilisateur"
 
 msgid "SYNC_OUTPUT_TYPES"
-msgstr "Synchronizer les outputs"
+msgstr "Synchronizer les types d'outputs."
 
 msgid "MAKE_DEFAULT"
-msgstr "Défaut"
+msgstr "Par défaut"
 
 msgid "DISABLE"
 msgstr "Désactiver"
@@ -247,126 +247,126 @@ msgid "VALUE"
 msgstr "Valeur"
 
 msgid "KEY"
-msgstr "Clé"
+msgstr "Clé" 
 
 msgid "EDIT_DATABASE_SETTINGS"
-msgstr "Modifier configuration de base de données"
+msgstr "Modifier la configuration de la base de données"
 
 # Tester Section
 
 msgid "QUERY_URI"
-msgstr "Requete URI"
+msgstr "Requête URI" 
 
 msgid "PARAMS"
-msgstr "Parametres"
+msgstr "Param&egrave;tres"
 
 msgid "TESTER_ADD_PARAMETER"
-msgstr "Ajouter un parametre (&quot;nom=valeur&quot;)"
+msgstr "Ajouter un param&egrave;tre (&quot;nom=valeur&quot;)"
 
 msgid "FORMAT"
 msgstr "Format"
 
 msgid "METHOD"
-msgstr "Methode"
+msgstr "Méthode"
 
 msgid "EMAIL"
-msgstr "Email"
+msgstr "E-mail"
 
 msgid "SECRET_KEY"
-msgstr "Clé Secrete"
+msgstr "Clé Secr&egrave;te"
 
 msgid "LOAD_EMAIL_KEY"
-msgstr "Charger Combo Email/Clé"
+msgstr "Charger Combo E-mail/Clé"
 
 msgid "SELECT_COMBO_OF_FIELDS"
-msgstr "Selectionner une combination pour completer le champs dessus"
+msgstr "Sélectionner un combo de champs"  
 
 msgid "RUN_TEST"
-msgstr "Executer test"
+msgstr "Exécuter le test"
 
 msgid "POST_FIELDS"
-msgstr "Champs POST"
+msgstr "Champs POST" 
 
 msgid "RESPONSE"
-msgstr "Reponse"
+msgstr "Réponse"
 
 msgid "NO_QUERY_URI"
-msgstr "Aucune requete URI"
+msgstr "Aucune Requête URI"
 
 msgid "REQUEST"
-msgstr "Requete"
+msgstr "Requête"
 
 msgid "CODE"
 msgstr "Code"
 
 msgid "CONTENT_BODY"
-msgstr "Content Body"
+msgstr "Corps du contenu" 
 
 msgid "TESTER_REQUEST_ERROR"
-msgstr "Error: You were logged out due to inactivity. Please <a href=\"/login\" target=\"_blank\">log in</a> (opens in new tab) and try again."
+msgstr "Erreur: Vous avez été déconnecté pour des raisons d'inactivité. S'il vous plaît, veuillez vous <a href=\"/login\" target=\"_blank\"> reconnectez</a> (ouvrir dans un nouvel onglet) et essayez à nouveau."
 
 
 # Other
 
 msgid "ADDED"
-msgstr "added"
+msgstr "Ajouter"
 
 msgid "UPDATED"
-msgstr "updated"
+msgstr "Mise à jour"
 
 msgid "ID_PARAM_MISSING"
-msgstr "ID parameter is missing."
+msgstr "Param&egrave;tre ID manquant."
 
 msgid "NO_ACCESS_MESSAGE"
-msgstr "You do not have access to the area you were trying to access.<br />Please contact any of the administrators if you believe you should have access"
+msgstr "Vous n'avez pas accès à la zone que vous tentez d'accéder. <br /> S'il vous plaît contacter l'un des administrateurs, si vous croyez que vous devriez y avoir accès  "
 
 msgid "VISIBILITY"
-msgstr "Visibility"
+msgstr "Visibilité"
 
 msgid "DETAIL"
-msgstr "Detail"
+msgstr "Détail"
 
 # Database
 
 msgid "DATABASE_CONFIGURATION"
-msgstr "Database configuration"
+msgstr "Configuration de la base de données"
 
 msgid "ADD_NEW_DATABASE_CONFIGURATION"
-msgstr "Add new database configuration"
+msgstr "Ajout d'une nouvelle configuration de la base de données"
 
 msgid "EDIT_DATABASE_CONFIGURATION"
-msgstr "Edit database configuration"
+msgstr "Modifier la configuration de la base de données"
 
 msgid "NO_DATABASE_CONFIGURATION_YET"
-msgstr "There are no database configurations yet"
+msgstr "Il n'existe pas encore de configuration de la base de données"
 
 msgid "ADD_SOME"
-msgstr "Add some"
+msgstr "Ajouter en une"
 
 msgid "MAIN"
-msgstr "Main"
+msgstr "Principal"
 
 msgid "DATABASE_SELECT_ITEM"
-msgstr "Please select an item from the submenu, to your left"
+msgstr "Veuillez sélectionner un item à votre gauche dans le sous-menu de la base de données."
 
 # Error page
 msgid "ERROR_PAGE"
-msgstr "Error Page"
+msgstr "Page d'erreur"
 
 msgid "SORRY_ERROR_MESSAGE"
-msgstr "Sorry! A system error prevented your action from being executed"
+msgstr "Désolé! Une erreur système a empêché votre action d'être exécutés."
 
 # Warnings
 
 msgid "ACTION_WARNING_CONFIG"
-msgstr "The &quot;<b>%s</b>&quot; directory is not writeable by the current user (%s), therefore we will not be able to save API configurations: (Actions, Errors, Partners, Configuration, etc) until the user has write access."
+msgstr "Le \"<b>%s</b>\" répertoire n'est pas accessible en écriture par l'utilisateur en cours (%s), donc nous ne serons pas en mesure de sauvegarder les configurations de l'API: (Actions, erreurs, partenaires, configuration, etc) tant que l'utilisateur n'aura pas l'accès en écriture."
 
 msgid "ACTION_WARNING_ACTION"
-msgstr "The &quot;<b>%s</b>&quot; directory is not writeable by the current user (%s), therefore we will not be able to synchronize the codebase until the user has write access."
+msgstr "Le \"<b>%s</b>\" répertoire n'est pas accessible en écriture par l'utilisateur en cours (%s), donc nous ne serons pas en mesure de synchroniser la base de code jusqu'à ce que l'utilisateur en est l'accès en écriture. "
 
 ## extra post-pre
 msgid "USE_HTTPS"
-msgstr "Use HTTPS?"
+msgstr "Utiliser HTTPS?"
 
 msgid "RETYPE"
 msgstr "Re-type"
@@ -375,7 +375,7 @@ msgid "SYNC"
 msgstr "Sync No"
 
 msgid "SYNCRONIZE_TITLE"
-msgstr "Synchronize Development Codebase"
+msgstr "Synchroniser le développement de la base de code"
 
 msgid "ADMIN_INTERFACE"
-msgstr "Interface Administrative"
+msgstr "Interface Administrateur"
