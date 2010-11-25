@@ -16,8 +16,11 @@
  */
 class PartnersController extends Lupin_Controller_Base
 {
+    private $tr;
+
     public function init($styles = array())
     {
+        $this->tr = Zend_Registry::get('tr');
         $actions = array('index', 'add', 'edit', 'delete');
         $this->_helper->_acl->allow('admin', $actions);
         parent::init($styles);
@@ -37,19 +40,13 @@ class PartnersController extends Lupin_Controller_Base
     public function addAction()
     {
         $form = new Default_Form_Partner;
-        $form->addElement(new Zend_Form_Element_Submit('submit'));
-
         $model   = new Default_Model_Partner;
         $request = $this->getRequest();
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 // Save data
                 $model->add($form->getValues());
-                $this->addMessage(
-                    'The partner has been added. Remember that if you want to make an API call ' . 
-                    'require a partner authentication, you have to uncheck "Is the action public?" in the ' .
-                    'action edition/add section. Psstt the RESTful API uses HTTP Auth.'
-                );
+                $this->addMessage(sprintf($this->tr->_('PARTNER_ADD_SUCCESS'),$request->getParam('company')));
                 $this->_redirect('/partners');
             }
         }
@@ -62,7 +59,7 @@ class PartnersController extends Lupin_Controller_Base
         $request = $this->getRequest();
         $id      = $request->getParam('id');
         if ($id === null) {
-            $this->addErrorMessage('ID parameter is missing.');
+            $this->addErrorMessage($this->tr->_('ACTION_MISSING_ID'));
             return;
         }
 
@@ -73,10 +70,8 @@ class PartnersController extends Lupin_Controller_Base
         $apiKey->setAttrib('disabled', true);
         $form->addElement($apiKey);
 
-        $form->addElement(new Zend_Form_Element_Submit('submit'));
-
         $generate = new Zend_Form_Element_Submit('generate_api_key');
-        $generate->setLabel('Generate a New API Key');
+        $generate->setLabel($this->tr->_('PARTNER_GENERATE_NEW_API_KEY'));
         $form->addElement($generate);
 
         $model = new Default_Model_Partner;
@@ -88,9 +83,9 @@ class PartnersController extends Lupin_Controller_Base
                 
                 if (isset($data['generate_api_key'])) {
                     $model->updateAPIKey($id);
+                    $this->addMessage($this->tr->_('PARTNER_API_KEY_UPDATED'));
                 }
-
-                $this->addMessage('Partner ' . $request->getParam('company') . ' updated.');
+                $this->addMessage(sprintf($this->tr->_('PARTNER_UPDATE_SUCCESS'), $request->getParam('company')));
                 $this->_redirect('/partners/edit/id/' . $id);
             }
         } else {
@@ -104,13 +99,13 @@ class PartnersController extends Lupin_Controller_Base
     {
         $id = $this->getRequest()->getParam('id');
         if ($id === null) {
-            $this->addErrorMessage('ID parameter is missing.');
+            $this->addErrorMessage($this->tr->_('ACTION_MISSING_ID'));
             return;
         }
 
         $model = new Default_Model_Partner;
         $model->delete($id);
-        $this->addMessage('Partner deleted');
+        $this->addMessage($this->tr->_('PARTNER_DELETE'));
         $this->_redirect('/partners');
     }
 }

@@ -193,6 +193,24 @@ msgstr "Фамилия"
 msgid "EMAIL_USERNAME"
 msgstr "Адрес почты/Пользователь"
 
+msgid "PARTNER_ADD_SUCCESS"
+msgstr "Партнер (%s) добавлен. Не забывайте что если вы хотите использовать аутентификацировать партнеров, вы должны сделать действие тайным в конфигурации действий. (API типа REST используют HTTP Auth)"
+
+msgid "PARTNER_UPDATE_SUCCESS"
+msgstr "Партнер (%s) обновлен"
+
+msgid "PARTNER_DELETE"
+msgstr "Партнер удален"
+
+msgid "PARTNER_GENERATE_NEW_API_KEY"
+msgstr "Сгенерировать новый ключ ППИ (API)"
+
+msgid "PARTNER_API_KEY_UPDATED"
+msgstr "Ключ ППИ (API) обновлен"
+
+msgid "PARTNER_CONFIRM_DELETE"
+msgstr "Бы уверены что вы хотите удалить этого партнера?"
+
 # Configuration Section
 msgid "CACHE"
 msgstr "Кэш"

@@ -39,5 +39,7 @@ class Default_Form_Partner extends Lupin_Form
         $company->setLabel($tr->_('COMPANY'));
         $company->setRequired(true);
         $this->addElement($company);
+
+        $this->addElement(new Zend_Form_Element_Submit($tr->_('SUBMIT')));
     }
 }

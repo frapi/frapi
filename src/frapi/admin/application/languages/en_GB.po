@@ -193,6 +193,25 @@ msgstr "Last Name"
 msgid "EMAIL_USERNAME"
 msgstr "Email/Username"
 
+msgid "PARTNER_ADD_SUCCESS"
+msgstr "Partner (%s) has been added. Remember that if you want to make an API call that requires a partner authentication, you have to uncheck \"Is the action public?\" in the action edition/add section. Psstt the RESTful API uses HTTP Auth."
+
+msgid "PARTNER_UPDATE_SUCCESS"
+msgstr "Partner (%s) updated"
+
+msgid "PARTNER_DELETE"
+msgstr "Partner removed"
+
+msgid "PARTNER_GENERATE_NEW_API_KEY"
+msgstr "Generate new API key"
+
+msgid "PARTNER_API_KEY_UPDATED"
+msgstr "API key updated"
+
+msgid "PARTNER_CONFIRM_DELETE"
+msgstr "Are you sure you want to delete this partner?"
+
+
 # Configuration Section
 msgid "CACHE"
 msgstr "Cache"

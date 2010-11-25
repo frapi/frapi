@@ -15,7 +15,7 @@
         <td><?php echo $d['company']; ?></td>
         <td><?php echo $d['api_key']; ?></td>
         <td style="text-align: center;">
-            <a href="/partners/edit/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('EDIT'); ?></a> | <a href="/partners/delete/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('DELETE'); ?></a>
+            <a href="/partners/edit/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('EDIT'); ?></a> | <a href="/partners/delete/id/<?php echo $d['hash']; ?>" onclick="return confirm('<?php echo $this->tr->_('PARTNER_CONFIRM_DELETE'); ?>');"><?php echo $this->tr->_('DELETE'); ?></a>
         </td>
       </tr>
 <?php endif; endforeach; ?>
