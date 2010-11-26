@@ -16,8 +16,11 @@
  */
 class ConfigurationController extends Lupin_Controller_Base
 {
+    private $tr;
+
     public function init($styles = array())
     {
+        $this->tr = Zend_Registry::get('tr');
         $actions = array('index');
         $this->_helper->_acl->allow('admin', $actions);
 
@@ -29,25 +32,46 @@ class ConfigurationController extends Lupin_Controller_Base
         $config_model = new Default_Model_Configuration();
         $form         = new Default_Form_Configuration();
         $lang_form    = new Default_Form_Language();
-        $data         = $this->_request->getParams();
 
-        if ($this->_request->isPost()) {
-            if ($form->isValid($data)) {
-                $res = $config_model->updateApiUrl($data['api_url']);
+        $config_dir = Zend_Registry::get('localConfigPath');
+        $config_file = $config_dir . 'configurations.xml';
 
-                if ($res !== false) {
-                    $this->addMessage('Configuration updated!');
-                    $this->_redirect('/configuration');
-                }
+        // Lets make sure our permissions are ok before the user modifies config
+        if (!is_writable($config_dir)) {
+            $configPathMessage = sprintf($this->tr->_('ACTION_DIR_PROBLEM'), $config_dir);
+            $setupHelpMessage  = $this->tr->_('SETUP_HELP_MESSAGE');
+            $this->addErrorMessage(
+                $configPathMessage .' <br /><br />' . $setupHelpMessage
+            );
+        } elseif (!is_writable($config_file)) {
+            $configFileMessage = sprintf($this->tr->_('FILE_NOT_WRITABLE'), $config_file);
+            $setupHelpMessage  = $this->tr->_('SETUP_HELP_MESSAGE');
+            $this->addErrorMessage(
+                 $configFileMessage .' <br /><br />' . $setupHelpMessage
+            );
+        }    
+   
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                try {
+                    $res = $config_model->updateApiUrl($request->getParam('api_url'));                    
+                    if ($res === true) {
+                        $this->addMessage($this->tr->_('CONFIG_UPDATE_SUCCESS'));
+                    } else  {
+                        $this->addMessage($this->tr->_('CONFIG_UPDATE_FAIL'));
+                    }
+                } catch (RuntimeException $e) {
+                    $this->addErrorMessage($this->tr->_('CONFIG_UPDATE_FAIL') . ": " . $e->getMessage());
+                } 
+                $this->_redirect('/configuration'); 
             }
         } else {
             $form->populate(array(
                 'api_url' => $config_model->getKey('api_url')
             ));
-
-            $this->view->form = $form;
         }
-
+        $this->view->form = $form;
         $this->view->lang_form = $lang_form;
     }
 }

@@ -309,6 +309,12 @@ msgstr "Key"
 msgid "EDIT_DATABASE_SETTINGS"
 msgstr "Edit Database settings"
 
+msgid "CONFIG_UPDATE_SUCCESS"
+msgstr "Configuration updated"
+
+msgid "CONFIG_UPDATE_FAIL"
+msgstr "Configuration update failed"
+
 # Tester Section
 msgid "QUERY_URI"
 msgstr "Query URI"
@@ -451,7 +457,7 @@ msgid "EDITING_ACTION"
 msgstr "Editing Action"
 
 msgid "FILE_NOT_WRITABLE"
-msgstr "This file is not writeable, please give the web-user write access to the custom directory."
+msgstr "File (%s) is not writeable, please give the web-user write access to the custom directory."
 
 msgid "FILE_CONTENT_UPDATED"
 msgstr "The content of the file has been updated with success."
