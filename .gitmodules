@@ -1,3 +1,0 @@
-[submodule "src/frapi/custom/Model/ArmChair"]
-	path = src/frapi/custom/Model/ArmChair
-	url = git://github.com/till/armchair.git
