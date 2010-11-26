@@ -95,24 +95,24 @@ class Lupin_Form extends Zend_Form
         // Put a proper error message for setRequired(true)
         if ($element->isRequired()) {
             // Lets provide specific message for checkboxes
-            if ($element->getType() === 'Lupin_Form_Element_MultiCheckbox') {
+            if ($element->getType() === 'Lupin_Form_Element_MultiCheckbox' && $element->getValidator('NotEmpty') === false) {
                 $element->addValidator('NotEmpty', true,
                     array(
                         'messages' => array(
                             'isEmpty'         => 'This field requires at least one checkbox to be selected.',
-                            'notEmptyInvalid' => 'This field requires at least one checkbox to be selected.'
                         )
                     )
                 );
             } else {
-                $element->addValidator('NotEmpty', true,
-                    array(
-                        'messages' => array(
-                            'isEmpty'         => 'This field requires a value but you submitted nothing.',
-                            'notEmptyInvalid' => 'The value for this field is not a valid format.'
+                if ($element->getValidator('NotEmpty') === false) {
+                    $element->addValidator('NotEmpty', true,
+                        array(
+                            'messages' => array(
+                                'isEmpty'         => 'This field requires a value but you submitted nothing.',
+                            )
                         )
-                    )
-                );
+                    );
+                }
             }
         }
 

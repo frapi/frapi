@@ -23,6 +23,7 @@ class Default_Form_Configuration extends Lupin_Form
         $api_url = new Zend_Form_Element_Text('api_url');
         $api_url->setLabel($tr->_('API_DOMAIN') . ' ' . $tr->_('FOR_TESTER'));
         $api_url->setRequired(true);
+        $api_url->addValidator('NotEmpty', true, array('messages' => $tr->_('GENERAL_MISSING_TEXT_VALUE')));
         $this->addElement($api_url);
         
         $this->addElement(new Zend_Form_Element_Submit($tr->_('UPDATE_CONFIGURATION'), array('label' => $tr->_('UPDATE_CONFIGURATION'))));

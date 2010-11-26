@@ -28,12 +28,14 @@ class Default_Form_Error extends Lupin_Form
         $name = new Zend_Form_Element_Text('name');
         $name->setLabel($tr->_('NAME'));
         $name->setRequired(true);
+        $name->addValidator('NotEmpty', true, array('messages' => $tr->_('GENERAL_MISSING_TEXT_VALUE')));
         $this->addElement($name);
 
         $msg = new Zend_Form_Element_Textarea('message');
         $msg->setLabel($tr->_('ERROR_MESSAGE'));
         $msg->setAttribs(array('rows' => 10, 'cols' => 35));
         $msg->setRequired(true);
+        $msg->addValidator('NotEmpty', true, array('messages' => $tr->_('GENERAL_MISSING_TEXT_VALUE')));
         $this->addElement($msg);
 
         /** Maybe next version will have it back.
