@@ -80,7 +80,10 @@ msgid "PRIVATE"
 msgstr "Privée"
 
 msgid "PUBLIC"
-msgstr "Publique"
+msgstr "Publique" 
+
+msgid "ENABLED"
+msgstr "Fonctionne"
 
 msgid "IS_ACTION_ENABLED"
 msgstr "En fonction?" 
@@ -110,13 +113,47 @@ msgid "DELETE"
 msgstr "Effacer"
 
 msgid "PLEASE_PROVIDE_USERNAME"
-msgstr "Veuillez donner un nom d'utilisateur et un mot de passe."
+msgstr "Veuillez donner un nom d'utilisateur et un mot de passe."  
+
+msgid "ACTION_ADD_SUCCESS"
+msgstr "Action ajoutée avec succès"
+
+msgid "ACTION_ADD_FAIL"
+msgstr "Echec de l'ajout d'action"
+
+msgid "ACTION_MISSING_ID"
+msgstr "Le paramètre ID est introuvable."
+
+msgid "ACTION_UPDATE_SUCCESS"
+msgstr "Action de mise &agrave; jour réussie."   
+
+msgid "ACTION_UPDATE_FAIL"
+msgstr "Echec de la mise &agrave; jour."
+
+msgid "ACTION_DELETE"
+msgstr "Supprimer l'action"
+
+msgid "ACTION_WRITE_ERROR"
+msgstr "Le chemin (%s) n'est actuellement pas accessible en écriture par cet utilisateur, par conséquent, nous ne pouvez pas synchroniser la base de code." 
+
+msgid "ACTION_DEV_SYNC_SUCCESS"
+msgstr "Environnement de développement a été synchronisé."
+
 
 # Error section
 
 msgid "ADD_NEW_ERROR"
 msgstr "Ajoutez une erreur"
 
+msgid "ERROR_ADD_SUCCESS"
+msgstr "Erreur (%s) ajoutée"
+
+msgid "ERROR_UPDATE_SUCCESS"
+msgstr "Erreur (%s) mise &agrave; jour"
+
+msgid "ERROR_DELETE"
+msgstr "Supprimer une erreur"
+                          
 msgid "FILTER"
 msgstr "Filtre"
 
@@ -175,7 +212,10 @@ msgid "UPDATE_CONFIGURATION"
 msgstr "Mise à jour de la configuration"
 
 msgid "API_DOMAIN"
-msgstr "Nom de domaine de l'API"
+msgstr "Nom de domaine de l'API" 
+
+msgid "FOR_TESTER"
+msgstr "Pour le testeur"
 
 msgid "ADMIN_LANGUAGE"
 msgstr "Langue d'administration de FRAPI"
@@ -185,9 +225,6 @@ msgstr "Langue"
 
 msgid "UPDATE_SYSTEM_WIDE"
 msgstr "Mise &agrave; jour de l'ensemble du syst&egrave;me"
-
-msgid "FOR_TESTER"
-msgstr "pour Testeur"
 
 msgid "CACHE_HELP_ONE"
 msgstr "Voici une liste d'items cachées par code-couleur par FRAPI. Cliquer pour plus de détails."
@@ -282,7 +319,10 @@ msgid "SELECT_COMBO_OF_FIELDS"
 msgstr "Sélectionner un combo de champs"  
 
 msgid "RUN_TEST"
-msgstr "Exécuter le test"
+msgstr "Exécuter le test" 
+
+msgid "TESTING"
+msgstr "Test"
 
 msgid "POST_FIELDS"
 msgstr "Champs POST" 
@@ -305,6 +345,11 @@ msgstr "Corps du contenu"
 msgid "TESTER_REQUEST_ERROR"
 msgstr "Erreur: Vous avez été déconnecté pour des raisons d&#145;inactivité. S&#145;il vous plaît, veuillez vous <a href=\"/login\" target=\"_blank\"> reconnectez</a> (ouvrir dans un nouvel onglet) et essayez à nouveau."
 
+msgid "TESTER_HTTP_REQUEST_MISSING"
+msgstr "La classe HttpRequest class est introuvable &#8212; le <a href=\"http://pecl.php.net/package/pecl_http\" title=\"PECL HTTP\">pecl_http</a> paquet est nécessaire pour utiliser le testeur." 
+
+msgid "TESTER_API_INFO_MESSAGE"
+msgstr "N'oubliez pas, vous pouvez définir par défaut le nom de domaine de l'API dans <a href=\"/configuration\">configuration</a>!"
 
 # Other
 
@@ -379,3 +424,15 @@ msgstr "Synchroniser le développement de la base de code"
 
 msgid "ADMIN_INTERFACE"
 msgstr "Interface Administrateur"
+
+msgid "FILE_NOT_EXIST_HAVE_YOU_SYNCED"
+msgstr "This file doesn't exist... have you sync'ed since you created this action?"
+
+msgid "EDITING_ACTION"
+msgstr "Editing Action"
+
+msgid "FILE_NOT_WRITABLE"
+msgstr "This file is not writeable, please give the web-user write access to the custom directory."
+
+msgid "FILE_CONTENT_UPDATED"
+msgstr "The content of the file has been updated with success."
