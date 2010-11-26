@@ -55,16 +55,16 @@ class ConfigurationController extends Lupin_Controller_Base
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 try {
-                    $res = $config_model->updateApiUrl($request->getParam('api_url'));                    
-                    if ($res === true) {
+                    $res = $config_model->updateApiUrl($request->getParam('api_url'));
+                    if ($res !== false) {
                         $this->addMessage($this->tr->_('CONFIG_UPDATE_SUCCESS'));
+                        $this->_redirect('/configuration');
                     } else  {
-                        $this->addMessage($this->tr->_('CONFIG_UPDATE_FAIL'));
+                        $this->addErrorMessage($this->tr->_('CONFIG_UPDATE_FAIL'));
                     }
                 } catch (RuntimeException $e) {
                     $this->addErrorMessage($this->tr->_('CONFIG_UPDATE_FAIL') . ": " . $e->getMessage());
                 } 
-                $this->_redirect('/configuration'); 
             }
         } else {
             $form->populate(array(
