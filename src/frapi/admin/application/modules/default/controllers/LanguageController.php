@@ -44,8 +44,7 @@ class LanguageController extends Lupin_Controller_Base
             Zend_Registry::set('tr', $translate);
 
             $localeSession->value = $data['languages'];
+            $this->_redirect('/configuration');
         }
-
-        $this->_redirect('/');
     }
 }

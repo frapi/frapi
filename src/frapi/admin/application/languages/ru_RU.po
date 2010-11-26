@@ -308,6 +308,12 @@ msgstr "Ключ"
 msgid "EDIT_DATABASE_SETTINGS"
 msgstr "Изменить параметры базы данных"
 
+msgid "CONFIG_UPDATE_SUCCESS"
+msgstr "Конфигурация сохранена"
+
+msgid "CONFIG_UPDATE_FAIL"
+msgstr "Конфигурация не сохранена, ошибка"
+
 # Tester Section
 msgid "QUERY_URI"
 msgstr "URI запроса"
@@ -450,7 +456,7 @@ msgid "EDITING_ACTION"
 msgstr "Изменяемое действие"
 
 msgid "FILE_NOT_WRITABLE"
-msgstr "Этот файл не подлежит изменениям, пожалуйста измените права веб-пользователя в директории"
+msgstr "Файл (%s) не подлежит изменениям, пожалуйста измените права веб-пользователя в директории"
 
 msgid "FILE_CONTENT_UPDATED"
 msgstr "Файл обновлен"
