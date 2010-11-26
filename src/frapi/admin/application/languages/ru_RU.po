@@ -281,6 +281,27 @@ msgstr "Название"
 msgid "ADD_NEW_USER"
 msgstr "Добавить нового пользователя"
 
+msgid "USER_ADD_SUCCESS"
+msgstr "Пользователь (%s) добавлен"
+
+msgid "USER_ADD_FAIL"
+msgstr "Ошибка в добавлении пользователя"
+
+msgid "USER_UPDATE_SUCCESS"
+msgstr "Пользователь обновлен"
+
+msgid "USER_UPDATE_FAIL"
+msgstr "Ошибка в изменении пользователя"
+
+msgid "USER_DELETE"
+msgstr "Пользователь удален"
+
+msgid "USER_CONFIRM_DELETE"
+msgstr "Бы уверены что вы хотите удалить этого пользователя?"
+
+msgid "USER_PASSWORD_MISMATCH"
+msgstr "Пароли не совпадают"
+
 msgid "SYNC_OUTPUT_TYPES"
 msgstr "Обновить тип вывода (output)"
 

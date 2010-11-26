@@ -14,7 +14,7 @@
         <td><?php echo $d['handle']; ?></td>
         <td style="text-align: center;">
             <a href="/user/edit/id/<?php echo $d['handle']; ?>"><?php echo $this->tr->_('EDIT'); ?></a> |
-            <a href="/user/delete/id/<?php echo $d['handle']; ?>"><?php echo $this->tr->_('DELETE'); ?></a>
+            <a href="/user/delete/id/<?php echo $d['handle']; ?>" onclick="return confirm('<?php echo $this->tr->_('USER_CONFIRM_DELETE'); ?>');"><?php echo $this->tr->_('DELETE'); ?></a>
         </td>
       </tr>
 <?php endif; endforeach; ?>

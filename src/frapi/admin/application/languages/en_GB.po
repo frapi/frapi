@@ -282,6 +282,27 @@ msgstr "Handle"
 msgid "ADD_NEW_USER"
 msgstr "Add new User"
 
+msgid "USER_ADD_SUCCESS"
+msgstr "User (%s) added"
+
+msgid "USER_ADD_FAIL"
+msgstr "Error adding user"
+
+msgid "USER_UPDATE_SUCCESS"
+msgstr "User updated"
+
+msgid "USER_UPDATE_FAIL"
+msgstr "Error updating user"
+
+msgid "USER_DELETE"
+msgstr "User removed"
+
+msgid "USER_CONFIRM_DELETE"
+msgstr "Are you sure you want to delete this user?"
+
+msgid "USER_PASSWORD_MISMATCH"
+msgstr "Passwords do not match"
+
 msgid "SYNC_OUTPUT_TYPES"
 msgstr "Sync Output Types"
 

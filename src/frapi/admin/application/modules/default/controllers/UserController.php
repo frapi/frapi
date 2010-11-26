@@ -16,8 +16,11 @@
  */
 class UserController extends Lupin_Controller_Base
 {
+    private $tr;
+
     public function init($styles = array())
     {
+        $this->tr = Zend_Registry::get('tr');
         $actions = array('index', 'add', 'edit', 'delete');
         $this->_helper->_acl->allow('admin', $actions);
         parent::init($styles);
@@ -39,15 +42,16 @@ class UserController extends Lupin_Controller_Base
             if ($form->isValid($request->getPost())) {
                 $data = $form->getValues();
                 if ($data['password'] !== $data['password_again']) {
-                    $this->addErrorMessage('Passwords do not match, please try again.');
-                    $this->_redirect('/user/add');
+                    $this->addErrorMessage($this->tr->_('USER_PASSWORD_MISMATCH'));
+                    $this->view->form = $form;
+                    return;
                 }
 
                 // Save data
                 $model->add($data);
 
                 // Bit of xss here and there.
-                $this->addMessage('User ' . $data['handle'] . ' added.');
+                $this->addMessage(sprintf($this->tr->_('USER_ADD_SUCCESS'), $data['handle']));
                 $this->_redirect('/user');
             }
         }
@@ -67,14 +71,15 @@ class UserController extends Lupin_Controller_Base
             if ($form->isValid($request->getPost())) {
                 $data = $form->getValues();
                 if ($data['password'] !== $data['password_again']) {
-                    $this->addErrorMessage('Passwords do not match, please try again.');
-                    $this->_redirect('/user/edit/id/' . $data['id']);
+                    $this->addErrorMessage($this->tr->_('USER_PASSWORD_MISMATCH'));
+                    $this->view->form = $form;
+                    return;
                 }
 
                 // Save data
                 $model->update($data, $id);
-                $this->addMessage('User updated.');
-                $this->_redirect('/user/edit/id/' . $id);
+                $this->addMessage($this->tr->_('USER_UPDATE_SUCCESS'));
+                $this->_redirect('/user');
             }
         } else {
             $user = $model->getUser($id);
@@ -88,13 +93,13 @@ class UserController extends Lupin_Controller_Base
     {
         $id = $this->getRequest()->getParam('id');
         if ($id === null) {
-            $this->addErrorMessage('ID parameter is missing.');
+            $this->addErrorMessage($this->tr->_('ACTION_MISSING_ID'));
             return;
         }
 
         $model = new Default_Model_User;
         $model->delete($id);
-        $this->addMessage('User deleted');
+        $this->addMessage($this->tr->_('USER_DELETE'));
         $this->_redirect('/user');
     }
 }
