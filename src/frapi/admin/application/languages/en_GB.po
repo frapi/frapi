@@ -425,6 +425,9 @@ msgstr "The &quot;<b>%s</b>&quot; directory is not writeable by the current user
 msgid "ACTION_WARNING_ACTION"
 msgstr "The &quot;<b>%s</b>&quot; directory is not writeable by the current user (%s), therefore we will not be able to synchronize the codebase until the user has write access."
 
+msgid "GENERAL_MISSING_TEXT_VALUE"
+msgstr "Required field is empty"
+
 ## extra post-pre
 msgid "USE_HTTPS"
 msgstr "Use HTTPS?"

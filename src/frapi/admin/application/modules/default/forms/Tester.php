@@ -47,6 +47,7 @@ class Default_Form_Tester extends Lupin_Form
         $params = new Zend_Form_Element_Text('query_uri');
         $params->setLabel($tr->_('QUERY_URI'));
         $params->setRequired(true);
+        $params->addValidator('NotEmpty', true, array('messages' => $tr->_('GENERAL_MISSING_TEXT_VALUE')));
         $params->setAttrib('size', '80');
         $this->addElement($params);
 
@@ -118,6 +119,7 @@ class Default_Form_Tester extends Lupin_Form
         $url = new Zend_Form_Element_Text('url');
         $url->setLabel($tr->_('API_DOMAIN'));
         $url->setRequired(true);
+        $url->addValidator('NotEmpty', true, array('messages' => $tr->_('GENERAL_MISSING_TEXT_VALUE')));
         $url->setValue($config_model->getKey("api_url"));
         $this->addElement($url);
 

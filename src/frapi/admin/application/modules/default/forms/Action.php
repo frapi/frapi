@@ -23,6 +23,7 @@ class Default_Form_Action extends Lupin_Form
         $name = new Zend_Form_Element_Text('name');
         $name->setLabel($tr->_('NAME'));
         $name->setRequired(true);
+        $name->addValidator('NotEmpty', true, array('messages' => $tr->_('GENERAL_MISSING_TEXT_VALUE'))); 
         $this->addElement($name);
 
         $enabled = new Zend_Form_Element_Checkbox('enabled');
@@ -36,6 +37,7 @@ class Default_Form_Action extends Lupin_Form
         $route = new Zend_Form_Element_Text('route');
         $route->setLabel($tr->_('CUSTOM_ROUTE'));
         $route->setRequired(true);
+        $route->addValidator('NotEmpty', true, array('messages' => $tr->_('GENERAL_MISSING_TEXT_VALUE')));
         $this->addElement($route);
 
         $desc = new Zend_Form_Element_Textarea('description');
