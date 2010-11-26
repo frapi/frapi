@@ -16,7 +16,7 @@
  */
 class TesterController extends Lupin_Controller_Base
 {
-    private $tr; 
+    private $tr;
 
     public function init($styles = array())
     {
@@ -54,6 +54,16 @@ class TesterController extends Lupin_Controller_Base
         $extraParams = $this->_request->getParam('param');
 
         $params      = array();
+
+        $session_query_uri = '/' . substr($query_uri, 0, strrpos($query_uri, '.'));
+        $test_history      = new Zend_Session_Namespace('test_history');
+        $history           = $test_history->value;
+
+        if (!in_array($session_query_uri, $history)) {
+            $history[] = $session_query_uri;
+        }
+
+        $test_history->value = $history;
 
         if (!empty($extraParams)) {
             foreach ($extraParams as $newParam) {
