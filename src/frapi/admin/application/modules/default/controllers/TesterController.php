@@ -75,23 +75,25 @@ class TesterController extends Lupin_Controller_Base
             }
         }
 
-        $newMethod = HTTP_METH_GET;
+        require_once 'HTTP/Request2.php';
+
+        $newMethod = HTTP_Request2::METHOD_GET;
 
         switch ($method) {
             case 'get':
-                $newMethod = HTTP_METH_GET;
+                $newMethod = HTTP_Request2::METHOD_GET;
                 break;
             case 'post':
-                $newMethod = HTTP_METH_POST;
+                $newMethod = HTTP_Request2::METHOD_POST;
                 break;
             case 'put':
-                $newMethod = HTTP_METH_PUT;
+                $newMethod = HTTP_Request2::METHOD_PUT;
                 break;
             case 'delete':
-                $newMethod = HTTP_METH_DELETE;
+                $newMethod = HTTP_Request2::METHOD_DELETE;
                 break;
             case 'head':
-                $newMethod = HTTP_METH_HEAD;
+                $newMethod = HTTP_Request2::METHOD_HEAD;
 
                 break;
         }
@@ -99,38 +101,44 @@ class TesterController extends Lupin_Controller_Base
         $email = $this->_request->getParam('email');
         $pass = $this->_request->getParam('secretKey');
 
-        $request_url = 'http' . ($ssl !== null ? 's' : '') . '://' . $url . '/' . $query_uri;
+        $request_url = 'http' . ($ssl == true ? 's' : '') . '://' . $url . '/' . $query_uri;
 
-        $httpOptions = array();
+        $request = new HTTP_Request2($request_url, $newMethod);
 
         if ($email && $pass) {
-            $httpOptions = array(
-                'headers'      => array('Accept' => '*/*'),
-                'httpauth'     => $email . ':' . $pass,
-                'httpauthtype' => HTTP_AUTH_DIGEST,
-            );
+            $request->setAuth($email, $pass, HTTP_Request2::AUTH_DIGEST);
+            $request->setHeader(array(
+                'Accept' => '*/*'
+            ));
         }
-
-        $request = new HttpRequest($request_url, $newMethod, $httpOptions);
-
-        if ("post" == $method) {
-            $request->addPostFields($params);
+        if ($method == 'post') {
+            $request->addPostParameter($params);
         } else {
-            $request->addQueryData($params);
+            $url = $request->getUrl();
+            $url->setQueryVariables(array() + $params);
         }
 
-        $res = $request->send();
+        try {
+            $res = $request->send();
+        } catch (Exception $e) {
+            return $this->view->renderJson(array(
+                'request_url' => $request_url,
+                'response_headers' => $this->collapseHeaders(array(
+                    'error' => $e->getMessage())
+                ),
 
-        $responseInfo = $request->getResponseInfo();
+                'content' => $e->getMessage(),
+                'status' => 'Could not connect',
+                'method' => strtoupper($method)
+            ));
+        }
+
         $response = array(
-            'request_url'         => $responseInfo['effective_url'],
-            'response_headers'    => $this->collapseHeaders($res->getHeaders()),
+            'request_url'         => $request_url,
+            'response_headers'    => $this->collapseHeaders($res->getHeader()),
             'content'             => $res->getBody(),
-            'status'              => $res->getResponseCode(),
+            'status'              => $res->getStatus(),
             'method'              => strtoupper($method),
-            'request_post_fields' => http_build_query(
-                !is_null($postFields = $request->getPostFields()) ? $postFields : array()
-            )
         );
 
         $this->view->renderJson($response);
@@ -139,12 +147,13 @@ class TesterController extends Lupin_Controller_Base
     protected function collapseHeaders($headers)
     {
         $header_string = "";
+
         foreach ($headers as $name => $value) {
             if (is_array($value)) {
                 $value = implode("\n\t", $value);
             }
 
-            $header_string .= $name . ": " . wordwrap($value, 45, "\n\t") . "\n";
+            $header_string .= ucfirst($name) . ": " . wordwrap($value, 45, "\n\t") . "\n";
         }
         return $header_string;
     }
