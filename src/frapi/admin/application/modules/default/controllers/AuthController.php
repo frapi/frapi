@@ -13,7 +13,7 @@
  * @license   New BSD
  * @copyright echolibre ltd.
  * @package   frapi-admin
- */ 
+ */
 class AuthController extends Lupin_Controller_Base
 {
     public function init($styles = array())
@@ -65,7 +65,7 @@ class AuthController extends Lupin_Controller_Base
                 $authAdapter = $this->_getAuthAdapter($username, $password);
                 $auth   = Zend_Auth::getInstance();
                 $result = $auth->authenticate($authAdapter);
-                
+
                 if ($result->isValid()) {
                     $auth->getStorage()->write($authAdapter->getResult());
 
@@ -84,6 +84,11 @@ class AuthController extends Lupin_Controller_Base
                     $lastUrl = $ns->value;
                     if ($lastUrl !== '') {
                         $ns->value = '';
+
+                        // If our last request was an tester ajax request just
+                        // go back to /tester
+                        $lastUrl = (strpos($lastUrl,'/tester/ajax') === false) ? $lastUrl : '/tester';
+
                         $this->_redirect($lastUrl);
                     }
 
