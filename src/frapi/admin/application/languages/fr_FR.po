@@ -436,3 +436,12 @@ msgstr "This file is not writeable, please give the web-user write access to the
 
 msgid "FILE_CONTENT_UPDATED"
 msgstr "The content of the file has been updated with success."
+
+msgid "CLI_USAGE_MSG"
+msgstr "Usage: frapi.php [action] [module] [options]"
+
+msgid "CLI_INVALID_MODULE_ACTION"
+msgstr "Invalid module or action."
+
+msgid "CLI_VALID_OPTIONS"
+msgstr "Valid options are:"

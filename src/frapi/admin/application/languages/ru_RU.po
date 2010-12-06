@@ -482,3 +482,11 @@ msgstr "Файл (%s) не подлежит изменениям, пожалуй
 msgid "FILE_CONTENT_UPDATED"
 msgstr "Файл обновлен"
 
+msgid "CLI_USAGE_MSG"
+msgstr "Usage: frapi.php [action] [module] [options]"
+
+msgid "CLI_INVALID_MODULE_ACTION"
+msgstr "Invalid module or action."
+
+msgid "CLI_VALID_OPTIONS"
+msgstr "Valid options are:"

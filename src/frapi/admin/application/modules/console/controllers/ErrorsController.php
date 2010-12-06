@@ -16,6 +16,19 @@
  */
 class Console_ErrorsController extends Zend_Controller_Action
 {
+
+    private $tr;
+
+    /**
+     * Main Initializer
+     *
+     * This is the public method that will be used by the controller base
+     */
+    public function init()
+    {
+        $this->tr = Zend_Registry::get('tr');
+    }
+
     /*
      *  List action
      *
