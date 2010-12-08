@@ -97,7 +97,7 @@ class Frapi_Action
      * @var string The name of the custom template to load from custom/Output/{type}/custom/
      */
     protected $customTemplate = false;
-
+    
     /**
      * Get an instance of the desired type of Action
      * Context using the action passed to it
@@ -147,10 +147,26 @@ class Frapi_Action
      */
     public function setActionParams(array $params)
     {
+        $this->action = isset($params['action']) ? $params['action'] : null;
+        
         $this->params = $params;
         return $this;
     }
     
+    /**
+     * Retrieve the action we are invoking.
+     *
+     * This method is used to retrieve the name of the action we are
+     * currently invoking. This is mainly used by the likes of the custom
+     * authentication.
+     *
+     * @return string The action being invoked.
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+     
     /**
      * Set the template file to use
      *

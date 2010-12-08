@@ -113,6 +113,8 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executePut()
     {
+        $auth = new Custom_Model_Auth();
+        
         $valid = $this->hasRequiredParameters($this->requiredParams);
         if ($valid instanceof Frapi_Error) {
             return $valid;
