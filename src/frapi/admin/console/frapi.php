@@ -38,18 +38,19 @@ DIRECTORY_SEPARATOR . 'Frapi' . DIRECTORY_SEPARATOR . 'AllFiles.php';
 
 require_once ROOT_PATH . DIRECTORY_SEPARATOR . 'custom'. DIRECTORY_SEPARATOR . 'AllFiles.php';
 
-$app = new Zend_Application(
-    APPLICATION_ENV, APPLICATION_PATH . DIRECTORY_SEPARATOR . 'config' .
-    DIRECTORY_SEPARATOR.'application.ini'
-);
-$app->bootstrap(array('config', 'db', 'defaultAutoloader'));
-
 /**
  * Set our HTTP_HOST so hashing will work properly
  */
 global $_SERVER;
 
 $_SERVER['HTTP_HOST'] = '';
+
+$app = new Zend_Application(
+    APPLICATION_ENV, APPLICATION_PATH . DIRECTORY_SEPARATOR . 'config' .
+    DIRECTORY_SEPARATOR.'application.ini'
+);
+$app->bootstrap(array('config', 'db', 'defaultAutoloader', 'languages'));
+
 $configModel          = new Default_Model_Configuration();
 $_SERVER['HTTP_HOST'] = $configModel->getKey('api_url');
 
@@ -80,8 +81,10 @@ $routes = array(
     ),
 );
 
+$tr = Zend_Registry::get('tr');
+
 if ($argc < 3) {
-    echo 'Usage: frapi.php [action] [module] [options]' . PHP_EOL;
+    echo $tr->_('CLI_USAGE_MSG') . PHP_EOL;
     exit();
 }
 
@@ -89,8 +92,8 @@ $action = $argv[1];
 $module = $argv[2];
 
 if (!isset($routes[$module][$action])) {
-    echo 'Invalid module or action.' . PHP_EOL;
-    echo 'Valid options are:' . PHP_EOL;
+    echo $tr->_('CLI_INVALID_MODULE_ACTION') . PHP_EOL;
+    echo $tr->_('CLI_VALID_OPTIONS') . PHP_EOL;
     foreach ($routes as $module => $actions) {
         echo $module . PHP_EOL;
         foreach ($actions as $action_name => $controller) {
