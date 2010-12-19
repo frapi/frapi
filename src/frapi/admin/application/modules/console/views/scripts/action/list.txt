@@ -1,7 +1,7 @@
 <?php
 // Determine our max field widths so we can pad things out appropriately
-$action_name_max_length  = strlen('Name ');
-$action_route_max_length = strlen('Route ');
+$action_name_max_length  = strlen($this->tr->_('NAME') . ' ');
+$action_route_max_length = strlen($this->tr->_('ROUTE') . ' ');
 
 if ($this->actions) {
     foreach ($this->actions as $key => $action) {
@@ -16,8 +16,8 @@ if ($this->actions) {
     }
 }
 
-echo  str_pad('Name', $action_name_max_length) . 'Enabled Public '
-    . str_pad('Route', $action_route_max_length) . PHP_EOL;
+echo  str_pad($this->tr->_('NAME'), $action_name_max_length) . $this->tr->_('ENABLED') . ' ' . $this->tr->_('PUBLIC') . ' '
+    . str_pad($this->tr->_('ROUTE'), $action_route_max_length) . PHP_EOL;
 
 if ($this->actions) {
     foreach ($this->actions as $key => $action) {

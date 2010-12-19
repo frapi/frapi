@@ -84,7 +84,7 @@ $routes = array(
 $tr = Zend_Registry::get('tr');
 
 if ($argc < 3) {
-    echo $tr->_('CLI_USAGE_MSG') . PHP_EOL;
+    echo $tr->_('USAGE_MSG') . PHP_EOL;
     exit();
 }
 
@@ -92,8 +92,8 @@ $action = $argv[1];
 $module = $argv[2];
 
 if (!isset($routes[$module][$action])) {
-    echo $tr->_('CLI_INVALID_MODULE_ACTION') . PHP_EOL;
-    echo $tr->_('CLI_VALID_OPTIONS') . PHP_EOL;
+    echo $tr->_('INVALID_MODULE_ACTION') . PHP_EOL;
+    echo $tr->_('VALID_OPTIONS') . ':' . PHP_EOL;
     foreach ($routes as $module => $actions) {
         echo $module . PHP_EOL;
         foreach ($actions as $action_name => $controller) {

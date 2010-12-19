@@ -386,11 +386,42 @@ msgstr "Il file non è scrivibile, dai accesso alla cartella all'utente web."
 msgid "FILE_CONTENT_UPDATED"
 msgstr "Il contenuto del file è stato aggiornato con successo."
 
-msgid "CLI_USAGE_MSG"
+# CLI
+msgid "USAGE_MSG"
 msgstr "Usage: frapi.php [action] [module] [options]"
 
-msgid "CLI_INVALID_MODULE_ACTION"
+msgid "INVALID_MODULE_ACTION"
 msgstr "Invalid module or action."
 
-msgid "CLI_VALID_OPTIONS"
-msgstr "Valid options are:"
+msgid "VALID_OPTIONS"
+msgstr "Valid options are"
+
+msgid "CLI_PARAMETERS"
+msgstr "List of comma-seperated optional parameters."
+
+msgid "CLI_REQUIRED_PARAMETERS"
+msgstr "List of comma-seperated required parameters."
+
+msgid "ADDED_ACTION"
+msgstr "Successfully added action:"
+
+msgid "ERROR_ADDING_ACTION"
+msgstr "Error adding action"
+
+msgid "COULD_NOT_DELETE_ACTION"
+msgstr "Could not delete action"
+
+msgid "COULD_NOT_FIND_MATCH"
+msgstr "Could not find match."
+
+msgid "SUCCESS_DELETE_ACTION"
+msgstr "Successfully deleted action"
+
+msgid "ERROR_DELETING_ACTION"
+msgstr "Error deleting action"
+
+msgid "ACTION_ERROR_SYNCHRO"
+msgstr "Error synchronizing actions."
+
+msgid "ROUTE"
+msgstr "Route"

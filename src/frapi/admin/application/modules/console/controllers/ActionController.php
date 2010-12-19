@@ -26,7 +26,8 @@ class Console_ActionController extends Zend_Controller_Action
      */
     public function init()
     {
-        $this->tr = Zend_Registry::get('tr');
+        $this->tr       = Zend_Registry::get('tr');
+        $this->view->tr = Zend_Registry::get('tr');
     }
 
     /**
@@ -60,13 +61,13 @@ class Console_ActionController extends Zend_Controller_Action
         // The options we are accepting for adding
         $options = new Zend_Console_Getopt(
             array(
-                'name|n=s'                 => 'Name of the action.',
-                'enabled|e'                => 'Is the action enabled?',
-                'public|p'                 => 'Is the action public?',
-                'route|r=s'                => 'Custom route of the action.',
-                'description|d=s'          => 'Description of the action.',
-                'parameters|pa=s'          => 'List of comma-seperated optional parameters.',
-                'required-parameters|rp=s' => 'List of comma-seperated required parameters.'
+                'name|n=s'                 => $this->tr->_('NAME'),
+                'enabled|e'                => $this->tr->_('IS_ACTION_ENABLED'),
+                'public|p'                 => $this->tr->_('IS_ACTION_PUBLIC'),
+                'route|r=s'                => $this->tr->_('CUSTOM_ROUTE'),
+                'description|d=s'          => $this->tr->_('DESCRIPTION'),
+                'parameters|pa=s'          => $this->tr->_('CLI_PARAMETERS'),
+                'required-parameters|rp=s' => $this->tr->_('CLI_REQUIRED_PARAMETERS'),
             )
         );
 
@@ -121,9 +122,9 @@ class Console_ActionController extends Zend_Controller_Action
         $model = new Default_Model_Action();
         try {
             $model->add($submit_data);
-            $this->view->message = 'Successfully added action: ' . $action_name . PHP_EOL;
+            $this->view->message = $this->tr->_('ADDED_ACTION') . ' ' . $action_name . PHP_EOL;
         } catch (RuntimeException $e) {
-            $this->view->message = 'Error adding action: ' . $action_name . '. ' . $e->getMessage() . PHP_EOL;
+            $this->view->message = $this->tr->_('ERROR_ADDING_ACTION') . ': ' . $action_name . '. ' . $e->getMessage() . PHP_EOL;
         }
     }
 
@@ -141,7 +142,7 @@ class Console_ActionController extends Zend_Controller_Action
         // The options we are accepting for deleting
         $options = new Zend_Console_Getopt(
             array(
-                'name|n=s' => 'Name of the action.',
+                'name|n=s' => $this->tr->_('NAME'),
             )
         );
 
@@ -169,15 +170,15 @@ class Console_ActionController extends Zend_Controller_Action
         }
 
         if (!$action_id) {
-            $this->view->message = 'Could not delete action: ' . $action_name . '. Could not find match.' . PHP_EOL;
+            $this->view->message = $this->tr->_('COULD_NOT_DELETE_ACTION') . ': ' . $action_name . '. ' . $this->tr->_('COULD_NOT_FIND_MATCH') . PHP_EOL;
             return;
         }
 
         try {
             $model->delete($action_id);
-            $this->view->message = 'Successfully deleted action: ' . $action_name . PHP_EOL;
+            $this->view->message = $this->tr->_('SUCCESS_DELETE_ACTION') . ': ' . $action_name . PHP_EOL;
         } catch (RuntimeException $e) {
-            $this->view->message = 'Error deleting action: ' . $action_name . '. ' . $e->getMessage() . PHP_EOL;
+            $this->view->message = $this->tr->_('ERROR_DELETING_ACTION') . ': ' . $action_name . '. ' . $e->getMessage() . PHP_EOL;
         }
 
     }
@@ -196,9 +197,7 @@ class Console_ActionController extends Zend_Controller_Action
         $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
 
         if (!is_writable($dir)) {
-            $this->view->message = 'The path : "' . $dir
-                . '" is not currently writeable by this user, '
-                . 'therefore we cannot synchronize the codebase' . PHP_EOL;
+            $this->view->message = $this->tr->_('ACTION_WRITE_ERROR', $dir) . PHP_EOL;
            return;
         }
 
@@ -206,9 +205,9 @@ class Console_ActionController extends Zend_Controller_Action
 
         try {
             $model->sync();
-            $this->view->message = 'All actions have been synced successfully.' . PHP_EOL;
+            $this->view->message = $this->tr->_('ACTION_DEV_SYNC_SUCCESS') . PHP_EOL;
         } catch (RuntimeException $e) {
-            $this->view->message = 'Error synchronizing actions. ' . $e->getMessage();
+            $this->view->message = $this->tr->_('ACTION_ERROR_SYNCHRO') . ' ' . $e->getMessage();
         }
     }
 
