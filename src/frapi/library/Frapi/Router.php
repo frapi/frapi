@@ -22,7 +22,7 @@
  *    ?>
  *
  * 2. Let Frapi_Router load and prepare routes
- *    <?php 
+ *    <?php
  *        $router = new Frapi_Router();
  *        $router->loadAndPrepareRoutes(); //Load prepared routes from APC, else load from DB and prepare.
  *        $result = $router->match('/example-object/189/edit');
@@ -40,7 +40,7 @@ class Frapi_Router
      * @var Array
      */
     protected $preparedRoutes = array();
-    
+
     /**
      * A list of the reserved routes that Frapi may make use
      * of at some given point or another.
@@ -50,7 +50,7 @@ class Frapi_Router
     protected $reservedRoutes = array(
         '/_oauth', '/_xauth'
     );
-    
+
     /**
      * Load routes from APC, database etc.
      * Prepare routes if necessary!
@@ -63,21 +63,21 @@ class Frapi_Router
             $this->setPreparedRoutes($routes);
         } else {
             $routes = array();
-            
+
             $ret    = Frapi_Internal::getConfiguration('actions');
             $rows = $ret->getAll('action');
-            
+
             foreach ($rows as $row) {
                 if (isset($row['route']) && !empty($row['route'])) {
                     $routes[$row['name']] = $row['route'];
                 }
             }
-            
+
             $this->setPreparedRoutes($preparedRoutes = self::prepareRoutes($routes));
             Frapi_Internal::setCached('Router.routes-prepared', $preparedRoutes);
         }
     }
-    
+
     /**
      * Prepare routes
      *
@@ -93,19 +93,19 @@ class Frapi_Router
         foreach ($routes as $action => $route) {
             $parsedRoute = self::parseSegments($route);
             if ($parsedRoute[0][0] != ':') {
-                
+
                 if (!isset($optimizedRoutes[current($parsedRoute)])) {
                     $optimizedRoutes[current($parsedRoute)] = array();
                 }
-                
-                $optimizedRoutes[current($parsedRoute)][] = 
+
+                $optimizedRoutes[current($parsedRoute)][] =
                     array('segments'=>array_slice($parsedRoute, 1), 'action'=>$action);
             }
         }
-        
+
         return $optimizedRoutes;
     }
-    
+
     /**
      * Parse route or path in array segments.
      *
@@ -115,13 +115,13 @@ class Frapi_Router
     public static function parseSegments($route)
     {
         $route    = trim($route, ' /');
-        $exploded = preg_split('@[/]+@', $route); 
-        
+        $exploded = preg_split('@[/]+@', $route);
+
         return $exploded;
     }
-    
+
     /**
-     * Given a query path, match against URL segments 
+     * Given a query path, match against URL segments
      *
      * @param $queryPath The query path we want to route.
      * @return mixed Array|false array('params'=>array(), 'action'=>String)
@@ -131,21 +131,32 @@ class Frapi_Router
         if (empty($this->preparedRoutes)) {
             return false;
         }
-        
+
         $matches          = array('static' => array(), 'dynamic' => array());
         $explodedPath     = self::parseSegments($queryPath);
         $firstPathSegment = current($explodedPath);
 
         if (isset($this->preparedRoutes[$firstPathSegment])) {
-            
             foreach ($this->preparedRoutes[$firstPathSegment] as $route) {
                 $type = "static";
-                
+
+                // Wildcard match. Prioritized over anything else.
+                if ($route['segments'][count($route['segments'])-1] == '*') {
+                    $rest = array_slice($explodedPath, count($route['segments']), count($explodedPath)+1);
+
+                    $type = 'dynamic';
+                    $matches[$type][] = array(
+                        'params' => array('*' => implode('/', $rest)),
+                        'action' => $route['action']
+                    );
+
+                    continue;
+                }
+
                 if (count($route['segments']) + 1 == count($explodedPath)) {
                     $params = array();
-                    
+
                     foreach (array_slice($explodedPath, 1) as $pathSegment) {
-                        $routeSegment = current($route['segments']);
 
                         if ($routeSegment[0] == ':') {
                             $params[substr($routeSegment, 1)] = $pathSegment;
@@ -153,7 +164,7 @@ class Frapi_Router
                         } elseif ($routeSegment != $pathSegment) {
                             continue 2;
                         }
-                        
+
                         next($route['segments']);
                     }
                     //To reach here, all segments of query must have matched
@@ -164,20 +175,20 @@ class Frapi_Router
         } else {
             return false;
         }
-        
+
         if (!empty($matches['static'])) {
             return current($matches['static']);
         } else if (!empty($matches['dynamic'])) {
             return current($matches['dynamic']);
         }
-        
+
         return false;
     }
-    
+
     /**
      * Set prepared routes
      *
-     * This method sets the prepared routes 
+     * This method sets the prepared routes
      *
      * @param  array $route  An array of routes that have been prepared
      * @return void
