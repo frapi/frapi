@@ -141,7 +141,7 @@ class Frapi_Router
                 $type = "static";
 
                 // Wildcard match. Prioritized over anything else.
-                if ($route['segments'][count($route['segments'])-1] == '*') {
+                if (isset($route['segments'][count($route['segments'])-1]) && $route['segments'][count($route['segments'])-1] == '*') {
                     $rest = array_slice($explodedPath, count($route['segments']), count($explodedPath)+1);
 
                     $type = 'dynamic';
@@ -157,7 +157,7 @@ class Frapi_Router
                     $params = array();
 
                     foreach (array_slice($explodedPath, 1) as $pathSegment) {
-
+                        $routeSegment = current($route['segments']);
                         if ($routeSegment[0] == ':') {
                             $params[substr($routeSegment, 1)] = $pathSegment;
                             $type = "dynamic";
