@@ -28,5 +28,14 @@
     </parameter>
    </parameters>
   </action>
+  <action>
+   <name>Testing3</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>Do this ok?</description>
+   <route>/do/this/:version</route>
+   <parameters></parameters>
+   <hash>2a2f54cd82f002471d345a2b9d1dd709c379d74e</hash>
+  </action>
  </actions>
 </frapi-config>
