@@ -20,7 +20,7 @@
  * @package   frapi
  */
 class Frapi_Response
-{   
+{
     /**
      * HTTP Response Code
      *
@@ -32,16 +32,16 @@ class Frapi_Response
      * The data to use in the output
      *
      * This is the response data.
-     * 
+     *
      * @var array An array of data.
      */
     protected $data = array();
-    
+
     /**
      * The constructor
      *
      * The constructor takes on a single parameter which is
-     * an array of response information 
+     * an array of response information
      *
      * Up to version 0.0.1 the only 2 things the response array
      * contains is "code" and "data".
@@ -51,6 +51,7 @@ class Frapi_Response
      *     return new Frapi_Response(array(
      *         'code' => '201',
      *         'data' => array('location' => '/resource/id')
+     *         'headers' => array('X-Content-Love' => 'Nothing')
      *     ));
      * ?>
      *
@@ -61,9 +62,19 @@ class Frapi_Response
         if (isset($response['code'])) {
             $this->http_code = $response['code'];
         }
-        
+
         if (isset($response['data'])) {
             $this->data = $response['data'];
+        }
+
+        if (isset($response['headers']) && is_array($response['headers'])) {
+            foreach ($response['headers'] as $header => $value) {
+                if (is_int($header)) {
+                    header($value);
+                } elseif (isset($value)) {
+                    header($header . ': ' . $value);
+                }
+            }
         }
     }
 
@@ -76,8 +87,8 @@ class Frapi_Response
     {
         return $this->http_code;
     }
-    
-    /** 
+
+    /**
      * Set the Status code
      *
      * This method is used to set the HTTP status
@@ -90,7 +101,7 @@ class Frapi_Response
     {
         $this->http_code = $code;
     }
-    
+
     /**
      * Get the data
      *
@@ -102,7 +113,7 @@ class Frapi_Response
     {
         return $this->data;
     }
-    
+
     /**
      * Set the data
      *
