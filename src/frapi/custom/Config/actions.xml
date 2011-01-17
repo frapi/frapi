@@ -28,22 +28,5 @@
     </parameter>
    </parameters>
   </action>
-  <action>
-   <name>Testing4</name>
-   <enabled>1</enabled>
-   <public>1</public>
-   <description>Testing</description>
-   <route>/store/:path</route>
-   <hash>afbde691ed36805949dded12e0c9fd03115ff77c</hash>
-  </action>
-  <action>
-   <name>Testing5</name>
-   <enabled>1</enabled>
-   <public>1</public>
-   <description>Testing something</description>
-   <route>/images/testing/*</route>
-   <parameters></parameters>
-   <hash>8c02c6ea7d0d25c4f96747219e0ee149a0db5657</hash>
-  </action>
  </actions>
 </frapi-config>
