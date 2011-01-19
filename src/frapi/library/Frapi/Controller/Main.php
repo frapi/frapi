@@ -308,6 +308,7 @@ class Frapi_Controller_Main
                 // this handles a root element in the request body.
                 if(count($requestBody) == 1 && is_array($requestBody[$rootElement[0]])) {
                     $params[$rootElement[0]] = true;
+                    $requestBody = $requestBody[$rootElement[0]];
                 }
                 
                 $params = array_merge($params, $requestBody);
