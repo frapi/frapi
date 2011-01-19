@@ -59,19 +59,14 @@ class Frapi_Input_XmlParser
         } catch(Exception $e) {
             $xmlErrors = libxml_get_errors();
              return new Frapi_Exception(
-                     'Xml Parsing Failed: ' . var_export($xmlErrors, true), 
+                     'Xml Parsing Failed', 
                      'INVALID_XML', 
                      400, 
                      'xml_parsing'
                      );
              libxml_clear_errors();
         }
-        $xmlErrors = libxml_get_errors();
-        if (!empty($xmlErrors)) {
-            throw new Exception('Xml Parsing Failed: ' . var_export($xmlErrors, true));
-            libxml_clear_errors();
-        }
-
+        
         $xmlRoot = $iterator->getName();
         $type = $iterator->attributes()->type;
 
@@ -96,7 +91,6 @@ class Frapi_Input_XmlParser
     private static function _iteratorToArray($iterator)
     {
         $xmlArray = array();
-        //$value = null;
         $iterator->rewind();
         if (!$iterator->valid()) {
             return self::_typecastXmlValue($iterator);
