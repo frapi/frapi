@@ -159,15 +159,13 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
          * Error, we can assume that it's valid
          * output so keep going and output the result
          */
-        $out = $this->getOutputInstance($this->getFormat())
+        return $this->getOutputInstance($this->getFormat())
                     ->setOutputAction($this->getAction())
                     ->populateOutput(
                         $response->getData(), 
                         $this->actionContext->getTemplateFileName())
                     ->sendHeaders($response)
                     ->executeOutput();
-
-        return $out;
     }
 
     /**
@@ -181,13 +179,43 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      */
     public function processError(Frapi_Exception $e)
     {
-        $error = $this->getOutputInstance($this->getFormat())
-                      ->setOutputAction('defaultError')
-                      ->populateOutput($e->getErrorArray())
-                      ->sendHeaders($e)
-                      ->executeOutput();
+        return Frapi_Controller_Api::processInternalError($e);
+    }
+    
+    /**
+     * Statically Process Frapi Errors
+     *
+     * This method will process the FRAPI Errors, pass them to the 
+     * output handler, and format it correctly. 
+     *
+     * This method is in fact a hack. Whenever we instantiate the controller
+     * object from the source — index.php in this case — we can't try and
+     * catch the same controller object because the exception might in fact
+     * be thrown directly from within the constructor thus invalidating
+     * and sending the self $controller object out of scope. Thence this hack
+     * that instantiates it's own controller, ignores the exception thrown
+     * 
+     * This also allows us to catch syntax errors before the constructor
+     * is invoked and allows us to handle the errors gracefully.
+     *
+     * @param Frapi_Exception $e  The frapi exception to use
+     * @return object The response object.
+     */
+    public static function processInternalError(Frapi_Exception $e)
+    {
+        try {
+            $controller = new Frapi_Controller_API();
+        } catch (Exception $e) {
+            // This is a hack to intercept anything that may
+            // have happened before the internal error collection
+            // during the initialisation process.
+        }
 
-        return $error;
+        return $controller->getOutputInstance($controller->getFormat())
+                          ->setOutputAction('defaultError')
+                          ->populateOutput($e->getErrorArray())
+                          ->sendHeaders($e)
+                          ->executeOutput();
     }
 
     /**
@@ -204,11 +232,12 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      */
     public function processAction()
     {
+
         // The state of the action context is now at a state where it can be used.
         $e = $this->getActionInstance($this->getAction())
                   ->setActionParams($this->getParams())
                   ->setActionFiles($this->getFiles());
-
+                  
         return $this;
     }
 

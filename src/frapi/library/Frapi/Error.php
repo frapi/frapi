@@ -56,10 +56,10 @@ class Frapi_Error extends Frapi_Exception
      * ready to output.
      */
     const ERROR_MISSING_REQUEST_ARG_LABEL           = 'Required Parameters: %s';
-    
+
     /**
      * Are errors statically loaded into class?
-     * 
+     *
      * We use this bool variable because the self::$_errors
      * array may be EMPTY but it may have been loaded from
      * database so we keep a note of this.
@@ -67,17 +67,17 @@ class Frapi_Error extends Frapi_Exception
      * @var Boolean
      **/
     private static $_statically_loaded = false;
-    
+
     /**
-     * Stores error codes and messages. 
+     * Stores error codes and messages.
      *
      * @var Array
      **/
     private static $_errors = Array();
-    
+
     /**
      * Constructor
-     * 
+     *
      * This constructs a Frapi_Error message to return to the users.
      *
      * @todo add some doc examples of the new errors.
@@ -87,7 +87,7 @@ class Frapi_Error extends Frapi_Exception
      * @param int    $http_code  This might be hard to grasp however, we are in a web
      *                           industry dealing with the web. The code you are sending
      *                           to your exception should really be represented by the
-     *                           HTTP Code returned to your users. 
+     *                           HTTP Code returned to your users.
      *
      * @return void
      */
@@ -101,7 +101,7 @@ class Frapi_Error extends Frapi_Exception
 
         parent::__construct($error['message'], $error['name'], $error['http_code']);
     }
-    
+
     /**
      * Very basic error handler
      *
@@ -119,7 +119,7 @@ class Frapi_Error extends Frapi_Exception
     public static function errorHandler($errno, $errstr, $errfile, $errline)
     {
         $errorType = 'Fatal';
-        
+
         switch ($errno) {
             case E_ERROR:
             case E_CORE_ERROR:
@@ -149,18 +149,18 @@ class Frapi_Error extends Frapi_Exception
                 $errorType = 'Unknown';
                 break;
         }
-        
+
         throw new Frapi_Error(
-            'PHP ' . $errorType . ' error', 
-            $errstr . ' (Error Number: '.$errno.'),' . 
+            'PHP ' . $errorType . ' error',
+            $errstr . ' (Error Number: '.$errno.'),' .
                       ' (File: ' . $errfile . ' at line ' . $errline . ')',
             400
         );
     }
-    
+
     /**
      * Used to implement ::code(), ::msg() and ::message() ::name()
-     * Errors are retrieved as such: 
+     * Errors are retrieved as such:
      * <ul>
      *  <li>If in self::$_errors return</li>
      *  <li>If in APC return</li>
@@ -172,7 +172,7 @@ class Frapi_Error extends Frapi_Exception
     public static function __callStatic($function_name, $args)
     {
         $error = self::_get(current($args));
-        
+
         switch (strtolower($function_name)) {
             case 'msg':
             case 'message':
@@ -187,11 +187,11 @@ class Frapi_Error extends Frapi_Exception
                 break;
         }
     }
-    
+
     /**
      * Private function to get error (statically, APC, or DB).
      *
-     * This function tries to locate the error in progressively 
+     * This function tries to locate the error in progressively
      * slower datastores (static class variable, APC, database)
      * and will store the loaded errors in the faster stores.
      *
@@ -208,38 +208,38 @@ class Frapi_Error extends Frapi_Exception
     {
         if (!self::$_statically_loaded) {
             $errors = Frapi_Internal::getCached('Errors.user-defined');
-            
+
             if ($errors) {
                 self::$_errors = $errors;
             } elseif ($errors = self::_getErrorsFromDb()) {
                 self::$_errors = $errors;
                 Frapi_Internal::setCached('Errors.user-defined', $errors);
             }
-            
+
             self::$_statically_loaded = true;
         }
-        
+
         if (isset(self::$_errors[$error_name])) {
             $error = self::$_errors[$error_name];
-            
+
             if ($error_msg !== false) {
                 $error['message'] = $error_msg;
             }
-            
+
             if ($http_code !== false) {
                 $error['http_code'] = $http_code;
             }
 
             return $error;
         }
-        
+
         return array(
             'name'      => $error_name,
-            'message'   => $error_msg !== false ? $error_msg : $error_name, 
-            'http_code' => $http_code !== false  ? $http_code : '400', 
+            'message'   => $error_msg !== false ? $error_msg : $error_name,
+            'http_code' => $http_code !== false  ? $http_code : '400',
         );
     }
-    
+
     /**
      * Get errors from database.
      *
@@ -253,15 +253,15 @@ class Frapi_Error extends Frapi_Exception
         $conf          = Frapi_Internal::getConfiguration('errors');
 
         $conf_errors   = $conf->getAll('error');
-        
+
         $errors = array();
-        
+
         if (is_array($conf_errors) && !empty($conf_errors)) {
             foreach ($conf_errors as $errKey => $error) {
                 $errors[$error['name']] = $error;
             }
         }
-        
-        return $errors; 
+
+        return $errors;
     }
 }

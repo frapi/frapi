@@ -215,8 +215,11 @@ class Frapi_Controller_Main
             }
 
             $this->authorization->setAuthorizationParams($this->getParams());
-        } catch (Exception $e) {
+        } catch (Frapi_Exception $e) {
+            // Something RONG happened. Need to tell developers.
             throw $e;
+        } catch (Exception $e) {
+            // Something else? Silence! I Keeel you.
         }
     }
 
@@ -288,16 +291,15 @@ class Frapi_Controller_Main
         $input = file_get_contents("php://input");
         parse_str($input, $puts);
 
-        $xmlJsonMatch = preg_grep('/\<\?xml|\{/i', array_keys($puts));
-
+        $xmlJsonMatch = preg_grep('/\<|\{/i', array_keys($puts));
+        
         if (!empty($xmlJsonMatch)) {
             /* attempt to parse the input */
-
             $requestBody = Frapi_Input_RequestBodyParser::parse(
                 $this->getFormat(),
                 $input
             );
-
+            
             if (!empty($requestBody)) {
                 $rootElement = array_keys($requestBody);
 

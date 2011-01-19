@@ -57,8 +57,8 @@ class Frapi_Input_XmlParser
         $iterator = new SimpleXMLIterator($xml);
         $xmlErrors = libxml_get_errors();
         if (!empty($xmlErrors)) {
-             throw new Exception('Xml Parsing Failed: ' . var_export($xmlErrors, true));
-             libxml_clear_errors();
+            throw new Exception('Xml Parsing Failed: ' . var_export($xmlErrors, true));
+            libxml_clear_errors();
         }
 
         $xmlRoot = $iterator->getName();
@@ -67,6 +67,7 @@ class Frapi_Input_XmlParser
         // SimpleXML provides the root information on construct
         self::$_xmlRoot = $iterator->getName();
         self::$_responseType = $type;
+        
         // return the mapped array with the root element as the header
         return array($xmlRoot => self::_iteratorToArray($iterator));
     }
