@@ -279,15 +279,32 @@ class Frapi_Controller_Main
          * Unhappy? Remove me.
          */
 
-        parse_str(file_get_contents("php://input"), $puts);
+        $input = file_get_contents("php://input");
+        parse_str($input, $puts);
+        $xmlJsonMatch = preg_grep('/\<\?xml|\{\_/i', array_keys($puts));
 
-        if (!empty($puts)) {
-            foreach ($puts as $put => $val) {
+        if (!empty($xmlJsonMatch)) {
+            /* attempt to parse the input */
+            $requestBody = Frapi_Input_RequestBodyParser::parse(
+                    $this->getFormat(),
+                    $input
+            );
+            if (!empty($requestBody)) {
+                $rootElement = array_keys($requestBody);
+                // flatten the first element of the requestbody into the array
+                // if it is itself an array and the only element
+                // this handles a root element in the request body.
+                if(count($requestBody) == 1 && is_array($requestBody[$rootElement[0]])) {
+                    $params[$rootElement[0]] = true;
+                }
+                $params = array_merge($params, $requestBody[$rootElement[0]]);
+            }
+        } else if (!empty($puts)) {
+        foreach ($puts as $put => $val) {
                 $params[$put] = $val;
             }
         }
         
-
         $this->request = $params;
         return $this->request;
     }
