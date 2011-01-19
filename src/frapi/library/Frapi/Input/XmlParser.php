@@ -21,18 +21,31 @@
  * @license   New BSD
  * @copyright echolibre ltd.
  * @package   frapi
- *
  */
 class Frapi_Input_XmlParser
 {
+    /**
+     * The XML root information of the XML element
+     * that has been parsed.
+     *
+     * @var string The root element name.
+     */
     private static $_xmlRoot;
+    
+    /**
+     * @var The response type from the 
+     */
     private static $_responseType;
 
     /**
-     * sets up the SimpleXMLIterator and starts the parsing
-     * @access public
+     * Create an Array from XML
+     *
+     * This method sets up the SimpleXMLIterator and starts the parsing
+     * of an xml body to iterate through it and transform it into
+     * an array that can be used by the developers.
+     *
      * @param string $xml
-     * @return array array mapped to the passed xml
+     * @return array An array mapped to the passed xml
      */
     public static function arrayFromXml($xml)
     {
@@ -59,9 +72,12 @@ class Frapi_Input_XmlParser
     }
 
     /**
-     * processes SimpleXMLIterator objects recursively
+     * Processes SimpleXMLIterator objects recursively
      *
-     * @access protected
+     * This method receives an Iterator Object and 
+     * processes the object recursively to process all the
+     * attributes.
+     *
      * @param object $iterator
      * @return array xml converted to array
      */
@@ -71,7 +87,7 @@ class Frapi_Input_XmlParser
         //$value = null;
         $iterator->rewind();
         if (!$iterator->valid()) {
-               return self::_typecastXmlValue($iterator);
+            return self::_typecastXmlValue($iterator);
         }
         
         while($iterator->valid()) {
@@ -79,8 +95,8 @@ class Frapi_Input_XmlParser
             $tmpArray = null;
             // get the attribute type string for use in conditions below
             $attributeType = (string) (isset($iterator->attributes()->coerced_type)) ?
-                    $iterator->attributes()->coerced_type :
-                    $iterator->attributes()->type;
+                $iterator->attributes()->coerced_type :
+                $iterator->attributes()->type;
 
             // process children recursively
             $key = $iterator->key();
@@ -133,7 +149,12 @@ class Frapi_Input_XmlParser
     }
 
     /**
-     * typecast xml value based on attributes
+     * Type case XML values based on attributes
+     *
+     * This method typecasts the xml values based on the
+     * attributes of the SimpleXMLElement Object passed 
+     * to the method. 
+     *
      * @param object $valueObj SimpleXMLElement
      * @return mixed value for placing into array
      */
@@ -143,8 +164,9 @@ class Frapi_Input_XmlParser
         $attribs = $valueObj->attributes();
         // the element is null, so jump out here
         if (isset($attribs->nil) && $attribs->nil ||
-                (isset($attribs->null) && $attribs->null) ||
-                (string)$valueObj == 'null') {
+           (isset($attribs->null) && $attribs->null) ||
+           (string)$valueObj == 'null') 
+        {
             return null;
         }
         // switch on the type attribute
@@ -162,10 +184,9 @@ class Frapi_Input_XmlParser
                 // look for a number inside the string
                 if(is_numeric($value)) {
                     return (bool) $value;
-                } else {
-                    // look for the string "true", return false in all other cases
-                    return ($value != "true") ? FALSE : TRUE;
                 }
+                
+                return ($value == 'true');
                 break;
             case 'array':
                 return array();
@@ -175,9 +196,13 @@ class Frapi_Input_XmlParser
     }
 
     /**
-     * convert xml timestamps into DateTime
-     * @param string $timestamp
-     * @return string UTC formatted datetime string
+     * Convert XML timestamps to DateTime
+     *
+     * This method receives a timestamp and attempts to 
+     * convert it to a DateTime object using the DateTimeZone UTC.
+     *
+     * @param  string $timestamp
+     * @return DateTime A DateTime object with the UTC timezone.
      */
     private static function _timestampToUTC($timestamp)
     {
@@ -185,6 +210,5 @@ class Frapi_Input_XmlParser
         $dateTime = new DateTime($timestamp, $tz);
         $dateTime->setTimezone($tz);
         return $dateTime;
-
     }
 }

@@ -48,7 +48,16 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         'text/html'        => 'html',
         'text/plain'       => 'json',
         'text/javascript'  => 'js',
+        'text/php-printr'  => 'printr'
     );
+    
+    /**
+     * This is the detected mimetypes and the options
+     * associated with it.
+     * 
+     * @var array An array of mimetype and associated format.
+     */
+    public $options;
 
     /**
      * Ctor
@@ -62,6 +71,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      */
     public function __construct()
     {
+        $this->options = $this->detectAndSetMimeType();
         parent::__construct();
     }
 
@@ -102,8 +112,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      */
     protected function getOutputInstance($type)
     {
-        $options = $this->detectAndSetMimeType();
-        $this->outputContext = Frapi_Output::getInstance($type, $options);
+        $this->outputContext = Frapi_Output::getInstance($type, $this->options);
         return $this->outputContext;
     }
 
@@ -306,6 +315,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         $mimeType     = $type;
         $outputFormat = strtoupper($this->mimeMaps[$type]);
         
+        $this->setFormat(strtolower($outputFormat));
         return array('mimeType' => $mimeType, 'outputFormat' => $outputFormat);
     }
 }

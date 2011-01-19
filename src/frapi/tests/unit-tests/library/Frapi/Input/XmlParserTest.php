@@ -18,7 +18,7 @@
  * @copyright echolibre ltd.
  * @package   frapi-tests
  */
- 
+
 /**
  * Frapi_Input_XmlParser test case.
  */
@@ -124,7 +124,7 @@ XML;
                     2 => array('bar' => 'buz')
                     )
                 )
-            ), 
+            ),
             $array);
     }
 

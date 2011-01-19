@@ -175,7 +175,7 @@ class Frapi_Controller_Main
             //Query ending in .xxx may or may not be an output format
             $query_path_format = null;
             if (strrpos($query_path, '.')) {
-                $query_path_format = substr($query_path, $format_pos = strrpos($query_path, '.')+1);
+                $query_path_format = substr($query_path, $format_pos = strrpos($query_path, '.') + 1);
             }
 
             if (Frapi_Rules::validateOutputType($query_path_format) === true) {
@@ -204,10 +204,16 @@ class Frapi_Controller_Main
                     $format = $this->getParam('format');
                 }
 
-                $this->setFormat($format);
+                $setFormat = $this->getFormat();
+                $this->setFormat(
+                    isset($setFormat) && 
+                    $setFormat == Frapi_Controller_Api::DEFAULT_OUTPUT_FORMAT 
+                        ? $format : $setFormat
+                );
             } catch (Frapi_Exception $fex) {
                 $this->setFormat($this->getDefaultFormatFromConfiguration());
             }
+
             $this->authorization->setAuthorizationParams($this->getParams());
         } catch (Exception $e) {
             throw $e;
@@ -281,26 +287,31 @@ class Frapi_Controller_Main
 
         $input = file_get_contents("php://input");
         parse_str($input, $puts);
-        $xmlJsonMatch = preg_grep('/\<\?xml|\{\_/i', array_keys($puts));
+
+        $xmlJsonMatch = preg_grep('/\<\?xml|\{/i', array_keys($puts));
 
         if (!empty($xmlJsonMatch)) {
             /* attempt to parse the input */
+
             $requestBody = Frapi_Input_RequestBodyParser::parse(
-                    $this->getFormat(),
-                    $input
+                $this->getFormat(),
+                $input
             );
+
             if (!empty($requestBody)) {
                 $rootElement = array_keys($requestBody);
+
                 // flatten the first element of the requestbody into the array
                 // if it is itself an array and the only element
                 // this handles a root element in the request body.
                 if(count($requestBody) == 1 && is_array($requestBody[$rootElement[0]])) {
                     $params[$rootElement[0]] = true;
                 }
-                $params = array_merge($params, $requestBody[$rootElement[0]]);
+                
+                $params = array_merge($params, $requestBody);
             }
         } else if (!empty($puts)) {
-        foreach ($puts as $put => $val) {
+            foreach ($puts as $put => $val) {
                 $params[$put] = $val;
             }
         }
@@ -382,7 +393,7 @@ class Frapi_Controller_Main
      *
      * @param string $format The format to use.
      */
-    private function setFormat($format = false)
+    protected function setFormat($format = false)
     {
         if ($format) {
             $typeValid = Frapi_Rules::validateOutputType($format);
