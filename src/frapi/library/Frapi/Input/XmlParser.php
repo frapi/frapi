@@ -54,7 +54,18 @@ class Frapi_Input_XmlParser
 
         // catch libxml errors
         libxml_use_internal_errors(true);
-        $iterator = new SimpleXMLIterator($xml);
+        try {
+            $iterator = new SimpleXMLIterator($xml);
+        } catch(Exception $e) {
+            $xmlErrors = libxml_get_errors();
+             return new Frapi_Exception(
+                     'Xml Parsing Failed: ' . var_export($xmlErrors, true), 
+                     'INVALID_XML', 
+                     400, 
+                     'xml_parsing'
+                     );
+             libxml_clear_errors();
+        }
         $xmlErrors = libxml_get_errors();
         if (!empty($xmlErrors)) {
             throw new Exception('Xml Parsing Failed: ' . var_export($xmlErrors, true));
