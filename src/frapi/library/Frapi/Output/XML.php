@@ -275,8 +275,8 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
      */
     private function _arrayIsAssoc($array)
     {
-        foreach (array_keys($array) as $k => $v) {
-            if ($k !== $v) {
+        foreach ($array as $k => $v) {
+            if (!is_int($k)) {
                 return true;
             }
         }
