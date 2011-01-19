@@ -96,7 +96,7 @@ XML;
         $array = Frapi_Input_XmlParser::arrayFromXml($xml);
         $this->assertEquals(array('root' => array('foo' => 'bar')), $array);
     }
-    public function testXmlWithNumberedArray()
+    function testXmlWithNumberedArray()
     {
         $xml = <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -128,7 +128,7 @@ XML;
             $array);
     }
 
-    public function testXmlWithArrayAttribute()
+    function testXmlWithArrayAttribute()
     {
         //$this->markTestSkipped();
         $xml = <<<XML
@@ -218,5 +218,32 @@ XML;
 XML;
         $array = Frapi_Input_XmlParser::arrayFromXml($xml);
         $this->assertEquals(null, $array['root']['blank']);
+    }
+    
+    function testXmlWithNestedElements()
+    {
+        $xml = <<<XML
+<root>
+  <el>
+    <el2>
+      <nest1>test</nest1>
+        <nest2>test2</nest2>
+        <nest3>test3</nest3>
+    </el2>
+  </el>
+</root>    
+XML;
+        $array = Mongoose_Xml_Parser::arrayFromXml($xml);
+        $this->assertEquals(array(
+            'root' => array(
+                'el' => array(
+                    'el2' => array(
+                        'nest1' => 'test',
+                        'nest2' => 'test2',
+                        'nest3' => 'test3'
+                    )
+                )
+            )
+        ), $array);
     }
 }

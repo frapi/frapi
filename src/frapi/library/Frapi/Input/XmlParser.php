@@ -124,7 +124,7 @@ class Frapi_Input_XmlParser
                     }
                     // if there is exactly 1 unique key in the children,
                     // and there are many, treat it as an array
-                    if(count(array_unique($childKeys) === 1) && count($childKeys) > 1) {
+                    if(count(array_unique($childKeys)) === 1 && count($childKeys) > 1) {
                         // adding coerced_type instead of type to work around a PHPUnit issue
                         $iterator->current()->addAttribute('coerced_type', 'array');
                     }
