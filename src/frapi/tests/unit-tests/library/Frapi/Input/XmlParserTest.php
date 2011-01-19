@@ -219,7 +219,7 @@ XML;
         $array = Frapi_Input_XmlParser::arrayFromXml($xml);
         $this->assertEquals(null, $array['root']['blank']);
     }
-    
+
     function testXmlWithNestedElements()
     {
         $xml = <<<XML
@@ -231,9 +231,9 @@ XML;
         <nest3>test3</nest3>
     </el2>
   </el>
-</root>    
+</root>
 XML;
-        $array = Mongoose_Xml_Parser::arrayFromXml($xml);
+        $array = Frapi_Input_XmlParser::arrayFromXml($xml);
         $this->assertEquals(array(
             'root' => array(
                 'el' => array(
