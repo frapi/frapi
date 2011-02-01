@@ -4,7 +4,7 @@
     <table id="list">
      <thead>
       <tr>
-        <th><?php echo $this->tr->_('COMPANY'); ?></th>
+        <th><?php echo $this->tr->_('HANDLE'); ?></th>
         <th><?php echo $this->tr->_('API_KEY'); ?></th>
         <th><?php echo $this->tr->_('ACTION'); ?></th>
       </tr>
@@ -12,7 +12,7 @@
      <tbody>
 <?php foreach ($this->data as $d) : if (is_array($d) && !empty($d)) : ?>
       <tr>
-        <td><?php echo $d['company']; ?></td>
+        <td><?php echo $d['email']; ?></td>
         <td><?php echo $d['api_key']; ?></td>
         <td style="text-align: center;">
             <a href="/partners/edit/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('EDIT'); ?></a> | <a href="/partners/delete/id/<?php echo $d['hash']; ?>" onclick="return confirm('<?php echo $this->tr->_('PARTNER_CONFIRM_DELETE'); ?>');"><?php echo $this->tr->_('DELETE'); ?></a>
