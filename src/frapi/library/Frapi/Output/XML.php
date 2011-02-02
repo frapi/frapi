@@ -69,11 +69,11 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
         }
 
         $xml = '';
-		
+
         $print = hash('md5', json_encode(
             $data + array('__action__name' => $this->action)
         ));
-		
+
         if ($response = Frapi_Internal::getCached($print)) {
             $this->response = json_decode($response);
         } elseif (file_exists($file)) {
@@ -144,18 +144,6 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
      */
     private function _generateXML($response)
     {
-		file_put_contents("/tmp/xml.log", __FILE__ .':'. __LINE__ . PHP_EOL);
-		if ($response instanceof DomNode) {
-			file_put_contents("/tmp/xml.log", __FILE__ .':'. __LINE__ . PHP_EOL);
-			return $response->ownerDocument->saveXML();
-		} elseif ($response instanceof XMLWriter) {
-			file_put_contents("/tmp/xml.log", __FILE__ .':'. __LINE__ . PHP_EOL);
-			return $response->outputMemory();
-		} elseif ($response instanceof SimpleXMLElement) {
-			file_put_contents("/tmp/xml.log", __FILE__ .':'. __LINE__ . PHP_EOL);
-			return $response->asXML();
-		}
-		
         //Create XMLWriter object
         $writer = new XMLWriter();
         //We want to write to memory

@@ -28,12 +28,12 @@ class Frapi_Response
      */
     protected $http_code = 200;
 
-	/**
-	 * Content Type
-	 *
-	 * @var string
-	 */
-	protected $content_type = false;
+    /**
+     * Content Type
+     *
+     * @var string
+     */
+    protected $content_type = false;
 
     /**
      * The data to use in the output
@@ -133,27 +133,27 @@ class Frapi_Response
         $this->data = $data;
     }
 
-	/**
-	 * Get the content type
-	 *
-	 * This method gets the content type for the return data
-	 *
-	 * @return string A valid mimetype
-	 */
-	public function getContentType()
-	{
-		return $this->content_type;
-	}
+    /**
+     * Get the content type
+     *
+     * This method gets the content type for the return data
+     *
+     * @return string A valid mimetype
+     */
+    public function getContentType()
+    {
+        return $this->content_type;
+    }
 
-	/**
-	 * Set the content type
-	 *
-	 * This method sets the content type for the return data
-	 *
-	 * @param string A valid mimetype
-	 */
-	public function setContentType($mimetype)
-	{
-		$this->content_type = $mimetype;
-	}
+    /**
+     * Set the content type
+     *
+     * This method sets the content type for the return data
+     *
+     * @param string A valid mimetype
+     */
+    public function setContentType($mimetype)
+    {
+        $this->content_type = $mimetype;
+    }
 }
