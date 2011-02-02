@@ -109,6 +109,11 @@ class Frapi_Output
     {
         header('HTTP/1.1 '.intval($response->getStatusCode()));
 
+		$content_type = $response->getContentType();
+		if ($content_type) {
+			$this->mimeType = $content_type;
+		}
+
         header('Content-type: '.$this->mimeType.'; charset=utf-8');
 
         //IF debugging is turned on, then send cache info
