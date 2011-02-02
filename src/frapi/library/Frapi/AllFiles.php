@@ -76,6 +76,7 @@ require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Input' . DIRECTORY_SEPARATOR 
 
 // Response
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Response.php';
+require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Response/Custom.php';
 
 //Database
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Database.php';
@@ -90,6 +91,7 @@ require LIBRARY_OUTPUT    . DIRECTORY_SEPARATOR . 'CLI.php';
 require LIBRARY_OUTPUT    . DIRECTORY_SEPARATOR . 'PHP.php';
 require LIBRARY_OUTPUT    . DIRECTORY_SEPARATOR . 'PRINTR.php';
 require LIBRARY_OUTPUT    . DIRECTORY_SEPARATOR . 'JS.php';
+require LIBRARY_OUTPUT    . DIRECTORY_SEPARATOR . 'Custom.php';
 
 // Security
 require LIBRARY_SECURITY  . DIRECTORY_SEPARATOR . 'Interface.php';
