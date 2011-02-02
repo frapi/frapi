@@ -27,6 +27,11 @@
    <default>0</default>
   </output>
   <output>
+   <name>Custom</name>
+   <enabled>1</enabled>
+   <default>0</default>
+  </output>
+  <output>
    <name>HTML</name>
    <enabled>1</enabled>
    <default>0</default>
