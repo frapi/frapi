@@ -396,6 +396,9 @@ msgstr "Не найден класс HttpRequest - пакет <a href=\"http://p
 msgid "TESTER_API_INFO_MESSAGE"
 msgstr "Не забудте завести домен ППИ (API) по умолчанию в секции <a href=\"/configuration\">конфигурации</a>!"
 
+msgid "HISTORY_ERROR"
+msgstr "Error fetching your history"
+
 # Other
 msgid "ADDED"
 msgstr "Добавленно"

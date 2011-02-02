@@ -83,9 +83,10 @@ echo $this->form;
         }
     });
 
-    function addParamInput(paramName)
+    function addParamInput(paramName, paramValue)
     {
         var value = paramName ? paramName + "=" : "";
+        var value = paramValue ? value + paramValue : "";
         $("#params").append('<p><input type="text" name="param[]" value="'+value+'" /> <img src="/images/delete.png" class="remove" /></p>');
     }
 
@@ -249,6 +250,48 @@ echo $this->form;
         });
 
         return false;
+    });
+
+    $('#action').live('change', function() {
+        var inHistory = false;
+        var queryURI  = $('#query_uri').val();
+
+        $('#action optgroup[label=History] option').each(function() {
+            if ($(this).val() == queryURI) {
+                inHistory = true;
+            }
+        });
+
+        if (inHistory) {
+            $.ajax({
+                type:    "GET",
+                url:     "/tester/history",
+                data:    "url=" + escape(queryURI),
+                success: function(data) { 
+                    $("#query_uri").val(data.query_uri);
+                    $("#format").attr("value", data.format.toUpperCase());
+                    $("#method").attr("value", data.method.toLowerCase());
+                    $("#email").val(data.email);
+                    $("#key").val(data.secretKey);
+                    $("#url").val(data.url);
+
+                    if (typeof(data.ssl) != "undefined") {
+                        $("#ssl").attr("checked", data.ssl); 
+                    }
+
+                    if (typeof(data.param) != "undefined") {
+                        for(i in data.param) {
+                            var param_parts = data.param[i].split("=")
+                            addParamInput(param_parts[0], param_parts[1]);
+                        }
+                    }
+                },
+                dataType: "json",
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('<?php echo $this->tr->_('HISTORY_ERROR'); ?>');
+                }
+            });
+        }
     });
 </script>
 

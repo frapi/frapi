@@ -21,7 +21,7 @@ class TesterController extends Lupin_Controller_Base
     public function init($styles = array())
     {
         $this->tr = Zend_Registry::get('tr');
-        $actions = array('index', 'ajax');
+        $actions = array('index', 'ajax', 'history');
         $this->_helper->_acl->allow('admin', $actions);
         parent::init($styles);
     }
@@ -59,9 +59,7 @@ class TesterController extends Lupin_Controller_Base
         $test_history      = new Zend_Session_Namespace('test_history');
         $history           = $test_history->value;
 
-        if (!in_array($session_query_uri, $history)) {
-            $history[] = $session_query_uri;
-        }
+        $history[$session_query_uri] = $this->getRequest()->getParams();
 
         $test_history->value = $history;
 
@@ -142,6 +140,21 @@ class TesterController extends Lupin_Controller_Base
         );
 
         $this->view->renderJson($response);
+    }
+
+    public function historyAction()
+    {
+        $this->view  = new Lupin_View();
+
+        $url = strtolower($this->_request->getParam('url'));
+
+        $test_history             = new Zend_Session_Namespace('test_history');
+        $history                  = $test_history->value;
+        $return_data              = $history[$url];
+        $return_data['format']    = substr($return_data['query_uri'], strrpos($return_data['query_uri'], '.') +1);
+        $return_data['query_uri'] = substr($return_data['query_uri'], 0, strrpos($return_data['query_uri'], '.'));
+
+        $this->view->renderJson($return_data);
     }
 
     protected function collapseHeaders($headers)

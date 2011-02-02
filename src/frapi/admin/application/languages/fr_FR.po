@@ -351,6 +351,9 @@ msgstr "La classe HttpRequest class est introuvable &#8212; le <a href=\"http://
 msgid "TESTER_API_INFO_MESSAGE"
 msgstr "N'oubliez pas, vous pouvez définir par défaut le nom de domaine de l'API dans <a href=\"/configuration\">configuration</a>!"
 
+msgid "HISTORY_ERROR"
+msgstr "Error fetching your history"
+
 # Other
 
 msgid "ADDED"

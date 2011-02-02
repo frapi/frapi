@@ -303,6 +303,9 @@ msgstr "Contenuto del corpo"
 msgid "TESTER_REQUEST_ERROR"
 msgstr "Errore: Non sei più loggato a causa di un lugo periodo di inattività. Per favore <a href=\"/login\" target=\"_blank\">accedi</a> nuovamente (apre in una nuova finestra) e prova nuovamente."
 
+msgid "HISTORY_ERROR"
+msgstr "Error fetching your history"
+
 # Other
 msgid "ADDED"
 msgstr "aggiunto"
