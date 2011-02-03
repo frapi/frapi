@@ -36,10 +36,6 @@ class TesterController extends Lupin_Controller_Base
             $this->addInfoMessage($this->tr->_('TESTER_API_INFO_MESSAGE'));
         }
 
-        if (!class_exists("HttpRequest")) {
-            $this->addErrorMessage($this->tr->_('TESTER_HTTP_REQUEST_MISSING'));
-        }
-
         $this->view->form = $form;
     }
 
