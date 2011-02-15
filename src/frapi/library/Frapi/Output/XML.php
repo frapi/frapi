@@ -262,7 +262,9 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
                 throw new Frapi_Output_XML_Exception(
                     'Invalid XML element name, cannot create element. This means an array key in your dataset ' .
                     'is likely to contain invalid XML. ' .
-                    ($breadcrumb !== null ? 'A wild guess is, the key "' . $breadcrumb . '" is part of the problem.' : ''),
+                    ($breadcrumb !== null ? 'A wild guess is, the key "' . $breadcrumb . '" is part of the problem. ' : '') .
+                    'To resolve this issue, you need to create a custom template that handles invalid XML names and values.',
+
 
                     'Frapi_Output_XML_Exception');
             }
