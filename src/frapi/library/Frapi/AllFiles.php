@@ -44,9 +44,6 @@ define('CUSTOM_MODEL',    CUSTOM_PATH . DIRECTORY_SEPARATOR . 'Model');
 define('CUSTOM_CONFIG',  CUSTOM_PATH . DIRECTORY_SEPARATOR . 'Config');
 define('ADMIN_CONF_PATH', CUSTOM_CONFIG . DIRECTORY_SEPARATOR);
 
-// Require the CUSTOM AllFiles
-require CUSTOM_PATH . DIRECTORY_SEPARATOR . 'AllFiles.php';
-
 define('API_MODELS',     ROOT_PATH . DIRECTORY_SEPARATOR . 'Models');
 
 // Exception
@@ -125,9 +122,13 @@ require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Model' . DIRECTORY_SEPARATOR 
 require LIBRARY_AUTHORIZATION . DIRECTORY_SEPARATOR . 'HTTP' . DIRECTORY_SEPARATOR . 'Digest.php';
 
 // Lupin XML config stuff.
-require EXTRA_LIBRARIES_ROOT_PATH . 'Lupin' . DIRECTORY_SEPARATOR . 
+require EXTRA_LIBRARIES_ROOT_PATH . 'Lupin' . DIRECTORY_SEPARATOR .
                                     'Config' . DIRECTORY_SEPARATOR . 'Xml.php';
-                                    
-require EXTRA_LIBRARIES_ROOT_PATH . 'Lupin' . DIRECTORY_SEPARATOR  . 
-                                    'Config' . DIRECTORY_SEPARATOR . 
+
+require EXTRA_LIBRARIES_ROOT_PATH . 'Lupin' . DIRECTORY_SEPARATOR  .
+                                    'Config' . DIRECTORY_SEPARATOR .
                                     'Helper' . DIRECTORY_SEPARATOR . 'XmlArray.php';
+// Require the CUSTOM AllFiles
+require CUSTOM_PATH . DIRECTORY_SEPARATOR . 'AllFiles.php';
+
+
