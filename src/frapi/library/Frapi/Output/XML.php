@@ -250,7 +250,21 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
             try {
                 $writer->startElement($key);
             } catch (Exception $e) {
-                throw new Frapi_Output_XML_Exception('Invalid XML element name, cannot create element.', 'Frapi_Output_XML_Exception');
+                $traces = $e->getTrace();
+
+                $breadcrumb = null;
+                if (isset($traces[1]) && isset($traces[1]['args']) &&
+                    isset($traces[1]['args'][0]) && is_string($traces[1]['args'][0]))
+                {
+                    $breadcrumb = $traces[1]['args'][0];
+                }
+
+                throw new Frapi_Output_XML_Exception(
+                    'Invalid XML element name, cannot create element. This means an array key in your dataset ' .
+                    'is likely to contain invalid XML. ' .
+                    ($breadcrumb !== null ? 'A wild guess is, the key "' . $breadcrumb . '" is part of the problem.' : ''),
+
+                    'Frapi_Output_XML_Exception');
             }
 
             if (!is_null($value)) {
