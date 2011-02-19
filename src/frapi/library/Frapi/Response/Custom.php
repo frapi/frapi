@@ -27,7 +27,7 @@ class Frapi_Response_Custom extends Frapi_Response
      * @param  string $data The data to set in the response.
      * @return void
      */
-    public function setData($data)
+    public function setData(array $data)
     {
         $this->data = $data;
     }
