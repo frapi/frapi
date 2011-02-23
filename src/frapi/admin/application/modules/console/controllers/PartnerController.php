@@ -27,6 +27,7 @@ class Console_PartnerController extends Zend_Controller_Action
     public function init()
     {
         $this->tr = Zend_Registry::get('tr');
+        $this->view->tr = Zend_Registry::get('tr');
     }
 
     /**
