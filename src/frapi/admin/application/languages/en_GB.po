@@ -503,7 +503,7 @@ msgid "CLI_REQUIRED_PARAMETERS"
 msgstr "List of comma-seperated required parameters."
 
 msgid "ADDED_ACTION"
-msgstr "Successfully added action:"
+msgstr "Successfully added action"
 
 msgid "ERROR_ADDING_ACTION"
 msgstr "Error adding action"
@@ -525,3 +525,18 @@ msgstr "Error synchronizing actions."
 
 msgid "ROUTE"
 msgstr "Route"
+
+msgid "ADDED_ERROR"
+msgstr "Successfully added error"
+
+msgid "ERROR_ADDING_ERROR"
+msgstr "Error adding action"
+
+msgid "COULD_NOT_DELETE_ERROR"
+msgstr "Could not delete error"
+
+msgid "SUCCESS_DELETE_ERROR"
+msgstr "Successfully deleted error"
+
+msgid "ERROR_DELETING_ERROR"
+msgstr "Error deleting errror"

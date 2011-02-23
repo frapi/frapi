@@ -524,3 +524,18 @@ msgstr "Error synchronizing actions."
 
 msgid "ROUTE"
 msgstr "Route"
+
+msgid "ADDED_ERROR"
+msgstr "Successfully added error"
+
+msgid "ERROR_ADDING_ERROR"
+msgstr "Error adding action"
+
+msgid "COULD_NOT_DELETE_ERROR"
+msgstr "Could not delete error"
+
+msgid "SUCCESS_DELETE_ERROR"
+msgstr "Successfully deleted error"
+
+msgid "ERROR_DELETING_ERROR"
+msgstr "Error deleting errror"

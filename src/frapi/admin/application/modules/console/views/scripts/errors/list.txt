@@ -1,6 +1,6 @@
 <?php
 // Determine our max field widths so we can pad things out appropriately
-$error_name_max_length = strlen('Name ');
+$error_name_max_length = strlen($this->tr->_('NAME') . ' ');
 
 if ($this->errors) {
     foreach ($this->errors as $key => $error) {
@@ -11,7 +11,7 @@ if ($this->errors) {
     }
 }
 
-echo  str_pad('Name', $error_name_max_length) . 'HTTP Code' . PHP_EOL;
+echo  str_pad($this->tr->_('NAME'), $error_name_max_length) . $this->tr->_('HTTP_CODE') . PHP_EOL;
 
 if ($this->errors) {
     foreach ($this->errors as $key => $error) {
