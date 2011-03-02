@@ -222,6 +222,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
      */
     private function _generateKeyValueXML($writer, $key, $value)
     {
+    	$doEnd = true;
         //If key is numeric and value is string, make empty element: <VALUESTRING />
         if ((is_numeric($key) || is_null($key))
             && is_string($value)
@@ -235,8 +236,10 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
          * Algo for handling keys and values:
          * 1. If key is not a normal (valid XML) element name write <numeric-key>
          *    1.1 If key is null then parent array was numeric. (self-indexing)
-         * 2. Else, if key is valid XML element name open it.
-         *    2.1 IF value is null, then create empty element.
+         * 2. Else, create container
+         * 	  2.1 If value is non assoc array, non empty. Add each element with the same key.
+         *    2.2 Else open XML element name using key 
+         *    2.3 Else IF value is null, then create empty element.
          *
          */
         if (is_numeric($key) or is_null($key)) {
@@ -247,34 +250,32 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
 
             $this->_generateItemXML($writer, $value);
         } else {
-            try {
-                $writer->startElement($key);
-            } catch (Exception $e) {
-                $traces = $e->getTrace();
-
-                $breadcrumb = null;
-                if (isset($traces[1]) && isset($traces[1]['args']) &&
-                    isset($traces[1]['args'][0]) && is_string($traces[1]['args'][0]))
-                {
-                    $breadcrumb = $traces[1]['args'][0];
-                }
-
-                throw new Frapi_Output_XML_Exception(
-                    'Invalid XML element name, cannot create element. This means an array key in your dataset ' .
-                    'is likely to contain invalid XML. ' .
-                    ($breadcrumb !== null ? 'A wild guess is, the key "' . $breadcrumb . '" is part of the problem. ' : '') .
-                    'To resolve this issue, you need to create a custom template that handles invalid XML names and values.',
-
-
-                    'Frapi_Output_XML_Exception');
-            }
-
-            if (!is_null($value)) {
-                $this->_generateItemXML($writer, $value);
-            }
+        	if (is_array($value) && count($value) > 0 && !$this->_arrayIsAssoc($value)) {
+        		foreach($value as $v) {
+	        		try {
+		                $writer->startElement($key);
+		            } catch (Exception $e) {
+		                throw new Frapi_Output_XML_Exception('Invalid XML element name, cannot create element.', 'Frapi_Output_XML_Exception');
+		            }
+        			$this->_generateItemXML($writer, $v);
+        			$writer->endElement();
+        		}
+        		$doEnd = false;
+        	} else {
+	            try {
+	                $writer->startElement($key);
+	            } catch (Exception $e) {
+	                throw new Frapi_Output_XML_Exception('Invalid XML element name, cannot create element.', 'Frapi_Output_XML_Exception');
+	            }
+	
+	            if (!is_null($value)) {
+	                $this->_generateItemXML($writer, $value);
+	            }
+        	}
         }
-
-        $writer->endElement();
+		if ($doEnd) {
+        	$writer->endElement();
+		}
     }
 
     /**
