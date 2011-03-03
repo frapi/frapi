@@ -36,6 +36,15 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
      * @var string
      */
     private $_typeHinting = false;
+    
+    /**
+     * Numeric Key
+     *
+     * Whether to use <numeric-key>.
+     *
+     * @var boolean
+     */
+    private $_numericKey = false;
 
     /**
      * XML Mime Type
@@ -129,6 +138,18 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
         if ($set_typeHinting_on) {
             $this->_typeHinting = true;
         }
+    }
+    
+	/**
+     * Set Numeric Key use on/off.
+     *
+     * @param Boolean $numericKey Whether to turn numeric key on or off.
+     *
+     * @return void
+     */
+    public function setNumericKey($numericKey)
+    {
+        $this->_numericKey = (boolean) $numericKey;
     }
 
     /**
@@ -250,7 +271,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
 
             $this->_generateItemXML($writer, $value);
         } else {
-        	if (is_array($value) && count($value) > 0 && !$this->_arrayIsAssoc($value)) {
+        	if (!$this->_numericKey && is_array($value) && count($value) > 0 && !$this->_arrayIsAssoc($value)) {
         		foreach($value as $v) {
 	        		try {
 		                $writer->startElement($key);
@@ -291,12 +312,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
      */
     private function _arrayIsAssoc($array)
     {
-        foreach ($array as $k => $v) {
-            if (!is_int($k)) {
-                return true;
-            }
-        }
-
-        return false;
+        return !ctype_digit( implode('', array_keys($array) ) );
     }
 }
+
