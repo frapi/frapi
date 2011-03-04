@@ -24,7 +24,7 @@ if ($pos !== false && $pos === $lpos) {
     <?php if ($this->menuItem != '/action/code') : ?>
 	<div class="sidenav">
 		<h2><?php echo $this->tr->_('SUBMENU'); ?></h2>
-    <?php if (in_array($item, array('/configuration', '/database', '/cache', '/output'))) { ?>
+    <?php if (in_array($item, array('/configuration', '/database', '/cache', '/output', '/user'))) { ?>
         <li<?php echo $item == '/cache' ? ' class="active"' : '' ?>><a href="/cache"><?php echo $this->tr->_('CACHE'); ?></a></li>
       <li<?php echo $item == '/user' ? ' class="active"' : '' ?>><a href="/user"><?php echo $this->tr->_('USERS'); ?></a></li>
       <li<?php echo $item == '/output' ? ' class="active"' : '' ?>><a href="/output"><?php echo $this->tr->_('OUTPUT'); ?></a></li>
