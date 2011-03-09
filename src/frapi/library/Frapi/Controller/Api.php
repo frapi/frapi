@@ -143,7 +143,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
             $action = 'execute' . ucfirst(strtolower($method));
         }
 
-        $response = $this->actionContext->$action();
+        $response = $this->actionContext->setAction($action)->$action();
         
         // Make sure we use a Frapi_Response.
         if (!$response instanceof Frapi_Response) {

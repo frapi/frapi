@@ -152,6 +152,17 @@ class Frapi_Action
         $this->params = $params;
         return $this;
     }
+
+    /**
+     * Set the action context action method to be called, for reference
+     *
+     * @param string $action
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
+        return $this;
+    }
     
     /**
      * Retrieve the action we are invoking.
