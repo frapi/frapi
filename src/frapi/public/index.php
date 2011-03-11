@@ -23,4 +23,6 @@ try {
     // Whenever we get here, something went terribly wrong
     // in the core of FRAPI during initialisation phase.
     echo Frapi_Controller_Api::processInternalError($e);
+} catch (Exception $e) {
+    echo Frapi_Controller_Api::processInternalError(new Frapi_Error($e));
 }

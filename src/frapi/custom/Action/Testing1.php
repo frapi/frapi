@@ -65,10 +65,6 @@ class Action_Testing1 extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executeGet()
     {
-
-
-
-
         // Access your API like: http://api.frapi/testing/1.printr?bazinga=2.3david"><script>2
         $this->data['bazinga-escaped'] = $this->getParam('bazinga', self::TYPE_OUTPUT);
         $this->data['bazinga-plain']   = $this->getParam('bazinga', self::TYPE_STRING);
