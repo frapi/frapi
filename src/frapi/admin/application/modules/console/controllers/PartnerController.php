@@ -61,10 +61,10 @@ class Console_PartnerController extends Zend_Controller_Action
         // The options we are accepting for adding
         $options = new Zend_Console_Getopt(
             array(
-                'first-name|fn=s' => 'First Name of the partner.',
-                'last-name|ln=s'  => 'Last Name of the partner.',
-                'email|e=s'    => 'Username/Email of the partner.',
-                'company|c=s'     => 'Company of the partner.',
+                'first-name|fn=s' => $this->tr->_('FIRSTNAME'),
+                'last-name|ln=s'  => $this->tr->_('LASTNAME'),
+                'email|e=s'       => $this->tr->_('EMAIL_USERNAME'),
+                'company|c=s'     => $this->tr->_('COMPANY'),
             )
         );
 
@@ -119,7 +119,7 @@ class Console_PartnerController extends Zend_Controller_Action
         // The options we are accepting for deleting
         $options = new Zend_Console_Getopt(
             array(
-                'email|e=s' => 'Username/Email of the partner.',
+                'email|e=s' => $this->tr->_('EMAIL_USERNAME'),
             )
         );
 
@@ -147,15 +147,15 @@ class Console_PartnerController extends Zend_Controller_Action
         }
 
         if (!$partner_id) {
-            $this->view->message = 'Could not delete partner: ' . $partner_email . '. Could not find match.' . PHP_EOL;
+            $this->view->message = $this->tr->_('COULD_NOT_DELETE_PARTNER') . ': ' . $partner_email . '. ' . $this->tr->_('COULD_NOT_FIND_MATCH') . PHP_EOL;
             return;
         }
 
         try {
             $model->delete($partner_id);
-            $this->view->message = 'Successfully deleted partner: ' . $partner_email . PHP_EOL;
+            $this->view->message = $this->tr->_('SUCCESS_DELETE_PARTNER') . ': ' . $partner_email . PHP_EOL;
         } catch (RuntimeException $e) {
-            $this->view->message = 'Error deleting partner: ' . $partner_email . '. ' . $e->getMessage() . PHP_EOL;
+            $this->view->message = $this->tr->_('ERROR_DELETING_PARTNER') . ': ' . $partner_email . '. ' . $e->getMessage() . PHP_EOL;
         }
 
     }
