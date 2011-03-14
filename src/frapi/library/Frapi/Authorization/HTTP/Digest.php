@@ -172,7 +172,7 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
         {
             $username   = $username[1];
             $requestURI = $_SERVER['REQUEST_URI'];
-            $_SERVER['PHP_AUTH_USER'] = $username;
+            $_SERVER['X_FRAPI_AUTH_USER'] = $username;
 
             if (strpos($requestURI, '?') !== false) {
                 $requestURI = substr($requestURI, 0, strlen($uri[1]));
