@@ -42,7 +42,6 @@
    <public>1</public>
    <description>Example of Forms</description>
    <route>/forms</route>
-   <parameters></parameters>
    <hash>fd71bb50fe09272fe3045e0fbe282359ae22ef58</hash>
   </action>
  </actions>
