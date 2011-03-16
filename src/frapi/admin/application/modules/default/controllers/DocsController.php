@@ -20,32 +20,32 @@ class DocsController extends Lupin_Controller_Base
     {
         $actions = array('index', 'generate');
         $this->_helper->_acl->allow('admin', $actions);
-        
+
         $contextSwitch = $this->_helper->getHelper('contextSwitch');
-        
+
         if (!$contextSwitch->hasContext('text')) {
             $contextSwitch->addContext(
                 'text', array(
-                    'suffix'  => 'txt', 
+                    'suffix'  => 'txt',
                     'headers' => array('Content-Type'=>'text/plain')
                 )
             );
             $contextSwitch->addContext(
                 'mdown', array(
-                    'suffix'  => 'mdown', 
+                    'suffix'  => 'mdown',
                     'headers' => array('Content-Type'=>'text/plain')
                 )
             );
             $contextSwitch->addContext(
                 'html', array(
-                    'suffix'  => 'html', 
+                    'suffix'  => 'html',
                     'headers' => array('Content-Type'=>'text/html')
                 )
             );
-            
+
             $contextSwitch->addContext(
                 'pdf', array(
-                    'suffix'  => 'pdf', 
+                    'suffix'  => 'pdf',
                     'headers' => array(
                         'Content-Type'=>'application/pdf',
                         'Content-Disposition' => 'Attachment; filename="api_docs-'.@date('Y-m-d').'.pdf"',
@@ -53,15 +53,15 @@ class DocsController extends Lupin_Controller_Base
                 )
             );
         }
-        
+
         $contextSwitch->addActionContext('generate', 'text')->initContext();
         $contextSwitch->addActionContext('generate', 'html')->initContext();
         $contextSwitch->addActionContext('generate', 'pdf')->initContext();
         $contextSwitch->addActionContext('generate', 'mdown')->initContext();
-        
+
         parent::init($styles);
     }
-    
+
     /**
      * Index, used to display format options and
      * basic outline.
@@ -84,10 +84,12 @@ class DocsController extends Lupin_Controller_Base
         $emod  = new Default_Model_Error;
         $amod  = new Default_Model_Action;
         $omod  = new Default_Model_Output;
-        
+        $cmod  = new Default_Model_Configuration();
+
         $doc_data['actions']      = $amod->getAll();
         $doc_data['output-types'] = $omod->getAll();
         $doc_data['errors']       = $emod->getAll();
+        $doc_data['base_url']     = $cmod->getKey('api_url');
 
         $this->view->doc_data     = $doc_data;
     }

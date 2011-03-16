@@ -9,141 +9,280 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>API Documentation</title>
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
         <style type="text/css">
+        body {
+            font-family: 'Droid Sans', serif;
+        }
         /**
          * HTML (admin inline) Documentation
          *
          */
-        p.description{
-        	background-color: #EEE;
+        h3#desc {
+            padding-top: 20px;
+        }
+        p.description {
         	padding: 5px;
+        	padding-left:10px; 
+        	border-left: 3px solid #0F6AB4;
+        	font-size: 16px;
+        	color: #000;
+        	font-style: italic;
+        }
+        
+        p.error-description {
+        	padding: 5px;
+        	padding-left:10px; 
+        	border-left: 3px solid #a41e22;
+        	font-size: 16px;
+        	color: #000;
+        	font-style: italic;
         }
 
         .doc-subdata{
-        	border-left: 4px rgb(171, 190, 202) solid;
         	margin-left: 2em;
-        	padding-left: 5px;
         }
-
-        table.doc-table{
-        	border-collapse: collapse;
+        
+        .action, .error {
+            background: #e7f0f7;
+            width: 100%;
+            position: relative;
         }
-        	table.doc-table tr th{
-        		background-color: rgb(240, 246, 250);
-        		border-top: 1px rgb(151, 170, 182) solid;
-        		border-bottom: 1px rgb(151, 170, 182) solid;
-        		letter-spacing: 0.1em;
-        		line-height: 2.8em;
-        		padding-left: 0.9em;
-        		padding-right: 0.9em;
-        		text-align: left;
-        	}
-        	table.doc-table tr th+th{
-        		border-left: 1px rgb(151, 170, 182) solid;
-        	}
-        	table.doc-table tr td{
-        		border-bottom: 1px solid rgb(171, 190, 202);
-        		line-height: 1.8em;
-        		padding-left: 0.9em;
-        		padding-right: 0.9em;
-        	}
-        	table.doc-table tr td+td{
-        		border-left: 1px rgb(171, 190, 202) solid;
-        	}
-        </style>
-    </head>
-
+        
+        .action .top, .error .top {
+            position: relative;
+            float: left;
+            width: 100%;
+            height: 30px;
+            margin-bottom:25px;
+        }
+        
+        .action .top #name, .error .top #name {
+            width: 8%;
+            float: left;
+            height: 30px;
+            position: relative;
+            background: #0F6AB4;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            color: white;
+            text-align: center;
+            padding-top: 10px;
+            cursor: pointer;
+        }
+        
+        .error .top #name {
+            background: #a41e22;
+        }
+    
+        
+        
+        .action .top #route, .error .top #route  {
+            width: 90%;
+            height: 30px;
+            background: #e7f0f7;
+            border: 1px solid #c3d9ec;
+            position: relative;
+            float: left;       
+            padding-left: 10px;
+            padding-top: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .error .top #route {
+            background: #f5e8e8;
+            border: 1px solid #e8c6c7;
+        }
+        
+        .action .stub{
+            background: #e7f0f7;
+            display: none;
+            position: relative;
+            float: left;
+            border: 1px solid #c3d9ec;
+            width: 99%;
+            margin-bottom:25px;
+        }
+        
+        .error .stub {
+            background: #f5e8e8;
+            display: none;
+            position: relative;
+            float: left;
+            border: 1px solid #e8c6c7;
+            width: 99%;
+            margin-bottom:25px;
+        }
+        
+        .action .stub .doc-subdata {
+            color: #0F6AB4;
+        }
+        
+        .error .stub .doc-subdata {
+            color: #a41e22;
+        }
+        
+        .doc-table tr th#param-name, .doc-table tr td#param-name {
+            width: 100px;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .action .stub .doc-subdata .doc-table tr th{
+            border-bottom: 2px solid #0F6AB4;
+        }
+        
+        .action .stub .doc-subdata .doc-table tr td {
+            border-bottom: 1px solid #0F6AB4;
+        }
+        
+        .error .stub .doc-subdata .doc-table tr td {
+            border-bottom: 1px solid #a41e22;
+        }
+        
+        .error .stub .doc-subdata .doc-table tr th{
+            border-bottom: 2px solid #a41e22;
+        }
+        
+        .doc-table tr th#param-required, .doc-table tr td#param-required {
+            width: 70%;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .doc-table tr td#param-name {
+            color: #000;
+        }
+    </style>
     <body>
         <h1>Actions</h1>
         <?php if (count($this->doc_data['actions'])): ?>
             <?php foreach ($this->doc_data['actions'] as $action): ?>
-                <h2><?php echo $action['name'] ?></h2>
-                <p>
-                    Action is <?php echo (($action['enabled'])?('<strong>Enabled</strong>'):('Disabled')); ?> and <?php echo (($action['public'])?('<strong>Public</strong>'):('Private')); ?>.
-                </p>
-                <div class="doc-subdata">
-                    <?php if (!empty($action['route'])): ?>
-                        <h3>URL</h3>
-                        <p>
-                            <ul>
-                                <li><?php echo $action['route']; ?></li>
-                            </ul>
-                        </p>
-                    <?php endif; ?>
-                    <?php if (!empty($action['description'])):?>
-                        <h3>Description</h3>
-                        <p class="description"><?php echo nl2br($action['description']); ?></p>
-                    <?php endif; ?>
+                <div class="action" hash="<?php echo $action['hash']; ?>">
+                  <div class="top">
+                    <span id="name" hash="<?php echo $action['hash']; ?>"><?php echo $action['name'] ?></span>
+                    <span id="route"><?php echo isset($action['route']) ? $action['route'] : 'No Route'; ?></span>
+                  </div>
+                
+                  <div class="stub" id="action-<?php echo $action['hash']; ?>">
 
+                <div class="doc-subdata">
                     <?php if (isset($action['parameters']) && !empty($action['parameters']) && count($action['parameters'])): ?>
                         <h3>Parameters</h3>
                         <table class="doc-table">
-                            <?php
-                            /**
-                             * OMG OMG OMG OMG OMG.
-                             */
-                            ?>
+                            <tr>
+                                <th id="param-name">Name</th>
+                                <th id="param-required">Required</th>
+                            </tr>
                             <?php foreach ($action['parameters'] as $key => $param): ?>
                                 <?php 
                                 if (is_array($param) && isset($param[0])) : 
                                     foreach ($param as $subkey => $subparam) :
                                 ?>
                                 <tr>
-                                    <td><?php echo $subparam['name'] ?></td>
-                                    <td><?php echo (($subparam['required'])?('<strong>Required</strong>'):('Optional')) ?></td>
+                                    <td id="param-name"><?php echo $subparam['name'] ?></td>
+                                    <td id="param-required">
+                                        <?php 
+                                            echo isset($subparam['required']) && $subparam['required'] == '1' 
+                                                ? '<strong>&#10003;</strong>' : '' 
+                                        ?>
+                                    </td>
                                 </tr>
                                 <?php endforeach; else: ?>
                                 <tr>
-                                    <td><?php echo $param['name'] ?></td>
-                                    <td><?php echo (($param['required'])?('<strong>Required</strong>'):('Optional')) ?></td>
+                                    <td><?php echo $param['name']; ?></td>
+                                    <td id="param-required">
+                                        <?php 
+                                            echo isset($subparam['required']) && $subparam['required'] == '1' 
+                                                ? '<strong>&#10003;</strong>' : '' 
+                                        ?>
+                                    </td>
                                 </tr>
                             <?php endif; endforeach; ?>
                         </table>
                     <?php endif; ?>
-                    <?php /** Removed for now. ?>
-                    <?php if(count($action['errors'])): ?>
-                        <h3>Errors Associated with Action</h3>
-                        <table class="doc-table">
-                            <?php foreach ($action['errors'] as $error): ?>
-                                <tr>
-                                    <td><a href="#<?php echo _makeAnchor($error['name']); ?>" title="Jump to Error"><?php echo $error['name'] ?></a></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </table>
+                    <?php if (!empty($action['description'])):?>
+                        <h3 id="desc">Description</h3>
+                        <p class="description"><?php echo nl2br($action['description']); ?></p>
+                    <?php else: ?>
+                        <h3 id="desc">Description</h3>
+                        <p class="description">This API call has no description :-(</p>
                     <?php endif; ?>
-                    <?php */ ?>
                 </div>
+              </div>
+             </div>
             <?php endforeach; ?>
         <?php endif; ?>
 
         <h1>Errors</h1>
         <?php if (!empty($this->doc_data['errors'])): ?>
             <?php foreach ($this->doc_data['errors'] as $error): ?>
-                <h2 id="<?php echo _makeAnchor($error['name']); ?>"><?php echo $error['name'] ?> (HTTP Code <?php echo ((!is_null($error['http_code']))?($error['http_code']):('400')) ?>)</h2>
+                <div class="error" hash="<?php echo $error['hash']; ?>">
+                  <div class="top">
+                    <span id="name" hash="<?php echo $error['hash']; ?>"><?php echo ((!is_null($error['http_code']))?($error['http_code']):('400'))?></span>
+                    <span id="route"><?php echo $error['name']; ?></span>
+                  </div>
+                <div class="stub" id="error-<?php echo $error['hash']; ?>">
                 <div class="doc-subdata">
                     <?php if (!empty($error['description'])):?>
                         <h3>Description</h3>
-                        <p class="description"><?php echo $error['description'] ?></p>
+                        <p class="error-description"><?php echo $error['description'] ?></p>
                     <?php endif; ?>
                     <h3>Error Message</h3>
-                    <p>
+                    <p class="error-description">
                         <?php echo $error['message']; ?>
                     </p>
                 </div>
+              </div>
+            </div>
             <?php endforeach; ?>
         <?php endif; ?>
 
-        <h1>Output Types</h1>
+        <h1>Enabled Output Types</h1>
+        <p>
         <?php if (count($this->doc_data['output-types'])): ?>
-            <table class="doc-table">
+            The following output/content types are supported: 
+                <?php $types = array();?>
                 <?php foreach ($this->doc_data['output-types'] as $type): ?>
-                    <tr>
-                        <td><?php echo $type['name'] ?></td>
-                        <td><?php echo (($type['enabled'])?('<strong>Enabled</strong>'):('Disabled')) ?></td>
-                        <td><?php echo (($type['default'])?('<strong>Default</strong>'):('')) ?></td>
-                    </tr>
+                    <?php if ($type['enabled'] == '1'): ?>
+                        <?php $types[] = $type['name']; ?>
+                    <?php endif; ?>
                 <?php endforeach; ?>
-            </table>
+                <?php echo implode(', ', $types); ?>
+        <?php else: ?>
+            There is currently no enabled output format.
+        <?php endif;?>
+        </p>
+        
+        <?php if ($this->doc_data['base_url']): ?>
+        <h1>API Endpoint</h1>
+        <p>API Endpoint: <strong>http://<?php echo $this->doc_data['base_url']; ?></strong></p>
         <?php endif; ?>
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                $('.action #name').live('click', function() {
+                    var hash = $(this).attr('hash');
+                    $('#action-' + hash).slideToggle();
+                });
+                
+                $('.action #route').live('click', function() {
+                    var hash = $(this).parent().find('#name').attr('hash');
+                    $('#action-' + hash).slideToggle();
+                });
+                
+                $('.error #name').live('click', function() {
+                    var hash = $(this).attr('hash');
+                    $('#error-' + hash).slideToggle();
+                });
+                
+                $('.error #route').live('click', function() {
+                    var hash = $(this).parent().find('#name').attr('hash');
+                    $('#error-' + hash).slideToggle();
+                });
+            });
+        </script>
     </body>
 </html>

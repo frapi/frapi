@@ -13,6 +13,10 @@
      <name>bazinga</name>
      <required>1</required>
     </parameter>
+    <parameter>
+     <name>random</name>
+     <required>0</required>
+    </parameter>
    </parameters>
   </action>
   <action>
