@@ -1,15 +1,22 @@
 <?php
 
 /**
- * Action Forms
+ * Action Resource
  *
- * Example of Forms
+ * This is the resource contained in a certain collection group. 
+ * 
+ * PUT: A put with the "name" parameter will update the name of the resource
+ * 
+ * DELETE: Deletes the resource.
+ * 
+ * GET: This retrieves the information relative to the resource contained in the
+ * collection
  *
  * @link http://getfrapi.com
  * @author Frapi <frapi@getfrapi.com>
- * @link /forms
+ * @link /collection/:resource
  */
-class Action_Forms extends Frapi_Action implements Frapi_Action_Interface
+class Action_Resource extends Frapi_Action implements Frapi_Action_Interface
 {
 
     /**
@@ -48,7 +55,7 @@ class Action_Forms extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executeAction()
     {
-        return $this->toArray();
+        throw new Frapi_Error('NO_POST');
     }
 
     /**
@@ -60,27 +67,17 @@ class Action_Forms extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executeGet()
     {
-        $this->data['data'] = $this->getParams();
-        return $this->toArray();
-    }
-
-    /**
-     * Post Request Handler
-     *
-     * This method is called when a request is a POST
-     *
-     * @return array
-     */
-    public function executePost()
-    {
-        $name = $this->getParam('example');
-
-        if (empty($name)) {
-            $this->data['error'] = 'Missing the name';
-            return $this->toArray();
-        }
-
-        $this->setTemplateFileName('FormRedirect');
+        $this->data = array(
+            'meta' => array(
+                'name' => $this->getParam('resource', self::TYPE_STRING)
+            ),
+            'siblings' => array(
+                'res1' => array(
+                    'href' => '/collection/res1',
+                    'meta' => array('name' => 'res1')
+                )
+            ),
+        );
         return $this->toArray();
     }
 
@@ -93,6 +90,14 @@ class Action_Forms extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executePut()
     {
+        // We fake updating the data here.
+        $this->data = array(
+            'success' => 1,
+            'meta' => array(
+                'message' => 'Resource updated.'
+            )
+        );
+
         return $this->toArray();
     }
 
@@ -105,7 +110,10 @@ class Action_Forms extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executeDelete()
     {
-        return $this->toArray();
+        // Instead of a successful delete here we'll return
+        // a failed deletion because the resource would no
+        // longer exist.
+        throw new Frapi_Error('RESOURCE_NOT_FOUND');
     }
 
     /**
@@ -117,9 +125,12 @@ class Action_Forms extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executeHead()
     {
+         $this->data = array(
+            'meta' => array(
+                'name' => $this->getParam('resource', self::TYPE_STRING)
+            )
+        );
+
         return $this->toArray();
     }
-
-
 }
-

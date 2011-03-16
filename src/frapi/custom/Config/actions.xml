@@ -2,51 +2,46 @@
 <frapi-config>
  <actions>
   <action>
-   <name>Testing1</name>
+   <name>Collection</name>
    <enabled>1</enabled>
    <public>1</public>
-   <description>Testing 1 and editing from the new configuration location.</description>
-   <route>/testing/1</route>
-   <hash>6f1e8805cc0451de243b0432b15feb48f33383f9</hash>
+   <description>This is an example of a collection. A collection is a bucket of resources. In this case, you can only POST and DELETE this collection.&#13;
+&#13;
+POST: A post will add a new resource to a collection. You have to pass a &quot;name&quot; parameter.&#13;
+&#13;
+DELETE: Delete collection will remove the collection of resources from the system.&#13;
+&#13;
+Try it with &quot;curl -X POST http://api.frapi/collection -d '{&quot;name&quot;:&quot;new&quot;}' -H 'Content-Type: application/json'&#13;
+&#13;
+</description>
+   <route>/collection</route>
+   <hash>a0caa1c9f6c5ba636005b312918e7ce6acf70ccb</hash>
    <parameters>
     <parameter>
-     <name>bazinga</name>
-     <required>1</required>
-    </parameter>
-    <parameter>
-     <name>random</name>
+     <name>name</name>
      <required>0</required>
     </parameter>
    </parameters>
   </action>
   <action>
-   <name>Testing2</name>
+   <name>Resource</name>
    <enabled>1</enabled>
    <public>1</public>
-   <route>/testing/2</route>
-   <hash>500286218fe54ed4b7e8a8ce58ea4d947fb4f658</hash>
+   <description>This is the resource contained in a certain collection group. &#13;
+&#13;
+PUT: A put with the &quot;name&quot; parameter will update the name of the resource&#13;
+&#13;
+DELETE: Deletes the resource.&#13;
+&#13;
+GET: This retrieves the information relative to the resource contained in the collection</description>
+   <route>/collection/:resource</route>
+   <hash>3ecc1f98f5c2292d41150143083df87ea81dca08</hash>
    <parameters>
     <parameter>
      <name>name</name>
-     <required>1</required>
+     <required>0</required>
     </parameter>
    </parameters>
-  </action>
-  <action>
-   <name>Testing4</name>
-   <enabled>1</enabled>
-   <public>1</public>
-   <description>Testing action 4</description>
-   <route>/store/:path</route>
-   <hash>09a3f61f7c3cf09b3adfffe69411970b9afbccfb</hash>
-  </action>
-  <action>
-   <name>Forms</name>
-   <enabled>1</enabled>
-   <public>1</public>
-   <description>Example of Forms</description>
-   <route>/forms</route>
-   <hash>fd71bb50fe09272fe3045e0fbe282359ae22ef58</hash>
   </action>
  </actions>
 </frapi-config>

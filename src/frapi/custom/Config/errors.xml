@@ -2,18 +2,25 @@
 <frapi-config>
  <errors>
   <error>
-   <name>ERROR_EXAMPLE</name>
-   <message>This is an example error.</message>
+   <name>NO_PUT</name>
+   <message>This method is not accepted for this API call.</message>
    <http_code>405</http_code>
-   <description>This error is used as an example for both the API and the automatically generated documentation which can be found at admin.frapi/docs/generate/format/md</description>
-   <hash>e06f885297d44a9faf5703252c638b3dcdec6986</hash>
+   <description>This error is returned whenever someone tries to execute a PUT request on a collection or a resource that prevents PUT requests.</description>
+   <hash>a54734a568823346dfb86fd77d8497dd67076adc</hash>
   </error>
   <error>
-   <name>TEST</name>
-   <message>The error</message>
+   <name>NO_POST</name>
+   <message>POST calls are not accepted for this request.</message>
+   <http_code>405</http_code>
+   <description>This error is returned whenever a collection or a resource prevents the use of the POST method.</description>
+   <hash>d252bf7363a7431dd0cdd4fb5454dcb80901e429</hash>
+  </error>
+  <error>
+   <name>RESOURCE_NOT_FOUND</name>
+   <message>This resource could not be found.</message>
    <http_code>404</http_code>
-   <description>Used in documentation</description>
-   <hash>137595984a31492d0637fe873922537b13094e53</hash>
+   <description>This error is thrown whenever a resource is not found. If a resource has moved the return code will be 301 Moved Permanently.</description>
+   <hash>eab0f00abdda7492a3160d26d377e452b935e9ba</hash>
   </error>
  </errors>
 </frapi-config>
