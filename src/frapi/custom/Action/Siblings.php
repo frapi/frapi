@@ -1,27 +1,25 @@
 <?php
 
 /**
- * Action Collection
+ * Action Siblings
  *
- * This is an example of a collection. A collection is a bucket of resources. In
- * this case, you can only POST and DELETE this collection.
+ * This is a collection of sibling for a resource. This only accepts POST, DELETE,
+ * GET and HEAD. 
  * 
- * POST: A post will add a new resource to a collection. You have to pass a "name"
- * parameter.
+ * POST: A post will add a new sibling using the name parameter
  * 
- * DELETE: Delete collection will remove the collection of resources from the
- * system.
+ * DELETE: This deletes the siblings connections, it removes all siblings in the
+ * collection
  * 
- * Try it with "curl -X POST http://api.frapi/collection -d '{"name":"new"}' -H
- * 'Content-Type: application/json'
+ * GET: Retrieve a list of siblings and the relative information.
  * 
- *
+ * HEAD: Fetch the meta information for the siblings.
  *
  * @link http://getfrapi.com
  * @author Frapi <frapi@getfrapi.com>
- * @link /collection
+ * @link /collection/:resource/sibling
  */
-class Action_Collection extends Frapi_Action implements Frapi_Action_Interface
+class Action_Siblings extends Frapi_Action implements Frapi_Action_Interface
 {
 
     /**
@@ -61,7 +59,6 @@ class Action_Collection extends Frapi_Action implements Frapi_Action_Interface
     public function executeAction()
     {
         throw new Frapi_Error('NO_PUT');
-        return $this->toArray();
     }
 
     /**
@@ -73,32 +70,25 @@ class Action_Collection extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executeGet()
     {
-        // Return a list of all resources in the collection.
-        $resources = array(
+        $res = $this->getParam('resource', self::TYPE_OUTPUTSAFE);
+
+        $this->data = array(
             'meta' => array(
-                'total' => 'N',
-                'desc'  => 'The total should be the active resources ' .
-                           'contained in a collection/bucket.'
-            ),
-            'resources' => array(
-                'res1' => array(
-                    'href' => '/collection/res1',
-                    'name' => 'res1',
-                ),
+                'total' => '2',
+             ),
+             'siblings' => array(
+                 'res1' => array(
+                     'name' => 'res1',
+                     'href' => '/collection/' . $res . '/siblings/res1'
+                 ),
+                 'res2' => array(
+                     'name' => 'res2',
+                     'href' => '/collection/' . $res . '/siblings/res2'
+                 )
+             )
+         );
 
-                'res2' => array(
-                    'href' => '/collection/res2',
-                    'name' => 'res2',
-                ),
 
-                'res3' => array(
-                    'href' => '/collection/res3',
-                    'name' => 'res3',
-                )
-            ),
-        );
-
-        $this->data = $resources;
         return $this->toArray();
     }
 
@@ -120,16 +110,20 @@ class Action_Collection extends Frapi_Action implements Frapi_Action_Interface
         }
 
         $name = $this->getParam('name', self::TYPE_STRING);
+        $resource = $this->getParam('resource', self::TYPE_STRING);
 
         // When we create a new Resource, we return its new location
         // and the http code is 201 for Created.
         return new Frapi_Response(array(
             'code' => '201',
             'headers' => array(
-                'Location' => '/collection/' . $name,
+                'Location' =>
+                    '/collection/' . $resource . '/siblings/' . $name,
             ),
             'data' => array('success' => 1)
         ));
+
+        return $this->toArray();
     }
 
     /**
@@ -141,15 +135,7 @@ class Action_Collection extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executeDelete()
     {
-        $this->data = array(
-            'success' => 1,
-            'meta'    => array(
-                'message' => 'The entire collection has been deleted with success.'
-            ),
-        );
-
         return $this->toArray();
-
     }
 
     /**
@@ -161,15 +147,15 @@ class Action_Collection extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executeHead()
     {
-        $resources = array(
+        $this->data = array(
             'meta' => array(
-                'total' => 'N',
-                'desc'  => 'The total should be the active resources ' .
-                           'contained in a collection/bucket.'
-            )
+                'total' => '2',
+             ),
         );
 
-        $this->data = $resources;
         return $this->toArray();
     }
+
+
 }
+

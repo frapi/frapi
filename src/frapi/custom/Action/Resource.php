@@ -67,13 +67,15 @@ class Action_Resource extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executeGet()
     {
+        $res = $this->getParam('resource', self::TYPE_OUTPUTSAFE);
+
         $this->data = array(
             'meta' => array(
-                'name' => $this->getParam('resource', self::TYPE_STRING)
+                'name' => $res
             ),
             'siblings' => array(
                 'res1' => array(
-                    'href' => '/collection/res1',
+                    'href' => '/collection/' . $res . '/siblings/res1',
                     'meta' => array('name' => 'res1')
                 )
             ),

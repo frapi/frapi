@@ -43,5 +43,43 @@ GET: This retrieves the information relative to the resource contained in the co
     </parameter>
    </parameters>
   </action>
+  <action>
+   <name>Siblings</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>This is a collection of sibling for a resource. This only accepts POST, DELETE, GET and HEAD. &#13;
+&#13;
+POST: A post will add a new sibling using the name parameter&#13;
+&#13;
+DELETE: This deletes the siblings connections, it removes all siblings in the collection&#13;
+&#13;
+GET: Retrieve a list of siblings and the relative information.&#13;
+&#13;
+HEAD: Fetch the meta information for the siblings.</description>
+   <route>/collection/:resource/siblings</route>
+   <hash>2f4d1cefc3bbb184dda9da882fac349558b8bb70</hash>
+   <parameters>
+    <parameter>
+     <name>name</name>
+     <required>0</required>
+    </parameter>
+   </parameters>
+  </action>
+  <action>
+   <name>Sibling</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description>This is used to execute operations on a sibling resource. &#13;
+&#13;
+GET: Retrieve the information relative to a sibling&#13;
+&#13;
+DELETE: Remove a sibling for this resource&#13;
+&#13;
+HEAD: Retrieve the meta information relative to a sibling.&#13;
+&#13;
+</description>
+   <route>/collection/:resource/siblings/:sibling</route>
+   <hash>836d88aacf5906048737893dd4dc0469e353dc33</hash>
+  </action>
  </actions>
 </frapi-config>

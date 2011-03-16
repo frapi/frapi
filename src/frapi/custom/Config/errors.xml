@@ -22,5 +22,12 @@
    <description>This error is thrown whenever a resource is not found. If a resource has moved the return code will be 301 Moved Permanently.</description>
    <hash>eab0f00abdda7492a3160d26d377e452b935e9ba</hash>
   </error>
+  <error>
+   <name>NO_POST_NOR_PUT</name>
+   <message>POST and PUTs have been disabled for this resource.</message>
+   <http_code>405</http_code>
+   <description>This error is returned whenever a resource or a collection does not allow POST and PUTS. </description>
+   <hash>8b6cf5417ad0d5c4730bca4e9fa0091441a6b148</hash>
+  </error>
  </errors>
 </frapi-config>
