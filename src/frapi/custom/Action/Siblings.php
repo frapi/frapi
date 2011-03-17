@@ -70,7 +70,7 @@ class Action_Siblings extends Frapi_Action implements Frapi_Action_Interface
      */
     public function executeGet()
     {
-        $res = $this->getParam('resource', self::TYPE_OUTPUTSAFE);
+        $res = $this->getParam('resource', self::TYPE_OUTPUT);
 
         $this->data = array(
             'meta' => array(
@@ -109,8 +109,8 @@ class Action_Siblings extends Frapi_Action implements Frapi_Action_Interface
             return $valid;
         }
 
-        $name = $this->getParam('name', self::TYPE_STRING);
-        $resource = $this->getParam('resource', self::TYPE_STRING);
+        $name = $this->getParam('name', self::TYPE_OUTPUT);
+        $resource = $this->getParam('resource', self::TYPE_OUTPUT);
 
         // When we create a new Resource, we return its new location
         // and the http code is 201 for Created.
