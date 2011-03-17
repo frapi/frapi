@@ -79,6 +79,11 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
 
         $xml = '';
 
+        if (!is_array($data)) {
+            $data = $this->_normalizeToArray($data);
+        }
+
+
         $print = hash('md5', json_encode(
             $data + array('__action__name' => $this->action)
         ));
@@ -330,6 +335,35 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
     private function _arrayIsAssoc($array)
     {
         return !ctype_digit( implode('', array_keys($array) ) );
+    }
+
+    /**
+     * Normalize a container to array
+     *
+     * Some data coming back from the database can sometimes be oddly
+     * formatted or even users might pass an object to the $this->data
+     * container in their Action file. We just need to make sure we make
+     * array out of it and do not fall and break when an object is passed.
+     *
+     * @param  mixed $input Either an array or an object
+     * @return array An associative array representation of the variable that was passed
+     *               and if the data isn't an array or an object, nothing is touched.
+     */
+    private function _normalizeToArray($input)
+    {
+        $output = $input;
+
+        if(is_object($input) || is_array($input)) {
+            $output = array();
+            foreach($input AS $key => $value) {
+                $output[$key] = $value;
+                if(is_object($value) || is_array($value)) {
+                    $output[$key] = $this->_normalizeToArray($value);
+                }
+            }
+        }
+
+        return $output;
     }
 }
 
