@@ -36,7 +36,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
      * @var string
      */
     private $_typeHinting = false;
-    
+
     /**
      * Numeric Key
      *
@@ -139,7 +139,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
             $this->_typeHinting = true;
         }
     }
-    
+
 	/**
      * Set Numeric Key use on/off.
      *
@@ -226,6 +226,17 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
                 }
             }
         } else {
+            $cache = new Frapi_Internal();
+            $cache = $cache->getCachedDbConfig();
+            $useCdata = $cache['use_cdata'];
+
+            if ((bool)$useCdata === true) {
+                if (!is_numeric($variable)) {
+                    $writer->writeCData($variable);
+                    return;
+                }
+            }
+
             $writer->text($variable);
         }
     }
@@ -259,7 +270,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
          *    1.1 If key is null then parent array was numeric. (self-indexing)
          * 2. Else, create container
          * 	  2.1 If value is non assoc array, non empty. Add each element with the same key.
-         *    2.2 Else open XML element name using key 
+         *    2.2 Else open XML element name using key
          *    2.3 Else IF value is null, then create empty element.
          *
          */
@@ -276,7 +287,10 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
 	        		try {
 		                $writer->startElement($key);
 		            } catch (Exception $e) {
-		                throw new Frapi_Output_XML_Exception('Invalid XML element name, cannot create element.', 'Frapi_Output_XML_Exception');
+		                throw new Frapi_Output_XML_Exception(
+                            'Invalid XML element name, cannot create element.',
+                            'Frapi_Output_XML_Exception'
+                        );
 		            }
         			$this->_generateItemXML($writer, $v);
         			$writer->endElement();
@@ -286,9 +300,12 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
 	            try {
 	                $writer->startElement($key);
 	            } catch (Exception $e) {
-	                throw new Frapi_Output_XML_Exception('Invalid XML element name, cannot create element.', 'Frapi_Output_XML_Exception');
+	                throw new Frapi_Output_XML_Exception(
+                        'Invalid XML element name, cannot create element.',
+                        'Frapi_Output_XML_Exception'
+                    );
 	            }
-	
+
 	            if (!is_null($value)) {
 	                $this->_generateItemXML($writer, $value);
 	            }

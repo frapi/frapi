@@ -49,14 +49,17 @@ class ConfigurationController extends Lupin_Controller_Base
             $this->addErrorMessage(
                  $configFileMessage .' <br /><br />' . $setupHelpMessage
             );
-        }    
-   
+        }
+
         $request = $this->getRequest();
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 try {
                     $res = $config_model->updateApiUrl($request->getParam('api_url'));
-                    if ($res !== false) {
+                    $useCdata = $request->getParam('cdata');
+                    $res2 = $config_model->updateUseCdata($useCdata);
+
+                    if ($res !== false && $res2 !== false) {
                         $this->addMessage($this->tr->_('CONFIG_UPDATE_SUCCESS'));
                         $this->_redirect('/configuration');
                     } else  {
@@ -64,11 +67,12 @@ class ConfigurationController extends Lupin_Controller_Base
                     }
                 } catch (RuntimeException $e) {
                     $this->addErrorMessage($this->tr->_('CONFIG_UPDATE_FAIL') . ": " . $e->getMessage());
-                } 
+                }
             }
         } else {
             $form->populate(array(
-                'api_url' => $config_model->getKey('api_url')
+                'api_url' => $config_model->getKey('api_url'),
+                'cdata'   => $config_model->getKey('use_cdata')
             ));
         }
         $this->view->form = $form;

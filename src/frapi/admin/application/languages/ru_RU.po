@@ -548,3 +548,6 @@ msgstr "Successfully deleted partner"
 
 msgid "ERROR_DELETING_PARTNER"
 msgstr "Error deleting partner"
+
+msgid "USE_CDATA"
+msgstr "Always use CDATA"

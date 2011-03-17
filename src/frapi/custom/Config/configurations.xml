@@ -25,5 +25,10 @@
    <key>cache</key>
    <value>apc</value>
   </configuration>
+  <configuration>
+   <key>use_cdata</key>
+   <hash>d36820838f92275c856b7cab1c5563976fb72c72</hash>
+   <value>0</value>
+  </configuration>
  </configurations>
 </frapi-config>

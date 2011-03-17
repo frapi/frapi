@@ -362,6 +362,3 @@ class Lupin_Config_Xml
         return array($array);
     }
 }
-
-
-

@@ -92,7 +92,7 @@ class Default_Model_Configuration extends Lupin_Model
                 'value' => $value,
             ));
         }
-
+        $this->refreshAPCCache();
         return $this->config->update(
             'configuration', 'key', $key, array('value' => $value));
     }
@@ -115,6 +115,11 @@ class Default_Model_Configuration extends Lupin_Model
         return true;
     }
 
+    public function updateUseCdata($useCdata)
+    {
+        return $this->updateByKey('use_cdata', $useCdata);
+    }
+
     public function updateApiUrl($api_url)
     {
         return $this->updateByKey('api_url', $api_url);
@@ -128,7 +133,7 @@ class Default_Model_Configuration extends Lupin_Model
     public function getKey($key)
     {
         $key = $this->config->getByField('configuration', 'key', $key);
-        if (isset($key)) {
+        if (isset($key) && isset($key['value'])) {
             return $key['value'];
         }
 
