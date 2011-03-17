@@ -25,7 +25,7 @@
  * @copyright echolibre ltd.
  * @package   frapi
  * @uses      Frapi_Action_Exception
- */ 
+ */
 class Frapi_Action
 {
     // Types used in getParam for casting
@@ -89,7 +89,7 @@ class Frapi_Action
      * @var string $uid  The user uid (Internally used only)
      */
     protected $uid;
-    
+
     /**
      * If one decides to use a custom template in the XML or HTML output
      * then this variable will be set.
@@ -97,7 +97,7 @@ class Frapi_Action
      * @var string The name of the custom template to load from custom/Output/{type}/custom/
      */
     protected $customTemplate = false;
-    
+
     /**
      * Get an instance of the desired type of Action
      * Context using the action passed to it
@@ -148,7 +148,7 @@ class Frapi_Action
     public function setActionParams(array $params)
     {
         $this->action = isset($params['action']) ? $params['action'] : null;
-        
+
         $this->params = $params;
         return $this;
     }
@@ -163,7 +163,7 @@ class Frapi_Action
         $this->action = $action;
         return $this;
     }
-    
+
     /**
      * Retrieve the action we are invoking.
      *
@@ -177,7 +177,7 @@ class Frapi_Action
     {
         return $this->action;
     }
-     
+
     /**
      * Set the template file to use
      *
@@ -191,7 +191,7 @@ class Frapi_Action
     {
         $this->customTemplate = $customTemplateFileName;
     }
-    
+
     /**
      * Get the template to load
      *
@@ -204,7 +204,7 @@ class Frapi_Action
     {
         return $this->customTemplate;
     }
-    
+
     /**
      * This method validates that all your parameters
      * required for your action to run are present.
@@ -290,11 +290,11 @@ class Frapi_Action
      * @param string $type       The type of casting to do when returning
      *                           the requested parameter
      * @param Mixed  $default    The default value, if param is empty.
-     * @param String $error_name The error name to raise, as last resort. 
+     * @param String $error_name The error name to raise, as last resort.
      *
      * @return Mixed String when the key is valid, ErrorContext if not valid, or null if not set.
      */
-    protected function getParam($key, $type = self::TYPE_STRING, $default = null, $error_name = null) 
+    protected function getParam($key, $type = self::TYPE_STRING, $default = null, $error_name = null)
     {
         $param = isset($this->params[$key]) ? $this->params[$key] : null;
 
@@ -323,29 +323,28 @@ class Frapi_Action
                 $param = (object)$param;
                 break;
             case self::TYPE_SQL:
+                // This isn't our problem. We shouldn't have that anymore.
                 $param = mysql_escape_string($param);
                 break;
             case self::TYPE_OUTPUT:
+            case self::TYPE_OUTPUTSAFE:
                 $param = htmlentities($param, ENT_QUOTES, 'UTF-8');
                 break;
-            case self::TYPE_OUTPUTSAFE:
-                // OMFG Skype: (Puke). Code gangbang.
-                $param = htmlentities(mysql_escape_string($param), ENT_QUOTES, 'UTF-8');
-                break;
             case self::TYPE_SAFESQLARRAY:
+                // Same as TYPE_SQL: Not our problem.
                 $tmpArray = array();
                 foreach ((array)$param as $val => $par) {
                     $val = mysql_escape_string($val);
                     $par = mysql_escape_string($par);
                     $tmpArray[$val] = $par;
                 }
-                
+
                 $param = $tmpArray;
                 break;
             default:
                 $param = null;
          }
-                 
+
          return $param;
      }
 }
