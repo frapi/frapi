@@ -32,7 +32,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         if (!$locale->value) {
             $config_model  = new Default_Model_Configuration();
             $locale_config = $config_model->getKey('locale');
-            ($locale_config) ? $locale->value = $locale_config : $locale->value = 'en';
+            $locale->value = $locale_config ? $locale_config : 'en';
         }
 
         $translate->setLocale($locale->value);
