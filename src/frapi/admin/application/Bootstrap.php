@@ -29,12 +29,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'ru_RU.mo', 'ru');
 
         $locale = new Zend_Session_Namespace('locale');
-        if ($locale->value === null) {
-
+        if (!$locale->value) {
             $config_model  = new Default_Model_Configuration();
             $locale_config = $config_model->getKey('locale');
-
-            isset($locale_config) ? $locale->value = $locale_config : $locale->value = 'en';
+            ($locale_config) ? $locale->value = $locale_config : $locale->value = 'en';
         }
 
         $translate->setLocale($locale->value);
