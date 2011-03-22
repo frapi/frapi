@@ -120,4 +120,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->bootstrap('Config');
         Zend_Registry::set('db', $this->getPluginResource('db')->getDbAdapter());
     }
+
+    protected function _initApiUrl()
+    {
+        $int = Frapi_Internal::getCachedDbConfig();
+        Frapi_Internal::$_hash = isset($int['api_url']) ? hash('sha1', $int['api_url']) : false;
+    }
 }

@@ -63,7 +63,7 @@ class Frapi_Internal
      * there would be cache collisions and conflicts thus the need for a special
      * hash in the apc keys.
      */
-    private static $_hash = false;
+    public static $_hash = false;
 
     /**
      * Logging function

@@ -73,7 +73,7 @@ require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Input' . DIRECTORY_SEPARATOR 
 
 // Response
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Response.php';
-require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Response/Custom.php';
+require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Response' . DIRECTORY_SEPARATOR . 'Custom.php';
 
 //Database
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Database.php';
