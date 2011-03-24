@@ -68,7 +68,7 @@ class Frapi_Plugins_OAuth2_Auth extends Frapi_Authorization_Oauth2
             // Something like:
             //
             // return new Frapi_Response(array(
-            //     'code' => 400,
+            //     'code' => 401,
             //     'data' => array(
             //         'error' => 'invalid_grant',
             //         'error_description' => 'The access token is expired.'
