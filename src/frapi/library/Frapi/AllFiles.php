@@ -121,6 +121,9 @@ require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Model' . DIRECTORY_SEPARATOR 
 // HTTP Digest Auth
 require LIBRARY_AUTHORIZATION . DIRECTORY_SEPARATOR . 'HTTP' . DIRECTORY_SEPARATOR . 'Digest.php';
 
+// OAuth2 Helper
+require LIBRARY_AUTHORIZATION . DIRECTORY_SEPARATOR . 'Oauth2.php';
+
 // Lupin XML config stuff.
 require EXTRA_LIBRARIES_ROOT_PATH . 'Lupin' . DIRECTORY_SEPARATOR .
                                     'Config' . DIRECTORY_SEPARATOR . 'Xml.php';
