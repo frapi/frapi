@@ -74,11 +74,15 @@ class Action_Collection extends Frapi_Action implements Frapi_Action_Interface
     public function executeGet()
     {
         // Return a list of all resources in the collection.
+        if ($valid instanceof Frapi_Response) {
+            return $valid;
+        }
+
         $resources = array(
             'meta' => array(
                 'total' => 'N',
                 'desc'  => 'The total should be the active resources ' .
-                           'contained in a collection/bucket.'
+                           'contained in a collection/bucket.',
             ),
             'resources' => array(
                 'res1' => array(
