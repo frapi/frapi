@@ -74,9 +74,6 @@ class Action_Collection extends Frapi_Action implements Frapi_Action_Interface
     public function executeGet()
     {
         // Return a list of all resources in the collection.
-        $auth = new Frapi_Plugins_OAuth2_Auth($this->getParams());
-        $valid = $auth->authorize();
-
         if ($valid instanceof Frapi_Response) {
             return $valid;
         }
