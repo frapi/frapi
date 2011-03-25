@@ -190,6 +190,7 @@ class Frapi_Action
     public function setTemplateFileName($customTemplateFileName)
     {
         $this->customTemplate = $customTemplateFileName;
+        return $this;
     }
 
     /**
