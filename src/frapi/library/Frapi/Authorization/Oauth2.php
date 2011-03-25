@@ -67,7 +67,7 @@ abstract class Frapi_Authorization_Oauth2 extends Frapi_Authorization
         // to see if we are using apache and let's use getallheaders.
         $headers = getallheaders();
         if (isset($headers['Authorization'])) {
-            $header = $headers['Authorization']
+            $header = $headers['Authorization'];
             if (stristr('oauth', $header) !== 0) {
                 list($null, $token) = explode(' ', $header);
 
