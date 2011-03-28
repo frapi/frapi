@@ -506,3 +506,6 @@ msgstr "Error deleting partner"
 
 msgid "USE_CDATA"
 msgstr "Always use CDATA"
+
+msgid "ALLOW_CROSSDOMAIN"
+msgstr "Allow cross domain requests"
