@@ -142,7 +142,7 @@ class Frapi_Output
 
         $cache = new Frapi_Internal();
         $cache = $cache->getCachedDbConfig();
-        $allowCrossDomain = $cache['allow_cross_domain'];
+        $allowCrossDomain = isset($cache['allow_cross_domain']) ? $cache['allow_cross_domain'] : false;
 
         if ($allowCrossDomain) {
             header('Access-Control-Allow-Origin: *');
