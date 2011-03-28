@@ -120,6 +120,11 @@ class Default_Model_Configuration extends Lupin_Model
         return $this->updateByKey('use_cdata', $useCdata);
     }
 
+    public function updateAllowCrossDomain($useCdata)
+    {
+        return $this->updateByKey('allow_cross_domain', $useCdata);
+    }
+
     public function updateApiUrl($api_url)
     {
         return $this->updateByKey('api_url', $api_url);

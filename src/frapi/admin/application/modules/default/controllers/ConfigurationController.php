@@ -55,11 +55,13 @@ class ConfigurationController extends Lupin_Controller_Base
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 try {
-                    $res = $config_model->updateApiUrl($request->getParam('api_url'));
-                    $useCdata = $request->getParam('cdata');
-                    $res2 = $config_model->updateUseCdata($useCdata);
+                    $res              = $config_model->updateApiUrl($request->getParam('api_url'));
+                    $useCdata         = $request->getParam('cdata');
+                    $res2             = $config_model->updateUseCdata($useCdata);
+                    $allowCrossDomain = $request->getParam('allow_cross_domain');
+                    $res3             = $config_model->updateAllowCrossDomain($allowCrossDomain);
 
-                    if ($res !== false && $res2 !== false) {
+                    if ($res !== false && $res2 !== false && $res3 !== false) {
                         $this->addMessage($this->tr->_('CONFIG_UPDATE_SUCCESS'));
                         $this->_redirect('/configuration');
                     } else  {
@@ -71,8 +73,9 @@ class ConfigurationController extends Lupin_Controller_Base
             }
         } else {
             $form->populate(array(
-                'api_url' => $config_model->getKey('api_url'),
-                'cdata'   => $config_model->getKey('use_cdata')
+                'api_url'            => $config_model->getKey('api_url'),
+                'cdata'              => $config_model->getKey('use_cdata'),
+                'allow_cross_domain' => $config_model->getKey('allow_cross_domain')
             ));
         }
         $this->view->form = $form;

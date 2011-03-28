@@ -31,7 +31,7 @@ class Default_Form_Configuration extends Lupin_Form
         $cd->setRequired(false);
         $this->addElement($cd);
 
-        $cs = new Zend_Form_Element_Checkbox('crossdomain');
+        $cs = new Zend_Form_Element_Checkbox('allow_cross_domain');
         $cs->setLabel($tr->_('ALLOW_CROSSDOMAIN'));
         $cs->setRequired(false);
         $this->addElement($cs);
