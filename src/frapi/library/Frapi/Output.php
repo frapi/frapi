@@ -140,6 +140,16 @@ class Frapi_Output
             }
         }
 
+        $cache = new Frapi_Internal();
+        $cache = $cache->getCachedDbConfig();
+        $allowCrossDomain = $cache['allow_cross_domain'];
+
+        if ($allowCrossDomain) {
+            header('Access-Control-Allow-Origin: *');
+            header('Access-Control-Allow-Headers: *');
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Allow-Methods: POST,GET,PUT,DELETE,HEAD');
+        }
         return $this;
     }
 
