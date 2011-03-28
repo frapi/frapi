@@ -149,6 +149,7 @@ class Frapi_Output
             header('Access-Control-Allow-Headers: *');
             header('Access-Control-Allow-Credentials: true');
             header('Access-Control-Allow-Methods: POST,GET,PUT,DELETE,HEAD');
+            header('Access-Control-Max-Age: 604800');
         }
         return $this;
     }
