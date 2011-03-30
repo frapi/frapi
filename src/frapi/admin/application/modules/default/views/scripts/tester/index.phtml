@@ -4,6 +4,7 @@
 <script type="text/javascript" src="/scripts/syntaxhighlighter/shBrushPlain.js"></script>
 <script type="text/javascript" src="/scripts/syntaxhighlighter/shBrushXml.js"></script>
 <script type="text/javascript" src="/scripts/customBrushHeaders.js"></script>
+<script type="text/javascript" src="/scripts/beautify.js"></script>
 <link type="text/css" rel="stylesheet" href="/css/syntaxhighlighter/shCore.css"/>
 <link type="text/css" rel="stylesheet" href="/css/syntaxhighlighter/shThemeDefault.css"/>
 <script type="text/javascript">
@@ -126,6 +127,8 @@ echo $this->form;
         var email    = $('#email').val();
         var key      = $('#key').val();
         var format   = $('#format').val();
+
+
         var url      = $('#url').val();
         var ssl      = $('#ssl').is(':checked');
 
@@ -171,6 +174,17 @@ echo $this->form;
             }
         }
 
+        if (format.indexOf('JSON') >= 0) {
+            $('#beautify').live('click', function() {
+                var code = $('#response-container').attr('data-content')
+                code = js_beautify(code);
+                $('#response-container div.syntaxhighlighter').remove();
+                $('#response-container').append('<pre id="response" />');
+                $('pre#response').html(code).addClass('brush: jscript');
+                highlight_response();
+            });
+        }
+
         $.ajax( {
            type:    "GET",
            url:     "/tester/ajax",
@@ -212,13 +226,25 @@ echo $this->form;
                $('#response-container').append(
                    $('<pre>').attr('id', '#response_headers').addClass("brush: headers").html(data.response_headers)
                );
-               $('#response-container').append(
+
+               var responseContent = '';
+               responseContent = $('<pre>').attr('id', 'response').addClass("brush: " + brush).html(unescape(data.content));
+
+
+               $('#response-container').attr('data-content', data.content).append(
                    $('<h2><?php echo $this->tr->_('CONTENT_BODY'); ?></h2>')
-               ).append(
-                   $('<pre>').attr('id', '#response').addClass("brush: " + brush).html(unescape(data.content))
-               );
+               ).append(responseContent);
+
+
+               var abeauty = $('<a id="beautify">Beautify</a>').css({cursor: 'pointer'});
+               if (format.indexOf('JSON') >= 0) {
+                   $('#response-container').append(abeauty);
+               } else {
+                   $('#beautify').remove();
+               }
 
                highlight_response();
+
 
                $('#submitter').attr('disabled', false)
                               .attr('value', '<?php echo $this->tr->_('RUN_TEST'); ?>');

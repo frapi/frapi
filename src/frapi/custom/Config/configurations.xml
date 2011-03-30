@@ -30,5 +30,10 @@
    <hash>d36820838f92275c856b7cab1c5563976fb72c72</hash>
    <value>0</value>
   </configuration>
+  <configuration>
+   <key>allow_cross_domain</key>
+   <value>0</value>
+   <hash>e93a8dc4d1bb0f7d7dc37d21d6307f7dfdbbdae3</hash>
+  </configuration>
  </configurations>
 </frapi-config>
