@@ -117,6 +117,7 @@ class Lupin_Config_Helper_XmlArray
         $xmlHelper = new Lupin_Config_Helper_XmlArrayWriter();
 
         $xmlHelper->startElement($topLevelName);
+
         $xml = $xmlHelper->setElementFromArray($xmlHelper->xmlObject, $topLevelName, $configArray);
         $xmlHelper->endElement();
 

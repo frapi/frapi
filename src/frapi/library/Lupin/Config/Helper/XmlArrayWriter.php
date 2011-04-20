@@ -54,7 +54,6 @@ class Lupin_Config_Helper_XmlArrayWriter
                     $key     = $rootNode;
                 }
 
-
                 if (is_array($val)) {
                     $isAssoc = $this->isAssoc($val);
                     if ($isAssoc || $numeric) {
@@ -108,7 +107,7 @@ class Lupin_Config_Helper_XmlArrayWriter
             is_array($array) &&
             count(
                 array_diff_key($array, array_keys(array_keys($array)))
-            ) !== 0
+            ) > 0
         );
     }
 }

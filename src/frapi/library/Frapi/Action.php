@@ -53,13 +53,6 @@ class Frapi_Action
     protected $action;
 
     /**
-     * This is the pid of the person that has been logged.
-     *
-     * @var string   The session saved pid
-     */
-    protected $sessionPid;
-
-    /**
      * The parameters passed to the action
      * context object.
      *

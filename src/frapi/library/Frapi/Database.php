@@ -30,7 +30,7 @@ class Frapi_Database extends PDO
      * @var PDO object
      */
     private static $instance = array();
-    
+
     /**
      * Singleton for database connections
      *
@@ -48,15 +48,16 @@ class Frapi_Database extends PDO
             $configs = Frapi_Internal::getCachedDbConfig();
 
             self::$instance[$name] = new PDO(
-                'mysql:dbname='.$configs['db_database'].';host='.$configs['db_hostname'], 
-                $configs['db_username'], 
-                $configs['db_password']
+                'mysql:dbname='.$configs['db_database'].';host='.$configs['db_hostname'],
+                $configs['db_username'],
+                $configs['db_password'],
+                array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'')
             );
         }
-        
+
         return self::$instance[$name];
     }
-    
+
     /**
      * Get a database instance
      *
@@ -73,12 +74,12 @@ class Frapi_Database extends PDO
     {
         return self::factory($name);
     }
-    
+
     public static function getMasterInstance()
     {
         throw new Frapi_Database_Exception('Method not yet implemented');
     }
-    
+
     public static function getSlavesInstance()
     {
         throw new Frapi_Database_Exception('Method not yet implemented');

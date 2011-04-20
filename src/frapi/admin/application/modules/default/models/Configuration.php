@@ -33,23 +33,28 @@ class Default_Model_Configuration extends Lupin_Model
         $password = $this->config->getByField('configuration', 'key', 'db_password');
 
         if (isset($hostname) && isset($hostname['value'])) {
-            $return[] = $hostname;
+            $return[] = !empty($hostname['value']) ?
+                $hostname : array('key' => $hostname['key'], 'value' => '');
         }
 
         if (isset($database) && isset($database['value'])) {
-            $return[] = $database;
+            $return[] = !empty($database['value']) ?
+                $database : array('key' => $database['key'], 'value' => '');
         }
 
         if (isset($username) && isset($username['value'])) {
-            $return[] = $username;
+            $return[] = !empty($username['value']) ?
+                $username : array('key' => $username['key'], 'value' => '');
         }
 
         if (isset($password) && isset($password['value'])) {
-            $return[] = $password;
+            $return[] = !empty($password['value']) ?
+                $password : array('key' => $password['key'], 'value' => '');
         }
 
         if (isset($cache) && isset($cache['value'])) {
-            $return[] = $cache;
+            $return[] = !empty($cache['value'])
+                ? $cache : array('key' => $cache['key'], 'value' => '');
         }
 
         return $return;

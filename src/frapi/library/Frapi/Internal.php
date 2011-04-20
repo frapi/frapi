@@ -222,7 +222,7 @@ class Frapi_Internal
 
             if ($rows !== false) {
                 foreach ($rows as $key => $value) {
-                    $confs[$value['key']] = $value['value'];
+                    $confs[$value['key']] = !empty($value['value']) ? $value['value'] : '';
                 }
 
                 if (!self::setCached('Database.configs',  $confs)) {
