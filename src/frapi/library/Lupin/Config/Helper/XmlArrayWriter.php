@@ -103,6 +103,7 @@ class Lupin_Config_Helper_XmlArrayWriter
 
     public function isAssoc ($array)
     {
+        $array = (is_array($array)) ? array_merge(array(), $array) : $array;
         return (
             is_array($array) &&
             count(
