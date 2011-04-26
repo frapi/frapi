@@ -127,6 +127,12 @@ class Frapi_Internal
         }
 
         if (!isset(self::$conf[$type])) {
+            /**
+             * Hater's gon hate. This is there so we know that we have to rework
+             * it and that we don't actually loose the initial "if" statement.
+             *
+             * @TODO @FIXME
+             */
             if (1 == 2 && $cachedConfig = self::getCached('Internal.configuration.type.' . $type)) {
                 return $cachedConfig;
             } else {
