@@ -35,6 +35,7 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
      */
     public $secretKey = 'secretKey--&@72';
 
+
     /**
      * The digest opaque value
      *
@@ -82,6 +83,21 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
     public function __construct($realm = null)
     {
         $this->realm = $realm !== null ? $realm : $_SERVER['SERVER_NAME'];
+    }
+
+    /**
+     * Use a custom secret key.
+     *
+     * This method is used to modify the secretKey salt value of
+     * the Auth object.
+     *
+     * @param string $secretKey  The new secret key to use when salting
+     *                           the authentication challenge.
+     * @return void
+     */
+    public function setSecretKey($secretKey)
+    {
+        $this->secretKey = $secretKey;
     }
 
     /**
