@@ -75,10 +75,13 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
      * Constructor
      *
      * The constructor that sets the $this->realm
+     *
+     * @param string $realm Perhaps a custom realm. Default is null so the
+     *                      realm will be $_SERVER['SERVER_NAME']
      */
-    public function __construct()
+    public function __construct($realm = null)
     {
-        $this->realm = $_SERVER['SERVER_NAME'];
+        $this->realm = $realm !== null ? $realm : $_SERVER['SERVER_NAME'];
     }
 
     /**
