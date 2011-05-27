@@ -11,6 +11,8 @@ class Frapi_Controller_MainTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * test Content-Type header values
+     *
      * @dataProvider contentTypeProvider
      */
     public function testSetInputFormat($mimeType, $format)

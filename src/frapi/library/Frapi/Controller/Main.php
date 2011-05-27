@@ -75,6 +75,9 @@ class Frapi_Controller_Main
      */
     protected $format = 'xml';
 
+    /**
+     * @var bool indicates output format was determined by file extension in URL
+     */
     protected $formatSetByExtension = false;
 
     /**
@@ -164,6 +167,9 @@ class Frapi_Controller_Main
         'text/php-printr'  => 'printr'
     );
 
+    /*
+     * @var array denotes which documents can be used as input
+     */
     protected $allowedInputTypes = array('xml', 'json');
 
     /**
@@ -430,6 +436,7 @@ class Frapi_Controller_Main
      * default the value to 'xml'
      *
      * @param string $format The format to use.
+     * @throws Frapi_Error
      */
     protected function setFormat($format = false)
     {
@@ -475,6 +482,11 @@ class Frapi_Controller_Main
         $this->action = strtolower($action);
     }
 
+    /**
+     * reads the Content-Type header; sets request body format if a valid mime type exists
+     *
+     * @return void
+     */
     public function setInputFormat()
     {
         $contentType = (isset($_SERVER['CONTENT_TYPE'])) ?
@@ -489,6 +501,11 @@ class Frapi_Controller_Main
 
     }
 
+    /**
+     * returns the expected input format
+     *
+     * @return string
+     */
     public function getInputFormat()
     {
         return $this->inputFormat;

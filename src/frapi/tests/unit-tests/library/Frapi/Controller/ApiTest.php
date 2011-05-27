@@ -2,7 +2,6 @@
 
 class Frapi_Controller_ApiTest extends PHPUnit_Framework_TestCase
 {
-
     protected $_controller;
 
     public function setUp()
@@ -10,6 +9,8 @@ class Frapi_Controller_ApiTest extends PHPUnit_Framework_TestCase
         $this->_controller = new MockFrapi_Controller_Api();
     }
     /**
+     * test various Accept header values, passed via acceptProvider
+     *
      * @dataProvider acceptProvider
      */
     public function testDetectMimeType($mimeType, $dataType)
@@ -19,6 +20,9 @@ class Frapi_Controller_ApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($dataType, strtolower($detectedOutputType['outputFormat']));
     }
 
+    /**
+     * @return array
+     */
     public function acceptProvider()
     {
         return array(

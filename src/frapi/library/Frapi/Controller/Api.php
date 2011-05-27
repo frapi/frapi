@@ -328,6 +328,11 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         return false;
     }
 
+    /**
+     * parse Accept header and sort Accept values by q priority
+     *
+     * @return array
+     */
     protected function parseAcceptHeader()
     {
         if (!isset($_SERVER['HTTP_ACCEPT'])) {
