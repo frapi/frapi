@@ -31,30 +31,11 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      * the default output format is simply xml
      */
     const DEFAULT_OUTPUT_FORMAT = 'xml';
-    
-    /** 
-     * A map of all the mimetypes to their output
-     * format. In order to add a new mimetype, add it's
-     * mimetype name and then add it's output as the associated
-     * value.
-     * 
-     * @var array An array of mimetypes and their output types.
-     */
-    public $mimeMaps = array(
-        'application/xml'  => 'xml',
-        'text/xml'         => 'xml',
-        'application/json' => 'json',
-        'text/json'        => 'json',
-        'text/html'        => 'html',
-        'text/plain'       => 'json',
-        'text/javascript'  => 'js',
-        'text/php-printr'  => 'printr'
-    );
-    
+
     /**
      * This is the detected mimetypes and the options
      * associated with it.
-     * 
+     *
      * @var array An array of mimetype and associated format.
      */
     public $options;
@@ -144,7 +125,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         }
 
         $response = $this->actionContext->setAction($action)->$action();
-        
+
         // Make sure we use a Frapi_Response.
         if (!$response instanceof Frapi_Response) {
             $response = new Frapi_Response(
@@ -153,7 +134,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
                 )
             );
         }
-        
+
         /**
          * If the action result is NOT an instance of
          * Error, we can assume that it's valid
@@ -162,7 +143,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         return $this->getOutputInstance($this->getFormat())
                     ->setOutputAction($this->getAction())
                     ->populateOutput(
-                        $response->getData(), 
+                        $response->getData(),
                         $this->actionContext->getTemplateFileName())
                     ->sendHeaders($response)
                     ->executeOutput();
@@ -171,8 +152,8 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
     /**
      * Process Frapi Errors
      *
-     * This method will process the FRAPI Errors, pass them to the 
-     * output handler, and format it correctly. 
+     * This method will process the FRAPI Errors, pass them to the
+     * output handler, and format it correctly.
      *
      * @param Frapi_Exception $e  The frapi exception to use
      * @return object The response object.
@@ -181,12 +162,12 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
     {
         return Frapi_Controller_Api::processInternalError($e);
     }
-    
+
     /**
      * Statically Process Frapi Errors
      *
-     * This method will process the FRAPI Errors, pass them to the 
-     * output handler, and format it correctly. 
+     * This method will process the FRAPI Errors, pass them to the
+     * output handler, and format it correctly.
      *
      * This method is in fact a hack. Whenever we instantiate the controller
      * object from the source — index.php in this case — we can't try and
@@ -194,7 +175,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      * be thrown directly from within the constructor thus invalidating
      * and sending the self $controller object out of scope. Thence this hack
      * that instantiates it's own controller, ignores the exception thrown
-     * 
+     *
      * This also allows us to catch syntax errors before the constructor
      * is invoked and allows us to handle the errors gracefully.
      *
@@ -237,7 +218,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         $e = $this->getActionInstance($this->getAction())
                   ->setActionParams($this->getParams())
                   ->setActionFiles($this->getFiles());
-                  
+
         return $this;
     }
 
@@ -315,7 +296,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
 
         return true;
     }
-    
+
     /**
      * Detect and set the mimetype
      *
@@ -329,22 +310,48 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      */
     public function detectAndSetMimeType()
     {
-        $type = false;
-        
-        if (!isset($_SERVER['CONTENT_TYPE']) && !isset($_SERVER['HTTP_ACCEPT'])) {
+        $types = $this->parseAcceptHeader();
+
+        if(empty($types)) {
             return false;
         }
-        
-        $type = isset($_SERVER['HTTP_ACCEPT']) ? $_SERVER['HTTP_ACCEPT'] : $_SERVER['CONTENT_TYPE'];
-        
-        if (!isset($this->mimeMaps[$type])) {
-            return false;
+
+        foreach($types AS $type) {
+            if (isset($this->mimeMaps[$type])) {
+                $mimeType     = $type;
+                $outputFormat = strtoupper($this->mimeMaps[$type]);
+                $this->setFormat(strtolower($outputFormat));
+                return array('mimeType' => $mimeType, 'outputFormat' => $outputFormat);
+            }
         }
-        
-        $mimeType     = $type;
-        $outputFormat = strtoupper($this->mimeMaps[$type]);
-        
-        $this->setFormat(strtolower($outputFormat));
-        return array('mimeType' => $mimeType, 'outputFormat' => $outputFormat);
+
+        return false;
+    }
+
+    protected function parseAcceptHeader()
+    {
+        if (!isset($_SERVER['HTTP_ACCEPT'])) {
+            return array();
+        }
+
+        $acceptLowPriority = $acceptHighPriority = array();
+
+        $types = explode(',', $_SERVER['HTTP_ACCEPT']);
+        foreach($types AS $type) {
+            $typeMatch = preg_match('/([a-z\*]+\/[a-z\+\-\*]+)(?:;(?:q|level)=([0-9\.]+))?/i', $type, $typeComponents);
+            if(!$typeMatch) {
+                continue;
+            }
+            $priority = isset($typeComponents[2]) ? $typeComponents[2] : 1;
+
+            if($priority === 1) {
+                $acceptHighPriority[] = $type;
+            } else {
+                $acceptLowPriority[(10*$priority)] = $typeComponents[1];
+            }
+        }
+        krsort($acceptLowPriority);
+        return array_merge($acceptHighPriority, $acceptLowPriority);
     }
 }
+

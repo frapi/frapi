@@ -26,13 +26,13 @@ class Frapi_Controller_Main
     /**
      * Constant used to retrieve extra caching information
      * through the headers. If this is set to true, you will
-     * receive the size of the reuqest, the size of each 
+     * receive the size of the reuqest, the size of each
      * key in the cache and such information.
      *
      * @var bool Whether or not the webservice should be in debug mode.
      */
     const MAIN_WEBSERVICE_DEBUG  = false;
-    
+
     /**
      * The request parameter
      *
@@ -75,7 +75,16 @@ class Frapi_Controller_Main
      */
     protected $format = 'xml';
 
+    protected $formatSetByExtension = false;
+
     /**
+     * @var string stores the mapped mimeType of the incoming content if found
+     */
+    protected $inputFormat;
+
+
+    /**
+     *
      * Each call has an action
      *
      * Each call has an action and it is stored in this
@@ -137,6 +146,27 @@ class Frapi_Controller_Main
     protected $authorization;
 
     /**
+     * A map of all the mimetypes to their output
+     * format. In order to add a new mimetype, add it's
+     * mimetype name and then add it's output as the associated
+     * value.
+     *
+     * @var array An array of mimetypes and their output types.
+     */
+    protected $mimeMaps = array(
+        'application/xml'  => 'xml',
+        'text/xml'         => 'xml',
+        'application/json' => 'json',
+        'text/json'        => 'json',
+        'text/html'        => 'html',
+        'text/plain'       => 'json',
+        'text/javascript'  => 'js',
+        'text/php-printr'  => 'printr'
+    );
+
+    protected $allowedInputTypes = array('xml', 'json');
+
+    /**
      * Constructor
      *
      * Upon invoking of the constructor, a few objects need to be created
@@ -159,9 +189,10 @@ class Frapi_Controller_Main
             $this->security      = new Frapi_Security();
             $this->authorization = new Frapi_Authorization();
             $this->router        = new Frapi_Router();
-            
+
 
             $this->router->loadAndPrepareRoutes();
+            $this->setInputFormat();
 
             $uri = $_SERVER['REQUEST_URI'];
             // For some reason, this is now a fatal error in 5.3 and no longer a warning
@@ -184,10 +215,10 @@ class Frapi_Controller_Main
             } else {
                 $query_path_format = null;
             }
-                
+
             if ($routed = $this->router->match($query_path)) {
                 $_REQUEST = array_merge($_REQUEST, $routed['params']);
-                
+
                 $this->setAction(strtolower($routed['action']));
                 $this->setRequest($_REQUEST);
             } else {
@@ -200,14 +231,15 @@ class Frapi_Controller_Main
             try {
                 if (!is_null($query_path_format)) {
                     $format = $query_path_format;
+                    $this->formatSetByExtension = true;
                 } else {
                     $format = $this->getParam('format');
                 }
 
                 $setFormat = $this->getFormat();
                 $this->setFormat(
-                    isset($setFormat) && 
-                    $setFormat == Frapi_Controller_Api::DEFAULT_OUTPUT_FORMAT 
+                    isset($setFormat) &&
+                    $setFormat == Frapi_Controller_Api::DEFAULT_OUTPUT_FORMAT
                         ? $format : $setFormat
                 );
             } catch (Frapi_Exception $fex) {
@@ -237,7 +269,7 @@ class Frapi_Controller_Main
         $this->request = $request;
         return $this;
     }
-    
+
     /**
      * Get Files (GETTER)
      *
@@ -280,7 +312,7 @@ class Frapi_Controller_Main
     public function getParams()
     {
         $params = $this->request;
-        
+
         /**
          * This certainly isn't a pure approach however it is a very
          * practical approach that will suit most people most of the times.
@@ -291,15 +323,18 @@ class Frapi_Controller_Main
         $input = file_get_contents("php://input");
         parse_str($input, $puts);
 
-        $xmlJsonMatch = preg_grep('/\<|\{/i', array_keys($puts));
-        
-        if (!empty($xmlJsonMatch)) {
+        $inputFormat = $this->inputFormat;
+        if(empty($inputFormat)) {
+            $xmlJsonMatch = preg_grep('/\<|\{/i', array_keys($puts));
+            $inputFormat = $this->getFormat();
+        }
+        if (!empty($inputFormat) || !empty($xmlJsonMatch)) {
             /* attempt to parse the input */
             $requestBody = Frapi_Input_RequestBodyParser::parse(
-                $this->getFormat(),
+                $inputFormat,
                 $input
             );
-            
+
             if (!empty($requestBody)) {
                 $rootElement = array_keys($requestBody);
 
@@ -310,7 +345,7 @@ class Frapi_Controller_Main
                     $params[$rootElement[0]] = true;
                     $requestBody = $requestBody[$rootElement[0]];
                 }
-                
+
                 $params = array_merge($params, $requestBody);
             }
         } else if (!empty($puts)) {
@@ -318,7 +353,7 @@ class Frapi_Controller_Main
                 $params[$put] = $val;
             }
         }
-        
+
         $this->request = $params;
         return $this->request;
     }
@@ -371,16 +406,16 @@ class Frapi_Controller_Main
 
         if ($default_output_format = Frapi_Internal::getCached('Output.default-format')) {
             return $default_output_format;
-        } 
-        
+        }
+
         $conf = Frapi_Internal::getConfiguration('outputs');
         $row  = $conf->getByField('output', 'default', '1');
-        
+
         if (isset($row) && isset($row['name'])) {
             Frapi_Internal::setCached('Output.default-format', $row['name']);
             return $row['name'];
         }
-        
+
         return Frapi_Controller_Api::DEFAULT_OUTPUT_FORMAT;
     }
 
@@ -438,5 +473,24 @@ class Frapi_Controller_Main
     private function setAction($action = false)
     {
         $this->action = strtolower($action);
+    }
+
+    public function setInputFormat()
+    {
+        $contentType = (isset($_SERVER['CONTENT_TYPE'])) ?
+                $_SERVER['CONTENT_TYPE'] :
+                null;
+
+        if(!empty($contentType) &&
+           isset($this->mimeMaps[$contentType]) &&
+           in_array($this->mimeMaps[$contentType], $this->allowedInputTypes)) {
+            $this->inputFormat = $this->mimeMaps[$contentType];
+        }
+
+    }
+
+    public function getInputFormat()
+    {
+        return $this->inputFormat;
     }
 }
