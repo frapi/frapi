@@ -185,7 +185,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
     public static function processInternalError(Frapi_Exception $e)
     {
         try {
-            $controller = new Frapi_Controller_API();
+            $controller = new Frapi_Controller_Api();
         } catch (Exception $e) {
             // This is a hack to intercept anything that may
             // have happened before the internal error collection

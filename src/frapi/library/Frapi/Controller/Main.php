@@ -334,7 +334,7 @@ class Frapi_Controller_Main
             $xmlJsonMatch = preg_grep('/\<|\{/i', array_keys($puts));
             $inputFormat = $this->getFormat();
         }
-        if (!empty($inputFormat) || !empty($xmlJsonMatch)) {
+        if (empty($puts) && !empty($inputFormat) || !empty($xmlJsonMatch)) {
             /* attempt to parse the input */
             $requestBody = Frapi_Input_RequestBodyParser::parse(
                 $inputFormat,
