@@ -36,6 +36,11 @@ class Default_Form_Configuration extends Lupin_Form
         $cs->setRequired(false);
         $this->addElement($cs);
 
+        $it = new Zend_Form_Element_Checkbox('iterator');
+        $it->setLabel($tr->_('USE_ITERATOR'));
+        $it->setRequired(false);
+        $this->addElement($it);
+
         $this->addElement(new Zend_Form_Element_Submit($tr->_('UPDATE_CONFIGURATION'), array('label' => $tr->_('UPDATE_CONFIGURATION'))));
         parent::init();
     }

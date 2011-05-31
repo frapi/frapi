@@ -125,6 +125,11 @@ class Default_Model_Configuration extends Lupin_Model
         return $this->updateByKey('use_cdata', $useCdata);
     }
 
+    public function updateUseIterator($useIterator)
+    {
+        return $this->updateByKey('use_iterator', $useIterator);
+    }
+
     public function updateAllowCrossDomain($useCdata)
     {
         return $this->updateByKey('allow_cross_domain', $useCdata);
