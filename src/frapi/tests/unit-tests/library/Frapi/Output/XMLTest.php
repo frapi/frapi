@@ -86,7 +86,24 @@ class Frapi_Output_XMLTest extends PHPUnit_Framework_TestCase
         $data = array_shift($response);
         $valid = array_shift($response);
         $error = array_shift($response);
-        $this->testExpectedXML($data, $error);
+        $outputXML = new Frapi_Output_XML();
+
+        try {
+            $outputXML->populateOutput($data);
+        } catch (Frapi_Output_XML_Exception $e) {
+            if ($expectedXML !== false) {
+                $this->fail('Expected Frapi_Output_XML_Exception because of invalid element names.');
+            }
+        }
+        if ($expectedXML !== false) {
+            $generatedXML = $outputXML->executeOutput();
+            $this->assertContains($error, $generatedXML);
+            try {
+                simplexml_load_string($generatedXML);
+            } catch (Exception $e) {
+                $this->fail('Invalid XML generated.');
+            }
+        }
     }
 
     /**
