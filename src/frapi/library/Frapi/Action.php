@@ -101,9 +101,11 @@ class Frapi_Action
     public static function getInstance($action)
     {
         $directory = CUSTOM_ACTION . DIRECTORY_SEPARATOR;
-        $filePlain = ucfirst(strtolower($action));
+        //$filePlain = ucfirst(strtolower($action));
+        $filePlain = Frapi_FileHelper::normalizeName($action);
         $file      = $directory . $filePlain . '.php';
-        $class     = 'Action_' . $filePlain;
+        //$class     = 'Action_' . $filePlain;
+        $class = 'Action_' . Frapi_FileHelper::generateClassName($action);
 
         if (!file_exists($file) || !is_readable($file)) {
             throw new Frapi_Action_Exception (
