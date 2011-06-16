@@ -62,6 +62,9 @@ require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPAR
 //Routing
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Router.php';
 
+//FileHelper
+require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'FileHelper.php';
+
 // Action
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Action' . DIRECTORY_SEPARATOR . 'Exception.php';
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Action' . DIRECTORY_SEPARATOR . 'Interface.php';
