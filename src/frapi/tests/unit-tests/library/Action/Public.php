@@ -162,4 +162,16 @@ class Action_Public extends Frapi_Action implements Frapi_Action_Interface
         return $this->toArray();
     }
 
+    /**
+     * Test getParam
+     * 
+     * This method exposes the protected getParam() method for
+     * unit-testing purposes.
+     * 
+     * @see Frapi_Action::getParam()
+     */
+    public function testGetParam($key, $type = self::TYPE_STRING, $default = null, $error_name = null)
+    {
+        return $this->getParam($key, $type, $default, $error_name);
+    }
 }

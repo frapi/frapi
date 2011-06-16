@@ -290,7 +290,7 @@ class Frapi_Action
      */
     protected function getParam($key, $type = self::TYPE_STRING, $default = null, $error_name = null)
     {
-        $param = isset($this->params[$key]) ? $this->params[$key] : null;
+        $param = isset($this->params[$key]) ? $this->params[$key] : $default;
 
         switch ($type) {
             case self::TYPE_FILE;
