@@ -1,4 +1,13 @@
-domain "ru_RU"
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Scott Morken <scott.morken@pcmail.maricopa.edu>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
 
 # login page
 msgid "USERNAME"
@@ -554,3 +563,7 @@ msgstr "Always use CDATA"
 
 msgid "ALLOW_CROSSDOMAIN"
 msgstr "Allow cross domain requests"
+
+msgid "USE_ITERATOR"
+msgstr "Always iterate data (XML output)"
+

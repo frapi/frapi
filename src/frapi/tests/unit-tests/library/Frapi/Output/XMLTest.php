@@ -35,7 +35,7 @@ class Frapi_Output_XMLTest extends PHPUnit_Framework_TestCase
         $outputXML->populateOutput(array());
         $this->assertXMLStringEqualsXMLString('<response />', $outputXML->executeOutput());
     }
-    
+
     /**
      * Test scalars are rejected by XML output generator.
      * @dataProvider scalarProvider
@@ -46,7 +46,7 @@ class Frapi_Output_XMLTest extends PHPUnit_Framework_TestCase
         $outputXML->populateOutput($scalar);
         $this->assertXMLStringEqualsXMLString('<response />', $outputXML->executeOutput());
     }
-    
+
     /**
      * Test that XML generated from response matches expected.
      *
@@ -55,7 +55,7 @@ class Frapi_Output_XMLTest extends PHPUnit_Framework_TestCase
     public function testExpectedXML($response, $expectedXML)
     {
         $outputXML = new Frapi_Output_XML();
-        
+
         try {
             $outputXML->populateOutput($response);
         } catch (Frapi_Output_XML_Exception $e) {
@@ -73,7 +73,68 @@ class Frapi_Output_XMLTest extends PHPUnit_Framework_TestCase
             }
         }
     }
-    
+
+    /**
+     * Test that an object in an array will output an error message in XML output
+     * with the iterator set to false
+     * No idea if this test actually works...
+     */
+    public function testObjectInArrayWithoutIterator()
+    {
+        Frapi_Internal::setCached('use_iterator', 0);
+        $response = $this->arrayObjectProvider();
+        $data = array_shift($response);
+        $valid = array_shift($response);
+        $error = array_shift($response);
+        $outputXML = new Frapi_Output_XML();
+
+        try {
+            $outputXML->populateOutput($data);
+        } catch (Frapi_Output_XML_Exception $e) {
+            if ($expectedXML !== false) {
+                $this->fail('Expected Frapi_Output_XML_Exception because of invalid element names.');
+            }
+        }
+        if ($expectedXML !== false) {
+            $generatedXML = $outputXML->executeOutput();
+            $this->assertContains($error, $generatedXML);
+            try {
+                simplexml_load_string($generatedXML);
+            } catch (Exception $e) {
+                $this->fail('Invalid XML generated.');
+            }
+        }
+    }
+
+    /**
+     * Test that an object will be iterated over correctly in an array if
+     * set_iterator is true
+     * No idea if this test actually works...
+     */
+    public function testObjectInArrayWithIterator()
+    {
+        Frapi_Internal::setCached('use_iterator', 1);
+        $response = $this->arrayObjectProvider();
+        $data = array_shift($response);
+        $valid = array_shift($response);
+        $error = array_shift($response);
+        $this->testExpectedXML($data, $valid);
+    }
+
+    /**
+     * provides array containing an object
+     * and both responses
+     * @return array
+     */
+    public function arrayObjectProvider()
+    {
+        return array(
+            array(new stdClass()),
+            '<response><numeric-key></numeric-key></response>',
+            '<response><errors><error code="PHP Warning error"><message>XMLWriter::text() expects parameter 1 to be string, object given'
+        );
+    }
+
     /**
      * Scalar Provider
      **/
@@ -89,7 +150,7 @@ class Frapi_Output_XMLTest extends PHPUnit_Framework_TestCase
             array("Single-Quoted String")
             );
     }
-    
+
     /**
      * Response arrays for testing
      **/
@@ -117,7 +178,7 @@ class Frapi_Output_XMLTest extends PHPUnit_Framework_TestCase
                 array('a', 'b', 'c'=>'d', 'd'=>'e'),
                 '<response><a/><b/><c>d</c><d>e</d></response>'
                 ),
-            //Values that would create invalid XML elements are converted to numeric-key's. 
+            //Values that would create invalid XML elements are converted to numeric-key's.
             array(
                 array('numeric-key invalid value', 'assoc'=>'value'),
                 '<response><numeric-key key="0">numeric-key invalid value</numeric-key><assoc>value</assoc></response>'

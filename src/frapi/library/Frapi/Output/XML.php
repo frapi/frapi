@@ -79,7 +79,11 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
 
         $xml = '';
 
-        if (!is_array($data)) {
+        $cache = new Frapi_Internal();
+        $cache = $cache->getCachedDbConfig();
+        $useIterator = (isset($cache['use_iterator']) ? $cache['use_iterator'] : false);
+
+        if (!is_array($data) || (bool)$useIterator === true) {
             $data = $this->_normalizeToArray($data);
         }
 

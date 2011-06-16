@@ -60,8 +60,10 @@ class ConfigurationController extends Lupin_Controller_Base
                     $res2             = $config_model->updateUseCdata($useCdata);
                     $allowCrossDomain = $request->getParam('allow_cross_domain');
                     $res3             = $config_model->updateAllowCrossDomain($allowCrossDomain);
+                    $useIterator = $request->getParam('iterator');
+                    $res4 = $config_model->updateUseIterator($useIterator);
 
-                    if ($res !== false && $res2 !== false && $res3 !== false) {
+                    if ($res !== false && $res2 !== false && $res3 !== false && $res4 !== false) {
                         $this->addMessage($this->tr->_('CONFIG_UPDATE_SUCCESS'));
                         $this->_redirect('/configuration');
                     } else  {
@@ -75,7 +77,8 @@ class ConfigurationController extends Lupin_Controller_Base
             $form->populate(array(
                 'api_url'            => $config_model->getKey('api_url'),
                 'cdata'              => $config_model->getKey('use_cdata'),
-                'allow_cross_domain' => $config_model->getKey('allow_cross_domain')
+                'allow_cross_domain' => $config_model->getKey('allow_cross_domain'),
+                'iterator'          => $config_model->getKey('use_iterator')
             ));
         }
         $this->view->form = $form;
