@@ -9,3 +9,8 @@
 # Ignore the Netbeans nbproject folder
 #
 nbproject
+
+#
+# Ignore the PhpStorm project folder
+#
+.idea
