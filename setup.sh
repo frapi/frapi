@@ -17,6 +17,3 @@ chmod 775 $CURRENTDIR/src/frapi/custom/Action
 
 chmod 775 $CURRENTDIR/src/frapi/custom/Config
 chmod 664 $CURRENTDIR/src/frapi/custom/Config/*.xml
-# Init the Armchair submodule
-git submodule init
-git submodule update
