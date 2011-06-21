@@ -175,6 +175,28 @@ class Frapi_ActionTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests Frapi_Action->hasParam() when a parameter is passed
+     */
+    public function testHasParamWhenPassed()
+    {
+        $actionParams = array('key1' => 'value1');
+        $action = MockFrapi_Action::getInstance('Public');
+        $action->setActionParams($actionParams);
+        $this->assertTrue($action->testHasParam('key1'));
+    }
+
+    /**
+     * Tests Frapi_Action->hasParam() when a parameter is not passed
+     */
+    public function testHasParamWhenNotPassed()
+    {
+        $actionParams = array('key1' => 'value1');
+        $action = MockFrapi_Action::getInstance('Public');
+        $action->setActionParams($actionParams);
+        $this->assertFalse($action->testHasParam('key2'));
+    }
+
+    /**
      * Tests Frapi_Action->getParams()
      */
     public function testGetParams()

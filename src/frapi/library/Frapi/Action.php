@@ -341,4 +341,15 @@ class Frapi_Action
 
          return $param;
      }
+
+    /**
+     * This method checks whether a param exists or not.
+     *
+     * @param string $key The name of the param key
+     * @return bool Whether the parameter exists or not
+     */
+    protected function hasParam($key)
+    {
+        return isset($this->params[$key]);
+    }
 }

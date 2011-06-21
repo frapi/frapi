@@ -174,4 +174,17 @@ class Action_Public extends Frapi_Action implements Frapi_Action_Interface
     {
         return $this->getParam($key, $type, $default, $error_name);
     }
+
+    /**
+     * Test hasParam
+     *
+     * This method exposes the protected hasParam() method for
+     * unit-testing purposes.
+     * 
+     * @see Frapi_Action::hasParam()
+     */
+    public function testHasParam($key)
+    {
+        return $this->hasParam($key);
+    }
 }
