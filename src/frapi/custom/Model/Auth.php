@@ -21,8 +21,8 @@
  * @package   frapi
  */
 /**
- * This model class is used as an example for anyone who would like to use granular 
- * authentication per HTTP verb. 
+ * This model class is used as an example for anyone who would like to use granular
+ * authentication per HTTP verb.
  *
  * All one has to do to use the built-in frapi changes is to invoke:
  * <code>
@@ -46,7 +46,7 @@ class Custom_Model_Auth
      */
     public function __construct()
     {
-        $authorization = new Frapi_Authorization_HTTP_Digest();
+        $authorization = new Frapi_Authorization_HTTP_Digest('Testing Your App');
 
         $authParams = array(
             'digest' => isset($_SERVER['PHP_AUTH_DIGEST']) ? $_SERVER['PHP_AUTH_DIGEST'] : null

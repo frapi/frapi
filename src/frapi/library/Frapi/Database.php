@@ -47,15 +47,50 @@ class Frapi_Database extends PDO
         if (!isset(self::$instance[$name])) {
             $configs = Frapi_Internal::getCachedDbConfig();
 
+            $dsn = self::buildDsn($configs);
+
             self::$instance[$name] = new PDO(
-                'mysql:dbname='.$configs['db_database'].';host='.$configs['db_hostname'],
+                $dsn,
                 $configs['db_username'],
-                $configs['db_password'],
-                array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'')
+                $configs['db_password']
             );
         }
 
         return self::$instance[$name];
+    }
+
+    /**
+     * Build a DataSource Name.
+     *
+     * This method is used by the factory method to build
+     * a datasource name for PDO based on the db_engine
+     * specified in the configuration (configurable via the admin)
+     *
+     * @throw  Frapi_Error
+     * @return string      The Datasource for the selected database engine.
+     */
+    public static function buildDsn(array $configs)
+    {
+        $dsn = false;
+
+        if (!isset($configs['db_engine'])) {
+            throw new Frapi_Error(
+                 'NO_DATABASE_DEFINED',
+                 'No Database is defined in the configuration',
+                 500
+            );
+        }
+
+        switch ($configs['db_engine']) {
+            case 'mysql':
+                $dsn = 'mysql:dbname=' . $configs['db_database'] .
+                       ';host='.$configs['db_hostname'];
+                break;
+            case 'mssql':
+                $dsn = 'sqlsrv:server=' . $configs['db_hostname'] .
+                       ';database=' . $configs['db_database'];
+                break;
+        }
     }
 
     /**

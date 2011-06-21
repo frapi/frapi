@@ -201,7 +201,9 @@ class Frapi_Controller_Main
             $this->setInputFormat();
 
             $uri = $_SERVER['REQUEST_URI'];
-            // For some reason, this is now a fatal error in 5.3 and no longer a warning
+            // For some reason, this is now a fatal
+            // error in 5.3 and no longer a warning
+
             // in php (parse_url() with an http:// in the URL_PATH)...
             if (stristr($uri, '?') !== false) {
                 $uri = substr($uri, 0, strpos($uri, '?'));
@@ -212,7 +214,10 @@ class Frapi_Controller_Main
             //Query ending in .xxx may or may not be an output format
             $query_path_format = null;
             if (strrpos($query_path, '.')) {
-                $query_path_format = substr($query_path, $format_pos = strrpos($query_path, '.') + 1);
+                $query_path_format = substr(
+                    $query_path,
+                    $format_pos = strrpos($query_path, '.') + 1
+                );
             }
 
             if (Frapi_Rules::validateOutputType($query_path_format) === true) {
@@ -235,18 +240,19 @@ class Frapi_Controller_Main
             $this->setFiles($_FILES);
 
             try {
+                $format = $this->getParam('format');
+
                 if (!is_null($query_path_format)) {
                     $format = $query_path_format;
                     $this->formatSetByExtension = true;
-                } else {
-                    $format = $this->getParam('format');
                 }
 
                 $setFormat = $this->getFormat();
                 $this->setFormat(
                     isset($setFormat) &&
-                    $setFormat == Frapi_Controller_Api::DEFAULT_OUTPUT_FORMAT
-                        ? $format : $setFormat
+                    Frapi_Controller_Api::DEFAULT_OUTPUT_FORMAT ==
+                        $setFormat
+                    ? $format : $setFormat
                 );
             } catch (Frapi_Exception $fex) {
                 $this->setFormat($this->getDefaultFormatFromConfiguration());

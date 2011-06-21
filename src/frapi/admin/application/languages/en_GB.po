@@ -1,5 +1,8 @@
 domain "en_GB"
 
+msgid "HOSTNAME"
+msgstr "Hostname"
+
 # login page
 msgid "USERNAME"
 msgstr "Username"
@@ -555,3 +558,9 @@ msgstr "Always use CDATA"
 
 msgid "ALLOW_CROSSDOMAIN"
 msgstr "Allow cross domain requests"
+
+msgid "DATABASE_TYPE"
+msgstr "Database Engine"
+
+msgid "DATABASE_ENGINE"
+msgstr "DB Engine"

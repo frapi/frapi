@@ -5,16 +5,16 @@
  *
  * This is an example of a collection. A collection is a bucket of resources. In
  * this case, you can only POST and DELETE this collection.
- * 
+ *
  * POST: A post will add a new resource to a collection. You have to pass a "name"
  * parameter.
- * 
+ *
  * DELETE: Delete collection will remove the collection of resources from the
  * system.
- * 
+ *
  * Try it with "curl -X POST http://api.frapi/collection -d '{"name":"new"}' -H
  * 'Content-Type: application/json'
- * 
+ *
  *
  *
  * @link http://getfrapi.com
@@ -49,6 +49,13 @@ class Action_Collection extends Frapi_Action implements Frapi_Action_Interface
     public function toArray()
     {
         return $this->data;
+    }
+
+    public function __construct()
+    {
+        require_once CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'Auth.php';
+
+        $auth = new Custom_Model_Auth();
     }
 
     /**

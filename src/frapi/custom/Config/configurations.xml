@@ -35,5 +35,10 @@
    <value>0</value>
    <hash>e93a8dc4d1bb0f7d7dc37d21d6307f7dfdbbdae3</hash>
   </configuration>
+  <configuration>
+   <key>db_engine</key>
+   <value>mssql</value>
+   <hash>9dcf333a185b1744f0ba4176a47cdf0e1b9b8873</hash>
+  </configuration>
  </configurations>
 </frapi-config>

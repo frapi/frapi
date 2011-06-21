@@ -52,8 +52,8 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      */
     public function __construct()
     {
-        $this->options = $this->detectAndSetMimeType();
         parent::__construct();
+        $this->options = $this->detectAndSetMimeType();
     }
 
     /**
@@ -316,12 +316,22 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
             return false;
         }
 
-        foreach($types AS $type) {
+        if ($this->formatSetByExtension) {
+            $this->setformat(strtolower($this->format));
+            return true;
+        }
+
+        foreach($types as $type) {
             if (isset($this->mimeMaps[$type])) {
                 $mimeType     = $type;
                 $outputFormat = strtoupper($this->mimeMaps[$type]);
+
                 $this->setFormat(strtolower($outputFormat));
-                return array('mimeType' => $mimeType, 'outputFormat' => $outputFormat);
+
+                return array(
+                    'mimeType'     => $mimeType,
+                    'outputFormat' => $outputFormat
+                );
             }
         }
 
