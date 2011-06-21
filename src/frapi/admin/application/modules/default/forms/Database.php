@@ -68,7 +68,7 @@ class Default_Form_Database extends Lupin_Form
             $returns['pgsql'] = 'PostgreSQL';
         }
 
-        if (extension_loaded('pdo_sqlsrv')) {
+        if (extension_loaded('pdo_sqlsvr')) {
             $returns['mssql'] = 'MS SQL Server';
         }
 
