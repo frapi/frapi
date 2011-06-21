@@ -62,7 +62,7 @@ class Default_Form_Database extends Lupin_Form
 	 */
     protected function getEngines()
     {
-        $returns = array('mysql' => 'MySQL', 'mssql' => 'MS SQL Server');
+        $returns = array('mysql' => 'MySQL');
 
         if (extension_loaded('pdo_pgsql')) {
             $returns['pgsql'] = 'PostgreSQL';
