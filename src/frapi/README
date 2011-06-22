@@ -1,10 +1,9 @@
 Requirements
 ===========================
 PHP: Version 5.2.4 and above
-APC: Required for caching, specifically for From_Database_Error::code, ::msg
-HTTP: (http://pecl.php.net/http)
-PEAR: (http://pear.php.net)
-HTTP_Request2: Used in the tester (http://pear.php.net/HTTP_Request2)
+Caching:
+  APC: Required for caching, specifically for From_Database_Error::code, ::msg
+  WinCache: Required for a more stable caching on Windows
 
 Redis
 =====
@@ -13,7 +12,7 @@ In order to use the Redis cache adapter, you will have to install the phpredis p
 
 APC Keys
 ===========================
-A number of APC keys are in use across the application. 
+A number of APC keys are in use across the application.
 These are often stored on the frontend, and deleted on the backend
 when actions, errors or routes are updated.
 "Actions.enabled-public"    = Enabled, public actions as list.
