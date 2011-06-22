@@ -361,7 +361,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
                     $output[$key] = $this->_normalizeToArray($value);
                 }
             }
-        }asd
+        }
 		if( !is_array( $output ) ){
 			return array();
 		}
