@@ -36,7 +36,7 @@ class Frapi_Input_XmlParser
      * @var The response type from the 
      */
     private static $_responseType;
-	aa
+	
     /**
      * Create an Array from XML
      *
