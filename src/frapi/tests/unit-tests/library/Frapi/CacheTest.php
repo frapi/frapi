@@ -35,8 +35,8 @@ class Frapi_CacheTest extends PHPUnit_Framework_TestCase
      */
     public function testDefaultAdapterIsApcAdapter() {
         $adapter = Frapi_Cache::getInstance();
-        $this->assertType('Frapi_Cache_Adapter_Apc', $adapter);
-        $this->assertType('Frapi_Cache_Interface', $adapter);
+        $this->assertInstanceOf('Frapi_Cache_Adapter_Apc', $adapter);
+        $this->assertInstanceOf('Frapi_Cache_Interface', $adapter);
     }
 
     /**
@@ -45,8 +45,8 @@ class Frapi_CacheTest extends PHPUnit_Framework_TestCase
     public function testGetInstanceApcAdapter ()
     {
         $adapter = Frapi_Cache::getInstance('apc');
-        $this->assertType('Frapi_Cache_Adapter_Apc', $adapter);
-        $this->assertType('Frapi_Cache_Interface', $adapter);
+        $this->assertInstanceOf('Frapi_Cache_Adapter_Apc', $adapter);
+        $this->assertInstanceOf('Frapi_Cache_Interface', $adapter);
     }
     
     /**
@@ -55,8 +55,8 @@ class Frapi_CacheTest extends PHPUnit_Framework_TestCase
     public function testGetInstanceWincacheAdapter ()
     {
         $adapter = Frapi_Cache::getInstance('wincache');
-        $this->assertType('Frapi_Cache_Adapter_Wincache', $adapter);
-        $this->assertType('Frapi_Cache_Interface', $adapter);
+        $this->assertInstanceOf('Frapi_Cache_Adapter_Wincache', $adapter);
+        $this->assertInstanceOf('Frapi_Cache_Interface', $adapter);
     }
     
     /**
