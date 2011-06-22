@@ -53,7 +53,9 @@ class Frapi_ActionTest extends PHPUnit_Framework_TestCase
     {
         $action = MockFrapi_Action::getInstance('Public');
         $this->assertNotNull($action);
-        $this->assertType('Frapi_Action', $action);
+		
+        //$this->assertType('Frapi_Action', $action);
+		$this->assertInstanceOf( 'Frapi_Action', $action );
         $this->assertEquals('Action_Public', get_class($action));
     }
 

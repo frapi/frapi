@@ -55,7 +55,7 @@ class Frapi_Output_XMLTest extends PHPUnit_Framework_TestCase
     public function testExpectedXML($response, $expectedXML)
     {
         $outputXML = new Frapi_Output_XML();
-        
+        $outputXML->setNumericKey(true);
         try {
             $outputXML->populateOutput($response);
         } catch (Frapi_Output_XML_Exception $e) {
