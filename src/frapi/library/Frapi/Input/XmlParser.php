@@ -36,7 +36,7 @@ class Frapi_Input_XmlParser
      * @var The response type from the 
      */
     private static $_responseType;
-
+	
     /**
      * Create an Array from XML
      *
@@ -59,7 +59,7 @@ class Frapi_Input_XmlParser
         } catch(Exception $e) {
             $xmlErrors = libxml_get_errors();
              return new Frapi_Exception(
-                     'Xml Parsing Failed', 
+                     'String could not be parsed as XML', 
                      'INVALID_XML', 
                      400, 
                      'xml_parsing'
