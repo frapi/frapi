@@ -15,19 +15,5 @@
    <description>This error is returned whenever a collection or a resource prevents the use of the POST method.</description>
    <hash>d252bf7363a7431dd0cdd4fb5454dcb80901e429</hash>
   </error>
-  <error>
-   <name>NOT_TRUE</name>
-   <message>This is not true</message>
-   <http_code>406</http_code>
-   <description>This is the error returned when a string pass isn't true.</description>
-   <hash>af73d327be8e7b360ff9074a7d0b204f7e71c9da</hash>
-  </error>
-  <error>
-   <name>TEK_ERROR</name>
-   <message>Some example.</message>
-   <http_code>419</http_code>
-   <description>this is an error returned whenever we're at tek.</description>
-   <hash>9e873c63fbac1619fa95ab7d8a6e38812110ff05</hash>
-  </error>
  </errors>
 </frapi-config>

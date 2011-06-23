@@ -87,10 +87,12 @@ class Frapi_Database extends PDO
                        ';host='.$configs['db_hostname'];
                 break;
             case 'mssql':
-                $dsn = 'sqlsrv:server=' . $configs['db_hostname'] .
-                       ';database=' . $configs['db_database'];
+                $dsn = 'sqlsrv:Server=' . $configs['db_hostname'] .
+                       ';Database=' . $configs['db_database'];
                 break;
         }
+
+        return $dsn;
     }
 
     /**

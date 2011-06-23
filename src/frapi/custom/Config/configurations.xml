@@ -15,7 +15,7 @@
   </configuration>
   <configuration>
    <key>db_database</key>
-   <value>test</value>
+   <value>example</value>
   </configuration>
   <configuration>
    <key>api_url</key>
@@ -37,7 +37,7 @@
   </configuration>
   <configuration>
    <key>db_engine</key>
-   <value>mssql</value>
+   <value>mysql</value>
    <hash>9dcf333a185b1744f0ba4176a47cdf0e1b9b8873</hash>
   </configuration>
  </configurations>

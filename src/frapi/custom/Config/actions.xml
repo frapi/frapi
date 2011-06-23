@@ -81,19 +81,5 @@ HEAD: Retrieve the meta information relative to a sibling.&#13;
    <route>/collection/:resource/siblings/:sibling</route>
    <hash>836d88aacf5906048737893dd4dc0469e353dc33</hash>
   </action>
-  <action>
-   <name>Tekdemos</name>
-   <enabled>1</enabled>
-   <public>1</public>
-   <description>IM a currently giving a talk on demoing frapi and talking about frapi.</description>
-   <route>/tek/demo</route>
-   <hash>8249fbd8a4990db09df5577bf6a8c87054c5f9f0</hash>
-   <parameters>
-    <parameter>
-     <name>baptiboupti</name>
-     <required>1</required>
-    </parameter>
-   </parameters>
-  </action>
  </actions>
 </frapi-config>

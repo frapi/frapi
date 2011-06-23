@@ -14,12 +14,12 @@
   <output>
    <name>XML</name>
    <enabled>1</enabled>
-   <default>1</default>
+   <default>0</default>
   </output>
   <output>
    <name>JSON</name>
    <enabled>1</enabled>
-   <default>0</default>
+   <default>1</default>
   </output>
   <output>
    <name>PRINTR</name>
