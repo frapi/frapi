@@ -60,7 +60,8 @@ class Frapi_Router
     public function loadAndPrepareRoutes()
     {
         if ($routes = Frapi_Internal::getCached('Router.routes-prepared')) {
-            $this->setPreparedRoutes($routes);
+           
+		   $this->setPreparedRoutes($routes);
         } else {
             $routes = array();
 
@@ -195,6 +196,7 @@ class Frapi_Router
      */
     public function setPreparedRoutes($routes)
     {
+		
         $this->preparedRoutes = $routes;
     }
 }

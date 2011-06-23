@@ -71,7 +71,14 @@ class Frapi_Cache_Adapter_MemcachedTest extends PHPUnit_Framework_TestCase
         $this->cache = new Memcached();
         $this->cache->addServer('127.0.0.1', '11211');
         
-        $this->Frapi_Cache_Adapter_Memcached = new Frapi_Cache_Adapter_Memcached();
+		$options = array(
+              'servers' => array(
+                  '127.0.0.1' => 11211
+              )
+          ); 
+		
+        $this->Frapi_Cache_Adapter_Memcached = new Frapi_Cache_Adapter_Memcached($options);
+		
     }
 
     /**
@@ -101,15 +108,17 @@ class Frapi_Cache_Adapter_MemcachedTest extends PHPUnit_Framework_TestCase
         );
     }
 
+	
     /**
      * Tests Frapi_Cache_Adapter_Memcached->get()
      * 
      * @dataProvider keysValuesProvider
      */
-    public function testGet ($key, $value)
+    public function testGet($key = '', $value = '')
     {
+		
         $this->cache->set($key, $value, $this->_ttl);
-        $this->assertEquals($value, $this->Frapi_Cache_Adapter_Apc->get($key));
+        $this->assertEquals($value, $this->Frapi_Cache_Adapter_Memcached->get($key));
     }
 
     /**
@@ -117,9 +126,9 @@ class Frapi_Cache_Adapter_MemcachedTest extends PHPUnit_Framework_TestCase
      * 
      * @dataProvider keysValuesProvider
      */
-    public function testAdd ($key, $value)
+    public function testAdd ($key = '', $value = '')
     {
-        $this->Frapi_Cache_Adapter_Apc->add($key, $value);
+        $this->Frapi_Cache_Adapter_Memcached->add($key, $value);
         $this->assertEquals($value, $this->cache->get($key));
     }
 
@@ -128,10 +137,10 @@ class Frapi_Cache_Adapter_MemcachedTest extends PHPUnit_Framework_TestCase
      * 
      * @dataProvider keysValuesProvider
      */
-    public function testDelete ($key, $value)
+    public function testDelete ($key = '', $value = '')
     {
         $this->cache->add($key, $value, $this->_ttl);
-        $this->Frapi_Cache_Adapter_Apc->delete($key);
+        $this->Frapi_Cache_Adapter_Memcached->delete($key);
         $this->assertEquals(false, $this->cache->get($key));
     }
 
@@ -141,7 +150,7 @@ class Frapi_Cache_Adapter_MemcachedTest extends PHPUnit_Framework_TestCase
     public function testUndelete ()
     {
         $this->markTestIncomplete("undelete test not implemented");
-        $this->Frapi_Cache_Adapter_Apc->undelete(/* parameters */);
+        $this->Frapi_Cache_Adapter_Memcached->undelete(/* parameters */);
     }
 
 }
