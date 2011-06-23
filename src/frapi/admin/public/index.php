@@ -8,7 +8,7 @@ define('APPLICATION_PATH', ROOT_PATH . DIRECTORY_SEPARATOR .
 define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
 
-set_include_path('.' . PATH_SEPARATOR . ROOT_PATH . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR . get_include_path());
+set_include_path('.' . PATH_SEPARATOR . ROOT_PATH . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR . ROOT_PATH . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'PEAR' . PATH_SEPARATOR . get_include_path());
 
 // Create application, bootstrap, and run
 require_once 'Zend/Application.php';
