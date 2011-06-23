@@ -20,7 +20,7 @@ class Frapi_Cache_Adapter_Wincache_Exception extends Frapi_Cache_Adapter_Excepti
  * @copyright echolibre ltd.
  * @package   frapi
  */
-class Frapi_Cache_Adapter_Wincache implements Frapi_Cache_Interface 
+class Frapi_Cache_Adapter_Wincache implements Frapi_Cache_Interface
 {
     /**
      * Get a cache variable
@@ -33,7 +33,7 @@ class Frapi_Cache_Adapter_Wincache implements Frapi_Cache_Interface
      * @return mixed         The value of the retrieved variable or false if
      *                       variable isn't found.
      */
-    public function get($name) 
+    public function get($name)
     {
         return wincache_ucache_get($name);
     }
@@ -47,15 +47,15 @@ class Frapi_Cache_Adapter_Wincache implements Frapi_Cache_Interface
      * @param  string  $name   The name of the cache variable to store.
      * @param  string  $value  The value of the cache variable to store.
      * @param  integer $expire When should it expire? Default: 900 seconds.
-     * 
-     * @return boolean       Depending on the success of the operation, 
-     *                       either true or false. 
+     *
+     * @return boolean       Depending on the success of the operation,
+     *                       either true or false.
      */
-    public function add($name, $value, $expiry = 900) 
+    public function add($name, $value, $expiry = 900)
     {
-        return wincache_ucache_add($name, $value, $expiry);
+        return wincache_ucache_set($name, $value, $expiry);
     }
-    
+
     /**
      * Delete from the cache
      *
@@ -63,11 +63,11 @@ class Frapi_Cache_Adapter_Wincache implements Frapi_Cache_Interface
      * retrievable by $this->get($name)
      *
      * @param  string $name  The name of the cache variable to delete.
-     * 
-     * @return boolean       Depending on the success of the operation, 
-     *                       either true or false. 
+     *
+     * @return boolean       Depending on the success of the operation,
+     *                       either true or false.
      */
-    public function delete($name) 
+    public function delete($name)
     {
         return wincache_ucache_delete($name);
     }
