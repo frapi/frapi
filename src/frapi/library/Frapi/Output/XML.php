@@ -362,9 +362,11 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
                 }
             }
         }
-		if( !is_array( $output ) ){
+
+		if (!is_array($output)) {
 			return array();
 		}
+
         return $output;
     }
 }
