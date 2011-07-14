@@ -135,4 +135,26 @@ class Action_Resource extends Frapi_Action implements Frapi_Action_Interface
 
         return $this->toArray();
     }
+
+    /**
+     * Custom DOCS request handler.
+     *
+     * This method is called when a non-conventional DOCS
+     * request is made.
+     *
+     * @return array
+     */
+    public function executeDocs()
+    {
+        return new Frapi_Response(array(
+            'code' => 200,
+            'data' => array(
+                'GET'    => 'This retrieves the information relative ' .
+                            'to the resource contained in the collection',
+                'DELETE' => 'Deletes the resource.',
+                'PUT'    => 'A put with the "name" parameter will update ' .
+                            'the name of the resource'
+            )
+        ));
+    }
 }
