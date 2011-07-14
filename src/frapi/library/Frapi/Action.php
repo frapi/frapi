@@ -238,6 +238,12 @@ class Frapi_Action
     public function executeDelete() { return $this->executeAction(); }
     public function executeHead()   { return $this->executeAction(); }
 
+    // Funny non-RESTful actions
+    public function executeBro()    { return $this->executeAction(); }
+    public function executeOsama()  { return array('status' => 'done'); }
+    public function executeDocs()   { return $this->executeAction(); }
+
+
     /**
      * Return all the parameters
      *
