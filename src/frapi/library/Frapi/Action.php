@@ -237,10 +237,11 @@ class Frapi_Action
     public function executePost()   { return $this->executeAction(); }
     public function executeDelete() { return $this->executeAction(); }
     public function executeHead()   { return $this->executeAction(); }
+    public function executeTrace()  { return $this->executeAction(); }
+    public function executeOptions(){ return $this->executeAction(); }
 
-    // Funny non-RESTful actions
-    public function executeBro()    { return $this->executeAction(); }
-    public function executeOsama()  { return array('status' => 'done'); }
+    // non-RESTful action but curl -X DOCS could have some interesting
+    // implications in the future.
     public function executeDocs()   { return $this->executeAction(); }
 
 
