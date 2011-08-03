@@ -17,7 +17,6 @@
  * in order for frapi to work correctly.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 interface Frapi_Cache_Interface

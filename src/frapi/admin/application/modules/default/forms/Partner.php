@@ -11,7 +11,6 @@
  * to license@getfrapi.com so we can send you a copy immediately.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi-admin
  */
 class Default_Form_Partner extends Lupin_Form

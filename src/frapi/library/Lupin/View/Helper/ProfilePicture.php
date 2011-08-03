@@ -2,10 +2,9 @@
 
 /**
  * Helper to generate a profile picture
- * @category   echolibre
+ * @category   Lupin
  * @package    Lupin_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2009 echolibre
  * @license    New BSD License
  */
 class Zend_View_Helper_ProfilePicture extends Zend_View_Helper_Abstract

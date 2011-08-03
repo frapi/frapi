@@ -15,7 +15,6 @@
  * The Dummy adapter of the Frapi Cache.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Cache_Adapter_Dummy implements Frapi_Cache_Interface 

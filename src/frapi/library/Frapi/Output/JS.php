@@ -23,7 +23,6 @@
  * using $response from the parent object.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Output_JS extends Frapi_Output implements Frapi_Output_Interface

@@ -15,7 +15,6 @@
  * This class attempts to parse JSON or XML from the request body.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  * @uses      Frapi_Error
  */

@@ -18,7 +18,6 @@
  *
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Controller_Main

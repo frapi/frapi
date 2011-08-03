@@ -19,7 +19,6 @@
  * @uses      Frapi_Output
  * @uses      Frapi_Output_Interface
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Output_CLI extends Frapi_Output implements Frapi_Output_Interface

@@ -15,7 +15,6 @@
  * @TODO Add the setContentType, etc etc.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @since     0.2.0
  * @package   frapi
  */

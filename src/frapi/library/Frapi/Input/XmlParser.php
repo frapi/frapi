@@ -19,7 +19,6 @@
  * and typecast values when attributes are specified.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Input_XmlParser

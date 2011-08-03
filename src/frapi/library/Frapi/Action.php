@@ -22,7 +22,6 @@
  * a username/email and secretkey (Set from the admin).
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  * @uses      Frapi_Action_Exception
  */

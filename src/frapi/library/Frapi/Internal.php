@@ -23,7 +23,6 @@ class Frapi_Internal_Exception extends Frapi_Exception {}
  * instance of the db handle to the SQLite db is maintained!
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Internal

@@ -16,7 +16,6 @@
  * Simply the interface to every outputType
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 interface Frapi_Output_Interface

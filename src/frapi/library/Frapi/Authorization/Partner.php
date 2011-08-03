@@ -21,7 +21,6 @@
  * @uses      Frapi_Authorization
  * @uses      Frapi_Authorization_Interface
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Authorization_Partner extends Frapi_Authorization implements Frapi_Authorization_Interface

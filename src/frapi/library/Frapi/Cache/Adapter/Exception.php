@@ -15,7 +15,6 @@
  * The cache adapter exception.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Cache_Adapter_Exception extends Frapi_Exception {}

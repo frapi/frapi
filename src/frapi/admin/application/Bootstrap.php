@@ -1,7 +1,6 @@
 <?php
 /**
- * @author Echolibre ltd. 2009 <freedom@echolibre.com>
- * @copyright Echolibre ltd. 2009
+ * @author See AUTHORS file.
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {

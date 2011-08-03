@@ -18,7 +18,6 @@ class Lupin_Config_Xml_Exception extends Exception {}
  * critical file.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   Lupin
  */
 class Lupin_Config_Xml

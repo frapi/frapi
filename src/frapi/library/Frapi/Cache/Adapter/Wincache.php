@@ -17,7 +17,6 @@ class Frapi_Cache_Adapter_Wincache_Exception extends Frapi_Cache_Adapter_Excepti
  * The Wincache adapter of the Frapi Cache.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Cache_Adapter_Wincache implements Frapi_Cache_Interface

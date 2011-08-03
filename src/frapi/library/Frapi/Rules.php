@@ -21,7 +21,6 @@ class Frapi_Rules_Exception extends Frapi_Exception {}
  * the types and actions requested.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Rules implements Frapi_Rules_Interface

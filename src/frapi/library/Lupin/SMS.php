@@ -24,9 +24,7 @@
  *   $sms->sendMessage('Does that work?', '353863209369');
  * </code>
  *
- * @package   echolibre
- * @author    Echolibre ltd. 2009 <freedom@echolibre.com>
- * @copyright Echolibre ltd. 2009
+ * @package   Lupin
  */
 class Lupin_SMS
 {

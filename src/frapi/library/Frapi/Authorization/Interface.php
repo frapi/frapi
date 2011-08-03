@@ -16,7 +16,6 @@
  * to license@getfrapi.com so we can send you a copy immediately.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 interface Frapi_Authorization_Interface

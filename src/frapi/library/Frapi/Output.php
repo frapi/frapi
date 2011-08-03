@@ -27,7 +27,6 @@ class Frapi_Output_Exception extends Frapi_Exception {}
  *
  * @uses      Frapi_Output_Exception
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Output

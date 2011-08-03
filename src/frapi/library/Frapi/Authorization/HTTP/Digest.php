@@ -21,7 +21,6 @@
  * @uses      Frapi_Authorization
  * @uses      Frapi_Authorization_Interface
  * @license   New BSD
- * @copyright echolibre ltd.
  * @link      http://www.peej.co.uk/projects/phphttpdigest.html
  * @link      http://en.wikipedia.org/wiki/Digest_access_authentication
  * @package   frapi

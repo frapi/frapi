@@ -17,7 +17,6 @@
  *
  * @uses      Frapi_Authorization_HTTP_Digest
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 /**

@@ -15,7 +15,6 @@
  * The Memcache adapter of the Frapi Cache.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Cache_Adapter_Memcached implements Frapi_Cache_Interface 

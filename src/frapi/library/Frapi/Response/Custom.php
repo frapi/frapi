@@ -13,7 +13,6 @@
  * to license@getfrapi.com so we can send you a copy immediately.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @since     0.2.0
  * @package   frapi
  */
