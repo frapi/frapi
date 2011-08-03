@@ -49,11 +49,22 @@ class Frapi_Database extends PDO
 
             $dsn = self::buildDsn($configs);
 
-            self::$instance[$name] = new PDO(
-                $dsn,
-                $configs['db_username'],
-                $configs['db_password']
-            );
+            // I iz not happy with this. We already have a switch
+            // for the dsn in the "buildDsn" method...
+            if (isset($configs['db_engine']) &&
+                in_array($configs['db_engine'], array('pgsql'))
+            {
+                // DSN that have the user/pass implicitely defined.
+                self::$instance[$name] = new PDO(
+                    $dsn
+            } else {
+                // Other dsns like mysql, mssql, etc.
+                self::$instance[$name] = new PDO(
+                    $dsn,
+                    $configs['db_username'],
+                    $configs['db_password']
+                );
+            }
         }
 
         return self::$instance[$name];
@@ -85,6 +96,12 @@ class Frapi_Database extends PDO
             case 'mysql':
                 $dsn = 'mysql:dbname=' . $configs['db_database'] .
                        ';host='.$configs['db_hostname'];
+                break;
+            case 'pgsql':
+                $dsn = 'pgsql:host=' . $configs['db_hostname'] .
+                       ';dbname=' . $configs['db_database'] .
+                       ';user=' . $configs['db_username'] .
+                       ';password=' . $configs['db_password'];
                 break;
             case 'mssql':
                 $dsn = 'sqlsrv:Server=' . $configs['db_hostname'] .
