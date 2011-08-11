@@ -98,6 +98,10 @@ class TesterController extends Lupin_Controller_Base
         $request_url = 'http' . ($ssl == true ? 's' : '') . '://' . $url . '/' . $query_uri;
 
         $request = new HTTP_Request2($request_url, $newMethod);
+        $request->setConfig(array(
+            'ssl_verify_peer' => false,
+            'ssl_verify_host' => false,
+        ));
 
         if ($email && $pass) {
             $request->setAuth($email, $pass, HTTP_Request2::AUTH_DIGEST);
