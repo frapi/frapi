@@ -16,7 +16,6 @@
  * Simply the interface for any actionType actions.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 interface Frapi_Action_Interface

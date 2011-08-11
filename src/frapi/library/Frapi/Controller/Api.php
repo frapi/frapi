@@ -21,7 +21,6 @@
  * and it is much cleaner now.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Controller_Api extends Frapi_Controller_Main

@@ -11,10 +11,9 @@
  * Allows you to achieve:
  * Label: [box] - [box] - [box]
  *
- * @category   echolibre
+ * @category   Lupin
  * @package    Lupin_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2009 echolibre
  */
 class Lupin_Form_Element_MultiText extends Zend_Form_Element_Text
 {

@@ -4,9 +4,7 @@
  *
  * This is the package used to send SMS text messages using clickatell
  *
- * @package   echolibre
- * @author    Echolibre ltd. 2009 <freedom@echolibre.com>
- * @copyright Echolibre ltd. 2009
+ * @package   Lupin
  */
 class Lupin_SMS_Clickatell extends Lupin_SMS_Abstract
 {

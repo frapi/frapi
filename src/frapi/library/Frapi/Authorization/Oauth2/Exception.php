@@ -17,7 +17,6 @@
  * from either the headers or the parameters passed.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Authorization_Oauth2_Exception extends Frapi_Exception

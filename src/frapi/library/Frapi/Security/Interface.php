@@ -18,7 +18,6 @@
  * or a partner.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 interface Frapi_Security_Interface

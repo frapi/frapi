@@ -1,7 +1,5 @@
 <?php
 /**
- * @author Echolibre ltd. 2009 <freedom@echolibre.com>
- * @copyright Echolibre ltd. 2009
  */
 // http://chart.apis.google.com/chart?
 // chs=128x18

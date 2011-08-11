@@ -5,9 +5,7 @@
  * Abstract class where all the methods are declared
  * and the main send method is.
  *
- * @package   echolibre
- * @author    Echolibre ltd. 2009 <freedom@echolibre.com>
- * @copyright Echolibre ltd. 2009
+ * @package   Lupin
  */
 abstract class Lupin_SMS_Abstract
 {

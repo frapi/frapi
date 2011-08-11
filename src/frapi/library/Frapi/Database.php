@@ -19,7 +19,6 @@ class Frapi_Database_Exception extends Frapi_Exception {}
  *
  * @uses      Frapi_Database_Exception
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Database extends PDO

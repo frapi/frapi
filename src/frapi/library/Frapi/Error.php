@@ -18,7 +18,6 @@
  * consistency
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Error extends Frapi_Exception

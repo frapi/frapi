@@ -25,7 +25,6 @@ class Frapi_Security_Exception extends Frapi_Exception {}
  * @uses    Frapi_Security_Interface
  * @uses    Frapi_Security_Exception
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Security implements Frapi_Security_Interface

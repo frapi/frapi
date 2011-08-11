@@ -11,10 +11,9 @@
  * Allows you to achieve:
  * Label: [select] - [select] - [select]
  *
- * @category   echolibre
+ * @category   Lupin
  * @package    Lupin_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2009 echolibre
  */
 class Lupin_Form_Element_MultiSelectBox extends Zend_Form_Element_Select
 {

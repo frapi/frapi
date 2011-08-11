@@ -15,7 +15,6 @@
  * The Zend Server SHM adapter of the Frapi Cache.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @link      http://files.zend.com/help/Zend-Platform/zend_cache_functions.htm
  * @package   frapi
  */

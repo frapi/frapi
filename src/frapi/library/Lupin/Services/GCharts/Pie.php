@@ -1,7 +1,5 @@
 <?php
 /**
- * @author Echolibre ltd. 2009 <freedom@echolibre.com> 
- * @copyright Echolibre ltd. 2009
  */
 class Lupin_Services_GCharts_Pie extends Lupin_Services_GCharts implements Lupin_Services_GCharts_Interface
 {

@@ -5,10 +5,9 @@
 /**
  * Helper to generate a set of checkbox button elements
  *
- * @category   echolibre
+ * @category   Lupin
  * @package    Lupin_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2009 echolibre
  * @license    New BSD License
  */
 class Lupin_View_Helper_FormMultiSelectBox extends Zend_View_Helper_FormSelect

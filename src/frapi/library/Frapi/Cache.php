@@ -17,7 +17,6 @@
  * and this can't be good as APIs will have issues running windows.
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Cache

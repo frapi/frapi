@@ -16,7 +16,6 @@
  * to install phpredis from: http://github.com/owlient/phpredis
  *
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Cache_Adapter_Redis implements Frapi_Cache_Interface 

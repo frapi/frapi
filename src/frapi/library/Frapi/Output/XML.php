@@ -12,9 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to license@getfrapi.com so we can send you a copy immediately.
  *
- * @author  David Doran <david.doran@echolibre.com>
  * @license   New BSD
- * @copyright echolibre ltd.
  * @package   frapi
  */
 class Frapi_Output_XML_Exception extends Frapi_Output_Exception {}
