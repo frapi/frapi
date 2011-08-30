@@ -134,6 +134,22 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
             );
         }
 
+
+        /**
+         * Here we look for the temporary params so we can
+         * automatically replace the jsonp_callback and handle
+         * it in the OutputHandlers transparently.
+         */
+        $tmpParams = $this->actionContext->getParams();
+        if (isset($tmpParams['jsonp_callback'])) {
+            $response->setData(
+                $response->getData() +
+                array('jsonp_callback' => $tmpParams['jsonp_callback'])
+            );
+        }
+
+        unset($tmpParams);
+
         /**
          * If the action result is NOT an instance of
          * Error, we can assume that it's valid
