@@ -70,6 +70,11 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
      * @var boolean True or False.
      */
     public $passwordsHashed = true;
+	
+	/**
+	 * This variable contains the parsed digest data
+	 */
+	protected $digest = null;
 
     /**
      * Constructor
@@ -180,59 +185,71 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
             return $this->send();
         }
 
-        $authorization = $_SERVER['PHP_AUTH_DIGEST'];
-
-        if (preg_match('/username="([^"]+)"/', $authorization, $username) &&
-            preg_match('/nonce="([^"]+)"/', $authorization, $nonce) &&
-            preg_match('/response="([^"]+)"/', $authorization, $response) &&
-            preg_match('/opaque="([^"]+)"/', $authorization, $opaque) &&
-            preg_match('/uri="([^"]+)"/', $authorization, $uri) )
-        {
-            $username   = $username[1];
-            $requestURI = $_SERVER['REQUEST_URI'];
-            $_SERVER['X_FRAPI_AUTH_USER'] = $username;
-
-            if (strpos($requestURI, '?') !== false) {
-                $requestURI = substr($requestURI, 0, strlen($uri[1]));
-            }
-
-            $users = Frapi_Model_Partner::isPartnerHandle($username);
+        if ($this->_parseDigest($_SERVER['PHP_AUTH_DIGEST'])) {
+            $users = Frapi_Model_Partner::isPartnerHandle($this->digest['username']);
 
             if ($users === false) {
                 return $this->send();
             }
 
-            if ($this->getOpaque() == $opaque[1] && $requestURI == $uri[1] &&
-                $this->getNonce() == $nonce[1])
-            {
-                $passphrase = hash('md5', "$username:{$this->realm}:{$users['api_key']}");
-
-                if ($this->passwordsHashed) {
-                    $a1 = $passphrase;
-                } else {
-                    $a1 = md5($username.':'.$this->realm.':'.$passphrase);
-                }
-
-                $a2 = md5($_SERVER['REQUEST_METHOD'] . ':' . $requestURI);
-
-                if (preg_match('/qop="?([^,\s"]+)/', $authorization, $qop) &&
-                    preg_match('/nc=([^,\s"]+)/', $authorization, $nc) &&
-                    preg_match('/cnonce="([^"]+)"/', $authorization, $cnonce))
-                {
-                    $expectedResponse =
-                        md5($a1.':'.$nonce[1].':'.$nc[1].':'.$cnonce[1].':'.$qop[1].':'.$a2);
-                } else {
-                    $expectedResponse = md5($a1.':'.$nonce[1].':'.$a2);
-                }
-
-                if ($response[1] == $expectedResponse) {
-                    return $username;
-                }
-            }
-
-            return $this->send();
+            return $this->_validateResponse($users['api_key']);
         }
 
         return $this->send();
     }
+
+    protected function _parseDigest($authorization)
+    {
+        if (preg_match('/username="([^"]+)"/', $authorization, $username) &&
+                preg_match('/nonce="([^"]+)"/', $authorization, $nonce) &&
+                preg_match('/response="([^"]+)"/', $authorization, $response) &&
+                preg_match('/opaque="([^"]+)"/', $authorization, $opaque) &&
+                preg_match('/uri="([^"]+)"/', $authorization, $uri))
+        {
+            $this->digest = compact('username', 'nonce', 'response', 'opaque', 'uri');
+			$this->digest['username'] = $this->digest['username'][1];
+			return true;
+        }
+
+        return false;
+    }
+	
+	protected function _validateResponse($data)
+	{
+		$requestURI = $_SERVER['REQUEST_URI'];
+		$_SERVER['X_FRAPI_AUTH_USER'] = $this->digest['username'];
+
+		if (strpos($requestURI, '?') !== false) {
+			$requestURI = substr($requestURI, 0, strlen($this->digest['uri'][1]));
+		}
+		
+		if ($this->getOpaque() == $this->digest['opaque'][1] && $requestURI == $this->digest['uri'][1] &&
+			$this->getNonce() == $this->digest['nonce'][1]) {
+			
+			$passphrase = hash('md5', "{$this->digest['username']}:{$this->realm}:{$data}");
+
+			if ($this->passwordsHashed) {
+				$a1 = $passphrase;
+			} else {
+				$a1 = md5($this->digest['username'] . ':' . $this->realm . ':' . $passphrase);
+			}
+
+			$a2 = md5($_SERVER['REQUEST_METHOD'] . ':' . $requestURI);
+
+			if (preg_match('/qop="?([^,\s"]+)/', $_SERVER['PHP_AUTH_DIGEST'], $qop) &&
+					preg_match('/nc=([^,\s"]+)/', $_SERVER['PHP_AUTH_DIGEST'], $nc) &&
+					preg_match('/cnonce="([^"]+)"/', $_SERVER['PHP_AUTH_DIGEST'], $cnonce)) {
+				$expectedResponse =
+						md5($a1 . ':' . $this->digest['nonce'][1] . ':' . $nc[1] . ':' . $cnonce[1] . ':' . $qop[1] . ':' . $a2);
+			} else {
+				$expectedResponse = md5($a1 . ':' . $this->digest['nonce'][1] . ':' . $a2);
+			}
+
+			if ($this->digest['response'][1] == $expectedResponse) {
+				return $this->digest['username'];
+			}
+		}
+
+		return $this->send();
+	}
 }
