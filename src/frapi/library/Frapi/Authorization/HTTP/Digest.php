@@ -180,53 +180,44 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
             return $this->send();
         }
 
-        $authorization = $_SERVER['PHP_AUTH_DIGEST'];
-
-        if (preg_match('/username="([^"]+)"/', $authorization, $username) &&
-            preg_match('/nonce="([^"]+)"/', $authorization, $nonce) &&
-            preg_match('/response="([^"]+)"/', $authorization, $response) &&
-            preg_match('/opaque="([^"]+)"/', $authorization, $opaque) &&
-            preg_match('/uri="([^"]+)"/', $authorization, $uri) )
-        {
-            $username   = $username[1];
+        if ($authorization = $this->_parseDigest()) {
+            $authorization['username'] = $authorization['username'][1];
             $requestURI = $_SERVER['REQUEST_URI'];
-            $_SERVER['X_FRAPI_AUTH_USER'] = $username;
+            $_SERVER['X_FRAPI_AUTH_USER'] = $authorization['username'];
 
             if (strpos($requestURI, '?') !== false) {
-                $requestURI = substr($requestURI, 0, strlen($uri[1]));
+                $requestURI = substr($requestURI, 0, strlen($authorization['uri'][1]));
             }
 
-            $users = Frapi_Model_Partner::isPartnerHandle($username);
+            $users = Frapi_Model_Partner::isPartnerHandle($authorization['username']);
 
             if ($users === false) {
                 return $this->send();
             }
 
-            if ($this->getOpaque() == $opaque[1] && $requestURI == $uri[1] &&
-                $this->getNonce() == $nonce[1])
-            {
-                $passphrase = hash('md5', "$username:{$this->realm}:{$users['api_key']}");
+            if ($this->getOpaque() == $authorization['opaque'][1] && $requestURI == $authorization['uri'][1] &&
+                    $this->getNonce() == $authorization['nonce'][1]) {
+                $passphrase = hash('md5', "{$authorization['username']}:{$this->realm}:{$users['api_key']}");
 
                 if ($this->passwordsHashed) {
                     $a1 = $passphrase;
                 } else {
-                    $a1 = md5($username.':'.$this->realm.':'.$passphrase);
+                    $a1 = md5($authorization['username'] . ':' . $this->realm . ':' . $passphrase);
                 }
 
                 $a2 = md5($_SERVER['REQUEST_METHOD'] . ':' . $requestURI);
 
                 if (preg_match('/qop="?([^,\s"]+)/', $authorization, $qop) &&
-                    preg_match('/nc=([^,\s"]+)/', $authorization, $nc) &&
-                    preg_match('/cnonce="([^"]+)"/', $authorization, $cnonce))
-                {
+                        preg_match('/nc=([^,\s"]+)/', $authorization, $nc) &&
+                        preg_match('/cnonce="([^"]+)"/', $authorization, $cnonce)) {
                     $expectedResponse =
-                        md5($a1.':'.$nonce[1].':'.$nc[1].':'.$cnonce[1].':'.$qop[1].':'.$a2);
+                            md5($a1 . ':' . $authorization['nonce'][1] . ':' . $nc[1] . ':' . $cnonce[1] . ':' . $qop[1] . ':' . $a2);
                 } else {
-                    $expectedResponse = md5($a1.':'.$nonce[1].':'.$a2);
+                    $expectedResponse = md5($a1 . ':' . $authorization['nonce'][1] . ':' . $a2);
                 }
 
-                if ($response[1] == $expectedResponse) {
-                    return $username;
+                if ($authorization['response'][1] == $expectedResponse) {
+                    return $authorization['username'];
                 }
             }
 
@@ -234,5 +225,21 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
         }
 
         return $this->send();
+    }
+
+    protected function _parseDigest()
+    {
+        $authorization = $_SERVER['PHP_AUTH_DIGEST'];
+
+        if (preg_match('/username="([^"]+)"/', $authorization, $username) &&
+                preg_match('/nonce="([^"]+)"/', $authorization, $nonce) &&
+                preg_match('/response="([^"]+)"/', $authorization, $response) &&
+                preg_match('/opaque="([^"]+)"/', $authorization, $opaque) &&
+                preg_match('/uri="([^"]+)"/', $authorization, $uri))
+        {
+            return compact('username', 'nonce', 'response', 'opaque', 'uri');
+        }
+
+        return false;
     }
 }
