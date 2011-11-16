@@ -207,9 +207,9 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
 
                 $a2 = md5($_SERVER['REQUEST_METHOD'] . ':' . $requestURI);
 
-                if (preg_match('/qop="?([^,\s"]+)/', $authorization, $qop) &&
-                        preg_match('/nc=([^,\s"]+)/', $authorization, $nc) &&
-                        preg_match('/cnonce="([^"]+)"/', $authorization, $cnonce)) {
+                if (preg_match('/qop="?([^,\s"]+)/', $_SERVER['PHP_AUTH_DIGEST'], $qop) &&
+                        preg_match('/nc=([^,\s"]+)/', $_SERVER['PHP_AUTH_DIGEST'], $nc) &&
+                        preg_match('/cnonce="([^"]+)"/', $_SERVER['PHP_AUTH_DIGEST'], $cnonce)) {
                     $expectedResponse =
                             md5($a1 . ':' . $authorization['nonce'][1] . ':' . $nc[1] . ':' . $cnonce[1] . ':' . $qop[1] . ':' . $a2);
                 } else {
