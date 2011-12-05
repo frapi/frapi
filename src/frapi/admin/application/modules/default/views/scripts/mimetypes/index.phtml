@@ -1,0 +1,54 @@
+<div style="float: left"><form id="filter-form"><?php echo $this->tr->_('FILTER'); ?>: <input name="filter" id="filter" value="" maxlength="30" size="30" type="text"></form></div>
+<br /><br /><br /><br /><br />
+
+    <table id="list">
+     <thead>
+      <tr>
+        <th><?php echo $this->tr->_('MIMETYPE'); ?></th>
+        <th><?php echo $this->tr->_('OUTPUT_FORMAT'); ?></th>
+        <th><?php echo $this->tr->_('ACTION'); ?></th>
+      </tr>
+     </thead>
+     <tbody>
+<?php foreach ($this->data as $key => $d) : if (is_array($d) && !empty($d)) : ?>
+      <tr><?php echo $this->tr->_(''); ?>
+        <td><?php echo $d['mimetype']; ?></td>
+        <td><?php echo $d['output_format']; ?></td>
+        <td style="text-align: center;">
+            <a href="/mimetypes/edit/id/<?php echo $d['hash']; ?>"><?php echo $this->tr->_('EDIT'); ?></a> |
+            <?php
+            /**
+             * @todo Localize
+             */
+            ?>
+            <a href="/mimetypes/delete/id/<?php echo $d['hash']; ?>" onclick="return confirm('<?php echo $this->tr->_('MIMETYPE_CONFIRM_DELETE'); ?>');"><?php echo $this->tr->_('DELETE'); ?></a>
+        </td>
+      </tr>
+<?php endif; endforeach; ?>
+     </tbody>
+    </table>
+
+
+<script type="text/javascript">
+$(function() {
+    var t = $('table#list')
+    t.tablesorter({
+        sortList:[[0,0]],
+        widgets: ['zebra'],
+        dateFormat: 'dd.mm.yyyy',
+        headers: {
+            3: { sorter: false }
+        }
+    });
+
+
+  $("#filter").keyup(function() {
+    $.uiTableFilter(t, this.value);
+  })
+
+  $('#filter-form').submit(function(){
+    t.find("tbody > tr:visible > td:eq(1)").mousedown();
+    return false;
+  }).focus(); //Give focus to input field
+});
+</script>
