@@ -172,6 +172,24 @@ class Frapi_Output
         $this->setOutputAction($action);
         return $this;
     }
+    
+    public static function getMimeTypeMap()
+    {
+        try {
+            $cache = new Frapi_Internal();
+            $mimetypes = $cache->getConfiguration('mimetypes')->getAll('mimetype');
+        
+            $map = array();
+            foreach ($mimetypes as $mimetype) {
+                $map[$mimetype['mimetype']] = $mimetype['output_format'];
+            }
+        } catch (Exception $e) {
+            // No matter what happens for legacy reasons we fallback to the defaults
+            return false;
+        }
+        
+        return $map;
+    }
 
     /**
      * This method will use the desired type
