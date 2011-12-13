@@ -70,7 +70,7 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
      * @var boolean True or False.
      */
     public $passwordsHashed = true;
-	
+
 	/**
 	 * This variable contains the parsed digest data
 	 */
@@ -201,7 +201,7 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
     protected function _parseDigest($authorization)
     {
         if (preg_match('/username="([^"]+)"/', $authorization, $username) &&
-                preg_match('/nonce="([^"]+)"/', $authorization, $nonce) &&
+                preg_match('/[,| ]nonce="([^"]+)"/', $authorization, $nonce) &&
                 preg_match('/response="([^"]+)"/', $authorization, $response) &&
                 preg_match('/opaque="([^"]+)"/', $authorization, $opaque) &&
                 preg_match('/uri="([^"]+)"/', $authorization, $uri))
@@ -213,7 +213,7 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
 
         return false;
     }
-	
+
 	protected function _validateResponse($data)
 	{
 		$requestURI = $_SERVER['REQUEST_URI'];
@@ -222,10 +222,10 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
 		if (strpos($requestURI, '?') !== false) {
 			$requestURI = substr($requestURI, 0, strlen($this->digest['uri'][1]));
 		}
-		
+
 		if ($this->getOpaque() == $this->digest['opaque'][1] && $requestURI == $this->digest['uri'][1] &&
 			$this->getNonce() == $this->digest['nonce'][1]) {
-			
+
 			$passphrase = hash('md5', "{$this->digest['username']}:{$this->realm}:{$data}");
 
 			if ($this->passwordsHashed) {
