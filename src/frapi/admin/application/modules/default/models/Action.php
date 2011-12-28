@@ -11,6 +11,7 @@
  * to license@getfrapi.com so we can send you a copy immediately.
  *
  * @license   New BSD
+ * @copyright echolibre ltd.
  * @package   frapi-admin
  */
 class Default_Model_Action extends Lupin_Model
@@ -389,7 +390,7 @@ class Default_Model_Action extends Lupin_Model
             );
 
             $default = $class->getProperty('requiredParams');
-            if ($default->getDefaultValue()->getValue() != $properties) {
+            if (is_object($default) && ($default->getDefaultValue()->getValue() != $properties)) {
                 $default->setSourceDirty(true);
                 $class->setProperty($default->setDefaultValue($properties));
             }
