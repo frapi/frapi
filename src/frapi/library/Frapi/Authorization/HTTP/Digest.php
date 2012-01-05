@@ -141,10 +141,13 @@ class Frapi_Authorization_HTTP_Digest extends Frapi_Authorization implements Fra
     public function getNonce()
     {
         $time = ceil(time() / $this->nonceLife) * $this->nonceLife;
+        $remoteAddress = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? 
+            $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+
         return hash(
             'md5',
             date('Y-m-d H:i', $time) . ':' .
-                $_SERVER['REMOTE_ADDR'] . ':' .
+                $remoteAddress . ':' .
                 $this->secretKey
         );
     }
