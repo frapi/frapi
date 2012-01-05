@@ -18,7 +18,7 @@
  */
 
 // Define path to application directory
-define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
+define('ROOT_PATH', (getenv('FRAPI_ROOT_PATH') ? getenv('FRAPI_ROOT_PATH') : dirname(dirname(dirname(__FILE__)))));
 define('APPLICATION_PATH', ROOT_PATH . DIRECTORY_SEPARATOR .
        'admin' . DIRECTORY_SEPARATOR.'application');
 define('CONSOLE_CONTROLLERS_PATH', APPLICATION_PATH . DIRECTORY_SEPARATOR .
