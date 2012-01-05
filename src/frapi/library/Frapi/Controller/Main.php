@@ -152,6 +152,9 @@ class Frapi_Controller_Main
      * format. In order to add a new mimetype, add it's
      * mimetype name and then add it's output as the associated
      * value.
+     * 
+     * The list here is left for legacy installations. Defining mimetypes in the admin
+     * will override these once defined.
      *
      * @var array An array of mimetypes and their output types.
      */
@@ -498,6 +501,12 @@ class Frapi_Controller_Main
                 $_SERVER['CONTENT_TYPE'] :
                 null;
 
+        $mimetypes = Frapi_Output::getMimeTypeMap();
+        
+        if ($mimetypes) {
+            $this->mimeMaps = $mimetypes;
+        }
+        
         if(!empty($contentType) &&
            isset($this->mimeMaps[$contentType]) &&
            in_array($this->mimeMaps[$contentType], $this->allowedInputTypes)) {

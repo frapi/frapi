@@ -37,6 +37,13 @@ if ($pos !== false && $pos === $lpos) {
         <li<?php echo $item == '/errors/add' ? ' class="active"' : '' ?>><a href="/errors/add"><?php echo $this->tr->_('ADD_NEW_ERROR'); ?></a></li>
     <?php } elseif ($item == '/action') { ?>
         <li<?php echo $item == '/action/add' ? ' class="active"' : '' ?>><a href="/action/add"><?php echo $this->tr->_('ADD_NEW_ACTION'); ?></a></li>
+    <?php } elseif ($item == '/mimetypes') { ?>
+        <?php
+        /**
+         * @todo Localize
+         */
+        ?>
+        <li<?php echo $item == '/mimetypes/add' ? ' class="active"' : '' ?>><a href="/mimetypes/add"><?php echo $this->tr->_('ADD_NEW_MIMETYPE'); ?></a></li>
     <?php } ?>
 	</div>
     <?php endif; ?>
