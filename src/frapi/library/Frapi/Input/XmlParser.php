@@ -59,13 +59,13 @@ class Frapi_Input_XmlParser
         } catch(Exception $e) {
             $xmlErrors = libxml_get_errors();
 			
-			throw new Frapi_Exception(
-					'String could not be parsed as XML', 
-                     'INVALID_XML', 
-                     400, 
-                     'xml_parsing'
-					);
-             libxml_clear_errors();
+            throw new Frapi_Exception(
+                'String could not be parsed as XML', 
+                'INVALID_XML', 
+                400, 
+                'xml_parsing'
+            );
+            libxml_clear_errors();
         }
         
         $xmlRoot = $iterator->getName();
