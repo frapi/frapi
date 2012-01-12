@@ -357,7 +357,7 @@ class Frapi_Controller_Main
          */
         if (end($puts) == '' && !empty($inputFormat) || !empty($xmlJsonMatch)) {
             /* attempt to parse the input */
-            rewind($puts);
+            reset($puts);
             $requestBody = Frapi_Input_RequestBodyParser::parse(
                 $inputFormat,
                 $input
