@@ -45,6 +45,7 @@ class Frapi_Input_XmlParser
      *
      * @param string $xml
      * @return array An array mapped to the passed xml
+	 * @throws Frapi_Exception In case of Invalid XML
      */
     public static function arrayFromXml($xml)
     {
@@ -57,13 +58,14 @@ class Frapi_Input_XmlParser
             $iterator = new SimpleXMLIterator($xml);
         } catch(Exception $e) {
             $xmlErrors = libxml_get_errors();
-             return new Frapi_Exception(
-                     'String could not be parsed as XML', 
-                     'INVALID_XML', 
-                     400, 
-                     'xml_parsing'
-                     );
-             libxml_clear_errors();
+			
+            throw new Frapi_Exception(
+                'String could not be parsed as XML', 
+                'INVALID_XML', 
+                400, 
+                'xml_parsing'
+            );
+            libxml_clear_errors();
         }
         
         $xmlRoot = $iterator->getName();

@@ -41,13 +41,14 @@ class Frapi_Input_RequestBodyParser
                 break;
             case 'xml':
                 if(!empty($body)) {
-                    $parseResponse = Frapi_Input_XmlParser::arrayFromXml($body);
-                    if ($parseResponse instanceof Frapi_Exception) {
-                        throw new Frapi_Error('INVALID_REQUEST_BODY', $parseResponse->getMessage(), $parseResponse->getCode());
+                    try{
+                        $parseResponse = Frapi_Input_XmlParser::arrayFromXml($body);
+                        return $parseResponse;
+                    } catch( Frapi_Exception $e ){
+                        throw new Frapi_Error('INVALID_REQUEST_BODY', $e->getMessage(), $e->getCode());
                     }
-                    return $parseResponse;
                 }
-                break;
+            break;
             default:
                 break;
         }
