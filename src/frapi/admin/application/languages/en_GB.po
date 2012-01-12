@@ -29,6 +29,9 @@ msgstr "Dashboard"
 msgid "ACTIONS"
 msgstr "Actions"
 
+msgid "MIMETYPES"
+msgstr "Mimetypes"
+
 msgid "ERRORS"
 msgstr "Errors" 
 
@@ -142,6 +145,28 @@ msgstr "Development environment has been synchronized"
 
 msgid "ACTION_CONFIRM_DELETE"
 msgstr "Are you sure you want to delete this action?"
+
+# Mimetype section
+msgid "ADD_NEW_MIMETYPE"
+msgstr "Add new Mimetype"
+
+msgid "MIMETYPE_ADD_SUCCESS"
+msgstr "Mimetype (%s) added"
+
+msgid "MIMETYPE_UPDATE_SUCCESS"
+msgstr "Mimetype (%s) updated"
+
+msgid "MIMETYPE_DELETE"
+msgstr "Mimetype removed"
+
+msgid "MIMETYPE"
+msgstr "Mimetype"
+
+msgid "OUTPUT_FORMAT"
+msgstr "Output Format"
+
+msgid "MIMETYPE_CONFIRM_DELETE"
+msgstr "Are you sure you want to delete this mimetype?"
 
 # Error section
 msgid "ADD_NEW_ERROR"
