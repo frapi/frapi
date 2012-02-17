@@ -59,7 +59,7 @@ class Frapi_Router
     public function loadAndPrepareRoutes()
     {
         if ($routes = Frapi_Internal::getCached('Router.routes-prepared')) {
-           
+
 		   $this->setPreparedRoutes($routes);
         } else {
             $routes = array();
@@ -92,6 +92,10 @@ class Frapi_Router
         $optimizedRoutes = array();
         foreach ($routes as $action => $route) {
             $parsedRoute = self::parseSegments($route);
+            if (empty($parsedRoute[0])) {
+                $optimizedRoutes[current($parsedRoute)][] = array('segments' => array(), 'action' => $action);
+                continue;
+            }
             if ($parsedRoute[0][0] != ':') {
 
                 if (!isset($optimizedRoutes[current($parsedRoute)])) {
@@ -195,7 +199,7 @@ class Frapi_Router
      */
     public function setPreparedRoutes($routes)
     {
-		
+
         $this->preparedRoutes = $routes;
     }
 }
