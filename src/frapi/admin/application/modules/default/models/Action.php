@@ -183,13 +183,15 @@ class Default_Model_Action extends Lupin_Model
 
         $segments = Frapi_Router::parseSegments($data['route']);
         foreach ($segments as $key => $value) {
-            if ($key == 0) {
-                if (!preg_match('/^[a-z0-9\-\_\*]+$/', $value)) {
-                    throw new RuntimeException('Action route does not validate. Please ensure each part contains only alpha-numeric characters, underscores, dashes and colons.');
-                }
-            } else {
-                if (!preg_match('/^:?[a-z0-9\-\_\*]+$/', $value)) {
-                    throw new RuntimeException('Action route does not validate. Please ensure each part contains only alpha-numeric characters, underscores, dashes and colons.');
+            if (!empty($value)) {
+                if ($key == 0) {
+                    if (!preg_match('/^[a-z0-9\-\_\*]+$/', $value)) {
+                        throw new RuntimeException('Action route does not validate. Please ensure each part contains only alpha-numeric characters, underscores, dashes and colons.');
+                    }
+                } else {
+                    if (!preg_match('/^:?[a-z0-9\-\_\*]+$/', $value)) {
+                        throw new RuntimeException('Action route does not validate. Please ensure each part contains only alpha-numeric characters, underscores, dashes and colons.');
+                    }
                 }
             }
         }
