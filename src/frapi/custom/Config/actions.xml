@@ -81,5 +81,14 @@ HEAD: Retrieve the meta information relative to a sibling.&#13;
    <route>/collection/:resource/siblings/:sibling</route>
    <hash>836d88aacf5906048737893dd4dc0469e353dc33</hash>
   </action>
+  <action>
+   <name>Introduction</name>
+   <enabled>1</enabled>
+   <public>1</public>
+   <description></description>
+   <route>/</route>
+   <parameters></parameters>
+   <hash>29e39f311db4ca2ef7dacf8d8c493ef69aa29b61</hash>
+  </action>
  </actions>
 </frapi-config>
