@@ -1,1 +1,22 @@
 <?php echo $this->form; ?>
+<script type="text/javascript">
+$(document).ready(function() {
+    if ($('#mimetype').val() == '') {
+        $('#mimetype').val('text/:var');
+    }
+
+    $('#mimetype').focus(function() {
+        if ($('#mimetype').val() == 'text/:var') {
+            $(this).val('');
+        }
+    });
+
+    $('#mimetype').blur(function() {
+        if ($(this).val() == '') {
+            $(this).val('text/:var')
+        }
+    });
+
+    $('#output_format').after($("<p style='margin-left: 185px; margin-top: -2em; font-size: 10px'><em>You may use a :var instead of an <a href='/output'>output type</a>.</em></p>"))
+});
+</script>

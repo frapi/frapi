@@ -345,17 +345,44 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
             return true;
         }
 
+        $mimetypes = $this->parseMimeTypes();
+
         foreach($types as $type) {
             if (isset($this->mimeMaps[$type])) {
-                $mimeType     = $type;
                 $outputFormat = strtoupper($this->mimeMaps[$type]);
 
                 $this->setFormat(strtolower($outputFormat));
 
                 return array(
-                    'mimeType'     => $mimeType,
+                    'mimeType'     => $type,
                     'outputFormat' => $outputFormat
                 );
+            } else {
+                foreach ($mimetypes as $mimetype) {
+                    $matches = array();
+                    if (preg_match($mimetype['pattern'], $type, $matches)) {
+                        $return = array(
+                            'mimeType' => $type,
+                        );
+
+                        if ($mimetype['output_format'][0] == ':') {
+                            $format = substr($mimetype['output_format'], 1);
+                            if (!empty($matches[$format])) {
+                                $return['outputFormat'] = $matches[$format];
+                            } else {
+                                $return['outputFormat'] = self::DEFAULT_OUTPUT_FORMAT;
+                            }
+                        } else {
+                            $return['outputFormat'] = $mimetype['output_format'];
+                        }
+
+                        foreach ($mimetype['params'] as $param) {
+                            $return[$param] = $matches[$param];
+                        }
+
+                        return $return;
+                    }
+                }
             }
         }
 
@@ -391,6 +418,43 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         }
         krsort($acceptLowPriority);
         return array_merge($acceptHighPriority, $acceptLowPriority);
+    }
+
+    /**
+     * Parse mimetype for params
+     *
+     * @param string $mimetype
+     *
+     * @return array
+     */
+    protected function parseMimeTypes()
+    {
+        $cache = new Frapi_Internal();
+        $mimetypes = $cache->getConfiguration('mimetypes')->getAll('mimetype');
+
+        foreach($mimetypes as $mimetype) {
+            if (strpos($mimetype['mimetype'], ':') === false) {
+                continue;
+            }
+
+            $segments = preg_split("@/|\.|\+@", $mimetype['mimetype']);
+            $mimetype['mimetype'] = preg_quote($mimetype['mimetype']);
+
+            foreach ($segments as $segment) {
+                if ($segment[0] == ':') {
+                    $param = substr($segment, 1);
+                    $params[] = $param;
+                    $mimetype['mimetype'] = str_replace(preg_quote($segment), '(?P<' .preg_quote($param). '>.*?)', $mimetype['mimetype']);
+                }
+            }
+
+            // Don't add mimetypes that didn't have params
+            if (sizeof($params)) {
+                $patterns[] = $mimetype + array('pattern' => "@^{$mimetype['mimetype']}$@", 'params' => $params);
+            }
+        }
+
+        return $patterns;
     }
 }
 
