@@ -1,1 +1,22 @@
 <?php echo $this->form; ?>
+<script type="text/javascript" src="/js/ace/build/src/ace.js"></script>
+<script src="/js/ace/build/src/theme-textmate.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/ace/build/src/mode-markdown.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var textarea = $('#description').hide();
+        textarea.after($('<div id="editor" style="position: relative; width: 500px; height: 500px; font-size: 11px; line-height: 1.2em; letter-spacing: 0; background-color: #FFF"></div>'));
+
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/textmate");
+        var MarkdownMode = require("ace/mode/markdown").Mode;
+        editor.getSession().setMode(new MarkdownMode());
+        editor.getSession().setValue(textarea.val());
+        editor.getSession().setUseWrapMode(true);
+        editor.getSession().on('change', function(){
+            textarea.val(editor.getSession().getValue());
+        });
+
+        $('#editor').after($("<p style='margin-left: 185px; margin-top: -1em; font-size: 10px'><em>You may use <a href='http://michelf.com/projects/php-markdown/extra/' target='_blank'>extended markdown</a>.</em></p>"))
+    });
+</script>
