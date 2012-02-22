@@ -2,20 +2,28 @@
 <h2><?php echo $this->tr->_('EDITING_ACTION'); ?>: <?php echo $this->name; ?></h2>
 <br />
 <br />
-<form method="post" style="width: 750px;">
+<form method="post" style="width: 750px; line-height:  1.2em; letter-spacing: 0;">
   <input type="submit" value="<?php echo $this->tr->_('SAVE'); ?>" />
   <br />
-  <textarea id="edit" name="code" style="width: 750px; height: 500px; font-size: 11px;" ><?php echo $this->content; ?></textarea>
+  <textarea name="code" style="position: relative; width: 687px; margin-left: 45px; height: 500px; font-size: 11px; margin-top: 35px; font-family: 'Monaco','Menlo','Ubuntu Mono','Droid Sans Mono','Consolas',monospace; font-size: 11px;"><?php echo $this->content; ?></textarea>
+  <div id="editor" style="position: relative; width: 750px; height: 500px; font-size: 11px; margin-top: 35px; background-color: #FFF"></div>
   <br /><br /><br />
 
   <input type="submit" value="<?php echo $this->tr->_('SAVE'); ?>" />
 </form>
+<script type="text/javascript" src="/js/ace/build/src/ace.js"></script>
+ <script src="/js/ace/build/src/theme-textmate.js" type="text/javascript" charset="utf-8"></script>
+ <script src="/js/ace/build/src/mode-php.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-window.onBespinLoad = function() {
-    var edit = document.getElementById('edit');
-    bespin.useBespin(edit, {
-        stealFocus: true,
-        syntax: 'php'
-    });
-};
+    window.onload = function() {
+        var editor = ace.edit("editor");
+        var textarea = $('textarea[name="code"]').hide();
+        editor.setTheme("ace/theme/textmate");
+        var PHPMode = require("ace/mode/php").Mode;
+        editor.getSession().setMode(new PHPMode());
+        editor.getSession().setValue(textarea.val());
+        editor.getSession().on('change', function(){
+            textarea.val(editor.getSession().getValue());
+        });
+    };
 </script>
