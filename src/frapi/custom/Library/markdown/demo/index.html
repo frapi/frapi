@@ -1,0 +1,43 @@
+﻿<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>PHP Markdown Extra Extended Test Page</title>
+	<meta name="author" content="Egil Hansen - http://egilhansen.com">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css?v=4">
+	<link rel="stylesheet" href="css/libs/sunburst.css" />
+</head>
+<body>
+	<div id="container">
+		<header>
+			<h1>PHP Markdown Extra Extended Test Page</h1>
+		</header>		
+		<div class="column">
+			<h2>Markdown Input</h2>
+			<form>				
+				<div id="input" class="content-area"><textarea name="markdown" tabindex="1"></textarea></div>
+				<div>
+					<button type="submit">Submit</button>
+					<button type="reset">Reset</button>
+                    <span class="feedback" id="submit-count">#0</span> @ <time class="feedback" id="last-submit"></time>
+				</div>			
+			</form>
+		</div>
+		<div class="column">
+			<h2>Markdown Output</h2>
+			<div id="result" class="content-area"></div>
+		</div>
+		<div class="column">
+			<h2>HTML Output</h2>
+			<pre class="content-area prettyprint"><code id="rawoutput" class="language-html"></code></pre>
+		</div>
+	</div>
+	<script src="js/libs/jquery-1.6.2.min.js"></script>      
+	<script src="js/libs/jquery.cookie.js"></script>	
+	<script src="js/libs/prettify.js"></script>
+	<script src="js/script.js"></script>
+	
+</body>
+</html>
