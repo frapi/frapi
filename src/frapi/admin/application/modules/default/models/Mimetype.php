@@ -68,7 +68,7 @@ class Default_Model_Mimetype extends Lupin_Model
         // Validate the mimetype doesn't already exist and is valid
         if (in_array($data['mimetype'], $this->getList())) {
             throw new RuntimeException('Mimetype already exists.');
-        } else if (!preg_match('/^[a-z]+\/[a-z]([a-z0-9\-\.]+)?(\+[a-z0-9\-\.]+)?$/', $data['mimetype'])) {
+        } else if (!preg_match('/^:?[a-z]+\/:?[a-z]([:a-z0-9\-\.]+)?(\+[:a-z0-9\-\.]+)?$/', $data['mimetype'])) {
             throw new RuntimeException('Mimetype does not validate.');
         }
         

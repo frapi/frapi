@@ -61,6 +61,13 @@ class Frapi_Action
     protected $params;
 
     /**
+     * The parameters passed in via the Accept header
+     *
+     * @var array $params
+     */
+    protected $acceptParams;
+
+    /**
      * Those are the files uploaded to the server.
      *
      * @var mixed $params  The values of the $_FILES variable
@@ -142,6 +149,17 @@ class Frapi_Action
         $this->action = isset($params['action']) ? $params['action'] : null;
 
         $this->params = $params;
+        return $this;
+    }
+
+    /**
+     * Set the Accept header parameters
+     *
+     * @param array $params The params parsed from the Accept header
+     */
+    public function setAcceptParams(array $params)
+    {
+        $this->acceptParams = $params;
         return $this;
     }
 
@@ -258,6 +276,19 @@ class Frapi_Action
     }
 
     /**
+     * Return all the Accept parameters
+     *
+     * Return all the accept parameters we are currently holding
+     * in $this->acceptParams
+     *
+     * @return array An array of request parameters and files maybe.
+     */
+    public function getAcceptParams()
+    {
+        return $this->acceptParams;
+    }
+
+    /**
      * Return the files uploaded
      *
      * This method is exactly like $this->getParams() however
@@ -274,6 +305,40 @@ class Frapi_Action
     /**
      * This method will return the value of the
      * parameter. If it's not set then it returns null.
+     *
+     * @param string $key        The name of the param key
+     * @param string $type       The type of casting to do when returning
+     *                           the requested parameter
+     * @param Mixed  $default    The default value, if param is empty.
+     * @param String $error_name The error name to raise, as last resort.
+     *
+     * @return Mixed String when the key is valid, ErrorContext if not valid, or null if not set.
+     */
+    protected function getParam($key, $type = self::TYPE_STRING, $default = null, $error_name = null)
+    {
+         return $this->getByKey($this->params, $key, $type, $default, $error_name);
+    }
+
+    /**
+     * This method will return the value of the Accepts
+     * parameter. If it's not set then it returns null.
+     *
+     * @param string $key        The name of the param key
+     * @param string $type       The type of casting to do when returning
+     *                           the requested parameter
+     * @param Mixed  $default    The default value, if param is empty.
+     * @param String $error_name The error name to raise, as last resort.
+     *
+     * @return Mixed String when the key is valid, ErrorContext if not valid, or null if not set.
+     */
+    protected function getAcceptParam($key, $type = self::TYPE_STRING, $default = null, $error_name = null)
+    {
+         return $this->getByKey($this->acceptParams, $key, $type, $default, $error_name);
+    }
+
+    /**
+     * This method will return the value from the array, by key.
+     * If it's not set then it returns null.
      *
      * The function is coded such that FALSE is known to indicate
      * non-existence of param in $params, NULL indicates that
@@ -294,9 +359,9 @@ class Frapi_Action
      *
      * @return Mixed String when the key is valid, ErrorContext if not valid, or null if not set.
      */
-    protected function getParam($key, $type = self::TYPE_STRING, $default = null, $error_name = null)
+    protected function getByKey(array $array, $key, $type = self::TYPE_STRING, $default = null, $error_name = null)
     {
-        $param = isset($this->params[$key]) ? $this->params[$key] : $default;
+        $param = isset($this->acceptParams[$key]) ? $this->acceptParams[$key] : $default;
 
         switch ($type) {
             case self::TYPE_FILE;
@@ -357,5 +422,16 @@ class Frapi_Action
     protected function hasParam($key)
     {
         return isset($this->params[$key]);
+    }
+
+    /**
+     * This method checks whether an Accept param exists or not.
+     *
+     * @param string $key The name of the param key
+     * @return bool Whether the parameter exists or not
+     */
+    protected function hasAcceptParam($key)
+    {
+        return isset($this->acceptParams[$key]);
     }
 }
