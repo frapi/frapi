@@ -241,7 +241,8 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         // The state of the action context is now at a state where it can be used.
         $e = $this->getActionInstance($this->getAction())
                   ->setActionParams($this->getParams())
-                  ->setActionFiles($this->getFiles());
+                  ->setActionFiles($this->getFiles())
+                  ->setAcceptParams($this->options);
 
         return $this;
     }
@@ -348,21 +349,23 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         $mimetypes = $this->parseMimeTypes();
 
         foreach($types as $type) {
-            if (isset($this->mimeMaps[$type])) {
-                $outputFormat = strtoupper($this->mimeMaps[$type]);
+            if (isset($this->mimeMaps[$type['mimetype']])) {
+                $outputFormat = strtoupper($this->mimeMaps[$type['mimetype']]);
 
                 $this->setFormat(strtolower($outputFormat));
 
-                return array(
-                    'mimeType'     => $type,
+                $return = $type['params'] + array(
+                    'mimeType'     => $type['mimetype'],
                     'outputFormat' => $outputFormat
                 );
+
+                return $return;
             } else {
                 foreach ($mimetypes as $mimetype) {
                     $matches = array();
-                    if (preg_match($mimetype['pattern'], $type, $matches)) {
+                    if (preg_match($mimetype['pattern'], $type['mimetype'], $matches)) {
                         $return = array(
-                            'mimeType' => $type,
+                            'mimeType' => $type['mimetype'],
                         );
 
                         if ($mimetype['output_format'][0] == ':') {
@@ -386,7 +389,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
             }
         }
 
-        return false;
+        return array();
     }
 
     /**
@@ -404,20 +407,48 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
 
         $types = explode(',', $_SERVER['HTTP_ACCEPT']);
         foreach($types AS $type) {
-            $typeMatch = preg_match('/([a-z\*]+\/[a-z\+\-\*]+)(?:;(?:q|level)=([0-9\.]+))?/i', $type, $typeComponents);
+            $typeMatch = preg_match('/(?P<mimetype>[a-z\*]+\/[a-z\+\-\*]+)(?:(?:;)(?P<params>.*?$))?/i', $type, $typeComponents);
             if(!$typeMatch) {
                 continue;
             }
-            $priority = isset($typeComponents[2]) ? $typeComponents[2] : 1;
+
+            $params = array();
+            if (isset($typeComponents['params'])) {
+                $params = $this->parseAcceptHeaderParams($typeComponents['params']);
+            }
+
+            $priority = isset($params['q']) ? $params['q'] : 1;
+
+            $mimetype = array('mimetype' => $typeComponents['mimetype'], 'params' => $params);
 
             if($priority === 1) {
-                $acceptHighPriority[] = $type;
+                $acceptHighPriority[] = $mimetype;
             } else {
-                $acceptLowPriority[(10*$priority)] = $typeComponents[1];
+                $acceptLowPriority[(10*$priority)] = $mimetype;
             }
         }
         krsort($acceptLowPriority);
         return array_merge($acceptHighPriority, $acceptLowPriority);
+    }
+
+    /**
+     * Parse accept headers params, e.g. charset=utf-8
+     *
+     * @param string $params
+     */
+    protected function parseAcceptHeaderParams($params)
+    {
+        $segments = explode(";", $params);
+
+        $params = array();
+        foreach ($segments as $segment) {
+            $param = array();
+            preg_match('/^(?P<name>.+?)=(?P<quoted>"|\')?(?P<value>.*?)(?:\k<quoted>)?$/', $segment, $param);
+
+            $params[$param['name']] = $param['value'];
+        }
+
+        return $params;
     }
 
     /**
@@ -431,6 +462,8 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
     {
         $cache = new Frapi_Internal();
         $mimetypes = $cache->getConfiguration('mimetypes')->getAll('mimetype');
+
+        $patterns = array();
 
         foreach($mimetypes as $mimetype) {
             if (strpos($mimetype['mimetype'], ':') === false) {
