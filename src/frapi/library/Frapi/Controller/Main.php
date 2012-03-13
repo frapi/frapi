@@ -189,13 +189,13 @@ class Frapi_Controller_Main
      * @see Security
      * @see ErrorContainer
      * @see Authorization
-     * @see Frapi_Router
+     * @params object $customAuthorization optional custom authorization extending Frapi_Authorization
      */
-    public function __construct()
+    public function __construct($customAuthorization=null)
     {
         try {
             $this->security      = new Frapi_Security();
-            $this->authorization = new Frapi_Authorization();
+            $this->authorization = ($customAuthorization instanceof Frapi_Authorization) ? $customAuthorization : new Frapi_Authorization();
             $this->router        = new Frapi_Router();
 
 
