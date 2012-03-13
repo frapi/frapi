@@ -464,7 +464,7 @@ class Frapi_Controller_Main
     {
         if ($format) {
             $typeValid = Frapi_Rules::validateOutputType($format);
-            $this->format = $format;
+            $this->format = strtolower($format);
 
             $mimetypes = array_flip($this->mimeMaps);
             return $mimetypes[$this->format];
