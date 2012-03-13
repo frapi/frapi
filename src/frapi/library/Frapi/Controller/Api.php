@@ -48,10 +48,11 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      * @see $this->setFormat()
      * @see Error
      * @uses Error
+     * @param Frapi_Authorization $customAuthorization optional custom authorization
      */
-    public function __construct()
+    public function __construct($customAuthorization=null)
     {
-        parent::__construct();
+        parent::__construct($customAuthorization);
         $this->options = $this->detectAndSetMimeType();
     }
 
