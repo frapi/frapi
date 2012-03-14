@@ -465,6 +465,9 @@ class Frapi_Controller_Main
         if ($format) {
             $typeValid = Frapi_Rules::validateOutputType($format);
             $this->format = $format;
+
+            $mimetypes = array_flip($this->mimeMaps);
+            return $mimetypes[$this->format];
         } else {
             throw new Frapi_Error (
                 Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_NAME,

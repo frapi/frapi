@@ -345,8 +345,10 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         }
 
         if ($this->formatSetByExtension) {
-            $this->setformat(strtolower($this->format));
-            return true;
+            return array(
+                'mimeType' => $this->setformat(strtolower($this->format)),
+                'outputFormat' => $this->format,
+            );
         }
 
         $mimetypes = $this->parseMimeTypes();
