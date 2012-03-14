@@ -80,6 +80,7 @@ class Action_Resource extends Frapi_Action implements Frapi_Action_Interface
                 )
             ),
         );
+
         return $this->toArray();
     }
 
