@@ -243,7 +243,10 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         $e = $this->getActionInstance($this->getAction())
                   ->setActionParams($this->getParams())
                   ->setActionFiles($this->getFiles())
-                  ->setAcceptParams($this->options);
+                  ->setAcceptParams(
+                      isset($this->options) && is_array($this->options) 
+                      ? $this->options : array()
+                  );
 
         return $this;
     }
