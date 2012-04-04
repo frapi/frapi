@@ -4,9 +4,10 @@ require dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'library/Frapi/AllFil
 set_error_handler(array('Frapi_Error', 'errorHandler'), E_ALL);
 
 try {
-    if(!isset($customAuthorization))
+    if(!isset($customAuthorization)) {
         $customAuthorization = null;
-    
+    }
+
     $controller = new Frapi_Controller_Api($customAuthorization);
 
     try {
