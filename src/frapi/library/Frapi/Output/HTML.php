@@ -26,14 +26,14 @@ class Frapi_Output_HTML_Exception extends Frapi_Output_Exception {}
  */
 class Frapi_Output_HTML extends Frapi_Output implements Frapi_Output_Interface
 {
-    
+
     /**
      * XML Mime Type
      *
      * @var string
      */
     public $mimeType = 'text/html';
-    
+
     /**
      * Populate the Output
      *
@@ -43,13 +43,13 @@ class Frapi_Output_HTML extends Frapi_Output implements Frapi_Output_Interface
      *
      * @param Mixed $response Most of the times an array but could be and stdClass
      * @param String $customTemplate The custom template file to use instead of the default one.
-     *                        
+     *
      * @return Object $This object
      */
     public function populateOutput($data, $customTemplate = false)
     {
         $directory = CUSTOM_OUTPUT . DIRECTORY_SEPARATOR . 'html';
-        
+
         $file      = $directory . DIRECTORY_SEPARATOR .
                      ucfirst(strtolower($this->action)) . '.html.tpl';
 
@@ -57,7 +57,7 @@ class Frapi_Output_HTML extends Frapi_Output implements Frapi_Output_Interface
              $file = $directory . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR .
                      $customTemplate . '.html.tpl';
          }
-         
+
         $html       = '';
 
         if (file_exists($file)) {
@@ -67,7 +67,7 @@ class Frapi_Output_HTML extends Frapi_Output implements Frapi_Output_Interface
             ob_end_clean();
             $this->response = $html;
             return $this;
-            
+
         } elseif ($this->action == 'defaultError') {
             $directory = LIBRARY_OUTPUT . DIRECTORY_SEPARATOR . 'html';
             $file      = $directory . DIRECTORY_SEPARATOR . 'Defaulterror.html.tpl';
@@ -76,19 +76,18 @@ class Frapi_Output_HTML extends Frapi_Output implements Frapi_Output_Interface
             include $file;
             $xml = ob_get_contents();
             ob_end_clean();
-            
+
             $this->response = $xml;
             return $this;
         }
 
         throw new Frapi_Output_HTML_Exception(
-            'If you want HTML, you need to create ' . ucfirst($this->action) . 
-            '.html.tpl in the ' . CUSTOM_OUTPUT . '/html directory.',
-            
+            'Template not found. For more information on custom templates, see <a href="http://frapi.github.com/developing/custom-templates.html">the frapi documentation.</a>',
+
             'MISSING_HTML_TEMPLATE'
         );
     }
-    
+
     /**
      * Execute the output
      *

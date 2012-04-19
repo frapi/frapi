@@ -172,22 +172,34 @@ class Frapi_Output
         $this->setOutputAction($action);
         return $this;
     }
-    
+
     public static function getMimeTypeMap()
     {
         try {
             $cache = new Frapi_Internal();
             $mimetypes = $cache->getConfiguration('mimetypes')->getAll('mimetype');
-        
+
+            $outputs = $cache->getConfiguration('outputs')->getAll('output');
+
+            $disabled = array();
+            foreach ($outputs as $output) {
+                if ($output['enabled'] == 0) {
+                    $disabled[strtolower($output['name'])] = true;
+                }
+            }
+
             $map = array();
             foreach ($mimetypes as $mimetype) {
+                if (isset($disabled[strtolower($mimetype['output_format'])])) {
+                    continue;
+                }
                 $map[$mimetype['mimetype']] = $mimetype['output_format'];
             }
         } catch (Exception $e) {
             // No matter what happens for legacy reasons we fallback to the defaults
             return false;
         }
-        
+
         return $map;
     }
 
