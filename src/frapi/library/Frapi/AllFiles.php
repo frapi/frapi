@@ -19,7 +19,8 @@ if (!defined('ROOT_PATH')) {
     define('ROOT_PATH',         dirname(dirname(dirname(__FILE__))));
 }
 
-define('CUSTOM_PATH',       ROOT_PATH . DIRECTORY_SEPARATOR . 'custom');
+define('DEFAULT_CUSTOM_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'custom');
+define('CUSTOM_PATH', (!isset($_SERVER['FRAPI_CUSTOM_PATH']) || !file_exists($_SERVER['FRAPI_CUSTOM_PATH'])) ? DEFAULT_CUSTOM_PATH : $_SERVER['FRAPI_CUSTOM_PATH']);
 define('LIBRARY_ROOT_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'Frapi');
 define('EXTRA_LIBRARIES_ROOT_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR);
 
