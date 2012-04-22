@@ -140,7 +140,7 @@ class ActionController extends Lupin_Controller_Base
         $name       = $actionData['name'];
         $file       = strtolower($name) . '.php';
 
-        $dir = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
+        $dir = CUSTOM_PATH . DIRECTORY_SEPARATOR . 'Action';
         $file = $dir . DIRECTORY_SEPARATOR . ucfirst($file);
 
         if ($this->_request->isPost()) {
@@ -263,7 +263,7 @@ class ActionController extends Lupin_Controller_Base
         $this->_helper->viewRenderer->setNoRender();
         $model = new Default_Model_Action;
 
-        $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
+        $dir  = CUSTOM_PATH . DIRECTORY_SEPARATOR . 'Action';
         if (!is_writable($dir)) {
             $this->addMessage(sprintf($this->tr->_('ACTION_WRITE_ERROR'), $dir));
             $this->_redirect('/action');
@@ -276,7 +276,7 @@ class ActionController extends Lupin_Controller_Base
     public function testAction()
     {
         $name = 'Testing1';
-        $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
+        $dir  = CUSTOM_PATH . DIRECTORY_SEPARATOR . 'Action';
         $file = $dir . DIRECTORY_SEPARATOR . $name . '.php';
         require_once $file;
 

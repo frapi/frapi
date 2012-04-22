@@ -16,15 +16,15 @@
 class Default_Model_Output extends Lupin_Model
 {
     protected $config;
-    
+
     public function __construct()
     {
         $this->config = new Lupin_Config_Xml('outputs');
     }
-    
+
     public function sync()
     {
-        $path = ROOT_PATH . '/library/Frapi/Output/';
+        $path = LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Output' . DIRECTORY_SEPARATOR;
         $dir  = new DirectoryIterator($path);
         $data = array();
         foreach ($dir as $d) {
@@ -63,7 +63,7 @@ class Default_Model_Output extends Lupin_Model
         try {
             $this->config->update('output', 'name', $id, array('default' => '1'));
         } catch (Exception $e) {}
-        
+
         $this->refreshAPCCache();
     }
 
@@ -79,7 +79,7 @@ class Default_Model_Output extends Lupin_Model
         try {
             $this->config->update('output', 'name', $id, array('enabled' => '1'));
         } catch (Exception $e) {}
-        
+
         $this->refreshAPCCache();
     }
 
@@ -89,7 +89,7 @@ class Default_Model_Output extends Lupin_Model
         try {
             $this->config->update('output', 'name', $id, array('enabled' => '0'));
         } catch (Exception $e) {}
-        
+
         $this->refreshAPCCache();
     }
 
@@ -103,7 +103,7 @@ class Default_Model_Output extends Lupin_Model
         $configModel = new Default_Model_Configuration();
         $server = $configModel->getKey('api_url');
         $hash = isset($server) ? hash('sha1', $server) : '';
-        
+
         $cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
 
         $cache->delete($hash . '-Output.default-format');
