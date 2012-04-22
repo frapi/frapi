@@ -342,7 +342,7 @@ class Default_Model_Action extends Lupin_Model
             }
 
             $name = ucfirst(strtolower($a['name']));
-            $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
+            $dir  = CUSTOM_PATH . DIRECTORY_SEPARATOR . 'Action';
 
             $file = $dir . DIRECTORY_SEPARATOR . $name . '.php';
 

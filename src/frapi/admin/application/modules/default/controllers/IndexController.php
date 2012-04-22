@@ -27,7 +27,7 @@ class IndexController extends Lupin_Controller_Base
     /**
      * Index action
      *
-     * The main index does nothing special. it verifies whether or not the 
+     * The main index does nothing special. it verifies whether or not the
      * setup can be ran by verifying the permissions on the custom directory
      * emits meesages when it's not.
      *
@@ -39,13 +39,13 @@ class IndexController extends Lupin_Controller_Base
         $user   = get_current_user();
 
         $dir = Zend_Registry::get('localConfigPath');
-        
+
         if (!is_writable($dir)) {
             $configPathMessage = $this->tr->_('ACTION_WARNING_CONFIG');
             $issues['config-path'] = sprintf($configPathMessage, $dir, $user);
         }
-        
-        $dir    = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
+
+        $dir    = CUSTOM_PATH . DIRECTORY_SEPARATOR . 'Action';
 
         if (!is_writable($dir)) {
             $actionPathMessage = $this->tr->_('ACTION_WARNING_ACTION');
@@ -53,6 +53,6 @@ class IndexController extends Lupin_Controller_Base
         }
 
         $this->view->issues = $issues;
-        
+
     }
 }

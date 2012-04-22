@@ -193,7 +193,7 @@ class Console_ActionController extends Zend_Controller_Action
     {
         $this->_helper->viewRenderer->setViewSuffix('txt');
 
-        $dir  = ROOT_PATH . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR . 'Action';
+        $dir  = CUSTOM_PATH . DIRECTORY_SEPARATOR . 'Action';
 
         if (!is_writable($dir)) {
             $this->view->message = $this->tr->_('ACTION_WRITE_ERROR', $dir) . PHP_EOL;
