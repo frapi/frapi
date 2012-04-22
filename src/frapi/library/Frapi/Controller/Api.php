@@ -344,7 +344,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
         $types = $this->parseAcceptHeader();
 
         if(empty($types)) {
-            return false;
+            return array('mimeType' => false, 'outputFormat' => false);
         }
 
         if ($this->formatSetByExtension) {
@@ -397,7 +397,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
             }
         }
 
-        return array();
+        return array('mimeType' => false, 'outputFormat' => false);
     }
 
     /**
