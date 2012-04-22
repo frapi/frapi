@@ -1,0 +1,9 @@
+language: php
+php:
+  - 5.3
+  - 5.4
+script: cd src/frapi/tests && phpunit -c phpunit.xml
+before_script:
+  - ./src/frapi/tests/travis-ci/install-apc.sh 
+notifications:
+  irc: "irc.freenode.org#frapi"
