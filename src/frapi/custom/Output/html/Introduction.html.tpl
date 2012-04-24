@@ -6,33 +6,45 @@ function _makeAnchor($string)
     return preg_replace('/[^a-zA-Z0-9_\-]+/', '', $string);
 }
 
+function _sortActions($a, $b)
+{
+    if ($a['route'] == '/') {
+       return -1;
+    }
+    return ($a['name'] < $b['name']) ? -1 : 1;
+}
+
+function _sortErrors($a, $b)
+{
+    return ($a['http_code'] . $a['name'] < $b['http_code'] . $b['name']) ? -1 : 1;
+}
+
+function _sortOutputs($a, $b)
+{
+    if ($a['default'] == '1') {
+        return -1;
+    }
+    return ($a['name'] < $b['name']) ? -1 : 1;
+}
+
+function _sortMimetypes($a, $b)
+{
+    return ($a['output_format'] < $b['output_format']) ? -1 : 1;
+}
+
 $internal = new Frapi_Internal();
 $actions = $internal->getConfiguration('actions')->getAll('action');
 $errors = $internal->getConfiguration('errors')->getAll('error');
 $outputs = $internal->getConfiguration('outputs')->getAll('output');
 $mimetypes = $internal->getConfiguration('mimetypes')->getAll('mimetype');
 
-usort($actions, function($a, $b) {
-    if ($a['route'] == '/') {
-       return -1;
-    }
-    return ($a['name'] < $b['name']) ? -1 : 1;
-});
+usort($actions, '_sortActions');
 
-usort($errors, function($a, $b) {
-    return ($a['http_code'] . $a['name'] < $b['http_code'] . $b['name']) ? -1 : 1;
-});
+usort($errors, '_sortErrors');
 
-usort($outputs, function($a, $b) {
-    if ($a['default'] == '1') {
-        return -1;
-    }
-    return ($a['name'] < $b['name']) ? -1 : 1;
-});
+usort($outputs, '_sortOutputs');
 
-usort($mimetypes, function($a, $b) {
-    return ($a['output_format'] < $b['output_format']) ? -1 : 1;
-});
+usort($mimetypes, '_sortMimetypes');
 
 foreach ($mimetypes as $mimetype) {
     $grouped[$mimetype['output_format']][] = $mimetype['mimetype'];
