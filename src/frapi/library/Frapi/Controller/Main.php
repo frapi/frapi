@@ -152,7 +152,7 @@ class Frapi_Controller_Main
      * format. In order to add a new mimetype, add it's
      * mimetype name and then add it's output as the associated
      * value.
-     *
+     * 
      * The list here is left for legacy installations. Defining mimetypes in the admin
      * will override these once defined.
      *
@@ -257,7 +257,6 @@ class Frapi_Controller_Main
                     ? $format : $setFormat
                 );
             } catch (Frapi_Exception $fex) {
-                /* @todo HTTP/1.1 412 Precondition Failed */
                 $this->setFormat($this->getDefaultFormatFromConfiguration());
             }
 
@@ -343,17 +342,17 @@ class Frapi_Controller_Main
             $xmlJsonMatch = preg_grep('/\<|\{/i', array_keys($puts));
             $inputFormat = $this->getFormat();
         }
-
+        
         /**
          * When doing parse_str("{json:string}") it creates an array like:
          * array(
          *  "{json:string}" => ""
          * )
-         *
+         * 
          * If args are also present along with the body, they are in the array
          * before the body.
-         *
-         * Checks if the last argument is an empty string, this + inputForm is
+         * 
+         * Checks if the last argument is an empty string, this + inputForm is 
          * indicative of the body needing parsing.
          */
         if (end($puts) == '' && !empty($inputFormat) || !empty($xmlJsonMatch)) {
@@ -363,7 +362,7 @@ class Frapi_Controller_Main
                 $inputFormat,
                 $input
             );
-
+            
             if (!empty($requestBody)) {
                 $rootElement = array_keys($requestBody);
 
@@ -463,12 +462,6 @@ class Frapi_Controller_Main
      */
     protected function setFormat($format = false)
     {
-        $mimetypes = Frapi_Output::getMimeTypeMap();
-
-        if ($mimetypes) {
-            $this->mimeMaps = $mimetypes;
-        }
-
         if ($format) {
             $typeValid = Frapi_Rules::validateOutputType($format);
             $this->format = strtolower($format);
@@ -481,28 +474,6 @@ class Frapi_Controller_Main
                 Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_MSG,
                 Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_NO
             );
-        }
-    }
-
-    protected function setFormatByExtension($extension = false)
-    {
-        if ($extension == false) {
-            throw new Frapi_Error (
-                Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_NAME,
-                Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_MSG,
-                Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_NO
-            );
-        }
-
-        $cache = new Frapi_Internal();
-
-        $outputs = $cache->getConfiguration('outputs')->getAll('output');
-
-
-        foreach ($outputs as $output) {
-            if (in_array(strtolower($extension), $output['extensions'])) {
-                return $output['mimetype'];
-            }
         }
     }
 
@@ -547,12 +518,16 @@ class Frapi_Controller_Main
                 $_SERVER['CONTENT_TYPE'] :
                 null;
 
-        $mimetypes = Frapi_Output::getMimeTypeMap() + $this->mimeMaps;
-
+        $mimetypes = Frapi_Output::getMimeTypeMap();
+        
+        if ($mimetypes) {
+            $this->mimeMaps = $mimetypes;
+        }
+        
         if(!empty($contentType) &&
-           isset($mimetypes[$contentType]) &&
-           in_array($mimetypes[$contentType], $this->allowedInputTypes)) {
-            $this->inputFormat = $mimetypes[$contentType];
+           isset($this->mimeMaps[$contentType]) &&
+           in_array($this->mimeMaps[$contentType], $this->allowedInputTypes)) {
+            $this->inputFormat = $this->mimeMaps[$contentType];
         }
 
     }

@@ -339,8 +339,6 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      */
     public function detectAndSetMimeType()
     {
-        $mimetypes = Frapi_Output::getMimeTypeMap();
-
         $types = $this->parseAcceptHeader();
 
         if(empty($types)) {
@@ -349,16 +347,16 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
 
         if ($this->formatSetByExtension) {
             return array(
-                'mimeType' => $this->setFormatByExtension($this->format),
+                'mimeType' => $this->setformat(strtolower($this->format)),
                 'outputFormat' => $this->format,
             );
         }
 
-        $patterns = $this->getMimeTypePatterns();
+        $mimetypes = $this->parseMimeTypes();
 
         foreach($types as $type) {
-            if (isset($mimetypes[$type['mimetype']])) {
-                $outputFormat = strtoupper($mimetypes[$type['mimetype']]);
+            if (isset($this->mimeMaps[$type['mimetype']])) {
+                $outputFormat = strtoupper($this->mimeMaps[$type['mimetype']]);
 
                 $this->setFormat(strtolower($outputFormat));
 
@@ -369,25 +367,25 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
 
                 return $return;
             } else {
-                foreach ($patterns as $pattern) {
+                foreach ($mimetypes as $mimetype) {
                     $matches = array();
-                    if (preg_match($pattern['pattern'], $type['mimetype'], $matches)) {
+                    if (preg_match($mimetype['pattern'], $type['mimetype'], $matches)) {
                         $return = array(
                             'mimeType' => $type['mimetype'],
                         );
 
-                        if ($pattern['output_format'][0] == ':') {
-                            $format = substr($pattern['output_format'], 1);
+                        if ($mimetype['output_format'][0] == ':') {
+                            $format = substr($mimetype['output_format'], 1);
                             if (!empty($matches[$format])) {
                                 $return['outputFormat'] = $matches[$format];
                             } else {
                                 $return['outputFormat'] = self::DEFAULT_OUTPUT_FORMAT;
                             }
                         } else {
-                            $return['outputFormat'] = $pattern['output_format'];
+                            $return['outputFormat'] = $mimetype['output_format'];
                         }
 
-                        foreach ($pattern['params'] as $param) {
+                        foreach ($mimetype['params'] as $param) {
                             $return[$param] = $matches[$param];
                         }
 
@@ -415,7 +413,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
 
         $types = explode(',', $_SERVER['HTTP_ACCEPT']);
         foreach($types AS $type) {
-            $typeMatch = preg_match('/(?P<mimetype>[a-z\*]+\/[a-z0-9\+\-\*\.]+)(?:(?:;)(?P<params>.*?$))?/i', $type, $typeComponents);
+            $typeMatch = preg_match('/(?P<mimetype>[a-z\*]+\/[a-z\+\-\*]+)(?:(?:;)(?P<params>.*?$))?/i', $type, $typeComponents);
             if(!$typeMatch) {
                 continue;
             }
@@ -466,7 +464,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
      *
      * @return array
      */
-    protected function getMimeTypePatterns()
+    protected function parseMimeTypes()
     {
         $cache = new Frapi_Internal();
         $mimetypes = $cache->getConfiguration('mimetypes')->getAll('mimetype');
