@@ -176,6 +176,10 @@ class Frapi_Output
     public static function getMimeTypeMap()
     {
         try {
+            if ($map = Frapi_Internal::getCached('Output.mimeMaps')) {
+                return $map;
+            }
+
             $cache = new Frapi_Internal();
             $mimetypes = $cache->getConfiguration('mimetypes')->getAll('mimetype');
 
@@ -200,7 +204,31 @@ class Frapi_Output
             return false;
         }
 
+        Frapi_Internal::setCached('Output.mimeMaps', $map);
+
         return $map;
+    }
+
+    /**
+     * Return a mimetype for a given extension
+     *
+     * @deprecated
+     * @param string $format
+     * @return string|false
+     */
+    public static function getMimeTypeByFormat($format)
+    {
+        $format = strtolower($format);
+
+        $mimeMap = array(
+            'xml' => 'application/xml',
+            'json' => 'application/json',
+            'html' => 'text/html',
+            'js' => 'text/javascript',
+            'printr' => 'text/php-printr',
+        );
+
+        return (isset($mimeMap[$format])) ? $mimeMap[$format] : false;
     }
 
     /**
@@ -225,8 +253,8 @@ class Frapi_Output
 
         $obj->type     = $type;
 
-        $obj->mimeType = isset($options['mimeType'])
-            ? $options['mimeType']
+        $obj->mimeType = isset($options['mimetype']) && $options['mimetype']
+            ? $options['mimetype']
             : $obj->mimeType;
 
         return $obj;
