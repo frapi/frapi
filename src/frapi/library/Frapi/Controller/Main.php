@@ -159,14 +159,15 @@ class Frapi_Controller_Main
      * @var array An array of mimetypes and their output types.
      */
     protected $mimeMaps = array(
-        'application/xml'  => 'xml',
-        'text/xml'         => 'xml',
-        'application/json' => 'json',
-        'text/json'        => 'json',
-        'text/html'        => 'html',
-        'text/plain'       => 'json',
-        'text/javascript'  => 'js',
-        'text/php-printr'  => 'printr'
+        'application/xml'           => 'xml',
+        'text/xml'                  => 'xml',
+        'application/json'          => 'json',
+        'text/json'                 => 'json',
+        'text/html'                 => 'html',
+        'text/plain'                => 'json',
+        'application/javascript'    => 'js',
+        'text/javascript'           => 'js',
+        'text/php-printr'           => 'printr'
     );
 
     /*
