@@ -224,7 +224,7 @@ class Frapi_Output
             'xml' => 'application/xml',
             'json' => 'application/json',
             'html' => 'text/html',
-            'js' => 'text/javascript',
+            'js' => 'application/javascript',
             'printr' => 'text/php-printr',
         );
 
