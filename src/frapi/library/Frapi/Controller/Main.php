@@ -152,9 +152,9 @@ class Frapi_Controller_Main
      * format. In order to add a new mimetype, add it's
      * mimetype name and then add it's output as the associated
      * value.
-     * 
-     * The list here is left for legacy installations. Defining mimetypes in the admin
-     * will override these once defined.
+     *
+     * @deprecated The list here is left for legacy installations. Defining
+     * @deprecated mimetypes in the admin will override these once defined.
      *
      * @var array An array of mimetypes and their output types.
      */
@@ -213,20 +213,26 @@ class Frapi_Controller_Main
 
             $query_path = parse_url($uri, PHP_URL_PATH);
 
+            // @deprecated The use of extensions is considered deprecated
             //Query ending in .xxx may or may not be an output format
-            $query_path_format = null;
-            if (strrpos($query_path, '.')) {
-                $query_path_format = substr(
-                    $query_path,
-                    $format_pos = strrpos($query_path, '.') + 1
-                );
-            }
+            $query_path_format = pathinfo($query_path, PATHINFO_EXTENSION);
+            $format = $this->getParam('format');
+            if (is_string($query_path_format) && strlen($query_path_format) || $format) {
+                $extension = ($query_path_format) ? $query_path_format : $format;
+                if (Frapi_Rules::validateOutputType($extension) === true) {
+                    //Output format suffix is valid, remove from URL!
+                    if ($query_path_format) {
+                        $query_path = substr($query_path, 0, (strlen($extension) + 1)*-1);
+                    }
+                    $accept = Frapi_Output::getMimeTypeByFormat($extension);
+                    if (isset($_SERVER['HTTP_ACCEPT'])) {
+                        $_SERVER['HTTP_ACCEPT'] = $accept . ',' .$_SERVER['HTTP_ACCEPT'];
+                    } else {
+                        $_SERVER['HTTP_ACCEPT'] = $accept;
+                    }
+                }
 
-            if (Frapi_Rules::validateOutputType($query_path_format) === true) {
-                //Output format suffix is valid, remove from URL!
-                $query_path = substr($query_path, 0, $format_pos-1);
-            } else {
-                $query_path_format = null;
+                $query_path_format = $format = null;
             }
 
             if ($routed = $this->router->match($query_path)) {
@@ -240,25 +246,6 @@ class Frapi_Controller_Main
             }
 
             $this->setFiles($_FILES);
-
-            try {
-                $format = $this->getParam('format');
-
-                if (!is_null($query_path_format)) {
-                    $format = $query_path_format;
-                    $this->formatSetByExtension = true;
-                }
-
-                $setFormat = $this->getFormat();
-                $this->setFormat(
-                    isset($setFormat) &&
-                    Frapi_Controller_Api::DEFAULT_OUTPUT_FORMAT ==
-                        $setFormat
-                    ? $format : $setFormat
-                );
-            } catch (Frapi_Exception $fex) {
-                $this->setFormat($this->getDefaultFormatFromConfiguration());
-            }
 
             $this->authorization->setAuthorizationParams($this->getParams());
         } catch (Frapi_Exception $e) {
@@ -342,17 +329,17 @@ class Frapi_Controller_Main
             $xmlJsonMatch = preg_grep('/\<|\{/i', array_keys($puts));
             $inputFormat = $this->getFormat();
         }
-        
+
         /**
          * When doing parse_str("{json:string}") it creates an array like:
          * array(
          *  "{json:string}" => ""
          * )
-         * 
+         *
          * If args are also present along with the body, they are in the array
          * before the body.
-         * 
-         * Checks if the last argument is an empty string, this + inputForm is 
+         *
+         * Checks if the last argument is an empty string, this + inputForm is
          * indicative of the body needing parsing.
          */
         if (end($puts) == '' && !empty($inputFormat) || !empty($xmlJsonMatch)) {
@@ -362,7 +349,7 @@ class Frapi_Controller_Main
                 $inputFormat,
                 $input
             );
-            
+
             if (!empty($requestBody)) {
                 $rootElement = array_keys($requestBody);
 
@@ -422,7 +409,7 @@ class Frapi_Controller_Main
     }
 
     /**
-     * Get default format from SQLite database
+     * Get default format from configuration
      *
      * A format (output type) has not been supplied
      * so try to get default from backend.
@@ -460,8 +447,10 @@ class Frapi_Controller_Main
      * @param string $format The format to use.
      * @throws Frapi_Error
      */
-    protected function setFormat($format = false)
+    protected function setOutputFormat($format = false)
     {
+        $format = strtolower($format);
+
         if ($format) {
             $typeValid = Frapi_Rules::validateOutputType($format);
             $this->format = $format;
@@ -472,6 +461,17 @@ class Frapi_Controller_Main
                 Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_NO
             );
         }
+    }
+
+    /**
+     * @see self::setOutputFormat
+     *
+     * @deprecated
+     * @param string $format
+     */
+    protected function setFormat($format = false)
+    {
+        $this->setOutputFormat($format);
     }
 
     /**
@@ -515,12 +515,6 @@ class Frapi_Controller_Main
                 $_SERVER['CONTENT_TYPE'] :
                 null;
 
-        $mimetypes = Frapi_Output::getMimeTypeMap();
-        
-        if ($mimetypes) {
-            $this->mimeMaps = $mimetypes;
-        }
-        
         if(!empty($contentType) &&
            isset($this->mimeMaps[$contentType]) &&
            in_array($this->mimeMaps[$contentType], $this->allowedInputTypes)) {
