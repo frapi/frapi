@@ -11,6 +11,7 @@ class Frapi_Controller_ApiTest extends PHPUnit_Framework_TestCase
             'text/json' => 'json',
             'text/html' => 'html',
             'text/plain' => 'json',
+            'application/javascript' => 'js',
             'text/javascript' => 'js',
             'text/php-printr' => 'printr',
             'application/vnd.test.:format' => ':format',
@@ -67,6 +68,7 @@ class Frapi_Controller_ApiTest extends PHPUnit_Framework_TestCase
             array('text/html', 'html', 'text/html', array()),
             array('text/plain', 'json', 'text/plain', array()),
             array('text/javascript', 'js', 'text/javascript', array()),
+            array('application/javascript', 'js', 'application/javascript', array()),
             array('text/php-printr', 'printr', 'text/php-printr', array()),
 
             /* Test q-values */
@@ -122,7 +124,7 @@ class Frapi_Controller_ApiTest extends PHPUnit_Framework_TestCase
             array('/foo.json', 'json', 'application/json'),
             array('/foo.xml', 'xml', 'application/xml'),
             array('/foo.html', 'html', 'text/html'),
-            array('/foo.js', 'js', 'text/javascript'),
+            array('/foo.js', 'js', 'application/javascript'),
             array('/foo.printr', 'printr', 'text/php-printr'),
 
             /* Test Multi-segment paths */

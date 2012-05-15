@@ -40,7 +40,7 @@ class Frapi_Output_JS extends Frapi_Output implements Frapi_Output_Interface
      *
      * @var string
      */
-    public $mimeType = 'text/javascript';
+    public $mimeType = 'application/javascript';
 
     /**
      * Populate the Output
