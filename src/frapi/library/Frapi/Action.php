@@ -361,7 +361,11 @@ class Frapi_Action
      */
     protected function getByKey(array $array, $key, $type = self::TYPE_STRING, $default = null, $error_name = null)
     {
-        $param = isset($array[$key]) ? $array[$key] : $default;
+        if (isset($array[$key])) {
+            $param = $array[$key];
+        } else {
+            return $default;
+        }
 
         switch ($type) {
             case self::TYPE_FILE;
