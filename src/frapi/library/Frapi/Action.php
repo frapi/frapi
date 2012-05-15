@@ -361,12 +361,9 @@ class Frapi_Action
      */
     protected function getByKey(array $array, $key, $type = self::TYPE_STRING, $default = null, $error_name = null)
     {
-        if (isset($array[$key]))
-        {
+        if (isset($array[$key])) {
             $param = $array[$key];
-        }
-        else
-        {
+        } else {
             return $default;
         }
 
