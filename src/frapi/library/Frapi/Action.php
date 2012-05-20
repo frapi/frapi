@@ -272,6 +272,10 @@ class Frapi_Action
      */
     public function getParams()
     {
+        if(!is_array($this->params)) {
+            $this->params = array();
+        }
+
         return $this->params;
     }
 
@@ -316,7 +320,7 @@ class Frapi_Action
      */
     protected function getParam($key, $type = self::TYPE_STRING, $default = null, $error_name = null)
     {
-         return $this->getByKey($this->params, $key, $type, $default, $error_name);
+         return $this->getByKey($this->getParams(), $key, $type, $default, $error_name);
     }
 
     /**
