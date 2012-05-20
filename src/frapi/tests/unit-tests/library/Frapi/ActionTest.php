@@ -235,6 +235,8 @@ class Frapi_ActionTest extends PHPUnit_Framework_TestCase
 
     /**
      * Makes sure that the default parameter returns if the key doesn't exist
+     * This tests with a set of parameters set on the action, but not the key
+     * we are looking for.
      */
     public function testUseDefaultValueInGetParamWithParamList()
     {
