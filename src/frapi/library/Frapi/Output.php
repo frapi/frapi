@@ -145,7 +145,9 @@ class Frapi_Output
 
         if ($allowCrossDomain) {
             header('Access-Control-Allow-Origin: *');
-            header('Access-Control-Allow-Headers: *');
+            if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
+                header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+            }
             header('Access-Control-Allow-Credentials: true');
             header('Access-Control-Allow-Methods: POST,GET,PUT,DELETE,HEAD');
             header('Access-Control-Max-Age: 604800');
