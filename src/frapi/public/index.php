@@ -2,6 +2,7 @@
 
 require dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'library/Frapi/AllFiles.php';
 set_error_handler(array('Frapi_Error', 'errorHandler'), E_ALL);
+ini_set('zlib.output_compression', 1);
 
 try {
     if(!isset($customAuthorization)) {
