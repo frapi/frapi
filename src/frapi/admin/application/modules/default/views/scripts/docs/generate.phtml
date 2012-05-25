@@ -19,7 +19,7 @@
                 <p class="description"><?php echo $action['description'] ?></p>
             <?php endif; ?>
 
-            <?php if(count($action['parameters'])): ?>
+            <?php if(isset($action['parameters'] && count($action['parameters'])): ?>
                 <h3>Parameters</h3>
                 <table class="doc-table">
                     <?php
