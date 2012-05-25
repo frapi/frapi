@@ -28,6 +28,13 @@ class Frapi_Response
     protected $http_code = 200;
 
     /**
+     * HTTP Status Message
+     *
+     * @var string
+     */
+    protected $http_message = 'OK';
+
+    /**
      * Content Type
      *
      * @var string
@@ -69,6 +76,10 @@ class Frapi_Response
             $this->http_code = $response['code'];
         }
 
+        if (isset($response['message'])) {
+            $this->http_message = $response['message'];
+        }
+
         if (isset($response['data'])) {
             $this->data = $response['data'];
         }
@@ -104,6 +115,30 @@ class Frapi_Response
      * @return void
      */
     public function setStatusCode($code)
+    {
+        $this->http_code = $code;
+    }
+
+    /**
+     * Get HTTP status message for this error
+     *
+     * @return string
+     */
+    public function getStatusMessage()
+    {
+        return $this->http_message;
+    }
+
+    /**
+     * Set the Status message
+     *
+     * This method is used to set the HTTP status
+     * message of the response we are going to return.
+     *
+     * @param string $message The http status message.
+     * @return void
+     */
+    public function setStatusMessage($code)
     {
         $this->http_code = $code;
     }

@@ -23,41 +23,49 @@ class Frapi_Exception extends Exception
      * @var string
      */
     protected $at;
-    
+
     /**
      * HTTP Response Code
      *
      * @var int
      */
     protected $http_code;
-    
+
+    /**
+     * HTTP Status Message
+     *
+     * @var string
+     */
+    protected $http_message;
+
     /**
      * The name of the actual exception
      *
      * @var string
      */
     protected $name;
-    
+
     /**
      * Custom Frapi Exception class
-     * 
+     *
      * $message and $name are required params used to display friendly error
      * messages to Frapi_Error.  Frapi_Exception is only used internally. API
      * developers should use Frapi_Error for providing errors to consumers.
-     * 
+     *
      * @param string $message   Exception message
      * @param string $name      The name of the exception
      * @param int    $http_code Defaults is 400
      * @param string $at        Where did that error actually happen?
      */
-    public function __construct($message, $name, $http_code = 400, $at = '')
+    public function __construct($message, $name, $http_code = 400, $http_message = '', $at = '')
     {
         // make sure everything is assigned properly
         parent::__construct($message, $http_code);
-        
-        $this->at        = $at;
-        $this->name      = $name;
-        $this->http_code = $http_code;
+
+        $this->at           = $at;
+        $this->name         = $name;
+        $this->http_code    = $http_code;
+        $this->http_message = $http_message;
     }
 
     /**
@@ -75,7 +83,7 @@ class Frapi_Exception extends Exception
     {
         return $this->at;
     }
-   
+
     /**
      * Get the name of the error
      *
@@ -98,8 +106,8 @@ class Frapi_Exception extends Exception
     {
         return $this->http_code;
     }
-    
-    /** 
+
+    /**
      * Set the Status code
      *
      * This method is used to set the HTTP status
@@ -111,6 +119,30 @@ class Frapi_Exception extends Exception
     public function setStatusCode($code)
     {
         $this->http_code = $code;
+    }
+
+    /**
+     * Get HTTP status message for this error
+     *
+     * @return string
+     */
+    public function getStatusMessage()
+    {
+        return $this->http_message;
+    }
+
+    /**
+     * Set the Status message
+     *
+     * This method is used to set the HTTP status
+     * message of the response we are going to return.
+     *
+     * @param string $message The http status message.
+     * @return void
+     */
+    public function setStatusMessage($message)
+    {
+        $this->http_message = $message;
     }
 
     /**
