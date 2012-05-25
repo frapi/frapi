@@ -37,11 +37,14 @@ class Frapi_Action
     const TYPE_BOOL         = 'bool';
     const TYPE_ARRAY        = 'array';
     const TYPE_OBJECT       = 'object';
-    const TYPE_SQL          = 'sqlsafe';
     const TYPE_OUTPUT       = 'output';
-    const TYPE_SAFESQLARRAY = 'safesqlarray';
     const TYPE_OUTPUTSAFE   = 'outputsafe';
     const TYPE_FILE         = 'file';
+    /**
+     * @deprecated Please use your own database handler
+     */
+    const TYPE_SQL          = 'sqlsafe';
+    const TYPE_SAFESQLARRAY = 'safesqlarray';
 
     /**
      * The value of the current action being
@@ -394,16 +397,17 @@ class Frapi_Action
             case self::TYPE_OBJECT:
                 $param = (object)$param;
                 break;
-            case self::TYPE_SQL:
-                // This isn't our problem. We shouldn't have that anymore.
-                $param = mysql_escape_string($param);
-                break;
             case self::TYPE_OUTPUT:
             case self::TYPE_OUTPUTSAFE:
                 $param = htmlentities($param, ENT_QUOTES, 'UTF-8');
                 break;
+            /**
+             * @deprecated Please use your own database handler
+             */
+            case self::TYPE_SQL:
+                $param = mysql_escape_string($param);
+                break;
             case self::TYPE_SAFESQLARRAY:
-                // Same as TYPE_SQL: Not our problem.
                 $tmpArray = array();
                 foreach ((array)$param as $val => $par) {
                     $val = mysql_escape_string($val);
