@@ -55,6 +55,21 @@ class Frapi_Controller_ApiTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests Frapi_Action->getByKey() for TYPE_BOOL
+     * 
+     * @dataProvider boolProvider
+     */
+    public function testBool($input, $expect)
+    {
+        $actionParams = array('key1' => $input);
+        $action = MockFrapi_Action::getInstance('Public');
+        $action->setActionParams($actionParams);
+        $param = $action->testGetParam('key1', Action_Public::TYPE_BOOL);
+
+        $this->assertEquals($param, $expect);
+    }
+    
+    /**
      * @return array
      */
     public function acceptProvider()
@@ -129,6 +144,32 @@ class Frapi_Controller_ApiTest extends PHPUnit_Framework_TestCase
 
             /* Test Multi-segment paths */
             array('/foo/bar.json', 'json', 'application/json'),
+        );
+    }
+    
+    /**
+     * @return array
+     */
+    public function boolProvider()
+    {
+        return array(
+            array('', false),
+            array('0', false),
+            array('no', false),
+            array('off', false),
+            array('OFF', false),
+            array('false', false),
+            array('f', false),
+            array('n', false),
+            array("\0", false),
+            array('1', true),
+            array('yes', true),
+            array('on', true),
+            array('ON', true),
+            array('true', true),
+            array('t', true),
+            array('y', true),
+            array('everything not false is true', true),
         );
     }
 }

@@ -385,6 +385,9 @@ class Frapi_Action
             case self::TYPE_DOUBLE:
                 $param = (float)$param;
                 break;
+            case self::TYPE_BOOL:
+                $param = ($param === true || !in_array(strtolower($param), array('', '0', 'no', 'off', 'false', 'f', 'n', "\0")));
+                break;
             case self::TYPE_ARRAY:
                 $param = (array)$param;
                 break;
