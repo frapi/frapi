@@ -29,23 +29,30 @@ class Frapi_Error extends Frapi_Exception
      * codes that are used thorough the application.
      *
      */
-    const ERROR_INVALID_SECRET_KEY_NO          = 403;
-    const ERROR_INVALID_URL_PROMPT_FORMAT_NO   = 400;
-    const ERROR_INVALID_ACTION_REQUEST_NO      = 404;
-    const ERROR_INVALID_PARTNER_ID_NO          = 403;
-    const ERROR_MISSING_REQUEST_ARG_NO         = 412; // Precondition Failed.
+    const ERROR_INVALID_SECRET_KEY_NO               = 403;
+    const ERROR_INVALID_URL_PROMPT_FORMAT_NO        = 400;
+    const ERROR_INVALID_ACTION_REQUEST_NO           = 404;
+    const ERROR_INVALID_PARTNER_ID_NO               = 403;
+    const ERROR_MISSING_REQUEST_ARG_NO              = 412; // Precondition Failed.
 
-    const ERROR_INVALID_SECRET_KEY_MSG         = 'Invalid secret key';
-    const ERROR_INVALID_URL_PROMPT_FORMAT_MSG  = 'Invalid format';
-    const ERROR_INVALID_ACTION_REQUEST_MSG     = 'Invalid requested action';
-    const ERROR_INVALID_PARTNER_ID_MSG         = 'Invalid user id';
-    const ERROR_MISSING_REQUEST_ARG_MSG        = 'Missing required parameters';
+    const ERROR_INVALID_SECRET_KEY_MSG              = 'Invalid secret key';
+    const ERROR_INVALID_URL_PROMPT_FORMAT_MSG       = 'Invalid format';
+    const ERROR_INVALID_ACTION_REQUEST_MSG          = 'Invalid requested action';
+    const ERROR_INVALID_PARTNER_ID_MSG              = 'Invalid user id';
+    const ERROR_MISSING_REQUEST_ARG_MSG             = 'Missing required parameters';
 
-    const ERROR_INVALID_SECRET_KEY_NAME         = 'ERROR_INVALID_SECRET_KEY';
-    const ERROR_INVALID_URL_PROMPT_FORMAT_NAME  = 'ERROR_INVALID_URL_PROMPT_FORMAT';
-    const ERROR_INVALID_ACTION_REQUEST_NAME     = 'ERROR_INVALID_ACTION_REQUEST';
-    const ERROR_INVALID_PARTNER_ID_NAME         = 'ERROR_INVALID_PARTNER_ID';
-    const ERROR_MISSING_REQUEST_ARG_NAME        = 'ERROR_MISSING_REQUEST_ARG';
+    const ERROR_INVALID_SECRET_KEY_NAME             = 'ERROR_INVALID_SECRET_KEY';
+    const ERROR_INVALID_URL_PROMPT_FORMAT_NAME      = 'ERROR_INVALID_URL_PROMPT_FORMAT';
+    const ERROR_INVALID_ACTION_REQUEST_NAME         = 'ERROR_INVALID_ACTION_REQUEST';
+    const ERROR_INVALID_PARTNER_ID_NAME             = 'ERROR_INVALID_PARTNER_ID';
+    const ERROR_MISSING_REQUEST_ARG_NAME            = 'ERROR_MISSING_REQUEST_ARG';
+
+    const ERROR_INVALID_SECRET_KEY_HTTP_MSG         = 'Forbidden';
+    const ERROR_INVALID_URL_PROMPT_FORMAT_HTTP_MSG  = 'Bad Request';
+    const ERROR_INVALID_ACTION_REQUEST_HTTP_MSG     = 'Not Found';
+    const ERROR_INVALID_PARTNER_ID_HTTP_MSG         = 'Forbidden';
+    const ERROR_MISSING_REQUEST_ARG_HTTP_MSG        = 'Precondition Failed';
+
 
     /**
      * Error Labels
@@ -81,24 +88,25 @@ class Frapi_Error extends Frapi_Exception
      *
      * @todo add some doc examples of the new errors.
      *
-     * @param string $error_name Name of error.
-     * @param string $error_msg  The actual message of the error.
-     * @param int    $http_code  This might be hard to grasp however, we are in a web
-     *                           industry dealing with the web. The code you are sending
-     *                           to your exception should really be represented by the
-     *                           HTTP Code returned to your users.
+     * @param string $error_name   Name of error.
+     * @param string $error_msg    The actual message of the error.
+     * @param int    $http_code    This might be hard to grasp however, we are in a web
+     *                             industry dealing with the web. The code you are sending
+     *                             to your exception should really be represented by the
+     *                             HTTP Code returned to your users.
+     * @param string $http_message The http message associated with the http_code
      *
      * @return void
      */
-    public function __construct($error_name, $error_msg = false, $http_code = false)
+    public function __construct($error_name, $error_msg = false, $http_code = false, $http_message = false)
     {
         if ($error_name instanceof Exception) {
-            $error = self::_get($error_name->getCode(), $error_name->getMessage(), 400);
+            $error = self::_get($error_name->getCode(), $error_name->getMessage(), 400, 'Bad Request');
         } else {
-            $error = self::_get($error_name, $error_msg, $http_code);
+            $error = self::_get($error_name, $error_msg, $http_code, $http_message);
         }
 
-        parent::__construct($error['message'], $error['name'], $error['http_code']);
+        parent::__construct($error['message'], $error['name'], $error['http_code'], $error['http_message']);
     }
 
     /**
@@ -153,7 +161,8 @@ class Frapi_Error extends Frapi_Exception
             'PHP ' . $errorType . ' error',
             $errstr . ' (Error Number: '.$errno.'),' .
                       ' (File: ' . $errfile . ' at line ' . $errline . ')',
-            400
+            400,
+            'Bad Request'
         );
     }
 
@@ -184,6 +193,9 @@ class Frapi_Error extends Frapi_Exception
             case 'name':
                 return $error['name'];
                 break;
+            case 'http_message':
+                return $error['http_message'];
+                break;
         }
     }
 
@@ -195,15 +207,16 @@ class Frapi_Error extends Frapi_Exception
      * and will store the loaded errors in the faster stores.
      *
      * @param string $error_name Name of error.
-     * @param string $error_msg  The actual message of the error.
-     * @param int    $http_code  This might be hard to grasp however, we are in a web
-     *                           industry dealing with the web. The code you are sending
-     *                           to your exception should really be represented by the
-     *                           HTTP Code returned to your users.
+     * @param string $error_msg    The actual message of the error.
+     * @param int    $http_code    This might be hard to grasp however, we are in a web
+     *                             industry dealing with the web. The code you are sending
+     *                             to your exception should really be represented by the
+     *                             HTTP Code returned to your users.
+     * @param string $http_message The http message associated with the http_code
      *
      * @return array An array with the content of the error.
      */
-    private static function _get($error_name, $error_msg = false, $http_code = false)
+    private static function _get($error_name, $error_msg = false, $http_code = false, $http_message = false)
     {
         if (!self::$_statically_loaded) {
             $errors = Frapi_Internal::getCached('Errors.user-defined');
@@ -229,13 +242,18 @@ class Frapi_Error extends Frapi_Exception
                 $error['http_code'] = $http_code;
             }
 
+            if ($http_message !== false) {
+                $error['http_message'] = $http_message;
+            }
+
             return $error;
         }
 
         return array(
-            'name'      => $error_name,
-            'message'   => $error_msg !== false ? $error_msg : $error_name,
-            'http_code' => $http_code !== false  ? $http_code : '400',
+            'name'         => $error_name,
+            'message'      => $error_msg !== false ? $error_msg : $error_name,
+            'http_code'    => $http_code !== false  ? $http_code : '400',
+            'http_message' => $http_message !== false ? $http_message : 'Bad Request',
         );
     }
 

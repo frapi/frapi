@@ -152,7 +152,7 @@ class Frapi_Controller_Main
      * format. In order to add a new mimetype, add it's
      * mimetype name and then add it's output as the associated
      * value.
-     * 
+     *
      * The list here is left for legacy installations. Defining mimetypes in the admin
      * will override these once defined.
      *
@@ -342,17 +342,17 @@ class Frapi_Controller_Main
             $xmlJsonMatch = preg_grep('/\<|\{/i', array_keys($puts));
             $inputFormat = $this->getFormat();
         }
-        
+
         /**
          * When doing parse_str("{json:string}") it creates an array like:
          * array(
          *  "{json:string}" => ""
          * )
-         * 
+         *
          * If args are also present along with the body, they are in the array
          * before the body.
-         * 
-         * Checks if the last argument is an empty string, this + inputForm is 
+         *
+         * Checks if the last argument is an empty string, this + inputForm is
          * indicative of the body needing parsing.
          */
         if (end($puts) == '' && !empty($inputFormat) || !empty($xmlJsonMatch)) {
@@ -362,7 +362,7 @@ class Frapi_Controller_Main
                 $inputFormat,
                 $input
             );
-            
+
             if (!empty($requestBody)) {
                 $rootElement = array_keys($requestBody);
 
@@ -469,7 +469,8 @@ class Frapi_Controller_Main
             throw new Frapi_Error (
                 Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_NAME,
                 Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_MSG,
-                Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_NO
+                Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_NO,
+                Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_HTTP_MSG
             );
         }
     }
@@ -516,11 +517,11 @@ class Frapi_Controller_Main
                 null;
 
         $mimetypes = Frapi_Output::getMimeTypeMap();
-        
+
         if ($mimetypes) {
             $this->mimeMaps = $mimetypes;
         }
-        
+
         if(!empty($contentType) &&
            isset($this->mimeMaps[$contentType]) &&
            in_array($this->mimeMaps[$contentType], $this->allowedInputTypes)) {

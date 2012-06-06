@@ -244,7 +244,7 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
                   ->setActionParams($this->getParams())
                   ->setActionFiles($this->getFiles())
                   ->setAcceptParams(
-                      isset($this->options) && is_array($this->options) 
+                      isset($this->options) && is_array($this->options)
                       ? $this->options : array()
                   );
 
@@ -319,7 +319,8 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
             throw new Frapi_Error(
                 Frapi_Error::ERROR_INVALID_ACTION_REQUEST_NAME,
                 Frapi_Error::ERROR_INVALID_ACTION_REQUEST_MSG,
-                Frapi_Error::ERROR_INVALID_ACTION_REQUEST_NO
+                Frapi_Error::ERROR_INVALID_ACTION_REQUEST_NO,
+                Frapi_Error::ERROR_INVALID_ACTION_REQUEST_HTTP_MSG
             );
         }
 
