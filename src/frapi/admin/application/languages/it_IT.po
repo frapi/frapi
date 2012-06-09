@@ -126,6 +126,9 @@ msgstr "Modifica"
 msgid "HTTP_CODE"
 msgstr "Codice HTTP"
 
+msgid "HTTP_REASON_PHRASE"
+msgstr "HTTP Reason Phrase"
+
 msgid "ERROR_MESSAGE"
 msgstr "Messaggio di errore"
 
