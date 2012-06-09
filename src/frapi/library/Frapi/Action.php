@@ -37,11 +37,14 @@ class Frapi_Action
     const TYPE_BOOL         = 'bool';
     const TYPE_ARRAY        = 'array';
     const TYPE_OBJECT       = 'object';
-    const TYPE_SQL          = 'sqlsafe';
     const TYPE_OUTPUT       = 'output';
-    const TYPE_SAFESQLARRAY = 'safesqlarray';
     const TYPE_OUTPUTSAFE   = 'outputsafe';
     const TYPE_FILE         = 'file';
+    /**
+     * @deprecated Please use your own database handler
+     */
+    const TYPE_SQL          = 'sqlsafe';
+    const TYPE_SAFESQLARRAY = 'safesqlarray';
 
     /**
      * The value of the current action being
@@ -272,6 +275,10 @@ class Frapi_Action
      */
     public function getParams()
     {
+        if(!is_array($this->params)) {
+            $this->params = array();
+        }
+
         return $this->params;
     }
 
@@ -316,7 +323,7 @@ class Frapi_Action
      */
     protected function getParam($key, $type = self::TYPE_STRING, $default = null, $error_name = null)
     {
-         return $this->getByKey($this->params, $key, $type, $default, $error_name);
+         return $this->getByKey($this->getParams(), $key, $type, $default, $error_name);
     }
 
     /**
@@ -361,7 +368,11 @@ class Frapi_Action
      */
     protected function getByKey(array $array, $key, $type = self::TYPE_STRING, $default = null, $error_name = null)
     {
-        $param = isset($array[$key]) ? $array[$key] : $default;
+        if (isset($array[$key])) {
+            $param = $array[$key];
+        } else {
+            return $default;
+        }
 
         switch ($type) {
             case self::TYPE_FILE;
@@ -381,22 +392,26 @@ class Frapi_Action
             case self::TYPE_DOUBLE:
                 $param = (float)$param;
                 break;
+            case self::TYPE_BOOL:
+                $param = ($param === true || !in_array(strtolower($param), array('', '0', 'no', 'off', 'false', 'f', 'n', "\0")));
+                break;
             case self::TYPE_ARRAY:
                 $param = (array)$param;
                 break;
             case self::TYPE_OBJECT:
                 $param = (object)$param;
                 break;
-            case self::TYPE_SQL:
-                // This isn't our problem. We shouldn't have that anymore.
-                $param = mysql_escape_string($param);
-                break;
             case self::TYPE_OUTPUT:
             case self::TYPE_OUTPUTSAFE:
                 $param = htmlentities($param, ENT_QUOTES, 'UTF-8');
                 break;
+            /**
+             * @deprecated Please use your own database handler
+             */
+            case self::TYPE_SQL:
+                $param = mysql_escape_string($param);
+                break;
             case self::TYPE_SAFESQLARRAY:
-                // Same as TYPE_SQL: Not our problem.
                 $tmpArray = array();
                 foreach ((array)$param as $val => $par) {
                     $val = mysql_escape_string($val);

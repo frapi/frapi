@@ -49,5 +49,11 @@
    <description></description>
    <hash>033c878cd3cb4182ac91eb31f2332ddd63bcc463</hash>
   </mimetype>
+  <mimetype>
+   <mimetype>application/javascript</mimetype>
+   <output_format>js</output_format>
+   <description></description>
+   <hash>a506b559c823b77ae1c78bb114ff3bb356270f86</hash>
+  </mimetype>
  </mimetypes>
 </frapi-config>

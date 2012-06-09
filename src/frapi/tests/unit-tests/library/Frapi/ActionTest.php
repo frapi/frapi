@@ -222,5 +222,30 @@ class Frapi_ActionTest extends PHPUnit_Framework_TestCase
         $this->action->getFiles(/* parameters */);
     }
 
-}
+    /**
+     * Makes sure that the default parameter returns if the key doesn't exist
+     */
+    public function testUseDefaultValueInGetParam()
+    {
+        $action = MockFrapi_Action::getInstance('Public');
+        $param = $action->testGetParam('key2', Action_Public::TYPE_INTEGER, 20);
 
+        $this->assertEquals($param, 20);
+    }
+
+    /**
+     * Makes sure that the default parameter returns if the key doesn't exist
+     * This tests with a set of parameters set on the action, but not the key
+     * we are looking for.
+     */
+    public function testUseDefaultValueInGetParamWithParamList()
+    {
+        $actionParams = array('key1' => 'value1');
+        $action = MockFrapi_Action::getInstance('Public');
+        $action->setActionParams($actionParams);
+        $param = $action->testGetParam('key2', Action_Public::TYPE_INTEGER, 20);
+
+        $this->assertEquals($param, 20);
+    }
+
+}

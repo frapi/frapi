@@ -52,6 +52,18 @@ class IndexController extends Lupin_Controller_Base
             $issues['custom-action-path'] = sprintf($actionPathMessage, $dir, $user);
         }
 
+        $file    = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR
+                . 'js' . DIRECTORY_SEPARATOR
+                . 'ace' . DIRECTORY_SEPARATOR
+                . 'build' . DIRECTORY_SEPARATOR
+                . 'src' . DIRECTORY_SEPARATOR
+                . 'ace.js';
+
+        if (!file_exists($file)) {
+            $submoduleMessage = $this->tr->_('SUBMODULES_NOT_INITED');
+            $issues['missing-ace-editor'] = $submoduleMessage;
+        }
+
         $this->view->issues = $issues;
 
     }
