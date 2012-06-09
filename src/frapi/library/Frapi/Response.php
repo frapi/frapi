@@ -28,11 +28,11 @@ class Frapi_Response
     protected $http_code = 200;
 
     /**
-     * HTTP Status Message
+     * HTTP Reason Phrase
      *
      * @var string
      */
-    protected $http_message = 'OK';
+    protected $http_phrase = 'OK';
 
     /**
      * Content Type
@@ -77,7 +77,7 @@ class Frapi_Response
         }
 
         if (isset($response['message'])) {
-            $this->http_message = $response['message'];
+            $this->http_phrase = $response['message'];
         }
 
         if (isset($response['data'])) {
@@ -120,27 +120,27 @@ class Frapi_Response
     }
 
     /**
-     * Get HTTP status message for this error
+     * Get HTTP reason phrase for this error
      *
      * @return string
      */
-    public function getStatusMessage()
+    public function getReasonPhrase()
     {
-        return $this->http_message;
+        return $this->http_phrase;
     }
 
     /**
-     * Set the Status message
+     * Set the reason phrase
      *
-     * This method is used to set the HTTP status
-     * message of the response we are going to return.
+     * This method is used to set the HTTP reason
+     * phrase of the response we are going to return.
      *
-     * @param string $message The http status message.
+     * @param string $phrase The http reason phrase.
      * @return void
      */
-    public function setStatusMessage($code)
+    public function setReasonPhrase($phrase)
     {
-        $this->http_code = $code;
+        $this->http_phrase = $phrase;
     }
 
     /**

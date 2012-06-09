@@ -88,25 +88,25 @@ class Frapi_Error extends Frapi_Exception
      *
      * @todo add some doc examples of the new errors.
      *
-     * @param string $error_name   Name of error.
-     * @param string $error_msg    The actual message of the error.
-     * @param int    $http_code    This might be hard to grasp however, we are in a web
-     *                             industry dealing with the web. The code you are sending
-     *                             to your exception should really be represented by the
-     *                             HTTP Code returned to your users.
-     * @param string $http_message The http message associated with the http_code
+     * @param string $error_name  Name of error.
+     * @param string $error_msg   The actual message of the error.
+     * @param int    $http_code   This might be hard to grasp however, we are in a web
+     *                            industry dealing with the web. The code you are sending
+     *                            to your exception should really be represented by the
+     *                            HTTP Code returned to your users.
+     * @param string $http_phrase The http reason associated with the http_code
      *
      * @return void
      */
-    public function __construct($error_name, $error_msg = false, $http_code = false, $http_message = false)
+    public function __construct($error_name, $error_msg = false, $http_code = false, $http_phrase = false)
     {
         if ($error_name instanceof Exception) {
             $error = self::_get($error_name->getCode(), $error_name->getMessage(), 400, 'Bad Request');
         } else {
-            $error = self::_get($error_name, $error_msg, $http_code, $http_message);
+            $error = self::_get($error_name, $error_msg, $http_code, $http_phrase);
         }
 
-        parent::__construct($error['message'], $error['name'], $error['http_code'], $error['http_message']);
+        parent::__construct($error['message'], $error['name'], $error['http_code'], $error['http_phrase']);
     }
 
     /**
@@ -193,8 +193,8 @@ class Frapi_Error extends Frapi_Exception
             case 'name':
                 return $error['name'];
                 break;
-            case 'http_message':
-                return $error['http_message'];
+            case 'http_phrase':
+                return $error['http_phrase'];
                 break;
         }
     }
@@ -207,16 +207,16 @@ class Frapi_Error extends Frapi_Exception
      * and will store the loaded errors in the faster stores.
      *
      * @param string $error_name Name of error.
-     * @param string $error_msg    The actual message of the error.
-     * @param int    $http_code    This might be hard to grasp however, we are in a web
-     *                             industry dealing with the web. The code you are sending
-     *                             to your exception should really be represented by the
-     *                             HTTP Code returned to your users.
-     * @param string $http_message The http message associated with the http_code
+     * @param string $error_msg   The actual message of the error.
+     * @param int    $http_code   This might be hard to grasp however, we are in a web
+     *                            industry dealing with the web. The code you are sending
+     *                            to your exception should really be represented by the
+     *                            HTTP Code returned to your users.
+     * @param string $http_phrase The http phrase associated with the http_code
      *
      * @return array An array with the content of the error.
      */
-    private static function _get($error_name, $error_msg = false, $http_code = false, $http_message = false)
+    private static function _get($error_name, $error_msg = false, $http_code = false, $http_phrase = false)
     {
         if (!self::$_statically_loaded) {
             $errors = Frapi_Internal::getCached('Errors.user-defined');
@@ -242,18 +242,18 @@ class Frapi_Error extends Frapi_Exception
                 $error['http_code'] = $http_code;
             }
 
-            if ($http_message !== false) {
-                $error['http_message'] = $http_message;
+            if ($http_phrase !== false) {
+                $error['http_phrase'] = $http_phrase;
             }
 
             return $error;
         }
 
         return array(
-            'name'         => $error_name,
-            'message'      => $error_msg !== false ? $error_msg : $error_name,
-            'http_code'    => $http_code !== false  ? $http_code : '400',
-            'http_message' => $http_message !== false ? $http_message : 'Bad Request',
+            'name'        => $error_name,
+            'message'     => $error_msg !== false ? $error_msg : $error_name,
+            'http_code'   => $http_code !== false  ? $http_code : '400',
+            'http_phrase' => $http_phrase !== false ? $http_phrase : 'Bad Request',
         );
     }
 

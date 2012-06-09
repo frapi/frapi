@@ -32,11 +32,11 @@ class Frapi_Exception extends Exception
     protected $http_code;
 
     /**
-     * HTTP Status Message
+     * HTTP Reason Phrase
      *
      * @var string
      */
-    protected $http_message;
+    protected $http_phrase;
 
     /**
      * The name of the actual exception
@@ -52,20 +52,21 @@ class Frapi_Exception extends Exception
      * messages to Frapi_Error.  Frapi_Exception is only used internally. API
      * developers should use Frapi_Error for providing errors to consumers.
      *
-     * @param string $message   Exception message
-     * @param string $name      The name of the exception
-     * @param int    $http_code Defaults is 400
-     * @param string $at        Where did that error actually happen?
+     * @param string $message     Exception message
+     * @param string $name        The name of the exception
+     * @param int    $http_code   Defaults is 400
+     * @param string $http_phrase Reason Phrase associated with http code
+     * @param string $at          Where did that error actually happen?
      */
-    public function __construct($message, $name, $http_code = 400, $http_message = '', $at = '')
+    public function __construct($message, $name, $http_code = 400, $http_phrase = '', $at = '')
     {
         // make sure everything is assigned properly
         parent::__construct($message, $http_code);
 
-        $this->at           = $at;
-        $this->name         = $name;
-        $this->http_code    = $http_code;
-        $this->http_message = $http_message;
+        $this->at          = $at;
+        $this->name        = $name;
+        $this->http_code   = $http_code;
+        $this->http_phrase = $http_phrase;
     }
 
     /**
@@ -122,27 +123,27 @@ class Frapi_Exception extends Exception
     }
 
     /**
-     * Get HTTP status message for this error
+     * Get HTTP reason phrase for this error
      *
      * @return string
      */
-    public function getStatusMessage()
+    public function getReasonPhrase()
     {
-        return $this->http_message;
+        return $this->http_phrase;
     }
 
     /**
-     * Set the Status message
+     * Set the reason phrase
      *
-     * This method is used to set the HTTP status
-     * message of the response we are going to return.
+     * This method is used to set the HTTP reason
+     * phrase of the response we are going to return.
      *
-     * @param string $message The http status message.
+     * @param string $phrase The http reason phrase.
      * @return void
      */
-    public function setStatusMessage($message)
+    public function setReasonPhrase($phrase)
     {
-        $this->http_message = $message;
+        $this->http_phrase = $phrase;
     }
 
     /**
