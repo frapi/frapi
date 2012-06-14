@@ -66,7 +66,7 @@ class Frapi_Exception extends Exception
         $this->at          = $at;
         $this->name        = $name;
         $this->http_code   = $http_code;
-        $this->http_phrase = $http_phrase;
+        $this->http_phrase = ($http_phrase != '') ? $http_phrase : $message;
     }
 
     /**
