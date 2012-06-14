@@ -76,8 +76,8 @@ class Frapi_Response
             $this->http_code = $response['code'];
         }
 
-        if (isset($response['message'])) {
-            $this->http_phrase = $response['message'];
+        if (isset($response['reason_phrase'])) {
+            $this->http_phrase = $response['reason_phrase'];
         }
 
         if (isset($response['data'])) {
