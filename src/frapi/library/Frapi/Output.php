@@ -209,6 +209,31 @@ class Frapi_Output
         return $map;
     }
 
+    public static function getEnabledFormats()
+    {
+        try {
+            if ($formats = Frapi_Internal::getCached('Output.formats-enabled')) {
+                return $formats;
+            }
+
+            $cache   = new Frapi_Internal();
+            $outputs = $cache->getConfiguration('outputs')->getAll('output');
+
+            $formats = array();
+            foreach ($outputs as $output) {
+                if($output['enabled'] == 1) {
+                    $formats[] = strtolower($output['name']);
+                }
+            }
+        } catch (Exception $e) {
+            return false;
+        }
+
+        Frapi_Internal::setCached('Output.formats-enabled', $formats);
+
+        return $formats;
+    }
+
     /**
      * Return a mimetype for a given extension
      *
