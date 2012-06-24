@@ -4,9 +4,10 @@ require_once realpath(dirname(__FILE__) . '/../library/Frapi/AllFiles.php');
 
 define('APPLICATION_PATH', ROOT_PATH . '/admin/application');
 define('APPLICATION_ENV', 'testing');
+define('TESTS_PATH', realpath(dirname(__FILE__)));
 
 set_include_path(
-    implode(PATH_SEPARATOR, 
+    implode(PATH_SEPARATOR,
         array(
             ROOT_PATH . DIRECTORY_SEPARATOR . 'library',
             dirname(__FILE__) . DIRECTORY_SEPARATOR .'mock',
@@ -27,7 +28,7 @@ $_SERVER['HTTP_HOST'] = 'test';
  * http://jaybill.com/2007/10/01/the-most-useful-function-you-will-ever-use-in-the-zend-framework/
  * Modified by Jeremy Kendall
  */
-            
+
 function dd($val, $label="", $echo=true){
     d($val, $label, $echo);
     die();
