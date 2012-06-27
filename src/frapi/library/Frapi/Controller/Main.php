@@ -220,11 +220,12 @@ class Frapi_Controller_Main
             $format = $this->getParam('format');
             if (is_string($query_path_format) && strlen($query_path_format) || $format) {
                 $extension = ($query_path_format) ? $query_path_format : $format;
+
+                if ($query_path_format) {
+                    $query_path = substr($query_path, 0, (strlen($extension) + 1)*-1);
+                }
+
                 if (Frapi_Rules::validateOutputType($extension) === true) {
-                    //Output format suffix is valid, remove from URL!
-                    if ($query_path_format) {
-                        $query_path = substr($query_path, 0, (strlen($extension) + 1)*-1);
-                    }
                     $accept = Frapi_Output::getMimeTypeByFormat($extension);
                     if (isset($_SERVER['HTTP_ACCEPT'])) {
                         $_SERVER['HTTP_ACCEPT'] = $accept . ',' .$_SERVER['HTTP_ACCEPT'];
@@ -453,8 +454,12 @@ class Frapi_Controller_Main
         $format = strtolower($format);
 
         if ($format) {
-            $typeValid = Frapi_Rules::validateOutputType($format);
-            $this->format = $format;
+            if (Frapi_Rules::validateOutputType($format)) {
+                $this->format = $format;
+            } else {
+                $this->format = false;
+            }
+
         } else {
             throw new Frapi_Error (
                 Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_NAME,
