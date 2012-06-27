@@ -248,7 +248,7 @@ echo $this->form;
 
                $('#submitter').attr('disabled', false)
                               .attr('value', '<?php echo $this->tr->_('RUN_TEST'); ?>');
-            
+
                var inHistory = false;
                var uri       = queryURI.replace('\.' + format.toLowerCase(), '');
                $('#action optgroup[label=History] option').each(function() {
@@ -294,7 +294,7 @@ echo $this->form;
                 type:    "GET",
                 url:     "/tester/history",
                 data:    "url=" + escape(queryURI),
-                success: function(data) { 
+                success: function(data) {
                     $("#query_uri").val(data.query_uri);
                     $("#format").attr("value", data.format.toUpperCase());
                     $("#method").attr("value", data.method.toLowerCase());
@@ -303,7 +303,7 @@ echo $this->form;
                     $("#url").val(data.url);
 
                     if (typeof(data.ssl) != "undefined") {
-                        $("#ssl").attr("checked", data.ssl); 
+                        $("#ssl").attr("checked", data.ssl);
                     }
 
                     if (typeof(data.param) != "undefined") {
@@ -320,5 +320,52 @@ echo $this->form;
             });
         }
     });
+
+    // Capture ctrl+r (or cmd+r) if the user wishes to run tests instead of reload the page
+    $(document).keydown(function(e) {
+        if(e.keyCode == 'R'.charCodeAt(0) && e.metaKey) {
+            var capture_ctrl_r = readCookie('capture_ctrl_r');
+
+            if (capture_ctrl_r == null) {
+
+                if (confirm('<?php echo $this->tr->_('CTRL_R_CAPTURE'); ?>')) {
+                    createCookie('capture_ctrl_r', true);
+                    $('#submitter').click()
+                } else {
+                    createCookie('capture_ctrl_r', false);
+                }
+            } else if (capture_ctrl_r) {
+                $('#submitter').click();
+            }
+
+            return false;
+        }
+    });
+
+    function createCookie(name, value, expires) {
+        if (expires) {
+            var date = new Date();
+            date.setTime(date.getTime()+expires);
+            var expires = "; expires="+date.toGMTString();
+        } else {
+            var expires = "";
+        }
+        document.cookie = name+"="+value+expires+"; path=/";
+    }
+
+    function readCookie(name) {
+        var name_eq = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(name_eq) == 0) return c.substring(name_eq.length,c.length);
+        }
+        return null;
+    }
+
+    function eraseCookie(name) {
+        createCookie(name,"",-1);
+    }
 </script>
 
