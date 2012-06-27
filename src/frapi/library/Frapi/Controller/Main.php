@@ -454,12 +454,8 @@ class Frapi_Controller_Main
         $format = strtolower($format);
 
         if ($format) {
-            if (Frapi_Rules::validateOutputType($format)) {
-                $this->format = $format;
-            } else {
-                $this->format = false;
-            }
-
+            $typeValid    = Frapi_Rules::validateOutputType($format);
+            $this->format = $format;
         } else {
             throw new Frapi_Error (
                 Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_NAME,
