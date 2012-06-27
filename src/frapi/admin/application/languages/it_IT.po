@@ -306,6 +306,9 @@ msgstr "Errore: Non sei più loggato a causa di un lugo periodo di inattività. 
 msgid "HISTORY_ERROR"
 msgstr "Error fetching your history"
 
+msgid "CTRL_R_CAPTURE"
+msgstr "Use ctrl+r/cmd+r to run tests?"
+
 # Other
 msgid "ADDED"
 msgstr "aggiunto"

@@ -33,7 +33,7 @@ msgid "MIMETYPES"
 msgstr "Mimetypes"
 
 msgid "ERRORS"
-msgstr "Errors" 
+msgstr "Errors"
 
 msgid "PARTNERS"
 msgstr "Partners"
@@ -427,6 +427,9 @@ msgstr "Remember, you can set the default API domain name in <a href=\"/configur
 
 msgid "HISTORY_ERROR"
 msgstr "Error fetching your history"
+
+msgid "CTRL_R_CAPTURE"
+msgstr "Use ctrl+r/cmd+r to run tests?"
 
 # Other
 msgid "ADDED"
