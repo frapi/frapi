@@ -56,19 +56,12 @@ class Frapi_Rules implements Frapi_Rules_Interface
      */
     public static function validateOutputType($type)
     {
-        $outputs = Frapi_Internal::getCachedElseQueryConfigurationByKey(
-            'Output.formats-enabled',
-            array(
-                'type' => 'outputs', 
-                'node' => 'output', 
-                'key'  => 'name'
-            )
-        );
+        $outputs = Frapi_Output::getEnabledFormats();
 
         if (is_array($outputs) && !in_array(strtolower($type), $outputs)) {
             return false;
         }
-        
+
         return true;
     }
 
