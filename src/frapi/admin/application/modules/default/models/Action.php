@@ -525,7 +525,7 @@ class Default_Model_Action extends Lupin_Model
         if (!empty($properties)) {
             $executeActionBody = '        $valid = $this->hasRequiredParameters($this->requiredParams);
 if ($valid instanceof Frapi_Error) {
-    return $valid;
+    throw $valid;
 }';
         }
 
