@@ -465,7 +465,8 @@ class Frapi_Controller_Main
             throw new Frapi_Error (
                 Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_NAME,
                 Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_MSG,
-                Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_NO
+                Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_NO,
+                Frapi_Error::ERROR_INVALID_URL_PROMPT_FORMAT_HTTP_MSG
             );
         }
     }

@@ -45,12 +45,13 @@ class Frapi_Security implements Frapi_Security_Interface
         // IP Validation should happen here.
         $model = Frapi_Model_Partner::isPartner($partnerID, $partnerKey);
         header('WWW-Authenticate: Basic realm="API Authentication"');
-        
+
         if ($model === false) {
             throw new Frapi_Error(
                 Frapi_Error::ERROR_INVALID_PARTNER_ID_NAME,
                 Frapi_Error::ERROR_INVALID_PARTNER_ID_MSG,
-                Frapi_Error::ERROR_INVALID_PARTNER_ID_NO
+                Frapi_Error::ERROR_INVALID_PARTNER_ID_NO,
+                Frapi_Error::ERROR_INVALID_PARTNER_ID_HTTP_MSG
             );
         }
 

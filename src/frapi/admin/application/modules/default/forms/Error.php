@@ -24,6 +24,11 @@ class Default_Form_Error extends Lupin_Form
         $http_code->setRequired(false);
         $this->addElement($http_code);
 
+        $http_phrase = new Zend_Form_Element_Text('http_phrase');
+        $http_phrase->setLabel($tr->_('HTTP_REASON_PHRASE'));
+        $http_phrase->setRequired(false);
+        $this->addElement($http_phrase);
+
         $name = new Zend_Form_Element_Text('name');
         $name->setLabel($tr->_('NAME'));
         $name->setRequired(true);

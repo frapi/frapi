@@ -106,7 +106,7 @@ class Frapi_Output
      **/
     public function sendHeaders($response)
     {
-        header('HTTP/1.1 '.intval($response->getStatusCode()));
+        header('HTTP/1.1 '.intval($response->getStatusCode()).' '.$response->getReasonPhrase());
 
         if ($response instanceof Frapi_Response) {
             $content_type = $response->getContentType();

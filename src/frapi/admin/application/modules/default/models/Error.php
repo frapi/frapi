@@ -16,58 +16,60 @@
 class Default_Model_Error extends Lupin_Model
 {
     protected $config;
-    
+
     public function __construct()
     {
         $this->config = new Lupin_Config_Xml('errors');
     }
-    
+
     public function add(array $data)
     {
-        $whitelist = array('name', 'message', 'actions', 'description', 'http_code');
+        $whitelist = array('name', 'message', 'actions', 'description', 'http_code', 'http_phrase');
         $this->whiteList($whitelist, $data);
 
         $values = array(
-            'name'        => $data['name'], 
-            'message'     => $data['message'], 
+            'name'        => $data['name'],
+            'message'     => $data['message'],
             'http_code'   => $data['http_code'],
-            'description' => $data['description'], 
+            'description' => $data['description'],
+            'http_phrase' => $data['http_phrase'],
         );
-        
+
         try {
             $this->config->add('error', $values);
         } catch (Exception $e) { }
-        
+
         $this->refreshAPCCache();
-        
+
         return true;
     }
 
     public function update(array $data, $id)
     {
-        $whitelist = array('name', 'message', 'actions', 'description', 'http_code');
+        $whitelist = array('name', 'message', 'actions', 'description', 'http_code', 'http_phrase');
         $this->whiteList($whitelist, $data);
 
         $values = array(
-            'name'        => $data['name'], 
-            'message'     => $data['message'], 
+            'name'        => $data['name'],
+            'message'     => $data['message'],
             'http_code'   => isset($data['http_code']) ? $data['http_code'] : 400,
-            'description' => $data['description'], 
+            'description' => $data['description'],
+            'http_phrase' => $data['http_phrase'],
         );
-        
+
         try {
             $this->config->update('error', 'hash', $id, $values);
         } catch (Exception $e) { }
-        
-        $this->refreshAPCCache();        
-        
+
+        $this->refreshAPCCache();
+
         return true;
     }
 
     public function delete($id)
     {
         $this->config->deleteByField('error', 'hash', $id);
-        $this->refreshAPCCache();        
+        $this->refreshAPCCache();
     }
 
     public function get($id)
@@ -75,13 +77,13 @@ class Default_Model_Error extends Lupin_Model
         $error = $this->config->getByField('error', 'hash', $id);
         return isset($error) ? $error : false;
     }
-    
+
     public function getAll()
     {
         $errors = $this->config->getAll('error');
         return $errors;
     }
-    
+
     /**
      * Refresh the APC cache by deleting APC entry.
      *
@@ -92,9 +94,9 @@ class Default_Model_Error extends Lupin_Model
         $configModel = new Default_Model_Configuration();
         $server = $configModel->getKey('api_url');
         $hash = isset($server) ? hash('sha1', $server) : '';
-        
+
         $cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
-        
+
         $cache->delete($hash . '-Errors.user-defined');
         $cache->delete($hash . '-configFile-errors');
     }

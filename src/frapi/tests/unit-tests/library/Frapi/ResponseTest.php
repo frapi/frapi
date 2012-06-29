@@ -30,13 +30,13 @@ class Frapi_ResponseTest extends PHPUnit_Framework_TestCase
     public function testResponseCode()
     {
         $response = new Frapi_Response(array('code' => 419));
-        
+
         $this->assertEquals(
             419,
             $response->getStatusCode()
         );
     }
-    
+
     /**
      * Test that a response code is correctly set within a Frapi_Response
      */
@@ -49,12 +49,31 @@ class Frapi_ResponseTest extends PHPUnit_Framework_TestCase
                 )
             )
         );
-        
+
         $data = $response->getData();
-        
+
         $this->assertEquals(
             'success',
             $data['test']
         );
+    }
+
+    /**
+     * Test that a reason phrase is correctly set within a Frapi_Response
+     */
+    public function testReasonPhrase()
+    {
+        $response = new Frapi_Response(array('reason_phrase' => 'A Reason Phrase'));
+        $this->assertEquals('A Reason Phrase', $response->getReasonPhrase());
+    }
+
+    /**
+     * Test that a reason phrase is correctly set with a Frapi_Response by a
+     * standard http code
+     */
+    public function testReasonPhraseByHttpCode()
+    {
+        $response = new Frapi_Response(array('code' => 405));
+        $this->assertEquals('Method Not Allowed', $response->getReasonPhrase());
     }
 }

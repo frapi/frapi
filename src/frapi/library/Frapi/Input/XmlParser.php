@@ -30,12 +30,12 @@ class Frapi_Input_XmlParser
      * @var string The root element name.
      */
     private static $_xmlRoot;
-    
+
     /**
-     * @var The response type from the 
+     * @var The response type from the
      */
     private static $_responseType;
-	
+
     /**
      * Create an Array from XML
      *
@@ -58,23 +58,24 @@ class Frapi_Input_XmlParser
             $iterator = new SimpleXMLIterator($xml);
         } catch(Exception $e) {
             $xmlErrors = libxml_get_errors();
-			
+
             throw new Frapi_Exception(
-                'String could not be parsed as XML', 
-                'INVALID_XML', 
-                400, 
+                'String could not be parsed as XML',
+                'INVALID_XML',
+                400,
+                'Bad Request',
                 'xml_parsing'
             );
             libxml_clear_errors();
         }
-        
+
         $xmlRoot = $iterator->getName();
         $type = $iterator->attributes()->type;
 
         // SimpleXML provides the root information on construct
         self::$_xmlRoot = $iterator->getName();
         self::$_responseType = $type;
-        
+
         // return the mapped array with the root element as the header
         return array($xmlRoot => self::_iteratorToArray($iterator));
     }
@@ -82,7 +83,7 @@ class Frapi_Input_XmlParser
     /**
      * Processes SimpleXMLIterator objects recursively
      *
-     * This method receives an Iterator Object and 
+     * This method receives an Iterator Object and
      * processes the object recursively to process all the
      * attributes.
      *
@@ -96,7 +97,7 @@ class Frapi_Input_XmlParser
         if (!$iterator->valid()) {
             return self::_typecastXmlValue($iterator);
         }
-        
+
         while($iterator->valid()) {
             $value = null;
             $tmpArray = null;
@@ -159,8 +160,8 @@ class Frapi_Input_XmlParser
      * Type case XML values based on attributes
      *
      * This method typecasts the xml values based on the
-     * attributes of the SimpleXMLElement Object passed 
-     * to the method. 
+     * attributes of the SimpleXMLElement Object passed
+     * to the method.
      *
      * @param object $valueObj SimpleXMLElement
      * @return mixed value for placing into array
@@ -172,7 +173,7 @@ class Frapi_Input_XmlParser
         // the element is null, so jump out here
         if (isset($attribs->nil) && $attribs->nil ||
            (isset($attribs->null) && $attribs->null) ||
-           (string)$valueObj == 'null') 
+           (string)$valueObj == 'null')
         {
             return null;
         }
@@ -192,7 +193,7 @@ class Frapi_Input_XmlParser
                 if(is_numeric($value)) {
                     return (bool) $value;
                 }
-                
+
                 return ($value == 'true');
                 break;
             case 'array':
@@ -205,7 +206,7 @@ class Frapi_Input_XmlParser
     /**
      * Convert XML timestamps to DateTime
      *
-     * This method receives a timestamp and attempts to 
+     * This method receives a timestamp and attempts to
      * convert it to a DateTime object using the DateTimeZone UTC.
      *
      * @param  string $timestamp

@@ -23,7 +23,7 @@ class Frapi_Input_RequestBodyParser
     /**
      * Static parsing of the request body
      *
-     * This method extracts parameters from request body 
+     * This method extracts parameters from request body
      * by parsing content and either throws an exception if
      * the body is invalid XML or returns the decoded array from XML.
      *
@@ -45,7 +45,7 @@ class Frapi_Input_RequestBodyParser
                         $parseResponse = Frapi_Input_XmlParser::arrayFromXml($body);
                         return $parseResponse;
                     } catch( Frapi_Exception $e ){
-                        throw new Frapi_Error('INVALID_REQUEST_BODY', $e->getMessage(), $e->getCode());
+                        throw new Frapi_Error('INVALID_REQUEST_BODY', $e->getMessage(), $e->getCode(), $e->getReasonPhrase());
                     }
                 }
             break;
