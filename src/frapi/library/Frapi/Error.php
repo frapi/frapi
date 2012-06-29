@@ -244,11 +244,12 @@ class Frapi_Error extends Frapi_Exception
 
             if ($http_phrase !== false) {
                 $error['http_phrase'] = $http_phrase;
-            } else if (isset(Frapi_Response::$http_reason[$error['http_code']])){
+            } else if (isset(Frapi_Response::$http_reason[$error['http_code']]) && !$error['http_phrase']) {
                 $error['http_phrase'] = Frapi_Response::$http_reason[$error['http_code']];
-            } else if ($error['message'] !== false) {
+            } else if ($error['message'] !== false && !$error['http_phrase']) {
                 $error['http_phrase'] = $error['message'];
             }
+
             return $error;
         }
 
