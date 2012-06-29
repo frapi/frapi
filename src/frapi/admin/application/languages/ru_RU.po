@@ -399,6 +399,9 @@ msgstr "Не забудте завести домен ППИ (API) по умол
 msgid "HISTORY_ERROR"
 msgstr "Error fetching your history"
 
+msgid "CTRL_R_CAPTURE"
+msgstr "Use ctrl+r/cmd+r to run tests?"
+
 # Other
 msgid "ADDED"
 msgstr "Добавленно"
