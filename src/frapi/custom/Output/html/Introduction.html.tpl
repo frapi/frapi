@@ -282,6 +282,8 @@ $mimetypes = $grouped;
                 if ($action['enabled'] != 1) {
                     continue;
                 }
+
+                $action['route'] = preg_replace('@:([^/]+)@', '<strong>:$1</strong>', $action['route']);
                 ?>
                 <div class="action <?php if ($action['route'] == '/') { echo 'root'; } ?>" hash="<?php echo $action['hash']; ?>">
                     <div class="top">
