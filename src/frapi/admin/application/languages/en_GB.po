@@ -33,7 +33,7 @@ msgid "MIMETYPES"
 msgstr "Mimetypes"
 
 msgid "ERRORS"
-msgstr "Errors" 
+msgstr "Errors"
 
 msgid "PARTNERS"
 msgstr "Partners"
@@ -192,6 +192,9 @@ msgstr "Edit"
 
 msgid "HTTP_CODE"
 msgstr "HTTP Code"
+
+msgid "HTTP_REASON_PHRASE"
+msgstr "HTTP Reason Phrase"
 
 msgid "ERROR_MESSAGE"
 msgstr "Error Message"

@@ -64,6 +64,7 @@ class Console_ErrorsController extends Zend_Controller_Action
                 'code|c-i'        => $this->tr->_('HTTP_CODE'),
                 'message|m=s'     => $this->tr->_('ERROR_MESSAGE'),
                 'description|d-s' => $this->tr->_('DESCRIPTION'),
+                'httpphrase|h-s'  => $this->tr->_('HTTP_REASON_PHRASE'),
             )
         );
 
@@ -86,12 +87,14 @@ class Console_ErrorsController extends Zend_Controller_Action
         $error_code        = $options->code;
         $error_message     = $options->message;
         $error_description = $options->description;
+        $http_phrase       = $options->httpphrase;
 
         $submit_data = array(
             'name'          => $error_name,
             'http_code'     => $error_code,
             'message'       => $error_message,
             'description'   => $error_description,
+            'http_phrase'   => $http_phrase,
         );
 
         $model = new Default_Model_Error();

@@ -165,6 +165,9 @@ msgstr "Изменить"
 msgid "HTTP_CODE"
 msgstr "HTTP Код"
 
+msgid "HTTP_REASON_PHRASE"
+msgstr "HTTP Reason Phrase"
+
 msgid "ERROR_MESSAGE"
 msgstr "Описание ошибки"
 

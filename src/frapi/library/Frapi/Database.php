@@ -87,7 +87,8 @@ class Frapi_Database extends PDO
             throw new Frapi_Error(
                  'NO_DATABASE_DEFINED',
                  'No Database is defined in the configuration',
-                 500
+                 500,
+                 'Internal Server Error'
             );
         }
 
