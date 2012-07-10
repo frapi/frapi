@@ -208,14 +208,15 @@ class Frapi_Controller_Api extends Frapi_Controller_Main
                           ->populateOutput($e->getErrorArray())
                           ->sendHeaders($e)
                           ->executeOutput();
+        } catch(Frapi_Error $e) {
+            // If it's just a Frapi_Error, we want to rethrow it.
+            throw $e;  
         } catch (Exception $e) {
-            // This is a hack to intercept anything that may
-            // have happened before the internal error collection
-            // during the initialisation process.
-            //
-            // If we got here, we have no controller and cannot properly handle
-            // output, so we just send a 500 and die.
-
+            // We have no controller or error handler, 
+            // so send some indication somewhere that things went wrong. 
+            ob_start();
+            debug_print_backtrace();
+            error_log(ob_get_clean());
 
             header("HTTP/1.0 500 Internal Server Error");
             exit;
