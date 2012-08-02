@@ -519,9 +519,12 @@ class Frapi_Controller_Main
      */
     public function setInputFormat()
     {
-        $contentType = (isset($_SERVER['CONTENT_TYPE'])) ?
-                $_SERVER['CONTENT_TYPE'] :
-                null;
+        $contentType = null;
+        if (isset($_SERVER['CONTENT_TYPE'])) {
+            $matches = array();
+            preg_match('/^\s*(.*?)(?:(?:$|\s|;).*)/', $_SERVER['CONTENT_TYPE'], $matches);
+            $contentType = $matches[1];
+        }
 
         if(!empty($contentType) &&
            isset($this->mimeMaps[$contentType]) &&
