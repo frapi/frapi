@@ -177,10 +177,16 @@ class Default_Model_Action extends Lupin_Model
             // Validate the route does not already exist and is valid
             $router = new Frapi_Router();
             $router->loadAndPrepareRoutes();
-            if ($router->match($data['route'])) {
-                throw new RuntimeException('There is already an action with this route.');
+            if ($route = $router->match($data['route'])) {
+
+                // If we match a route that is same as route we are updating,
+                // then we are ok. Otherwise there is an error
+                if ($route['action'] != $tempAction['name']) {
+                    throw new RuntimeException('There is already an action with this route.');
+                }
             }
         }
+
 
         $segments = Frapi_Router::parseSegments($data['route']);
         foreach ($segments as $key => $value) {
