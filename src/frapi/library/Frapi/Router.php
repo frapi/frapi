@@ -136,6 +136,13 @@ class Frapi_Router
             return false;
         }
 
+        if(defined('FRAPI_BASE_URI'))
+        {
+            if(strpos($queryPath, FRAPI_BASE_URI) != 0)
+                return false;
+            $queryPath = substr($queryPath, strlen(FRAPI_BASE_URI));
+        }
+
         $matches          = array('static' => array(), 'dynamic' => array());
         $explodedPath     = self::parseSegments($queryPath);
         $firstPathSegment = current($explodedPath);
