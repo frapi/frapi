@@ -178,8 +178,9 @@ echo $this->form;
             $('#beautify').live('click', function() {
                 var code = $('#response-container').attr('data-content')
                 code = js_beautify(code);
-                $('#response-container div.syntaxhighlighter').remove();
-                $('#response-container').append('<pre id="response" />');
+
+                $('#response-code-container div.syntaxhighlighter ').remove();
+                $('#response-code-container').append('<pre id="response" />');
                 $('pre#response').html(code).addClass('brush: jscript');
                 highlight_response();
             });
@@ -224,11 +225,11 @@ echo $this->form;
 
                $('#response-container').empty();
                $('#response-container').append(
-                   $('<pre>').attr('id', '#response_headers').addClass("brush: headers").html(data.response_headers)
+                   $('<div id="response-headers-container">').html($('<pre>').attr('id', '#response_headers').addClass("brush: headers").html(data.response_headers))
                );
 
                var responseContent = '';
-               responseContent = $('<pre>').attr('id', 'response').addClass("brush: " + brush).html(unescape(data.content));
+               responseContent = $('<div id="response-code-container">').html($('<pre>').attr('id', 'response').addClass("brush: " + brush).html(unescape(data.content)));
 
 
                $('#response-container').attr('data-content', data.content).append(
@@ -248,7 +249,7 @@ echo $this->form;
 
                $('#submitter').attr('disabled', false)
                               .attr('value', '<?php echo $this->tr->_('RUN_TEST'); ?>');
-            
+
                var inHistory = false;
                var uri       = queryURI.replace('\.' + format.toLowerCase(), '');
                $('#action optgroup[label=History] option').each(function() {
@@ -294,7 +295,7 @@ echo $this->form;
                 type:    "GET",
                 url:     "/tester/history",
                 data:    "url=" + escape(queryURI),
-                success: function(data) { 
+                success: function(data) {
                     $("#query_uri").val(data.query_uri);
                     $("#format").attr("value", data.format.toUpperCase());
                     $("#method").attr("value", data.method.toLowerCase());
@@ -303,7 +304,7 @@ echo $this->form;
                     $("#url").val(data.url);
 
                     if (typeof(data.ssl) != "undefined") {
-                        $("#ssl").attr("checked", data.ssl); 
+                        $("#ssl").attr("checked", data.ssl);
                     }
 
                     if (typeof(data.param) != "undefined") {
