@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: Alex Piaz <alex@socioambiental.org>\n"
+"Last-Translator: Alex Piaz <alex@piaz.com.br>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -286,22 +286,22 @@ msgid "CACHE_HELP_ONE"
 msgstr "Listado abaixo estão as cache keys internas do FRAPI, coloridas por status. Clique para ver o conteúdo do cache"
 
 msgid "CACHE_HELP_TWO"
-msgstr "Click &quot;Delete&quot; to expire cache values, they will then be re-generated (when required) by the API front-end."
+msgstr "Clique &quot;Excluir&quot; para expirar o cache, ele será regenerado (quando necessário) pela API do front-end."
 
 msgid "SET"
 msgstr "Set"
 
 msgid "SIZE"
-msgstr "Size"
+msgstr "Tamanho"
 
 msgid "YES"
-msgstr "Yes"
+msgstr "Sim"
 
 msgid "NO"
-msgstr "No"
+msgstr "Não"
 
 msgid "YOU_CAN"
-msgstr "You can"
+msgstr "Você pode"
 
 msgid "UNSET_ALL_KEYS"
 msgstr "unset all keys"
@@ -316,7 +316,7 @@ msgid "HANDLE"
 msgstr "Handle"
 
 msgid "ADD_NEW_USER"
-msgstr "Add new User"
+msgstr "Adicionar novo usuário"
 
 msgid "USER_ADD_SUCCESS"
 msgstr "User (%s) added"
@@ -479,7 +479,7 @@ msgstr "Please select an item from the submenu, to your left"
 
 # Error page
 msgid "ERROR_PAGE"
-msgstr "Error Page"
+msgstr "Página de erro."
 
 msgid "SORRY_ERROR_MESSAGE"
 msgstr "Sorry! A system error prevented your action from being executed"
@@ -495,11 +495,11 @@ msgid "SUBMODULES_NOT_INITED"
 msgstr "Submodules missing, please run <code>git submodule update --init</code>"
 
 msgid "GENERAL_MISSING_TEXT_VALUE"
-msgstr "Required field is empty"
+msgstr "Campo obrigatório está vazio."
 
 ## extra post-pre
 msgid "USE_HTTPS"
-msgstr "Use HTTPS?"
+msgstr "Usar HTTPS?"
 
 msgid "RETYPE"
 msgstr "Re-type"
@@ -508,92 +508,92 @@ msgid "SYNC"
 msgstr "SINCRONIZAR"
 
 msgid "SYNCRONIZE_TITLE"
-msgstr "Synchronize Development Codebase"
+msgstr "Sincronizar base de código "
 
 msgid "ADMIN_INTERFACE"
-msgstr "Admin Interface"
+msgstr "Interface de Administração"
 
 msgid "FILE_NOT_EXIST_HAVE_YOU_SYNCED"
-msgstr "This file doesn't exist... have you sync'ed since you created this action?"
+msgstr "Este arquivo não existe....Você sincronizou depois de criar esta Ação?"
 
 msgid "EDITING_ACTION"
-msgstr "Editing Action"
+msgstr "Editando Ação"
 
 msgid "FILE_NOT_WRITABLE"
-msgstr "File (%s) is not writeable, please give the web-user write access to the custom directory."
+msgstr "Arquivo (%s) não tem permissões de escrita. Por favor dê as permissões de escrita ao usuário do servidor web (www-data)."
 
 msgid "FILE_CONTENT_UPDATED"
-msgstr "The content of the file has been updated with success."
+msgstr "O conteúdo do arquivo foi atualizado com sucesso."
 
 # CLI
 msgid "USAGE_MSG"
 msgstr "Usage: frapi.php [action] [module] [options]"
 
 msgid "INVALID_MODULE_ACTION"
-msgstr "Invalid module or action."
+msgstr "Módulo ou Ação inválidos."
 
 msgid "VALID_OPTIONS"
-msgstr "Valid options are"
+msgstr "Opções válidas são"
 
 msgid "CLI_PARAMETERS"
-msgstr "List of comma-seperated optional parameters."
+msgstr "Lista separada por vírgula com os parâmetros opcionais."
 
 msgid "CLI_REQUIRED_PARAMETERS"
-msgstr "List of comma-seperated required parameters."
+msgstr "Lista separada por vírgula com os parâmetros obrigatórios."
 
 msgid "ADDED_ACTION"
-msgstr "Successfully added action"
+msgstr "Ação adicionada com sucesso"
 
 msgid "ERROR_ADDING_ACTION"
-msgstr "Error adding action"
+msgstr "Erro ao adicionar Ação"
 
 msgid "COULD_NOT_DELETE_ACTION"
-msgstr "Could not delete action"
+msgstr "Não foi possível excluir Ação"
 
 msgid "COULD_NOT_FIND_MATCH"
-msgstr "Could not find match."
+msgstr "Não encontramos semelhança"
 
 msgid "SUCCESS_DELETE_ACTION"
-msgstr "Successfully deleted action"
+msgstr "Ação excluída copm sucesso"
 
 msgid "ERROR_DELETING_ACTION"
-msgstr "Error deleting action"
+msgstr "Erro ao excluir Ação"
 
 msgid "ACTION_ERROR_SYNCHRO"
-msgstr "Error synchronizing actions."
+msgstr "Erro ao sincronizar Ações"
 
 msgid "ROUTE"
-msgstr "Route"
+msgstr "Rota"
 
 msgid "ADDED_ERROR"
-msgstr "Successfully added error"
+msgstr "Erro adicionado com sucesso"
 
 msgid "ERROR_ADDING_ERROR"
-msgstr "Error adding action"
+msgstr "Erro ao adicionar uma Ação"
 
 msgid "COULD_NOT_DELETE_ERROR"
-msgstr "Could not delete error"
+msgstr "Não foi possível excluir o Erro"
 
 msgid "SUCCESS_DELETE_ERROR"
-msgstr "Successfully deleted error"
+msgstr "Erro foi excluído com sucesso"
 
 msgid "ERROR_DELETING_ERROR"
-msgstr "Error deleting errror"
+msgstr "Erro ao excluir erro! (oh!)"
 
 msgid "COULD_NOT_DELETE PARTNER"
-msgstr "Could not delete partner"
+msgstr "Não foi possível excluir parceiro"
 
 msgid "SUCCESS_DELETE_PARTNER"
-msgstr "Successfully deleted partner"
+msgstr "Parceiro excluído com sucesso"
 
 msgid "ERROR_DELETING_PARTNER"
-msgstr "Error deleting partner"
+msgstr "Erro ao excluir parceiro"
 
 msgid "USE_CDATA"
-msgstr "Always use CDATA"
+msgstr "Sempre usar CDATA"
 
 msgid "ALLOW_CROSSDOMAIN"
-msgstr "Allow cross domain requests"
+msgstr "Permitir requisições \"cross-domain\""
 
 msgid "DATABASE_TYPE"
 msgstr "Database Engine"
