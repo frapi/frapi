@@ -26,26 +26,26 @@ msgid "SUBMENU"
 msgstr "Submenu"
 
 msgid "WELCOME"
-msgstr "Bem vindo"
+msgstr "Bem-vindo"
 
 msgid "YOU_ARE_USING_FRAPI"
 msgstr "Você está na interface de administração do FRAPI"
 
 #menu
 msgid "DASHBOARD"
-msgstr "Dashboard"
+msgstr "Painel"
 
 msgid "ACTIONS"
-msgstr "Actions"
+msgstr "Ações"
 
 msgid "MIMETYPES"
 msgstr "Mimetypes"
 
 msgid "ERRORS"
-msgstr "Errors"
+msgstr "Erros"
 
 msgid "PARTNERS"
-msgstr "Partners"
+msgstr "Parceiros"
 
 msgid "CONFIGURATION"
 msgstr "Configuração"
@@ -62,32 +62,32 @@ msgid "AMAZING_WELCOME"
 msgstr "Bem vindo ao maravilhoso mundo do FRAPI!"
 
 msgid "DASHBOARD_WELCOME_TITLE"
-msgstr "First of all, Welcome to your API! Now, see below"
+msgstr "Antes de tudo, Bem-vindo à sua API! Agora, veja abaixo"
 
 msgid "CRITICAL_SETUP_ISSUES"
-msgstr "Critical Setup Issues"
+msgstr "Problemas críticos na instalação"
 
 msgid "CRITICAL_SETUP_ISSUES_INTRO"
-msgstr "We have identified issues regarding your setup which means that your API will not function correctly until you resolved those issues."
+msgstr "Nós identificamos problemas relativos a sua configuração, o que significa que a sua API não funcionará corretamente até que você resolva esses problemas."
 
 msgid "THE"
-msgstr "The"
+msgstr "O"
 
 # Action section
 msgid "ADD_NEW_ACTION"
-msgstr "Add new Action"
+msgstr "Adicionar nova Ação"
 
 msgid "SETUP_HELP_MESSAGE"
-msgstr "You might want to run <b>sh setup.sh</b> which sets the files to chmod 777. This file is located in the root of your FRAPI download/checkout."
+msgstr "Você pode querer rodar <b>sh setup.sh</b> que configura os arquivos com chmod 777. Este arquivo está localizado no diretório raiz do seu donwload/checkout do FRAPI."
 
 msgid "ACTION_DIR_PROBLEM"
-msgstr "The <strong>%s</strong> is not currently writeable by this user, therefore we cannot update the configuration file."
+msgstr "O <strong>%s</strong> não tem permissões de escrita para este usuário, por isso não conseguimos atualizar o arquivo de configuração."
 
 msgid "NAME"
 msgstr "Nome"
 
 msgid "IS_ACTION_PUBLIC"
-msgstr "Is the action public?"
+msgstr "A Ação é pública?"
 
 msgid "PRIVATE"
 msgstr "Privado"
@@ -99,7 +99,7 @@ msgid "ENABLED"
 msgstr "Habilitado"
 
 msgid "IS_ACTION_ENABLED"
-msgstr "Is the action enabled?"
+msgstr "A Ação está habilitada?"
 
 msgid "CUSTOM_ROUTE"
 msgstr "Rota Customizada"
@@ -120,31 +120,31 @@ msgid "REQUIRED"
 msgstr "Requerido"
 
 msgid "ACTION"
-msgstr "Action"
+msgstr "Ação"
 
 msgid "DELETE"
-msgstr "Delete"
+msgstr "Excluir"
 
 msgid "PLEASE_PROVIDE_USERNAME"
 msgstr "Por favor forneça um nome de usuário e uma senha"
 
 msgid "ACTION_ADD_SUCCESS"
-msgstr "Action added"
+msgstr "Ação adicionada"
 
 msgid "ACTION_ADD_FAIL"
-msgstr "Error adding action"
+msgstr "Erro ao adicionar Ação"
 
 msgid "ACTION_MISSING_ID"
-msgstr "Required parameter ID not found"
+msgstr "Parâmetro requerido ID não está presente."
 
 msgid "ACTION_UPDATE_SUCCESS"
-msgstr "Action updated"
+msgstr "Ação atualizada"
 
 msgid "ACTION_UPDATE_FAIL"
-msgstr "Action update failed"
+msgstr "Atualização de Ação falhou"
 
 msgid "ACTION_DELETE"
-msgstr "Action deleted"
+msgstr "Ação excluída"
 
 msgid "ACTION_WRITE_ERROR"
 msgstr "The path (%s) is not currently writeable by this user, therefore we cannot synchronize the codebase"
@@ -505,7 +505,7 @@ msgid "RETYPE"
 msgstr "Re-type"
 
 msgid "SYNC"
-msgstr "Sync Now"
+msgstr "SINCRONIZAR"
 
 msgid "SYNCRONIZE_TITLE"
 msgstr "Synchronize Development Codebase"

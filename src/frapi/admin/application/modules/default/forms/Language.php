@@ -21,10 +21,11 @@ class Default_Form_Language extends Lupin_Form
         $locale = Zend_Registry::get('Zend_Locale');
 
         $available_languages = array (
-            'en' => 'English',
-            'fr' => 'Francais',
-            'it' => 'Italiano',
-            'ru' => 'Русский',
+            'en'    => 'English',
+            'fr'    => 'Francais',
+            'it'    => 'Italiano',
+            'ru'    => 'Русский',
+	    'pt_BR' => 'Português do Brasil',
         );
 
         $this->setAction('/language');

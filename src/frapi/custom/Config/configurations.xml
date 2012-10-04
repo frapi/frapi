@@ -40,5 +40,10 @@
    <value>mysql</value>
    <hash>9dcf333a185b1744f0ba4176a47cdf0e1b9b8873</hash>
   </configuration>
+  <configuration>
+   <key>locale</key>
+   <value>pt_BR</value>
+   <hash>70f31fbacc8c0bb666f75bd2db3c265ff2afd54a</hash>
+  </configuration>
  </configurations>
 </frapi-config>
