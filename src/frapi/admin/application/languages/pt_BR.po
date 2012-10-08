@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: Alex Piaz <alex@piaz.com.br>\n"
+"Last-Translator: Alex Piaz <alex@socioambiental.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -319,49 +319,49 @@ msgid "ADD_NEW_USER"
 msgstr "Adicionar novo usuário"
 
 msgid "USER_ADD_SUCCESS"
-msgstr "User (%s) added"
+msgstr "Usuário (%s) adicionado."
 
 msgid "USER_ADD_FAIL"
-msgstr "Error adding user"
+msgstr "Erro adicionando usuário"
 
 msgid "USER_UPDATE_SUCCESS"
-msgstr "User updated"
+msgstr "Usuário atualizado"
 
 msgid "USER_UPDATE_FAIL"
-msgstr "Error updating user"
+msgstr "Erro ao atualizar usuário"
 
 msgid "USER_DELETE"
-msgstr "User removed"
+msgstr "Usuário removido"
 
 msgid "USER_CONFIRM_DELETE"
-msgstr "Are you sure you want to delete this user?"
+msgstr "Tem certeza que deseja excluir este usuário?"
 
 msgid "USER_PASSWORD_MISMATCH"
-msgstr "Passwords do not match"
+msgstr "A senha não confere."
 
 msgid "SYNC_OUTPUT_TYPES"
-msgstr "Sync Output Types"
+msgstr "Sincronizando output types"
 
 msgid "MAKE_DEFAULT"
 msgstr "Make Default"
 
 msgid "DISABLE"
-msgstr "Disable"
+msgstr "Desabilitar"
 
 msgid "ENABLE"
-msgstr "Enabled"
+msgstr "Habilitar"
 
 msgid "DEFAULT_OUTPUT"
-msgstr "Default Output"
+msgstr "Saída Padrão"
 
 msgid "TYPE"
-msgstr "Type"
+msgstr "Tipo"
 
 msgid "VALUE"
-msgstr "Value"
+msgstr "Valor"
 
 msgid "KEY"
-msgstr "Key"
+msgstr "Chave"
 
 msgid "EDIT_DATABASE_SETTINGS"
 msgstr "Edit Database settings"
