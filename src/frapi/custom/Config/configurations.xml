@@ -11,15 +11,15 @@
   </configuration>
   <configuration>
    <key>db_password</key>
-   <value>password</value>
+   <value>2112</value>
   </configuration>
   <configuration>
    <key>db_database</key>
-   <value>example</value>
+   <value>ufo</value>
   </configuration>
   <configuration>
    <key>api_url</key>
-   <value>api.frapi</value>
+   <value>api.piaz.com.br</value>
   </configuration>
   <configuration>
    <key>cache</key>
@@ -28,11 +28,11 @@
   <configuration>
    <key>use_cdata</key>
    <hash>d36820838f92275c856b7cab1c5563976fb72c72</hash>
-   <value>1</value>
+   <value>0</value>
   </configuration>
   <configuration>
    <key>allow_cross_domain</key>
-   <value>1</value>
+   <value>0</value>
    <hash>e93a8dc4d1bb0f7d7dc37d21d6307f7dfdbbdae3</hash>
   </configuration>
   <configuration>
