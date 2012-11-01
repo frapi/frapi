@@ -1,0 +1,603 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Alex Piaz <alex@socioambiental.org>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "HOSTNAME"
+msgstr "Hostname"
+
+# login page
+msgid "USERNAME"
+msgstr "Nome de usuário"
+
+msgid "PASSWORD"
+msgstr "Senha"
+
+msgid "LOGIN"
+msgstr "Login"
+
+msgid "SUBMENU"
+msgstr "Submenu"
+
+msgid "WELCOME"
+msgstr "Bem-vindo"
+
+msgid "YOU_ARE_USING_FRAPI"
+msgstr "Você está na interface de administração do FRAPI"
+
+#menu
+msgid "DASHBOARD"
+msgstr "Painel"
+
+msgid "ACTIONS"
+msgstr "Ações"
+
+msgid "MIMETYPES"
+msgstr "Mimetypes"
+
+msgid "ERRORS"
+msgstr "Erros"
+
+msgid "PARTNERS"
+msgstr "Parceiros"
+
+msgid "CONFIGURATION"
+msgstr "Configuração"
+
+msgid "TESTER"
+msgstr "Testador"
+
+# top right - sync
+msgid "SYNCING_MESSAGE"
+msgstr "<i><strong>\"Sincronizando\"</strong></i>: Sincronizando sua base de códigos com as actions que você criou em \"<strong><a href=\"/action\" title=\"Action management\">Actions</a></strong>\""
+
+# Dashboard welcome
+msgid "AMAZING_WELCOME"
+msgstr "Bem vindo ao maravilhoso mundo do FRAPI!"
+
+msgid "DASHBOARD_WELCOME_TITLE"
+msgstr "Antes de tudo, Bem-vindo à sua API! Agora, veja abaixo"
+
+msgid "CRITICAL_SETUP_ISSUES"
+msgstr "Problemas críticos na instalação"
+
+msgid "CRITICAL_SETUP_ISSUES_INTRO"
+msgstr "Nós identificamos problemas relativos a sua configuração, o que significa que a sua API não funcionará corretamente até que você resolva esses problemas."
+
+msgid "THE"
+msgstr "O"
+
+# Action section
+msgid "ADD_NEW_ACTION"
+msgstr "Adicionar nova Ação"
+
+msgid "SETUP_HELP_MESSAGE"
+msgstr "Você pode querer rodar <b>sh setup.sh</b> que configura os arquivos com chmod 777. Este arquivo está localizado no diretório raiz do seu donwload/checkout do FRAPI."
+
+msgid "ACTION_DIR_PROBLEM"
+msgstr "O <strong>%s</strong> não tem permissões de escrita para este usuário, por isso não conseguimos atualizar o arquivo de configuração."
+
+msgid "NAME"
+msgstr "Nome"
+
+msgid "IS_ACTION_PUBLIC"
+msgstr "A Ação é pública?"
+
+msgid "PRIVATE"
+msgstr "Privado"
+
+msgid "PUBLIC"
+msgstr "Público"
+
+msgid "ENABLED"
+msgstr "Habilitado"
+
+msgid "IS_ACTION_ENABLED"
+msgstr "A Ação está habilitada?"
+
+msgid "CUSTOM_ROUTE"
+msgstr "Rota Customizada"
+
+msgid "DESCRIPTION"
+msgstr "Descrição"
+
+msgid "SAVE"
+msgstr "Salvar"
+
+msgid "ADD_PARAMETER"
+msgstr "Adicionar Parâmetro"
+
+msgid "PARAMETER"
+msgstr "Parâmetro"
+
+msgid "REQUIRED"
+msgstr "Requerido"
+
+msgid "ACTION"
+msgstr "Ação"
+
+msgid "DELETE"
+msgstr "Excluir"
+
+msgid "PLEASE_PROVIDE_USERNAME"
+msgstr "Por favor forneça um nome de usuário e uma senha"
+
+msgid "ACTION_ADD_SUCCESS"
+msgstr "Ação adicionada"
+
+msgid "ACTION_ADD_FAIL"
+msgstr "Erro ao adicionar Ação"
+
+msgid "ACTION_MISSING_ID"
+msgstr "Parâmetro requerido ID não está presente."
+
+msgid "ACTION_UPDATE_SUCCESS"
+msgstr "Ação atualizada"
+
+msgid "ACTION_UPDATE_FAIL"
+msgstr "Atualização de Ação falhou"
+
+msgid "ACTION_DELETE"
+msgstr "Ação excluída"
+
+msgid "ACTION_WRITE_ERROR"
+msgstr "O caminho (%s) não é gravável por este usuário, por conta disso não podemos sincronizar a base de código"
+
+msgid "ACTION_DEV_SYNC_SUCCESS"
+msgstr "Ambiente de desenvolvimento foi sincronizado"
+
+msgid "ACTION_CONFIRM_DELETE"
+msgstr "Tem certeza que você quer excluir esta ação?"
+
+# Mimetype section
+msgid "ADD_NEW_MIMETYPE"
+msgstr "Adicionar novo Mimetype"
+
+msgid "MIMETYPE_ADD_SUCCESS"
+msgstr "Mimetype (%s) adicionado"
+
+msgid "MIMETYPE_UPDATE_SUCCESS"
+msgstr "Mimetype (%s) atualizado"
+
+msgid "MIMETYPE_DELETE"
+msgstr "Mimetype removido"
+
+msgid "MIMETYPE"
+msgstr "Mimetype"
+
+msgid "OUTPUT_FORMAT"
+msgstr "Formato de saída"
+
+msgid "MIMETYPE_CONFIRM_DELETE"
+msgstr "Tem certeza que você quer excluir este mimetype?"
+
+# Error section
+msgid "ADD_NEW_ERROR"
+msgstr "Adicionar novo Erro"
+
+msgid "ERROR_ADD_SUCCESS"
+msgstr "Erro (%s) adicionado"
+
+msgid "ERROR_UPDATE_SUCCESS"
+msgstr "Erro (%s) atualizado"
+
+msgid "ERROR_DELETE"
+msgstr "Erro excluído"
+
+msgid "FILTER"
+msgstr "Filtro"
+
+msgid "MESSAGE"
+msgstr "Mensagem"
+
+msgid "EDIT"
+msgstr "Editar"
+
+msgid "HTTP_CODE"
+msgstr "HTTP Code"
+
+msgid "ERROR_MESSAGE"
+msgstr "Mensagem de Erro"
+
+msgid "SUBMIT"
+msgstr "Submeter"
+
+msgid "ERROR_CONFIRM_DELETE"
+msgstr "Tem certeza que deseja excluir este erro?"
+
+# Partner Section
+msgid "ADD_NEW_PARTNER"
+msgstr "Adicionar novo parceiro"
+
+msgid "COMPANY"
+msgstr "Empresa"
+
+msgid "API_KEY"
+msgstr "API Key"
+
+msgid "FIRSTNAME"
+msgstr "Primeiro Nome"
+
+msgid "LASTNAME"
+msgstr "Sobrenome"
+
+msgid "EMAIL_USERNAME"
+msgstr "E-mail/nome de usuário"
+
+msgid "PARTNER_ADD_SUCCESS"
+msgstr "Parceiro (%s) foi adicionado. Lembre-se que se você quiser fazer uma chamada à API que necessita de uma autenticação, você tem que desmarcar a opção \"A Ação é pública?\" na seção de edição/inclusão de uma ação. Psstt a API RESTful usa HTTP Auth."
+
+msgid "PARTNER_UPDATE_SUCCESS"
+msgstr "Parceiro (%s) atualizado"
+
+msgid "PARTNER_DELETE"
+msgstr "Parceiro removido"
+
+msgid "PARTNER_GENERATE_NEW_API_KEY"
+msgstr "Gerar nova API key"
+
+msgid "PARTNER_API_KEY_UPDATED"
+msgstr "API key atualizada"
+
+msgid "PARTNER_CONFIRM_DELETE"
+msgstr "Tem certeza que você quer excluir este parceiro?"
+
+# Configuration Section
+msgid "CACHE"
+msgstr "Cache"
+
+msgid "USERS"
+msgstr "Usuários"
+
+msgid "OUTPUT"
+msgstr "Saída"
+
+msgid "DATABASE"
+msgstr "Database"
+
+msgid "SELECT_ITEM_FROM_SUBMENU"
+msgstr "Por favor selecione um item no submenu localizado a sua esquerda."
+
+msgid "UPDATE_CONFIGURATION"
+msgstr "Atualizar Configuração"
+
+msgid "API_DOMAIN"
+msgstr "Domínio da API"
+
+msgid "FOR_TESTER"
+msgstr "Para o testador"
+
+msgid "ADMIN_LANGUAGE"
+msgstr "Idioma da área de Administração FRAPI"
+
+msgid "LANGUAGE"
+msgstr "Idioma"
+
+msgid "UPDATE_SYSTEM_WIDE"
+msgstr "Atualizar tudo"
+
+msgid "CACHE_HELP_ONE"
+msgstr "Listado abaixo estão as cache keys internas do FRAPI, coloridas por status. Clique para ver o conteúdo do cache"
+
+msgid "CACHE_HELP_TWO"
+msgstr "Clique &quot;Excluir&quot; para expirar o cache, ele será regenerado (quando necessário) pela API do front-end."
+
+msgid "SET"
+msgstr "Set"
+
+msgid "SIZE"
+msgstr "Tamanho"
+
+msgid "YES"
+msgstr "Sim"
+
+msgid "NO"
+msgstr "Não"
+
+msgid "YOU_CAN"
+msgstr "Você pode"
+
+msgid "UNSET_ALL_KEYS"
+msgstr "unset all keys"
+
+msgid "UNSET_ALL_CACHE_KEYS"
+msgstr "Unset all cache keys"
+
+msgid "TO_CLEAR_CACHE"
+msgstr "to clear the cache"
+
+msgid "HANDLE"
+msgstr "Handle"
+
+msgid "ADD_NEW_USER"
+msgstr "Adicionar novo usuário"
+
+msgid "USER_ADD_SUCCESS"
+msgstr "Usuário (%s) adicionado."
+
+msgid "USER_ADD_FAIL"
+msgstr "Erro adicionando usuário"
+
+msgid "USER_UPDATE_SUCCESS"
+msgstr "Usuário atualizado"
+
+msgid "USER_UPDATE_FAIL"
+msgstr "Erro ao atualizar usuário"
+
+msgid "USER_DELETE"
+msgstr "Usuário removido"
+
+msgid "USER_CONFIRM_DELETE"
+msgstr "Tem certeza que deseja excluir este usuário?"
+
+msgid "USER_PASSWORD_MISMATCH"
+msgstr "A senha não confere."
+
+msgid "SYNC_OUTPUT_TYPES"
+msgstr "Sincronizando output types"
+
+msgid "MAKE_DEFAULT"
+msgstr "Make Default"
+
+msgid "DISABLE"
+msgstr "Desabilitar"
+
+msgid "ENABLE"
+msgstr "Habilitar"
+
+msgid "DEFAULT_OUTPUT"
+msgstr "Saída Padrão"
+
+msgid "TYPE"
+msgstr "Tipo"
+
+msgid "VALUE"
+msgstr "Valor"
+
+msgid "KEY"
+msgstr "Chave"
+
+msgid "EDIT_DATABASE_SETTINGS"
+msgstr "Edit Database settings"
+
+msgid "CONFIG_UPDATE_SUCCESS"
+msgstr "Configuration updated"
+
+msgid "CONFIG_UPDATE_FAIL"
+msgstr "Configuration update failed"
+
+# Tester Section
+msgid "QUERY_URI"
+msgstr "Query URI"
+
+msgid "PARAMS"
+msgstr "Params"
+
+msgid "TESTER_ADD_PARAMETER"
+msgstr "Add a parameter (&quot;name=value&quot;)"
+
+msgid "FORMAT"
+msgstr "Format"
+
+msgid "METHOD"
+msgstr "Method"
+
+msgid "EMAIL"
+msgstr "Email"
+
+msgid "SECRET_KEY"
+msgstr "Secret Key"
+
+msgid "LOAD_EMAIL_KEY"
+msgstr "Load Email/Key Combo"
+
+msgid "SELECT_COMBO_OF_FIELDS"
+msgstr "Select a combination to fill the fields above."
+
+msgid "RUN_TEST"
+msgstr "Run Test"
+
+msgid "TESTING"
+msgstr "Testing"
+
+msgid "POST_FIELDS"
+msgstr "Post Fields"
+
+msgid "RESPONSE"
+msgstr "Response"
+
+msgid "NO_QUERY_URI"
+msgstr "No query URI"
+
+msgid "REQUEST"
+msgstr "Request"
+
+msgid "CODE"
+msgstr "Code"
+
+msgid "CONTENT_BODY"
+msgstr "Content Body"
+
+msgid "TESTER_REQUEST_ERROR"
+msgstr "Error: You were logged out due to inactivity. Please <a href=\"/login\" target=\"_blank\">log in</a> (opens in new tab) and try again."
+
+msgid "TESTER_HTTP_REQUEST_MISSING"
+msgstr "HttpRequest class was not found &#8212; the <a href=\"http://pecl.php.net/package/pecl_http\" title=\"PECL HTTP\">pecl_http</a> package is required to use the tester."
+
+msgid "TESTER_API_INFO_MESSAGE"
+msgstr "Remember, you can set the default API domain name in <a href=\"/configuration\">configuration</a>!"
+
+msgid "HISTORY_ERROR"
+msgstr "Error fetching your history"
+
+# Other
+msgid "ADDED"
+msgstr "added"
+
+msgid "UPDATED"
+msgstr "updated"
+
+msgid "ID_PARAM_MISSING"
+msgstr "ID parameter is missing."
+
+msgid "NO_ACCESS_MESSAGE"
+msgstr "You do not have access to the area you were trying to access.<br />Please contact any of the administrators if you believe you should have access"
+
+msgid "VISIBILITY"
+msgstr "Visibility"
+
+msgid "DETAIL"
+msgstr "Detail"
+
+# Database
+msgid "DATABASE_CONFIGURATION"
+msgstr "Database configuration"
+
+msgid "ADD_NEW_DATABASE_CONFIGURATION"
+msgstr "Add new database configuration"
+
+msgid "EDIT_DATABASE_CONFIGURATION"
+msgstr "Edit database configuration"
+
+msgid "NO_DATABASE_CONFIGURATION_YET"
+msgstr "There are no database configurations yet"
+
+msgid "ADD_SOME"
+msgstr "Add some"
+
+msgid "MAIN"
+msgstr "Main"
+
+msgid "DATABASE_SELECT_ITEM"
+msgstr "Please select an item from the submenu, to your left"
+
+# Error page
+msgid "ERROR_PAGE"
+msgstr "Página de erro."
+
+msgid "SORRY_ERROR_MESSAGE"
+msgstr "Sorry! A system error prevented your action from being executed"
+
+# Warnings
+msgid "ACTION_WARNING_CONFIG"
+msgstr "The &quot;<b>%s</b>&quot; directory is not writeable by the current user (%s), therefore we will not be able to save API configurations: (Actions, Errors, Partners, Configuration, etc) until the user has write access."
+
+msgid "ACTION_WARNING_ACTION"
+msgstr "The &quot;<b>%s</b>&quot; directory is not writeable by the current user (%s), therefore we will not be able to synchronize the codebase until the user has write access."
+
+msgid "SUBMODULES_NOT_INITED"
+msgstr "Submodules missing, please run <code>git submodule update --init</code>"
+
+msgid "GENERAL_MISSING_TEXT_VALUE"
+msgstr "Campo obrigatório está vazio."
+
+## extra post-pre
+msgid "USE_HTTPS"
+msgstr "Usar HTTPS?"
+
+msgid "RETYPE"
+msgstr "Re-type"
+
+msgid "SYNC"
+msgstr "SINCRONIZAR"
+
+msgid "SYNCRONIZE_TITLE"
+msgstr "Sincronizar base de código "
+
+msgid "ADMIN_INTERFACE"
+msgstr "Interface de Administração"
+
+msgid "FILE_NOT_EXIST_HAVE_YOU_SYNCED"
+msgstr "Este arquivo não existe....Você sincronizou depois de criar esta Ação?"
+
+msgid "EDITING_ACTION"
+msgstr "Editando Ação"
+
+msgid "FILE_NOT_WRITABLE"
+msgstr "Arquivo (%s) não tem permissões de escrita. Por favor dê as permissões de escrita ao usuário do servidor web (www-data)."
+
+msgid "FILE_CONTENT_UPDATED"
+msgstr "O conteúdo do arquivo foi atualizado com sucesso."
+
+# CLI
+msgid "USAGE_MSG"
+msgstr "Usage: frapi.php [action] [module] [options]"
+
+msgid "INVALID_MODULE_ACTION"
+msgstr "Módulo ou Ação inválidos."
+
+msgid "VALID_OPTIONS"
+msgstr "Opções válidas são"
+
+msgid "CLI_PARAMETERS"
+msgstr "Lista separada por vírgula com os parâmetros opcionais."
+
+msgid "CLI_REQUIRED_PARAMETERS"
+msgstr "Lista separada por vírgula com os parâmetros obrigatórios."
+
+msgid "ADDED_ACTION"
+msgstr "Ação adicionada com sucesso"
+
+msgid "ERROR_ADDING_ACTION"
+msgstr "Erro ao adicionar Ação"
+
+msgid "COULD_NOT_DELETE_ACTION"
+msgstr "Não foi possível excluir Ação"
+
+msgid "COULD_NOT_FIND_MATCH"
+msgstr "Não encontramos semelhança"
+
+msgid "SUCCESS_DELETE_ACTION"
+msgstr "Ação excluída copm sucesso"
+
+msgid "ERROR_DELETING_ACTION"
+msgstr "Erro ao excluir Ação"
+
+msgid "ACTION_ERROR_SYNCHRO"
+msgstr "Erro ao sincronizar Ações"
+
+msgid "ROUTE"
+msgstr "Rota"
+
+msgid "ADDED_ERROR"
+msgstr "Erro adicionado com sucesso"
+
+msgid "ERROR_ADDING_ERROR"
+msgstr "Erro ao adicionar uma Ação"
+
+msgid "COULD_NOT_DELETE_ERROR"
+msgstr "Não foi possível excluir o Erro"
+
+msgid "SUCCESS_DELETE_ERROR"
+msgstr "Erro foi excluído com sucesso"
+
+msgid "ERROR_DELETING_ERROR"
+msgstr "Erro ao excluir erro! (oh!)"
+
+msgid "COULD_NOT_DELETE PARTNER"
+msgstr "Não foi possível excluir parceiro"
+
+msgid "SUCCESS_DELETE_PARTNER"
+msgstr "Parceiro excluído com sucesso"
+
+msgid "ERROR_DELETING_PARTNER"
+msgstr "Erro ao excluir parceiro"
+
+msgid "USE_CDATA"
+msgstr "Sempre usar CDATA"
+
+msgid "ALLOW_CROSSDOMAIN"
+msgstr "Permitir requisições \"cross-domain\""
+
+msgid "DATABASE_TYPE"
+msgstr "Database Engine"
+
+msgid "DATABASE_ENGINE"
+msgstr "DB Engine"
+

@@ -26,6 +26,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'fr_FR.mo', 'fr');
         $translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'it_IT.mo', 'it');
         $translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'ru_RU.mo', 'ru');
+	$translate->addTranslation($languageDir . DIRECTORY_SEPARATOR . 'pt_BR.mo', 'pt_BR');
 
         $locale = new Zend_Session_Namespace('locale');
         if (!$locale->value) {
