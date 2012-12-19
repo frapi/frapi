@@ -5,6 +5,9 @@
 .project
 .settings
 
+# Ignore mac osx DS_Store 
+.DS_Store
+
 #
 # Ignore the Netbeans nbproject folder
 #

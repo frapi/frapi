@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<frapi-config>
+ <params>
+   <param>
+   <key>sample_param</key>
+   <value>sample_value</value>
+   <hash>4e1dc0e5e55043f17fae82b7836df731c3f8ab96</hash>
+  </param>
+ </params>
+</frapi-config>

@@ -77,7 +77,8 @@ require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Response' . DIRECTORY_SEPARAT
 
 //Database
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Database.php';
-
+//Param Helper
+require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Params.php';
 // Output
 require LIBRARY_OUTPUT    . DIRECTORY_SEPARATOR . 'Interface.php';
 require LIBRARY_ROOT_PATH . DIRECTORY_SEPARATOR . 'Output.php';

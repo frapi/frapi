@@ -242,6 +242,14 @@ msgstr "API key updated"
 msgid "PARTNER_CONFIRM_DELETE"
 msgstr "Are you sure you want to delete this partner?"
 
+msgid "PARAM_ADD_SUCCESS"
+msgstr "Parameter (%s) has been added."
+
+msgid "PARAM_UPDATE_SUCCESS"
+msgstr "Parameter (%s) updated"
+
+msgid "PARAM_DELETE"
+msgstr "Parameter removed"
 
 # Configuration Section
 msgid "CACHE"
@@ -253,8 +261,15 @@ msgstr "Users"
 msgid "OUTPUT"
 msgstr "Output"
 
-msgid "DATABASE"
-msgstr "Database"
+msgid "DATABASES"
+msgstr "Databases"
+
+msgid "CUSTOM_PARAM"
+msgstr "Custom parameters"
+
+msgid "ADD_NEW_CUSTOM_PARAM"
+msgstr "Add a new custom configuration parameter"
+
 
 msgid "SELECT_ITEM_FROM_SUBMENU"
 msgstr "Please select an item from the submenu, to your left."
@@ -468,6 +483,19 @@ msgstr "Add some"
 
 msgid "MAIN"
 msgstr "Main"
+
+msgid "PORT"
+msgstr "Port"
+
+msgid "DBNAME"
+msgstr "Database name"
+
+msgid "DATABASE_UPDATE_SUCCESS"
+msgstr "Database (%s) updated"
+
+msgid "DATABASE_DELETE"
+msgstr "Database deleted"
+
 
 msgid "DATABASE_SELECT_ITEM"
 msgstr "Please select an item from the submenu, to your left"

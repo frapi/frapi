@@ -21,14 +21,15 @@ if ($pos !== false && $pos === $lpos) {
 
 ?>	
 
-    <?php if ($this->menuItem != '/action/code') : ?>
+    <?php if ($this->menuItem != '/action/code' && $this->menuItem != '/') : ?>
 	<div class="sidenav">
 		<h2><?php echo $this->tr->_('SUBMENU'); ?></h2>
-    <?php if (in_array($item, array('/configuration', '/database', '/cache', '/output', '/user'))) { ?>
+    <?php if (in_array($item, array('/configuration', '/databases', '/cache', '/output', '/user', '/params'))) { ?>
         <li<?php echo $item == '/cache' ? ' class="active"' : '' ?>><a href="/cache"><?php echo $this->tr->_('CACHE'); ?></a></li>
       <li<?php echo $item == '/user' ? ' class="active"' : '' ?>><a href="/user"><?php echo $this->tr->_('USERS'); ?></a></li>
       <li<?php echo $item == '/output' ? ' class="active"' : '' ?>><a href="/output"><?php echo $this->tr->_('OUTPUT'); ?></a></li>
-      <li<?php echo $item == '/database' ? ' class="active"' : '' ?>><a href="/database"><?php echo $this->tr->_('DATABASE'); ?></a></li>
+      <li<?php echo $item == '/databases' ? ' class="active"' : '' ?>><a href="/databases"><?php echo $this->tr->_('DATABASES'); ?></a></li>
+      <li<?php echo $item == '/params' ? ' class="active"' : '' ?>><a href="/params"><?php echo $this->tr->_('CUSTOM_PARAM'); ?></a></li>
     <?php } elseif ($item == '/user') { ?>
         <li<?php echo $item == '/user/add' ? ' class="active"' : '' ?>><a href="/user/add"><?php echo $this->tr->_('ADD_NEW_USER'); ?></a></li>
     <?php } elseif ($item == '/partners') { ?>

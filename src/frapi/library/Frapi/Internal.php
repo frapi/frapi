@@ -216,9 +216,9 @@ class Frapi_Internal
      * @param string $type The type of cached database configs to fetch.
      * @return array A list of db configs retrieved that have valid information.
      */
-    public static function getCachedDbConfig()
+    public static function getCachedBasicConfig()
     {
-        if ($cached = self::getCached('Database.configs')) {
+        if ($cached = self::getCached('Basic.configs')) {
             return $cached;
         } else {
 
@@ -230,12 +230,12 @@ class Frapi_Internal
                     $confs[$value['key']] = !empty($value['value']) ? $value['value'] : '';
                 }
 
-                if (!self::setCached('Database.configs',  $confs)) {
+                if (!self::setCached('Basic.configs',  $confs)) {
                     return $confs;
                 }
             }
 
-            return self::getCached('Database.configs');
+            return self::getCached('Basic.configs');
         }
     }
 

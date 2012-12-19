@@ -139,6 +139,19 @@ msgstr "Le chemin (%s) n'est actuellement pas accessible en écriture par cet ut
 msgid "ACTION_DEV_SYNC_SUCCESS"
 msgstr "Environnement de développement a été synchronisé."
 
+# MIMETYPES
+
+msgid "MIMETYPES"
+msgstr "Types MIME"
+
+msgid "MIMETYPE"
+msgstr "Type MIME"
+
+msgid "OUTPUT_FORMAT"
+msgstr "Format de sortie"
+
+msgid "ADD_NEW_MIMETYPE"
+msgstr "Ajouter un nouveau type MIME"
 
 # Error section
 
@@ -180,6 +193,16 @@ msgstr "Soumettre"
 msgid "ADD_NEW_PARTNER"
 msgstr "Ajoutez un nouveau partenaire"
 
+# Param Section
+msgid "PARAM_ADD_SUCCESS"
+msgstr "Le Parametre (%s) a été ajouté."
+
+msgid "PARAM_UPDATE_SUCCESS"
+msgstr "Le Parametre (%s) a été modifié"
+
+msgid "PARAM_DELETE"
+msgstr "Parametre effacé"
+
 msgid "COMPANY"
 msgstr "Entreprise"
 
@@ -205,8 +228,14 @@ msgstr "Utilisateurs"
 msgid "OUTPUT"
 msgstr "Output"
 
-msgid "DATABASE"
-msgstr "Base de données"
+msgid "DATABASES"
+msgstr "Bases de données"
+
+msgid "CUSTOM_PARAM"
+msgstr "Paramètres personalisés"
+
+msgid "ADD_NEW_CUSTOM_PARAM"
+msgstr "Ajouter un nouveau paramètre de configuration"
 
 msgid "SELECT_ITEM_FROM_SUBMENU"
 msgstr "Veuillez sélectionner un item sur la gauche dans le sous-menu."
@@ -391,8 +420,21 @@ msgstr "Modifier la configuration de la base de données"
 msgid "NO_DATABASE_CONFIGURATION_YET"
 msgstr "Il n'existe pas encore de configuration de la base de données"
 
+msgid "DATABASE_UPDATE_SUCCESS"
+msgstr "La base de donnée (%s) a été modifiée"
+
+msgid "DATABASE_DELETE"
+msgstr "Database effacée"
+
 msgid "ADD_SOME"
 msgstr "Ajouter en une"
+
+msgid "PORT"
+msgstr "Port"
+
+msgid "DBNAME"
+msgstr "Database name"
+
 
 msgid "MAIN"
 msgstr "Principal"
