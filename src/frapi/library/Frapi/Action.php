@@ -323,7 +323,11 @@ class Frapi_Action
      */
     protected function getParam($key, $type = self::TYPE_STRING, $default = null, $error_name = null)
     {
-         return $this->getByKey($this->getParams(), $key, $type, $default, $error_name);
+        if ($type == self::TYPE_FILE) {
+            return $this->getByKey($this->getFiles(), $key, $type, $default, $error_name);
+        }
+
+        return $this->getByKey($this->getParams(), $key, $type, $default, $error_name);
     }
 
     /**
