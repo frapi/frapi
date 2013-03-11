@@ -11,6 +11,9 @@ function _sortActions($a, $b)
     if ($a['route'] == '/') {
        return -1;
     }
+    else if ($b['route'] == '/') {
+       return 1;
+    }
     return ($a['name'] < $b['name']) ? -1 : 1;
 }
 
