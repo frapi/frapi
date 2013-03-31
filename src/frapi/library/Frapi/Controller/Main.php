@@ -348,7 +348,7 @@ class Frapi_Controller_Main
          * Checks if the last argument is an empty string, this + inputForm is
          * indicative of the body needing parsing.
          */
-        if (end($puts) == '' && !empty($inputFormat) || !empty($xmlJsonMatch)) {
+        if (!empty($inputFormat) || !empty($xmlJsonMatch)) {
             /* attempt to parse the input */
             reset($puts);
             $requestBody = Frapi_Input_RequestBodyParser::parse(
