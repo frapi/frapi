@@ -17,16 +17,16 @@
  * @license   New BSD
  * @package   frapi
  */
-class Frapi_Cache_Adapter_Memcache implements Frapi_Cache_Interface 
+class Frapi_Cache_Adapter_Memcache implements Frapi_Cache_Interface
 {
-    /** 
+    /**
      * The memcache object.
      *
      * @var Memcache $memcache The memcache object.
      */
     private $memcache = null;
-    
-    /** 
+
+    /**
      * Constructor
      *
      * This is the constructor. The options passed can be the
@@ -39,7 +39,7 @@ class Frapi_Cache_Adapter_Memcache implements Frapi_Cache_Interface
      *         'servers' = array(
      *             '127.0.0.1' => 11211
      *         )
-     *     ); 
+     *     );
      *
      *     $cache   = Frapi_Cache_Adapter_Memcache($options);
      * </code>
@@ -50,18 +50,18 @@ class Frapi_Cache_Adapter_Memcache implements Frapi_Cache_Interface
     public function __construct(array $options)
     {
         $this->memcache = new Memcache();
-        
+
         if (!isset($options['servers'])) {
             $this->memcache->addServer('127.0.0.1', '11211');
         }
-        
+
         if (isset($options['servers'])) {
             foreach ($options['servers'] as $server => $port) {
                 $this->memcache->addServer($server, $port);
             }
         }
     }
-    
+
     /**
      * Get a cache variable
      *
@@ -73,7 +73,7 @@ class Frapi_Cache_Adapter_Memcache implements Frapi_Cache_Interface
      * @return mixed         The value of the retrieved variable or false if
      *                       variable isn't found.
      */
-    public function get($name) 
+    public function get($name)
     {
         return $this->memcache->get($name);
     }
@@ -87,15 +87,15 @@ class Frapi_Cache_Adapter_Memcache implements Frapi_Cache_Interface
      * @param  string  $name   The name of the cache variable to store.
      * @param  string  $value  The value of the cache variable to store.
      * @param  integer $expire When should it expire? Default: 900 seconds.
-     * 
-     * @return boolean       Depending on the success of the operation, 
-     *                       either true or false. 
+     *
+     * @return boolean       Depending on the success of the operation,
+     *                       either true or false.
      */
-    public function add($name, $value, $expiry = 900) 
+    public function add($name, $value, $expiry = 900)
     {
-        return $this->memcache->add($name, $value, $expiry);
+        return $this->memcache->add($name, $value, false, $expiry);
     }
-    
+
     /**
      * Delete from the cache
      *
@@ -103,11 +103,11 @@ class Frapi_Cache_Adapter_Memcache implements Frapi_Cache_Interface
      * retrievable by $this->get($name)
      *
      * @param  string $name  The name of the cache variable to delete.
-     * 
-     * @return boolean       Depending on the success of the operation, 
-     *                       either true or false. 
+     *
+     * @return boolean       Depending on the success of the operation,
+     *                       either true or false.
      */
-    public function delete($name) 
+    public function delete($name)
     {
         return $this->memcache->delete($name);
     }
