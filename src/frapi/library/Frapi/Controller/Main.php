@@ -526,6 +526,11 @@ class Frapi_Controller_Main
             $contentType = $matches[1];
         }
 
+        if (strpos($contentType, ';') !== false) {
+            $parts = explode(';', $contentType);
+            $contentType = $parts[0];
+        }
+
         if(!empty($contentType) &&
            isset($this->mimeMaps[$contentType]) &&
            in_array($this->mimeMaps[$contentType], $this->allowedInputTypes)) {
