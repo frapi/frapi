@@ -328,29 +328,14 @@ class Frapi_Controller_Main
     {
         // read the raw input to get the request body
         $input = file_get_contents("php://input");
-        parse_str($input, $puts);
 
         $inputFormat = $this->inputFormat;
         if(empty($inputFormat)) {
-            $xmlJsonMatch = preg_grep('/\<|\{/i', array_keys($puts));
             $inputFormat = $this->getFormat();
         }
 
-        /**
-         * When doing parse_str("{json:string}") it creates an array like:
-         * array(
-         *  "{json:string}" => ""
-         * )
-         *
-         * If args are also present along with the body, they are in the array
-         * before the body.
-         *
-         * Checks if the last argument is an empty string, this + inputForm is
-         * indicative of the body needing parsing.
-         */
-        if (!empty($inputFormat) || !empty($xmlJsonMatch)) {
+        if (!empty($inputFormat)) {
             /* attempt to parse the input */
-            reset($puts);
             $requestBody = Frapi_Input_RequestBodyParser::parse(
                 $inputFormat,
                 $input
@@ -369,9 +354,12 @@ class Frapi_Controller_Main
 
                 $params = array_merge($params, $requestBody);
             }
-        } else if (!empty($puts)) {
-            foreach ($puts as $put => $val) {
-                $params[$put] = $val;
+        } else {
+            parse_str($input, $puts);
+            if (!empty($puts)) {
+                foreach ($puts as $put => $val) {
+                    $params[$put] = $val;
+                }
             }
         }
 
