@@ -146,7 +146,7 @@ echo $this->form;
 
         queryURI += '.' + format.toLowerCase();
 
-        var finalParams = 'email=' + escape(email);
+        var finalParams = 'email=' + encodeURIComponent(email);
         finalParams += '&secretKey=' + key;
 
         switch (method.toLowerCase()) {
@@ -163,14 +163,14 @@ echo $this->form;
 
         finalParams += '&method=' + method;
         finalParams += '&url=' + url;
-        finalParams += '&query_uri=' + escape(queryURI);
+        finalParams += '&query_uri=' + encodeURIComponent(queryURI);
         if (ssl === true) {
             finalParams += '&ssl=true';
         }
 
         if (extraParams.length > 0) {
             for (var i = 0; i < extraParams.length; i++) {
-                finalParams += '&param[]=' + escape(extraParams[i]);
+                finalParams += '&param[]=' + encodeURIComponent(extraParams[i]);
             }
         }
 
@@ -229,7 +229,7 @@ echo $this->form;
                );
 
                var responseContent = '';
-               responseContent = $('<div id="response-code-container">').html($('<pre>').attr('id', 'response').addClass("brush: " + brush).html(unescape(data.content)));
+               responseContent = $('<div id="response-code-container">').html($('<pre>').attr('id', 'response').addClass("brush: " + brush).html(decodeURIComponent(data.content)));
 
 
                $('#response-container').attr('data-content', data.content).append(
@@ -294,7 +294,7 @@ echo $this->form;
             $.ajax({
                 type:    "GET",
                 url:     "/tester/history",
-                data:    "url=" + escape(queryURI),
+                data:    "url=" + encodeURIComponent(queryURI),
                 success: function(data) {
                     $("#query_uri").val(data.query_uri);
                     $("#format").attr("value", data.format.toUpperCase());
