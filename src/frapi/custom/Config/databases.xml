@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<frapi-config>
+ <databases>
+  <database>
+   <hostname>localhost</hostname>
+   <dbname>frapi1</dbname>
+   <username>root</username>
+   <password>root</password>
+   <port>8889</port>
+   <engine>mysql</engine>
+   <hash>06cdd9d53a3281730c15c4dd367b66f82ea81ca6</hash>
+  </database>
+  <database>
+   <hostname>localhost</hostname>
+   <dbname>frapi2</dbname>
+   <username>root</username>
+   <password>root</password>
+   <port>8889</port>
+   <engine>mysql</engine>
+   <hash>e1b63c2be7075a58f7b0f5108af84b366ab09010</hash>
+  </database>
+ </databases>
+</frapi-config>

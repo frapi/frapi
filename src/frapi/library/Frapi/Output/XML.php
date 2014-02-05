@@ -230,7 +230,7 @@ class Frapi_Output_XML extends Frapi_Output implements Frapi_Output_Interface
             }
         } else {
             $cache = new Frapi_Internal();
-            $cache = $cache->getCachedDbConfig();
+            $cache = $cache->getCachedBasicConfig();
             $useCdata = $cache['use_cdata'];
 
             if ((bool)$useCdata === true) {

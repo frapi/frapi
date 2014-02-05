@@ -122,7 +122,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initApiUrl()
     {
-        $int = Frapi_Internal::getCachedDbConfig();
+        $int = Frapi_Internal::getCachedBasicConfig();
         Frapi_Internal::$_hash = isset($int['api_url']) ? hash('sha1', $int['api_url']) : false;
     }
 }

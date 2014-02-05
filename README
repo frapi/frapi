@@ -1,5 +1,5 @@
-This is the FRAPI public repository (http://getFRAPI.com)
+Fork from the official FRAPI public repository (http://getFRAPI.com)
 ====================
-
-Our official project documentation can be found in FRAPI: The Developers Handbook (http://frapi.github.com/).
+Added support for multiple databases configuration and UI to manage custom configuration parameters.
+Official project documentation can be found in FRAPI: The Developers Handbook (http://frapi.github.com/).
 

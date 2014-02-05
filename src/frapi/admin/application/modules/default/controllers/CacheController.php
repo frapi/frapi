@@ -66,9 +66,28 @@ class CacheController extends Lupin_Controller_Base
             "Actions.enabled-public",
             "Partners.emails-keys",
             "Cache.adapter",
-            'Database.configs'
+            'Basic.configs'
         );
-        
+
+        //adds params keys to the list : 
+        $customModel   = new Default_Model_Param();
+        $data = $customModel->getAll();
+        if (!empty($data)) {
+            foreach ($data as $d){
+	           $this->cache_keys[]='Params.'.$d['key']; 
+            }
+        }
+        //adds params keys to the list : 
+        $dbModel   = new Default_Model_Database();
+        $data = $dbModel->getAll();
+        if (!empty($data)) {
+            foreach ($data as $d){
+	           $this->cache_keys[]='Databases.'.$d['dbname']; 
+            }
+        }
+
+
+
         parent::init($styles);
     }
 

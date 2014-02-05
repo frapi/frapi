@@ -22,76 +22,7 @@ class Default_Model_Configuration extends Lupin_Model
         $this->config = new Lupin_Config_Xml('configurations');
     }
 
-    public function getDbConfig()
-    {
-        $return = array();
-
-        $hostname = $this->config->getByField('configuration', 'key', 'db_hostname');
-        $database = $this->config->getByField('configuration', 'key', 'db_database');
-        $username = $this->config->getByField('configuration', 'key', 'db_username');
-        $password = $this->config->getByField('configuration', 'key', 'db_password');
-        $engine   = $this->config->getByField('configuration', 'key', 'db_engine');
-
-        if (isset($engine) && isset($engine['value'])) {
-            $return[] = !empty($engine['value'])
-                ? $engine : array('key' => $engine['key'], 'value' => '');
-        }
-
-        if (isset($hostname) && isset($hostname['value'])) {
-            $return[] = !empty($hostname['value']) ?
-                $hostname : array('key' => $hostname['key'], 'value' => '');
-        }
-
-        if (isset($database) && isset($database['value'])) {
-            $return[] = !empty($database['value']) ?
-                $database : array('key' => $database['key'], 'value' => '');
-        }
-
-        if (isset($username) && isset($username['value'])) {
-            $return[] = !empty($username['value']) ?
-                $username : array('key' => $username['key'], 'value' => '');
-        }
-
-        if (isset($password) && isset($password['value'])) {
-            $return[] = !empty($password['value']) ?
-                $password : array('key' => $password['key'], 'value' => '');
-        }
-
-        if (isset($cache) && isset($cache['value'])) {
-            $return[] = !empty($cache['value'])
-                ? $cache : array('key' => $cache['key'], 'value' => '');
-        }
-
-        return $return;
-    }
-
-    public function addDb(array $data)
-    {
-        try {
-            $this->config->add('configuration', array(
-                'key'   => 'db_hostname',
-                'value' => $data['db_hostname'],
-            ));
-
-            $this->config->add('configuration', array(
-                'key'   => 'db_database',
-                'value' => $data['db_database'],
-            ));
-
-            $this->config->add('configuration', array(
-                'key'   => 'db_username',
-                'value' => $data['db_username'],
-            ));
-
-            $this->config->add('configuration', array(
-                'key'   => 'db_password',
-                'value' => $data['db_password'],
-            ));
-        } catch (Exception $e) {}
-
-        return true;
-    }
-
+        
     /**
      * Update an entry by key.
      *
@@ -131,36 +62,7 @@ class Default_Model_Configuration extends Lupin_Model
         );
     }
 
-    /**
-     * Edit the database settings.
-     *
-     * This method is used to edit and modify
-     * the database configurations use by the
-     * service.
-     *
-     * @param array $data An associative array of
-     *                    the database configuration
-     */
-    public function editDb(array $data)
-    {
-        $engine   = $data['db_engine'];
-        $hostname = $data['db_hostname'];
-        $username = $data['db_username'];
-        $password = $data['db_password'];
-        $database = $data['db_database'];
-
-        try {
-            $this->updateByKey('db_engine',   $engine);
-            $this->updateByKey('db_hostname', $hostname);
-            $this->updateByKey('db_database', $database);
-            $this->updateByKey('db_username', $username);
-            $this->updateByKey('db_password', $password);
-        } catch (Exception $e) {}
-
-        $this->refreshAPCCache();
-        return true;
-    }
-
+  
     /**
      * Update the "USE C DATA" configuration.
      *
@@ -231,7 +133,7 @@ class Default_Model_Configuration extends Lupin_Model
 
         $cache = Frapi_Cache::getInstance(FRAPI_CACHE_ADAPTER);
 
-        $cache->delete($hash . '-Database.configs');
+        $cache->delete($hash . '-Basic.configs');
         $cache->delete($hash . '-configFile-configurations');
     }
 }

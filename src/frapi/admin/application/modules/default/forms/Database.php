@@ -19,25 +19,31 @@ class Default_Form_Database extends Lupin_Form
     {
         $tr = Zend_Registry::get('tr');
 
-        $engines = new Zend_Form_Element_Select('db_engine');
+        $engines = new Zend_Form_Element_Select('engine');
         $engines->setLabel($tr->_('DATABASE_ENGINE'));
         $engines->addMultiOptions($this->getEngines());
         $this->addElement($engines);
 
-        $hostname = new Zend_Form_Element_Text('db_hostname');
+        $hostname = new Zend_Form_Element_Text('hostname');
         $hostname->setLabel($tr->_('HOSTNAME'));
         $this->addElement($hostname);
 
-        $username = new Zend_Form_Element_Text('db_username');
+        $password = new Zend_Form_Element_Text('port');
+        $password->setLabel($tr->_('PORT'));
+        $this->addElement($password);
+
+
+        $username = new Zend_Form_Element_Text('username');
         $username->setLabel($tr->_('USERNAME'));
         $this->addElement($username);
 
-        $password = new Zend_Form_Element_Text('db_password');
+        $password = new Zend_Form_Element_Text('password');
         $password->setLabel($tr->_('PASSWORD'));
         $this->addElement($password);
 
-        $database = new Zend_Form_Element_Text('db_database');
-        $database->setLabel($tr->_('DATABASE'));
+        
+        $database = new Zend_Form_Element_Text('dbname');
+        $database->setLabel($tr->_('DBNAME'));
         $this->addElement($database);
 
         $this->addElement(new Zend_Form_Element_Submit($tr->_('SUBMIT')));
