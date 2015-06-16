@@ -320,7 +320,7 @@ $mimetypes = $grouped;
                                         }
                                         ?>
                                         <tr>
-                                            <td><?php echo $param['name']; ?></td>
+                                            <td><?php echo isset($param['name']) ? $param['name']: 'Missing Name'; ?></td>
                                                 <td class="param-required">
                                                     <?php
                                                         echo isset($subparam['required']) && $subparam['required'] == '1'
