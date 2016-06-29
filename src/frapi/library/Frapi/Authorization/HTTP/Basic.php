@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Authorization by Basic Auth
