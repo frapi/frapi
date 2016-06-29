@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Authorization Partner
@@ -26,6 +27,12 @@
 class Frapi_Authorization_Partner extends Frapi_Authorization implements Frapi_Authorization_Interface
 {
     /**
+     * This controls which auth scheme to use.
+     * Can be 'HTTP_Basic', or 'HTTP_Digest'
+     */
+    private $authorization_scheme = "HTTP_Basic";
+
+    /**
      * This method will verify the data that has been passed and authorize it or not.
      *
      * It will return an error in case it does not authorize.
@@ -40,16 +47,30 @@ class Frapi_Authorization_Partner extends Frapi_Authorization implements Frapi_A
             return false;
         }
 
-        $auth = new Frapi_Authorization_HTTP_Digest();
-        
-        /**
-         * Make sure the params needed are passed
-         * if not, return an error with invalid partner
-         * id/key
-         */
-        if (!empty($this->params['digest'])) {
-            $authed = $auth->authorize();
-            return true;
+        if ($this->authorization_scheme == "HTTP_Digest") {
+            $auth = new Frapi_Authorization_HTTP_Digest();
+
+           /**
+            * Make sure the params needed are passed
+            * if not, return an error with invalid partner
+            * id/key
+            */
+            if (!empty($this->params['digest'])) {
+                $authed = $auth->authorize();
+                return true;
+            }
+        } elseif ($this->authorization_scheme == "HTTP_Basic") {
+            $auth = new Frapi_Authorization_HTTP_Basic();
+
+            /**
+             * Make sure the params needed are passed
+             * if not, return an error with invalid partner
+             * id/key
+             */
+            if (isset($_SERVER['PHP_AUTH_USER'])) {
+                $authed = $auth->authorize();
+                return true;
+            }
         }
 
         $auth->send();
